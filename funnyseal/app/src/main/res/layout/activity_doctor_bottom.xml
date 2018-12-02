@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.bottomtab.DoctorBottomActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_doctor_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_doctorbottom" />
+
+    <RelativeLayout
+        android:id="@+id/rl_doctorbottom"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/ivory"
+            android:orientation="horizontal"
+            app:layout_behavior="com.funnyseals.app.model=.BottomViewBehavior">
+
+            <RadioGroup
+                android:id="@+id/doctor_bottom_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="3dp">
+
+                <RadioButton
+                    android:id="@+id/doctor_patientList_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center|bottom"
+                    android:text="患者列表" />
+
+                <RadioButton
+                    android:id="@+id/doctor_message_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:gravity="center|bottom"
+                    android:text="消息" />
+
+                <RadioButton
+                    android:id="@+id/doctor_nursingPlan_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:gravity="center|bottom"
+                    android:text="护理计划" />
+
+                <RadioButton
+                    android:id="@+id/doctor_personalCenter_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:gravity="center|bottom"
+                    android:text="个人中心" />
+            </RadioGroup>
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

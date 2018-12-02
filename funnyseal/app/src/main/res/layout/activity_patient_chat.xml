@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toolbar="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_patient_chat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.patientMessage.PatientChatActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_patient_chat_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        toolbar:navigationIcon="@drawable/ic_arrow_back_24dp"
+        toolbar:title=""
+        toolbar:titleTextColor="@color/white" />
+
+    <ListView
+        android:id="@+id/lv_patient_chat_message_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/ll_patient_chat_bottom_bar"
+        android:layout_below="@id/tb_patient_chat_toolbar"
+        android:divider="@color/transparent"
+        android:dividerHeight="30dp"
+        android:padding="10dp"
+        android:transcriptMode="alwaysScroll">
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/ll_patient_chat_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/et_patient_chat_input"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/bordered_edit_text"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:minLines="1" />
+
+        <Button
+            android:id="@+id/btn_patient_chat_send"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bordered_button"
+            android:text="发送"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>

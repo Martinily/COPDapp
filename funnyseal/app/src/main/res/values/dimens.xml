@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- ************************* 通用 ******************** -->
+    <dimen name="margin_mostleft">12dp</dimen>
+    <dimen name="margin_normalleft">80dp</dimen>
+    <dimen name="margin_veryleft">220dp</dimen>
+    <dimen name="margin_mostright">12dp</dimen>
+    <dimen name="margin_normalright">80dp</dimen>
+    <dimen name="margin_mosttop">12dp</dimen>
+    <dimen name="margin_normaltop">30dp</dimen>
+
+
+    <!-- ************************* 字体 ******************** -->
+    <dimen name="titleName_larger">30sp</dimen>
+    <dimen name="titleName_normal">15sp</dimen>
+    <dimen name="edittext_text">15sp</dimen>
+
+    <dimen name="ContentBlock">50dp</dimen>
+</resources>

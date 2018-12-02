@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/tv_login_titleName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:gravity="center"
+        android:text="@string/login_titleName"
+        android:textSize="@dimen/titleName_larger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/v_login_SplitLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_titleName" />
+
+    <RelativeLayout
+        android:id="@+id/rl_login_AccountGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:layout_marginTop="@dimen/margin_normaltop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_login_SplitLine">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_mostleft"
+            android:text="@string/login_accountTitleName"
+            android:textSize="@dimen/titleName_larger" />
+
+        <EditText
+            android:id="@+id/et_login_AccountInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/margin_normalleft"
+            android:layout_marginEnd="@dimen/margin_mostright"
+            android:hint="@string/login_accountInputHint"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/edittext_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_login_PasswordGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:layout_marginTop="@dimen/margin_mosttop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_login_AccountGroup">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_mostleft"
+            android:text="@string/login_passwordTitleName"
+            android:textSize="@dimen/titleName_larger" />
+
+
+        <EditText
+            android:id="@+id/et_login_PasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/margin_normalleft"
+            android:layout_marginEnd="@dimen/margin_mostright"
+            android:hint="@string/login_passwordInputHint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/edittext_text" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normaltop"
+        android:text="@string/login_loginButtonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_login_PasswordGroup" />
+
+    <Button
+        android:id="@+id/btn_login_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_mostleft"
+        android:layout_marginTop="@dimen/margin_mosttop"
+        android:background="@color/white"
+        android:text="@string/login_signupButtonName"
+        android:textColor="@color/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_login" />
+
+    <Button
+        android:id="@+id/btn_login_forgetpwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_mosttop"
+        android:layout_marginEnd="@dimen/margin_mostright"
+        android:background="@color/white"
+        android:text="@string/login_forgetPwdButtonName"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_login" />
+
+</android.support.constraint.ConstraintLayout>

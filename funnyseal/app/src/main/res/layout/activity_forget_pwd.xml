@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ForgetPwdActivity">
+
+    <TextView
+        android:id="@+id/tv_forgetpwd_titleName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:gravity="center"
+        android:text="@string/forgetpwd_titleName"
+        android:textSize="@dimen/titleName_larger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/v_forgetpwd_SplitLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_forgetpwd_titleName" />
+
+    <RelativeLayout
+        android:id="@+id/rl_forgetpwd_AccountGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:layout_marginTop="@dimen/margin_normaltop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_forgetpwd_SplitLine">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_mostleft"
+            android:layout_marginTop="@dimen/margin_mosttop"
+            android:text="@string/forgetpwd_accountTitleName"
+            android:textSize="@dimen/titleName_normal" />
+
+        <EditText
+            android:id="@+id/et_forgetPwd_AccountInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/margin_normalleft"
+            android:layout_marginEnd="@dimen/margin_mostright"
+            android:hint="@string/login_accountInputHint"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/edittext_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_forgetpwd_PasswordGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:layout_marginTop="@dimen/margin_mosttop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_forgetpwd_AccountGroup">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_mostleft"
+            android:layout_marginTop="@dimen/margin_mosttop"
+            android:text="@string/login_passwordTitleName"
+            android:textSize="@dimen/titleName_normal" />
+
+        <EditText
+            android:id="@+id/et_forgetpwd_PasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/margin_normalleft"
+            android:layout_marginEnd="@dimen/margin_mostright"
+            android:hint="@string/login_passwordInputHint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/edittext_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_forgetpwd_PasswordGroupAgain"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:layout_marginTop="@dimen/margin_mosttop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_forgetpwd_PasswordGroup">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_mostleft"
+            android:layout_marginTop="@dimen/margin_mosttop"
+            android:text="@string/forgetpwd_passwordTitleName"
+            android:textSize="@dimen/titleName_normal" />
+
+        <EditText
+            android:id="@+id/et_forgetpwd_PasswordInputAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/margin_normalleft"
+            android:layout_marginEnd="@dimen/margin_mostright"
+            android:hint="@string/forgetpwd_passwordInputHint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/edittext_text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_forgetpwd_IdentifyingCode"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ContentBlock"
+        android:layout_marginTop="@dimen/margin_mosttop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_forgetpwd_PasswordGroupAgain">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_mostleft"
+            android:layout_marginTop="@dimen/margin_mosttop"
+            android:text="@string/forgetpwd_identifyingCode"
+            android:textSize="@dimen/titleName_normal" />
+
+        <EditText
+            android:id="@+id/et_forgetpwd_IdentifyingCode"
+            android:layout_width="157dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_normalleft"
+            android:hint="@string/forgetpwd_identifyingCodeHint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/edittext_text" />
+
+        <Button
+            android:id="@+id/btn_forgetPwd_CodeSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="19dp"
+            android:layout_toEndOf="@+id/et_forgetpwd_IdentifyingCode"
+            android:maxLines="1"
+            android:text="@string/forgetpwd_identifyingCodeSend" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_forgetPwd_ChangePwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normaltop"
+        android:text="@string/forgetpwd_changepwd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_forgetpwd_IdentifyingCode" />
+</android.support.constraint.ConstraintLayout>
