@@ -9,48 +9,48 @@ package com.funnyseals.app.model;
  * </pre>
  */
 public class MedicinePlan {
-    private String medicineName;
-    private String medicineDose;
-    private String medicineNote;
-    private String medicineTime;
+    private String mMedicineName;
+    private String mMedicineDose;
+    private String mMedicineNote;
+    private String mMedicineTime;
 
     public MedicinePlan(String medicineName, String medicineDose, String medicineNote, String medicineTime) {
 
-        this.medicineName = medicineName;
-        this.medicineDose = medicineDose;
-        this.medicineNote = medicineNote;
-        this.medicineTime = medicineTime;
+        this.mMedicineName = medicineName;
+        this.mMedicineDose = medicineDose;
+        this.mMedicineNote = medicineNote;
+        this.mMedicineTime = medicineTime;
     }
 
     public String getMedicineName() {
-        return medicineName;
+        return mMedicineName;
     }
 
     public void setMedicineName(String medicineName) {
-        this.medicineNote = medicineName;
+        this.mMedicineNote = medicineName;
     }
 
     public String getMedicineDose() {
-        return medicineDose;
+        return mMedicineDose;
     }
 
     public void setMedicineDose(String medicineDose) {
-        this.medicineDose = medicineDose;
+        this.mMedicineDose = medicineDose;
     }
 
     public String getMedicineNote() {
-        return medicineNote;
+        return mMedicineNote;
     }
 
     public void setMedicineNote(String medicineNote) {
-        this.medicineNote = medicineNote;
+        this.mMedicineNote = medicineNote;
     }
 
     public String getMedicineTime() {
-        return medicineTime;
+        return mMedicineTime;
     }
 
     public void setMedicineTime(String medicineTime) {
-        this.medicineTime = medicineTime;
+        this.mMedicineTime = medicineTime;
     }
 }

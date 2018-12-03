@@ -60,7 +60,7 @@ public class MyAdapter extends BaseAdapter {
     }
 
 
-    class ViewHolder {
-        TextView mTextView;
+    private class ViewHolder {
+        private TextView mTextView;
     }
 }

@@ -22,25 +22,27 @@ import java.util.List;
  */
 public class MyApplication extends Application {
 
-    private boolean isInit=false;
+    private boolean mIsInit = false;
 
     //用户账号
-    private String account;
-    private User   user;
+    private String mAccount;
+    private User   mUser;
 
-    public String getAccount(){
-        return account;
+    public String getAccount() {
+        return mAccount;
     }
 
-    public User getUser(){
-        return user;
+    public User getUser() {
+        return mUser;
     }
 
-    public void setUser(User user){
-        this.user=user;
+    public void setUser(User user) {
+        this.mUser = user;
     }
 
-    public void setAccount(String account){this.account=account;}
+    public void setAccount(String account) {
+        this.mAccount = account;
+    }
 
     @Override
     public void onCreate() {
@@ -48,9 +50,9 @@ public class MyApplication extends Application {
         initEM();
     }
 
-    private void initEM(){
-        int pid=Process.myPid();
-        String processAppName=getAppName(pid);
+    private void initEM() {
+        int pid = Process.myPid();
+        String processAppName = getAppName(pid);
         /**
          * 如果app启用了远程的service，此application:onCreate会被调用2次
          * 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
@@ -60,7 +62,7 @@ public class MyApplication extends Application {
             // 则此application的onCreate 是被service 调用的，直接返回
             return;
         }
-        if (isInit) {
+        if (mIsInit) {
             return;
         }
         /**
@@ -92,8 +94,9 @@ public class MyApplication extends Application {
         EMClient.getInstance().setDebugMode(true);
 
         // 设置初始化已经完成
-        isInit = true;
+        mIsInit = true;
     }
+
     /*
         根据Pid获取当前进程名字，一般就是当前app包名
      */

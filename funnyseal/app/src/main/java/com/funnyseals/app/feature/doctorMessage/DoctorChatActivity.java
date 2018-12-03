@@ -30,11 +30,11 @@ public class DoctorChatActivity extends AppCompatActivity {
 
     private ChatMessageAdapter CurrentChatadapter;
 
-    private User myfriend;
+    private User mMyfriend;
 
-    private List<EMMessage> messageList;
+    private List<EMMessage> mMessageList;
 
-    private EMConversation conversation;
+    private EMConversation mConversation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +57,12 @@ public class DoctorChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         // 退出前将所有消息导入数据库
-        EMClient.getInstance().chatManager().importMessages(messageList);
+        EMClient.getInstance().chatManager().importMessages(mMessageList);
         EMClient.getInstance().chatManager().removeMessageListener(msgListener);
     }
 
     private void init() {
-        myfriend = (User) getIntent().getSerializableExtra("myfriend");
+        mMyfriend = (User) getIntent().getSerializableExtra("myfriend");
 
         initUIComponents();
 
@@ -112,7 +112,7 @@ public class DoctorChatActivity extends AppCompatActivity {
 
     private void initToolbar() {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_doctor_chat_toolbar);
-        toolbar.setTitle(myfriend.getNickName());
+        toolbar.setTitle(mMyfriend.getNickName());
 
         setSupportActionBar(toolbar);
 
@@ -123,47 +123,47 @@ public class DoctorChatActivity extends AppCompatActivity {
      * 加载所有聊天
      */
     private void loadAllMessage() {
-        conversation = EMClient.getInstance().chatManager().getConversation(myfriend.getAccount(), EMConversation.EMConversationType.Chat, true);
+        mConversation = EMClient.getInstance().chatManager().getConversation(mMyfriend.getAccount(), EMConversation.EMConversationType.Chat, true);
 
         // 设置当前会话未读数为 0
-        conversation.markAllMessagesAsRead();
+        mConversation.markAllMessagesAsRead();
 
-        int count = conversation.getAllMessages().size();
-        if (count < conversation.getAllMsgCount() && count < 20) {
+        int count = mConversation.getAllMessages().size();
+        if (count < mConversation.getAllMsgCount() && count < 20) {
             // 获取已经在列表中的最上边的一条消息id
-            String msgId = conversation.getAllMessages().get(0).getMsgId();
+            String msgId = mConversation.getAllMessages().get(0).getMsgId();
             // 分页加载更多消息，需要传递已经加载的消息的最上边一条消息的id，以及需要加载的消息的条数
-            conversation.loadMoreMsgFromDB(msgId, 20 - count);
+            mConversation.loadMoreMsgFromDB(msgId, 20 - count);
         }
         // 打开聊天界面获取最后一条消息内容并显示
-        if (conversation.getAllMessages().size() > 0) {
-            EMMessage message = conversation.getLastMessage();
+        if (mConversation.getAllMessages().size() > 0) {
+            EMMessage message = mConversation.getLastMessage();
             EMTextMessageBody body = (EMTextMessageBody) message.getBody();
             // 将消息内容和时间显示出来
             //mContentText.setText(body.getMessage() + " - " + conversation.getLastMessage().getMsgTime());
         }
 
-        if (conversation != null) {
+        if (mConversation != null) {
             //获取此会话的所有消息
-            messageList = conversation.getAllMessages();
+            mMessageList = mConversation.getAllMessages();
         } else {
-            messageList = new ArrayList<>();
+            mMessageList = new ArrayList<>();
         }
 
         initMessageList();
     }
 
     private void initMessageList() {
-        CurrentChatadapter = new ChatMessageAdapter(this, myfriend, messageList);
+        CurrentChatadapter = new ChatMessageAdapter(this, mMyfriend, mMessageList);
 
         mLv_message.setAdapter(CurrentChatadapter);
 
-        mLv_message.smoothScrollToPositionFromTop(messageList.size(), 0);
+        mLv_message.smoothScrollToPositionFromTop(mMessageList.size(), 0);
     }
 
     private void onSend() {
         //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户
-        EMMessage message = EMMessage.createTxtSendMessage(mEt_input.getText().toString(), myfriend.getAccount());
+        EMMessage message = EMMessage.createTxtSendMessage(mEt_input.getText().toString(), mMyfriend.getAccount());
         //发送消息
         EMClient.getInstance().chatManager().sendMessage(message);
 
@@ -171,9 +171,9 @@ public class DoctorChatActivity extends AppCompatActivity {
     }
 
     private void onAddMessage(EMMessage message) {
-        messageList.add(message);
+        mMessageList.add(message);
         mEt_input.setText("");
-        mLv_message.smoothScrollToPositionFromTop(messageList.size(), 0);
+        mLv_message.smoothScrollToPositionFromTop(mMessageList.size(), 0);
         CurrentChatadapter.notifyDataSetChanged();
         System.out.println("DoctorChatActivity.onAddMessage");
     }
@@ -194,9 +194,9 @@ public class DoctorChatActivity extends AppCompatActivity {
         public void onMessageReceived(List<EMMessage> messages) {
             // 循环遍历当前收到的消息
             for (EMMessage message : messages) {
-                if (message.getFrom().equals(myfriend.getAccount())) {
+                if (message.getFrom().equals(mMyfriend.getAccount())) {
                     // 设置消息为已读
-                    conversation.markMessageAsRead(message.getMsgId());
+                    mConversation.markMessageAsRead(message.getMsgId());
 
                     onAddMessage(message);
                 }

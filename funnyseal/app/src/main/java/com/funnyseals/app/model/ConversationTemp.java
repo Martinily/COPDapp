@@ -10,72 +10,67 @@ package com.funnyseals.app.model;
  */
 public class ConversationTemp {
 
-    private int portrait;
-
-    private String name;
-
-    private String account;
-
-    private String time;
-
-    private String content;
-
-    private int unreadNum;
+    private int mPortrait;
+    private String mName;
+    private String mAccount;
+    private String mTime;
+    private String mContent;
+    private int mUnreadNum;
 
     public ConversationTemp(int portrait, String account, String name, String time, String content, int unreadNum) {
-        this.account = account;
-        this.portrait = portrait;
-        this.name = name;
-        this.time = time;
-        this.content = content;
-        this.unreadNum = unreadNum;
+        this.mAccount = account;
+        this.mPortrait = portrait;
+        this.mName = name;
+        this.mTime = time;
+        this.mContent = content;
+        this.mUnreadNum = unreadNum;
     }
 
     public int getPortrait() {
-        return portrait;
+        return mPortrait;
     }
 
     public void setPortrait(int portrait) {
-        this.portrait = portrait;
+        this.mPortrait = portrait;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public String getTime() {
-        return time;
+        return mTime;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.mTime = time;
     }
 
     public String getAccount() {
-        return account;
+        return mAccount;
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.mAccount = account;
     }
 
     public String getContent() {
-        return content;
+        return mContent;
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.mContent = content;
     }
 
     public int getUnreadNum() {
-        return unreadNum;
+        return mUnreadNum;
     }
 
     public void setUnreadNum(int unreadNum) {
-        this.unreadNum = unreadNum;
+        this.mUnreadNum = unreadNum;
     }
 }

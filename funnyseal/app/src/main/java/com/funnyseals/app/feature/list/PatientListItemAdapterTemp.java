@@ -22,23 +22,23 @@ import java.util.List;
  * </pre>
  */
 public class PatientListItemAdapterTemp extends BaseAdapter {
-    private LayoutInflater inflater;
+    private LayoutInflater mInflater;
 
-    private List<UserTemp> userTemps;
+    private List<UserTemp> mUserTemps;
 
     public PatientListItemAdapterTemp(Context context, List<UserTemp> userTemps) {
-        this.inflater = LayoutInflater.from(context);
-        this.userTemps = userTemps;
+        this.mInflater = LayoutInflater.from(context);
+        this.mUserTemps = userTemps;
     }
 
     @Override
     public int getCount() {
-        return userTemps.size();
+        return mUserTemps.size();
     }
 
     @Override
     public UserTemp getItem(int position) {
-        return userTemps.get(position);
+        return mUserTemps.get(position);
     }
 
     @Override
@@ -51,12 +51,12 @@ public class PatientListItemAdapterTemp extends BaseAdapter {
         PatientListItemAdapterTemp.ViewHolder viewHolder;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_patient, parent, false);
+            convertView = mInflater.inflate(R.layout.list_item_patient, parent, false);
 
             viewHolder = new ViewHolder();
 
-            viewHolder.portrait = convertView.findViewById(R.id.patient_item_portrait);
-            viewHolder.name = convertView.findViewById(R.id.patient_item_name);
+            viewHolder.mPortrait = convertView.findViewById(R.id.patient_item_portrait);
+            viewHolder.mName = convertView.findViewById(R.id.patient_item_name);
 
             convertView.setTag(viewHolder);
         } else {
@@ -70,14 +70,14 @@ public class PatientListItemAdapterTemp extends BaseAdapter {
 
     private class ViewHolder {
 
-        private ImageView portrait;
+        private ImageView mPortrait;
 
-        private TextView name;
+        private TextView mName;
 
         private void init(UserTemp item) {
 
-            portrait.setBackgroundResource(item.getPortrait());
-            name.setText(item.getName());
+            mPortrait.setBackgroundResource(item.getPortrait());
+            mName.setText(item.getName());
         }
     }
 }

@@ -17,33 +17,31 @@ import com.funnyseals.app.feature.doctorPersonalCenter.DoctorPersonalCenterFragm
 
 public class DoctorBottomActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
 
-    private RadioButton indexTab;
-    //之前的界面id
-    private int         previousTabId;
+    private RadioButton mIndexTab;
 
-    private DoctorBottomTabAdapter fragmentTabAdapter;
+    private int mPreviousTabId;
+
+    private DoctorBottomTabAdapter mFragmentTabAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_bottom);
-        //初始化导航栏
+
         initBottomTabs();
     }
 
-    //返回
     @Override
     public void onBackPressed() {
-        if (indexTab.isChecked()) {
+        if (mIndexTab.isChecked()) {
             super.onBackPressed();
         } else {
-            indexTab.setChecked(true);
+            mIndexTab.setChecked(true);
         }
     }
 
-    //恢复
     @Override
     protected void onResume() {
         super.onResume();
@@ -52,8 +50,8 @@ public class DoctorBottomActivity extends AppCompatActivity {
     }
 
     private void initBottomTabs() {
-        indexTab = findViewById(R.id.doctor_nursingPlan_tab);
-        previousTabId = R.id.doctor_nursingPlan_tab;
+        mIndexTab = findViewById(R.id.doctor_nursingPlan_tab);
+        mPreviousTabId = R.id.doctor_nursingPlan_tab;
 
         RadioGroup bottomTabs = findViewById(R.id.doctor_bottom_tabs);
 
@@ -64,15 +62,15 @@ public class DoctorBottomActivity extends AppCompatActivity {
         fragmentMap.put(R.id.doctor_nursingPlan_tab, new DoctorNursingPlanFragment());
         fragmentMap.put(R.id.doctor_personalCenter_tab, new DoctorPersonalCenterFragment());
 
-        fragmentTabAdapter = new BottomTabBar(this, fragmentMap, R.id.fl_doctor_content, bottomTabs);
+        mFragmentTabAdapter = new BottomTabBar(this, fragmentMap, R.id.fl_doctor_content, bottomTabs);
     }
 
     public void showFragmentTab(int tabID) {
-        fragmentTabAdapter.setFragmentTab(tabID);
+        mFragmentTabAdapter.setFragmentTab(tabID);
     }
 
     public void showPrevious() {
-        showFragmentTab(previousTabId);
+        showFragmentTab(mPreviousTabId);
     }
 
     private class BottomTabBar extends DoctorBottomTabAdapter {
@@ -84,7 +82,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
         @Override
         public boolean onTabWillChange(int tabId) {
 
-            previousTabId = tabId;
+            mPreviousTabId = tabId;
             return true;
         }
 

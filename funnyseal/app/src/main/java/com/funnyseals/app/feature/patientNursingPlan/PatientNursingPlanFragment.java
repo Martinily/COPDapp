@@ -15,14 +15,14 @@ import java.util.Objects;
 
  */
 public class PatientNursingPlanFragment extends Fragment {
-    private View view;
+    private View mView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_patient_nursing_plan, container, false);
+        mView = inflater.inflate(R.layout.fragment_patient_nursing_plan, container, false);
 
         startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), PatientNursingPlanActivity.class));
-        return view;
+        return mView;
     }
 }

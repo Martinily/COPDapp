@@ -33,21 +33,22 @@ import java.util.Map;
  *
  */
 public class PatientOneFragment extends Fragment {
-    private static Connection conn;
-    MyApplication application;
-    private List<MedicinePlan> medicinePlans;
+    private static Connection                CONN;
+    private        MyApplication             mApplication;
+    private        List<MedicinePlan>        mMedicinePlans;
     //将数据封装成数据源
-    List<Map<String, Object>> medicine_list = new ArrayList<Map<String, Object>>();
-    private Thread  mThread;
+    private        List<Map<String, Object>> mMedicine_list = new ArrayList<Map<String, Object>>();
+    private        Thread                    mThread;
+
     //用于执行数据库线程
     @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
+    private        Handler                   mHandler       = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
-                medicinePlans = (List<MedicinePlan>) msg.obj;
+                mMedicinePlans = (List<MedicinePlan>) msg.obj;
 
-                //将数据封装成数据源
-                for (MedicinePlan p : medicinePlans) {
+
+                for (MedicinePlan p : mMedicinePlans) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("medicinetitle", p.getMedicineName());
                     map.put("medicineimg", R.drawable.pillow);
@@ -55,7 +56,7 @@ public class PatientOneFragment extends Fragment {
                     map.put("medicineattention", p.getMedicineNote());
                     map.put("medicinetime", "10:00");
                     map.put("realMedicineTime", p.getMedicineTime());
-                    medicine_list.add(map);
+                    mMedicine_list.add(map);
                 }
 
                 ListView listview = getActivity().findViewById(R.id.listViewmedicine);
@@ -79,28 +80,28 @@ public class PatientOneFragment extends Fragment {
         super.onResume();
     }
 
-    Runnable runnable = () -> {
+    private Runnable runnable = () -> {
         try {
-            conn = UserDao.getConnection();
-            application = (MyApplication) getActivity().getApplication();
-            String id = application.getAccount();
-            if (conn != null) {
-                PreparedStatement statement = conn.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
+            CONN = UserDao.getConnection();
+            mApplication = (MyApplication) getActivity().getApplication();
+            String id = mApplication.getAccount();
+            if (CONN != null) {
+                PreparedStatement statement = CONN.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
                 statement.setString(1, id);
                 ResultSet rs = statement.executeQuery();
                 if (rs.next()) {
-                    PreparedStatement medicineS = conn.prepareStatement("SELECT * FROM HLJHYW WHERE HLJH_BH=?");
+                    PreparedStatement medicineS = CONN.prepareStatement("SELECT * FROM HLJHYW WHERE HLJH_BH=?");
                     medicineS.setString(1, rs.getString(1));
                     rs = medicineS.executeQuery();
-                    medicinePlans = new ArrayList<>();
+                    mMedicinePlans = new ArrayList<>();
                     while (rs.next()) {
-                        medicinePlans.add(new MedicinePlan(rs.getString("HLJHYW_YWMC"), rs.getString("HLJHYW_YWJL"), rs.getString("HLJHYW_ZYSX"), rs.getString("HLJHYW_FYSJ")));
+                        mMedicinePlans.add(new MedicinePlan(rs.getString("HLJHYW_YWMC"), rs.getString("HLJHYW_YWJL"), rs.getString("HLJHYW_ZYSX"), rs.getString("HLJHYW_FYSJ")));
                     }
                     Message message = Message.obtain();
                     message.what = 0;
-                    message.obj = medicinePlans;
+                    message.obj = mMedicinePlans;
                     mHandler.sendMessage(message);
-                    conn.close();
+                    CONN.close();
                     medicineS.close();
                     rs.close();
                     statement.close();
@@ -120,16 +121,16 @@ public class PatientOneFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    class MyAdapter extends BaseAdapter {
+    private class MyAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return medicine_list.size();
+            return mMedicine_list.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return medicine_list.get(position);
+            return mMedicine_list.get(position);
         }
 
         @Override
@@ -144,23 +145,23 @@ public class PatientOneFragment extends Fragment {
             if (convertView == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.medicine_list_item, null);
                 mHolder = new ViewHolder();
-                mHolder.cardmedicine_title = view.findViewById(R.id.medicine);
-                mHolder.cardmedicine_image = view.findViewById(R.id.medicineImg);
-                mHolder.cardmedicine_content = view.findViewById(R.id.medicinenum);
-                mHolder.cardmedicine_attention = view.findViewById(R.id.medicineattention);
-                mHolder.cardmedicine_time = view.findViewById(R.id.medicinetime);
+                mHolder.mCardmedicine_title = view.findViewById(R.id.medicine);
+                mHolder.mCardmedicine_image = view.findViewById(R.id.medicineImg);
+                mHolder.mCardmedicine_content = view.findViewById(R.id.medicinenum);
+                mHolder.mCardmedicine_attention = view.findViewById(R.id.medicineattention);
+                mHolder.mCardmedicine_time = view.findViewById(R.id.medicinetime);
                 view.setTag(mHolder);  //将ViewHolder存储在View中
             } else {
                 view = convertView;
                 mHolder = (ViewHolder) view.getTag();  //重新获得ViewHolder
             }
-            mHolder.cardmedicine_title.setText(medicine_list.get(position).get("medicinetitle").toString());
-            mHolder.cardmedicine_image.setImageResource((int) medicine_list.get(position).get("medicineimg"));
-            mHolder.cardmedicine_content.setText(medicine_list.get(position).get("medicinecontent").toString());
-            mHolder.cardmedicine_attention.setText(medicine_list.get(position).get("medicineattention").toString());
-            mHolder.cardmedicine_time.setText(medicine_list.get(position).get("medicinetime").toString());
-            final String medicinenametime = medicine_list.get(position).get("realMedicineTime").toString();
-            System.err.println(medicine_list.get(position).get("realMedicineTime").toString());
+            mHolder.mCardmedicine_title.setText(mMedicine_list.get(position).get("medicinetitle").toString());
+            mHolder.mCardmedicine_image.setImageResource((int) mMedicine_list.get(position).get("medicineimg"));
+            mHolder.mCardmedicine_content.setText(mMedicine_list.get(position).get("medicinecontent").toString());
+            mHolder.mCardmedicine_attention.setText(mMedicine_list.get(position).get("medicineattention").toString());
+            mHolder.mCardmedicine_time.setText(mMedicine_list.get(position).get("medicinetime").toString());
+            final String medicinenametime = mMedicine_list.get(position).get("realMedicineTime").toString();
+            System.err.println(mMedicine_list.get(position).get("realMedicineTime").toString());
             Button moretime = view.findViewById(R.id.moremedicinetime);
 
             moretime.setOnClickListener(v -> {
@@ -174,11 +175,11 @@ public class PatientOneFragment extends Fragment {
         }
     }
 
-    class ViewHolder {
-        TextView  cardmedicine_title;
-        ImageView cardmedicine_image;
-        TextView  cardmedicine_content;
-        TextView  cardmedicine_attention;
-        TextView  cardmedicine_time;
+    private class ViewHolder {
+        private TextView  mCardmedicine_title;
+        private ImageView mCardmedicine_image;
+        private TextView  mCardmedicine_content;
+        private TextView  mCardmedicine_attention;
+        private TextView  mCardmedicine_time;
     }
 }

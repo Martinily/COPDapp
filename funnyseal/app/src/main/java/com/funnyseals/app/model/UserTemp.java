@@ -10,50 +10,47 @@ package com.funnyseals.app.model;
  */
 public class UserTemp {
 
-    private int portrait;
-
-    private String name;
-
-    private String account;
-
-    private User user;
+    private int mPortrait;
+    private String mName;
+    private String mAccount;
+    private User mUser;
 
     public UserTemp(int portrait, String name, String account, User user) {
-        this.portrait = portrait;
-        this.name = name;
-        this.account = account;
-        this.user = user;
+        this.mPortrait = portrait;
+        this.mName = name;
+        this.mAccount = account;
+        this.mUser = user;
     }
 
     public int getPortrait() {
-        return portrait;
+        return mPortrait;
     }
 
     public void setPortrait(int portrait) {
-        this.portrait = portrait;
+        this.mPortrait = portrait;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public String getAccount() {
-        return account;
+        return mAccount;
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.mAccount = account;
     }
 
     public User getUser() {
-        return user;
+        return mUser;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.mUser = user;
     }
 }

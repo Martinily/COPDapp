@@ -13,19 +13,12 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private String mAccount;
-
     private String mNickName;
-
     private String mMedicalHistory;
-
     private String mMedicalOrder;
-
     private String mDoctorAccount;
-
     private int mAge;
-
     private String mSex;
-
     private String mIconUrl;
 
     public User() {

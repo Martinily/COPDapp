@@ -38,35 +38,24 @@ import static com.funnyseals.app.R.id.edit_instrument;
  */
 public class DoctorTwoFragment extends Fragment {
     private        EditText        mEditText;
-    /**
-     * Context
-     */
     private        Context         mContext;
-    /**
-     * listview
-     */
-    private        ListView        listView;
-    /**
-     * 适配器
-     */
-    private        ListViewAdapter listViewAdapter;
-    private static Connection      conn;
-    /**
-     * 保存数据
-     */
-    private        List<Bean>      instrumentBeanList = new ArrayList<Bean>();
-    private        List<String>    InstrumentNames;
+    private        ListView        mListView;
+    private        ListViewAdapter mListViewAdapter;
+    private static Connection      CONN;
+    private        List<Bean>      mInstrumentBeanList = new ArrayList<Bean>();
+    private        List<String>    mInstrumentNames;
     private        Thread          mThread;
+
     //用于执行数据库线程
     @SuppressLint("HandlerLeak")
-    private        Handler         mHandler           = new Handler() {
+    private Handler   mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
-                InstrumentNames = (List<String>) msg.obj;
+                mInstrumentNames = (List<String>) msg.obj;
             }
         }
     };
-    private        ImageView       imageView;
+    private ImageView imageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -81,19 +70,19 @@ public class DoctorTwoFragment extends Fragment {
 
     Runnable runnable = () -> {
         try {
-            conn = UserDao.getConnection();
-            if (conn != null) {
-                PreparedStatement statement = conn.prepareStatement("SELECT QXK_QXMC FROM qxk");
+            CONN = UserDao.getConnection();
+            if (CONN != null) {
+                PreparedStatement statement = CONN.prepareStatement("SELECT QXK_QXMC FROM qxk");
                 ResultSet rs = statement.executeQuery();
-                InstrumentNames = new ArrayList<>();
+                mInstrumentNames = new ArrayList<>();
                 while (rs.next()) {
-                    InstrumentNames.add(rs.getString("QXK_QXMC"));
+                    mInstrumentNames.add(rs.getString("QXK_QXMC"));
                 }
                 Message message = Message.obtain();
                 message.what = 0;
-                message.obj = InstrumentNames;
+                message.obj = mInstrumentNames;
                 mHandler.sendMessage(message);
-                conn.close();
+                CONN.close();
                 rs.close();
                 statement.close();
             } else {
@@ -111,7 +100,7 @@ public class DoctorTwoFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mEditText = getActivity().findViewById(edit_instrument);      //edit下拉列表
+        mEditText = getActivity().findViewById(edit_instrument);
         mEditText.setOnTouchListener((view, event) -> {
             final int DRAWABLE_LEFT = 0;
             final int DRAWABLE_TOP = 1;
@@ -135,17 +124,18 @@ public class DoctorTwoFragment extends Fragment {
         });
 
         //this.mContext = this;
+
         //加载listview
-        listView = getActivity().findViewById(R.id.listViewinstrument);
-        listViewAdapter = new ListViewAdapter(getActivity(), instrumentBeanList);
-        listView.setAdapter(listViewAdapter);
+        mListView = getActivity().findViewById(R.id.listViewinstrument);
+        mListViewAdapter = new ListViewAdapter(getActivity(), mInstrumentBeanList);
+        mListView.setAdapter(mListViewAdapter);
 
         //save button的点击事件
         Button saveButton = getActivity().findViewById(R.id.addinstrument);
         saveButton.setOnClickListener(v -> saveinstrumentMessage());
 
-        listView.setOnItemClickListener((adapterView, view, position, id) -> {
-            Bean instrumentBean = instrumentBeanList.get(position);
+        mListView.setOnItemClickListener((adapterView, view, position, id) -> {
+            Bean instrumentBean = mInstrumentBeanList.get(position);
             String instrumentname = instrumentBean.getName();
             Intent intent = new Intent(getActivity(), InstrumentDetailActivity.class);
             Bundle bundle = new Bundle();
@@ -156,19 +146,19 @@ public class DoctorTwoFragment extends Fragment {
         });
     }
 
-    private void showListPopulWindow() {    //edit下拉列表
+    private void showListPopulWindow() {
         final ListPopupWindow listPopupWindow;
         listPopupWindow = new ListPopupWindow(getActivity());
-        listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, InstrumentNames));//用android内置布局，或设计自己的样式
-        listPopupWindow.setAnchorView(mEditText);//以哪个控件为基准，在该处以mEditText为基准
+        listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mInstrumentNames));
+        listPopupWindow.setAnchorView(mEditText);
         listPopupWindow.setModal(true);
 
         //设置项点击监听
         listPopupWindow.setOnItemClickListener((adapterView, view, i, l) -> {
-            mEditText.setText(InstrumentNames.get(i));//把选择的选项内容展示在EditText上
-            listPopupWindow.dismiss();//如果已经选择了，隐藏起来
+            mEditText.setText(mInstrumentNames.get(i));
+            listPopupWindow.dismiss();
         });
-        listPopupWindow.show();//把ListPopWindow展示出来
+        listPopupWindow.show();
         listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_na), null));
     }
 
@@ -183,15 +173,14 @@ public class DoctorTwoFragment extends Fragment {
             return;
         }
         //判断该器械是否存在
-        for (Bean instrumentBean : instrumentBeanList) //添加了的器械列表
-        {
+        for (Bean instrumentBean : mInstrumentBeanList) {
             if (StringUtils.equals(instrumentBean.getName(), nameEditText.getText().toString())) {
                 Toast.makeText(getActivity(), nameEditText.getText().toString() + "已经存在", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         Bean instrumentBean = new Bean(nameEditText.getText().toString());
-        instrumentBeanList.add(instrumentBean);
-        listViewAdapter.notifyDataSetChanged();
+        mInstrumentBeanList.add(instrumentBean);
+        mListViewAdapter.notifyDataSetChanged();
     }
 }

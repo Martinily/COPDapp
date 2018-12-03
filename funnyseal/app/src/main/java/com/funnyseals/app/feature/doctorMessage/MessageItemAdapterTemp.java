@@ -24,23 +24,23 @@ import cn.bingoogolapple.badgeview.BGABadgeTextView;
  * </pre>
  */
 public class MessageItemAdapterTemp extends BaseAdapter {
-    private LayoutInflater inflater;
+    private LayoutInflater mInflater;
 
-    private List<ConversationTemp> data;
+    private List<ConversationTemp> mData;
 
     public MessageItemAdapterTemp(Context context, List<ConversationTemp> data) {
-        this.inflater = LayoutInflater.from(context);
-        this.data = data;
+        this.mInflater = LayoutInflater.from(context);
+        this.mData = data;
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        return mData.size();
     }
 
     @Override
     public ConversationTemp getItem(int position) {
-        return data.get(position);
+        return mData.get(position);
     }
 
     @Override
@@ -53,15 +53,15 @@ public class MessageItemAdapterTemp extends BaseAdapter {
         ViewHolder viewHolder;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_chat, parent, false);
+            convertView = mInflater.inflate(R.layout.list_item_chat, parent, false);
 
             viewHolder = new ViewHolder();
 
-            viewHolder.portrait = convertView.findViewById(R.id.chat_item_portrait);
-            viewHolder.name = convertView.findViewById(R.id.chat_item_name);
-            viewHolder.time = convertView.findViewById(R.id.chat_item_time);
-            viewHolder.content = convertView.findViewById(R.id.chat_item_content);
-            viewHolder.messageNum = convertView.findViewById(R.id.chat_item_message_num);
+            viewHolder.mPortrait = convertView.findViewById(R.id.chat_item_portrait);
+            viewHolder.mName = convertView.findViewById(R.id.chat_item_name);
+            viewHolder.mTime = convertView.findViewById(R.id.chat_item_time);
+            viewHolder.mContent = convertView.findViewById(R.id.chat_item_content);
+            viewHolder.mMessageNum = convertView.findViewById(R.id.chat_item_message_num);
 
             convertView.setTag(viewHolder);
         } else {
@@ -75,27 +75,27 @@ public class MessageItemAdapterTemp extends BaseAdapter {
 
     private class ViewHolder {
 
-        private ImageView portrait;
+        private ImageView mPortrait;
 
-        private TextView name;
+        private TextView mName;
 
-        private TextView time;
+        private TextView mTime;
 
-        private TextView content;
+        private TextView mContent;
 
-        private BGABadgeTextView messageNum;
+        private BGABadgeTextView mMessageNum;
 
         private void init(ConversationTemp item) {
             int unread = item.getUnreadNum();
 
-            portrait.setBackgroundResource(item.getPortrait());
-            name.setText(item.getName());
-            time.setText(item.getTime());
-            content.setText(item.getContent());
+            mPortrait.setBackgroundResource(item.getPortrait());
+            mName.setText(item.getName());
+            mTime.setText(item.getTime());
+            mContent.setText(item.getContent());
 
             if (unread != 0) {
-                messageNum.showCirclePointBadge();
-                messageNum.showTextBadge(unread + "");
+                mMessageNum.showCirclePointBadge();
+                mMessageNum.showTextBadge(unread + "");
             }
         }
     }

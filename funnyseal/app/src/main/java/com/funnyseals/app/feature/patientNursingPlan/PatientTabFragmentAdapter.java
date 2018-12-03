@@ -17,23 +17,23 @@ import java.util.List;
  * </pre>
  */
 public class PatientTabFragmentAdapter extends FragmentPagerAdapter {
-    private FragmentManager mfragmentManager;
-    private List<Fragment>  mlist;
+    private FragmentManager mFragmentManager;
+    private List<Fragment>  mList;
 
     public PatientTabFragmentAdapter(FragmentManager fm, List<Fragment> list) {
         super(fm);
-        this.mlist = list;
-        this.mfragmentManager = fm;
+        this.mList = list;
+        this.mFragmentManager = fm;
     }
 
     @Override
     public Fragment getItem(int arg0) {
-        return mlist.get(arg0);//显示第几个页面
+        return mList.get(arg0);
     }
 
     @Override
     public int getCount() {
-        return mlist.size();//有几个页面
+        return mList.size();
     }
 
     @Override

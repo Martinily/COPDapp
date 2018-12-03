@@ -33,29 +33,29 @@ import java.util.Map;
 
  */
 public class PatientTwoFragment extends Fragment {
-    private        View       view;
-    private static Connection conn;
-    MyApplication application;
-    private List<InstrumentPlan> instrumentPlans;
+    private        View                      mView;
+    private static Connection                CONN;
+    private        MyApplication             mApplication;
+    private        List<InstrumentPlan>      mInstrumentPlans;
     //将数据封装成数据源
-    List<Map<String, Object>> instrument_list = new ArrayList<>();
-    private Thread  mThread;
+    private        List<Map<String, Object>> mInstrument_list = new ArrayList<>();
+    private        Thread                    mThread;
     //用于执行数据库线程
     @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
+    private        Handler                   mHandler         = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
-                instrumentPlans = (List<InstrumentPlan>) msg.obj;
+                mInstrumentPlans = (List<InstrumentPlan>) msg.obj;
 
                 //将数据封装成数据源
-                for (InstrumentPlan p : instrumentPlans) {
+                for (InstrumentPlan p : mInstrumentPlans) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("instrumenttitle", p.getInstrumentName());
                     map.put("instrumentimg", R.drawable.instrument);
                     map.put("instrumentcontent", p.getInstrumentTracks());
                     map.put("instrumentattention", p.getInstrumentNote());
                     map.put("instrumenttime", "10:00");
-                    instrument_list.add(map);
+                    mInstrument_list.add(map);
                 }
                 ListView listview = getActivity().findViewById(R.id.listViewinstrument);
                 listview.setAdapter(new MyAdapter());
@@ -70,39 +70,39 @@ public class PatientTwoFragment extends Fragment {
             mThread = new Thread(runnable);
             mThread.start();
         }
-        if (view != null) {
-            ViewGroup parent = (ViewGroup) view.getParent();
+        if (mView != null) {
+            ViewGroup parent = (ViewGroup) mView.getParent();
             if (parent != null) {
-                parent.removeView(view);
+                parent.removeView(mView);
             }
-            return view;
+            return mView;
         }
-        view = inflater.inflate(R.layout.fragment_patient_two, null);
-        return view;
+        mView = inflater.inflate(R.layout.fragment_patient_two, null);
+        return mView;
     }
 
-    Runnable runnable = () -> {
+    private Runnable runnable = () -> {
         try {
-            conn = UserDao.getConnection();
-            application = (MyApplication) getActivity().getApplication();
-            String id = application.getAccount();
-            if (conn != null) {
-                PreparedStatement statement = conn.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
+            CONN = UserDao.getConnection();
+            mApplication = (MyApplication) getActivity().getApplication();
+            String id = mApplication.getAccount();
+            if (CONN != null) {
+                PreparedStatement statement = CONN.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
                 statement.setString(1, id);
                 ResultSet rs = statement.executeQuery();
                 if (rs.next()) {
-                    PreparedStatement instrumentS = conn.prepareStatement("SELECT * FROM HLJHQX WHERE HLJH_BH=?");  //！！！！
+                    PreparedStatement instrumentS = CONN.prepareStatement("SELECT * FROM HLJHQX WHERE HLJH_BH=?");  //！！！！
                     instrumentS.setString(1, rs.getString(1));
                     rs = instrumentS.executeQuery();
-                    instrumentPlans = new ArrayList<>();
+                    mInstrumentPlans = new ArrayList<>();
                     while (rs.next()) {
-                        instrumentPlans.add(new InstrumentPlan(rs.getString("HLJHQX_QXMC"), rs.getString("HLJHQX_SYSC"), rs.getString("HLJHQX_ZYSX")));
+                        mInstrumentPlans.add(new InstrumentPlan(rs.getString("HLJHQX_QXMC"), rs.getString("HLJHQX_SYSC"), rs.getString("HLJHQX_ZYSX")));
                     }
                     Message message = Message.obtain();
                     message.what = 0;
-                    message.obj = instrumentPlans;
+                    message.obj = mInstrumentPlans;
                     mHandler.sendMessage(message);
-                    conn.close();
+                    CONN.close();
                     instrumentS.close();
                     rs.close();
                     statement.close();
@@ -129,12 +129,12 @@ public class PatientTwoFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return instrument_list.size();
+            return mInstrument_list.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return instrument_list.get(position);
+            return mInstrument_list.get(position);
         }
 
         @Override
@@ -149,21 +149,21 @@ public class PatientTwoFragment extends Fragment {
             if (convertView == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.instrument_list_item, null);
                 mHolder = new ViewHolder();
-                mHolder.cardinstrument_title = view.findViewById(R.id.instrument);
-                mHolder.cardinstrument_image = view.findViewById(R.id.instrumentImg);
-                mHolder.cardinstrument_content = view.findViewById(R.id.instrumentnum);
-                mHolder.cardinstrument_attention = view.findViewById(R.id.instrumentattention);
-                mHolder.cardinstrument_time = view.findViewById(R.id.instrumenttime);
+                mHolder.mCardinstrument_title = view.findViewById(R.id.instrument);
+                mHolder.mCardinstrument_image = view.findViewById(R.id.instrumentImg);
+                mHolder.mCardinstrument_content = view.findViewById(R.id.instrumentnum);
+                mHolder.mCardinstrument_attention = view.findViewById(R.id.instrumentattention);
+                mHolder.mCardinstrument_time = view.findViewById(R.id.instrumenttime);
                 view.setTag(mHolder);  //将ViewHolder存储在View中
             } else {
                 view = convertView;
                 mHolder = (PatientTwoFragment.ViewHolder) view.getTag();  //重新获得ViewHolder
             }
-            mHolder.cardinstrument_title.setText(instrument_list.get(position).get("instrumenttitle").toString());
-            mHolder.cardinstrument_image.setImageResource((int) instrument_list.get(position).get("instrumentimg"));
-            mHolder.cardinstrument_content.setText(instrument_list.get(position).get("instrumentcontent").toString());
-            mHolder.cardinstrument_attention.setText(instrument_list.get(position).get("instrumentattention").toString());
-            mHolder.cardinstrument_time.setText(instrument_list.get(position).get("instrumenttime").toString());
+            mHolder.mCardinstrument_title.setText(mInstrument_list.get(position).get("instrumenttitle").toString());
+            mHolder.mCardinstrument_image.setImageResource((int) mInstrument_list.get(position).get("instrumentimg"));
+            mHolder.mCardinstrument_content.setText(mInstrument_list.get(position).get("instrumentcontent").toString());
+            mHolder.mCardinstrument_attention.setText(mInstrument_list.get(position).get("instrumentattention").toString());
+            mHolder.mCardinstrument_time.setText(mInstrument_list.get(position).get("instrumenttime").toString());
 
             Button moretime = view.findViewById(R.id.moreinstrumenttime);
             moretime.setOnClickListener(v -> {
@@ -175,11 +175,11 @@ public class PatientTwoFragment extends Fragment {
 
     }
 
-    class ViewHolder {
-        TextView  cardinstrument_title;
-        ImageView cardinstrument_image;
-        TextView  cardinstrument_content;
-        TextView  cardinstrument_attention;
-        TextView  cardinstrument_time;
+    private class ViewHolder {
+        private TextView  mCardinstrument_title;
+        private ImageView mCardinstrument_image;
+        private TextView  mCardinstrument_content;
+        private TextView  mCardinstrument_attention;
+        private TextView  mCardinstrument_time;
     }
 }

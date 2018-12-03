@@ -19,39 +19,39 @@ import com.funnyseals.app.R;
  */
 public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedChangeListener {
     //所有可用fragment列表
-    private SparseArray<Fragment> fragmentMap;
+    private SparseArray<Fragment> mFragmentMap;
     //底部导航栏
-    private RadioGroup            radioGroup;
-    //
-    private FragmentActivity      fragmentActivity;
+    private RadioGroup            mRadioGroup;
+
+    private FragmentActivity mFragmentActivity;
     //容器组件id
-    private int                   fragmentContentId;
+    private int              mFragmentContentId;
     //当前tab对应的RadioButton id
-    private int                   currentTabId;
+    private int              mCurrentTabId;
 
     protected PatientBottomTabAdapter(FragmentActivity fragmentActivity, SparseArray<Fragment> fragmentMap, int fragmentContentId, RadioGroup radioGroup) {
-        this.fragmentMap = fragmentMap;
-        this.radioGroup = radioGroup;
-        this.fragmentActivity = fragmentActivity;
-        this.fragmentContentId = fragmentContentId;
+        this.mFragmentMap = fragmentMap;
+        this.mRadioGroup = radioGroup;
+        this.mFragmentActivity = fragmentActivity;
+        this.mFragmentContentId = fragmentContentId;
 
         this.init();
     }
 
     private void init() {
-        // 初始状态装载 patient_nursingplan_tab
-        FragmentTransaction ft = fragmentActivity.getSupportFragmentManager().beginTransaction();
-        ft.add(fragmentContentId, fragmentMap.get(R.id.patient_nursingplan_tab));
+
+        FragmentTransaction ft = mFragmentActivity.getSupportFragmentManager().beginTransaction();
+        ft.add(mFragmentContentId, mFragmentMap.get(R.id.patient_nursingplan_tab));
         ft.commit();
 
-        radioGroup.setOnCheckedChangeListener(this);
+        mRadioGroup.setOnCheckedChangeListener(this);
 
-        currentTabId = R.id.patient_nursingplan_tab;
+        mCurrentTabId = R.id.patient_nursingplan_tab;
     }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-        // 切换
+
         changeTab(checkedId);
     }
 
@@ -64,14 +64,14 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
      * @param tabId 目标 tab 对应的 RadioButton id
      */
     private void changeTab(int tabId) {
-        if (tabId == currentTabId) { // 选中当前tab无需切换
+        if (tabId == mCurrentTabId) {
             return;
         }
-        // 调用注册的回调函数
+
         if (onTabWillChange(tabId)) {
-            // 显示选中的tab
+
             showTab(tabId);
-            // 调用注册的回调函数
+
             onTabChanged(tabId);
         }
     }
@@ -82,36 +82,35 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
      * @param tabId 目标tab 对应的 RadioButton id
      */
     private void showTab(int tabId) {
-        // 当前 fragment
+
         Fragment temp = getCurrentFragment();
-        // 目标 fragment
-        Fragment fragment = fragmentMap.get(tabId);
 
-        FragmentTransaction ft = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        Fragment fragment = mFragmentMap.get(tabId);
 
-        if (fragment.isAdded()) { // 已添加
+        FragmentTransaction ft = mFragmentActivity.getSupportFragmentManager().beginTransaction();
+
+        if (fragment.isAdded()) {
             fragment.onResume();
         } else {
-            ft.add(fragmentContentId, fragment);
+            ft.add(mFragmentContentId, fragment);
         }
-        // 暂停
+
         temp.onPause();
-        // 显示目标 fragment
-        ft.show(fragmentMap.get(tabId));
-        // 隐藏原 fragment
+
+        ft.show(mFragmentMap.get(tabId));
+
         ft.hide(temp);
 
         ft.commit();
 
-        // 修改当前 fragment tab
-        currentTabId = tabId;
+        mCurrentTabId = tabId;
     }
 
     /**
      * 获取当前tab
      */
     private Fragment getCurrentFragment() {
-        return fragmentMap.get(currentTabId);
+        return mFragmentMap.get(mCurrentTabId);
     }
 
     /**
@@ -122,8 +121,8 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
     public void setFragmentTab(int tabId) {
         changeTab(tabId);
 
-        if (fragmentActivity.findViewById(tabId) instanceof RadioButton) {
-            ((RadioButton) fragmentActivity.findViewById(tabId)).setChecked(true);
+        if (mFragmentActivity.findViewById(tabId) instanceof RadioButton) {
+            ((RadioButton) mFragmentActivity.findViewById(tabId)).setChecked(true);
         }
     }
 

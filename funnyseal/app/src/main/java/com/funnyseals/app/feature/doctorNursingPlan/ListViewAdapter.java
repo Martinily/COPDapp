@@ -21,23 +21,14 @@ import java.util.List;
  * </pre>
  */
 public class ListViewAdapter extends BaseAdapter {
-    /**
-     * Context
-     */
+
     private Context mContext;
+    private String     mName;
+    private List<Bean> mBeanList;
 
-    /**
-     * 数据
-     */
-    private String     name;
-    private List<Bean> BeanList;
-
-    /**
-     * 构造函数
-     */
     public ListViewAdapter(Context context, List<Bean> BeanList) {
         this.mContext = context;
-        this.BeanList = BeanList;
+        this.mBeanList = BeanList;
     }
 
     /**
@@ -47,7 +38,7 @@ public class ListViewAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return BeanList.size();
+        return mBeanList.size();
     }
 
     /**
@@ -84,7 +75,7 @@ public class ListViewAdapter extends BaseAdapter {
             view = View.inflate(mContext, R.layout.listview, null);
         }
 
-        Bean bean = BeanList.get(position);
+        Bean bean = mBeanList.get(position);
         if (bean == null) {
             bean = new Bean("NoName");
         }
@@ -97,12 +88,9 @@ public class ListViewAdapter extends BaseAdapter {
 
         //删除按钮点击事件
         Button deleteButton = view.findViewById(R.id.showDeleteButton);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "已删除", Toast.LENGTH_SHORT).show();
-                deleteButtonAction(removePosition);
-            }
+        deleteButton.setOnClickListener(v -> {
+            Toast.makeText(mContext, "已删除", Toast.LENGTH_SHORT).show();
+            deleteButtonAction(removePosition);
         });
 
 
@@ -110,12 +98,12 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     private void deleteButtonAction(int position) {
-        BeanList.remove(position);
+        mBeanList.remove(position);
 
         notifyDataSetChanged();
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 }

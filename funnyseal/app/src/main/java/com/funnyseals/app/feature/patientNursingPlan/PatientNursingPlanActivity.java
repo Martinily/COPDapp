@@ -16,12 +16,12 @@ import java.util.List;
 
 public class PatientNursingPlanActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView                  tv_patient_one;
-    private TextView                  tv_patient_two;
-    private TextView                  tv_patient_three;
-    private ViewPager                 vp_patient_myViewPager;
-    private List<Fragment>            list;
-    private PatientTabFragmentAdapter adapter;
+    private TextView                  mTv_patient_one;
+    private TextView                  mTv_patient_two;
+    private TextView                  mTv_patient_three;
+    private ViewPager                 mVp_patient_myViewPager;
+    private List<Fragment>            mList;
+    private PatientTabFragmentAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,30 +34,30 @@ public class PatientNursingPlanActivity extends AppCompatActivity implements Vie
             actionBar.hide();
         }
         // 设置菜单栏的点击事件
-        tv_patient_one.setOnClickListener(this);
-        tv_patient_two.setOnClickListener(this);
-        tv_patient_three.setOnClickListener(this);
-        vp_patient_myViewPager.setOnPageChangeListener(new MyPagerChangeListener());
+        mTv_patient_one.setOnClickListener(this);
+        mTv_patient_two.setOnClickListener(this);
+        mTv_patient_three.setOnClickListener(this);
+        mVp_patient_myViewPager.setOnPageChangeListener(new MyPagerChangeListener());
 
         //把Fragment添加到List集合里面
-        list = new ArrayList<>();
-        list.add(new PatientOneFragment());
-        list.add(new PatientTwoFragment());
-        list.add(new PatientThreeFragment());
-        adapter = new PatientTabFragmentAdapter(getSupportFragmentManager(), list);
-        vp_patient_myViewPager.setAdapter(adapter);
-        vp_patient_myViewPager.setCurrentItem(0);  //初始化显示第一个页面
-        tv_patient_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
+        mList = new ArrayList<>();
+        mList.add(new PatientOneFragment());
+        mList.add(new PatientTwoFragment());
+        mList.add(new PatientThreeFragment());
+        mAdapter = new PatientTabFragmentAdapter(getSupportFragmentManager(), mList);
+        mVp_patient_myViewPager.setAdapter(mAdapter);
+        mVp_patient_myViewPager.setCurrentItem(0);  //初始化显示第一个页面
+        mTv_patient_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
     }
 
     /**
      * 初始化控件
      */
     private void InitView() {
-        tv_patient_one = findViewById(R.id.tv_patient_one);
-        tv_patient_two = findViewById(R.id.tv_patient_two);
-        tv_patient_three = findViewById(R.id.tv_patient_three);
-        vp_patient_myViewPager = findViewById(R.id.vp_patient_myViewPager);
+        mTv_patient_one = findViewById(R.id.tv_patient_one);
+        mTv_patient_two = findViewById(R.id.tv_patient_two);
+        mTv_patient_three = findViewById(R.id.tv_patient_three);
+        mVp_patient_myViewPager = findViewById(R.id.vp_patient_myViewPager);
     }
 
     /**
@@ -68,22 +68,22 @@ public class PatientNursingPlanActivity extends AppCompatActivity implements Vie
 
         switch (v.getId()) {
             case R.id.tv_patient_one:
-                vp_patient_myViewPager.setCurrentItem(0);
-                tv_patient_one.setBackgroundColor(Color.LTGRAY);
-                tv_patient_two.setBackgroundColor(Color.WHITE);
-                tv_patient_three.setBackgroundColor(Color.WHITE);
+                mVp_patient_myViewPager.setCurrentItem(0);
+                mTv_patient_one.setBackgroundColor(Color.LTGRAY);
+                mTv_patient_two.setBackgroundColor(Color.WHITE);
+                mTv_patient_three.setBackgroundColor(Color.WHITE);
                 break;
             case R.id.tv_patient_two:
-                vp_patient_myViewPager.setCurrentItem(1);
-                tv_patient_one.setBackgroundColor(Color.WHITE);
-                tv_patient_two.setBackgroundColor(Color.LTGRAY);
-                tv_patient_three.setBackgroundColor(Color.WHITE);
+                mVp_patient_myViewPager.setCurrentItem(1);
+                mTv_patient_one.setBackgroundColor(Color.WHITE);
+                mTv_patient_two.setBackgroundColor(Color.LTGRAY);
+                mTv_patient_three.setBackgroundColor(Color.WHITE);
                 break;
             case R.id.tv_patient_three:
-                vp_patient_myViewPager.setCurrentItem(2);
-                tv_patient_one.setBackgroundColor(Color.WHITE);
-                tv_patient_two.setBackgroundColor(Color.WHITE);
-                tv_patient_three.setBackgroundColor(Color.LTGRAY);
+                mVp_patient_myViewPager.setCurrentItem(2);
+                mTv_patient_one.setBackgroundColor(Color.WHITE);
+                mTv_patient_two.setBackgroundColor(Color.WHITE);
+                mTv_patient_three.setBackgroundColor(Color.LTGRAY);
                 break;
         }
     }
@@ -105,19 +105,19 @@ public class PatientNursingPlanActivity extends AppCompatActivity implements Vie
         public void onPageSelected(int arg0) {
             switch (arg0) {
                 case 0:
-                    tv_patient_one.setBackgroundColor(Color.LTGRAY);
-                    tv_patient_two.setBackgroundColor(Color.WHITE);
-                    tv_patient_three.setBackgroundColor(Color.WHITE);
+                    mTv_patient_one.setBackgroundColor(Color.LTGRAY);
+                    mTv_patient_two.setBackgroundColor(Color.WHITE);
+                    mTv_patient_three.setBackgroundColor(Color.WHITE);
                     break;
                 case 1:
-                    tv_patient_one.setBackgroundColor(Color.WHITE);
-                    tv_patient_two.setBackgroundColor(Color.LTGRAY);
-                    tv_patient_three.setBackgroundColor(Color.WHITE);
+                    mTv_patient_one.setBackgroundColor(Color.WHITE);
+                    mTv_patient_two.setBackgroundColor(Color.LTGRAY);
+                    mTv_patient_three.setBackgroundColor(Color.WHITE);
                     break;
                 case 2:
-                    tv_patient_one.setBackgroundColor(Color.WHITE);
-                    tv_patient_two.setBackgroundColor(Color.WHITE);
-                    tv_patient_three.setBackgroundColor(Color.LTGRAY);
+                    mTv_patient_one.setBackgroundColor(Color.WHITE);
+                    mTv_patient_two.setBackgroundColor(Color.WHITE);
+                    mTv_patient_three.setBackgroundColor(Color.LTGRAY);
                     break;
             }
         }

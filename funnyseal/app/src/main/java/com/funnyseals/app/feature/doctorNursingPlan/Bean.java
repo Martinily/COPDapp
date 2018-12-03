@@ -9,31 +9,31 @@ package com.funnyseals.app.feature.doctorNursingPlan;
  * </pre>
  */
 public class Bean {
-    private int id;
+    private int mId;
 
-    private String name;
+    private String mName;
 
     public Bean() {
 
     }
 
     public Bean(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public int getId() {
-        return id;
+        return mId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.mId = id;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 }

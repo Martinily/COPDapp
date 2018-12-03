@@ -15,10 +15,10 @@ import java.util.List;
 
 public class DoctorNursingPlanActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView tv_doctor_title, tv_doctor_one, tv_doctor_two, tv_doctor_three;
-    private ViewPager                     vp_doctor_myviewpage;
-    private List<Fragment>                list;
-    private DoctorTabFragmentPagerAdapter adapter;
+    private TextView mTv_doctor_title, mTv_doctor_one, mTv_doctor_two, mTv_doctor_three;
+    private ViewPager                     mVp_doctor_myviewpage;
+    private List<Fragment>                mList;
+    private DoctorTabFragmentPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,30 +26,30 @@ public class DoctorNursingPlanActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_doctor_nursing_plan);
         InitView();
         // 设置菜单栏的点击事件
-        tv_doctor_one.setOnClickListener(this);
-        tv_doctor_two.setOnClickListener(this);
-        tv_doctor_three.setOnClickListener(this);
-        vp_doctor_myviewpage.setOnPageChangeListener(new MyPagerChangeListener());
+        mTv_doctor_one.setOnClickListener(this);
+        mTv_doctor_two.setOnClickListener(this);
+        mTv_doctor_three.setOnClickListener(this);
+        mVp_doctor_myviewpage.setOnPageChangeListener(new MyPagerChangeListener());
 
         //把Fragment添加到List集合里面
-        list = new ArrayList<>();
-        list.add(new DoctorOneFragment());
-        list.add(new DoctorTwoFragment());
-        list.add(new DoctorThreeFragment());
-        adapter = new DoctorTabFragmentPagerAdapter(getSupportFragmentManager(), list);
-        vp_doctor_myviewpage.setAdapter(adapter);
-        vp_doctor_myviewpage.setCurrentItem(0);  //初始化显示第一个页面
-        tv_doctor_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
+        mList = new ArrayList<>();
+        mList.add(new DoctorOneFragment());
+        mList.add(new DoctorTwoFragment());
+        mList.add(new DoctorThreeFragment());
+        mAdapter = new DoctorTabFragmentPagerAdapter(getSupportFragmentManager(), mList);
+        mVp_doctor_myviewpage.setAdapter(mAdapter);
+        mVp_doctor_myviewpage.setCurrentItem(0);  //初始化显示第一个页面
+        mTv_doctor_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
     }
 
     /**
      * 初始化控件
      */
     private void InitView() {
-        tv_doctor_one = findViewById(R.id.tv_doctor_one);
-        tv_doctor_two = findViewById(R.id.tv_doctor_two);
-        tv_doctor_three = findViewById(R.id.tv_doctor_three);
-        vp_doctor_myviewpage = findViewById(R.id.vp_doctor_myViewPager);
+        mTv_doctor_one = findViewById(R.id.tv_doctor_one);
+        mTv_doctor_two = findViewById(R.id.tv_doctor_two);
+        mTv_doctor_three = findViewById(R.id.tv_doctor_three);
+        mVp_doctor_myviewpage = findViewById(R.id.vp_doctor_myViewPager);
     }
 
     /**
@@ -60,22 +60,22 @@ public class DoctorNursingPlanActivity extends AppCompatActivity implements View
 
         switch (v.getId()) {
             case R.id.tv_doctor_one:
-                vp_doctor_myviewpage.setCurrentItem(0);
-                tv_doctor_one.setBackgroundColor(Color.LTGRAY);
-                tv_doctor_two.setBackgroundColor(Color.WHITE);
-                tv_doctor_three.setBackgroundColor(Color.WHITE);
+                mVp_doctor_myviewpage.setCurrentItem(0);
+                mTv_doctor_one.setBackgroundColor(Color.LTGRAY);
+                mTv_doctor_two.setBackgroundColor(Color.WHITE);
+                mTv_doctor_three.setBackgroundColor(Color.WHITE);
                 break;
             case R.id.tv_doctor_two:
-                vp_doctor_myviewpage.setCurrentItem(1);
-                tv_doctor_one.setBackgroundColor(Color.WHITE);
-                tv_doctor_two.setBackgroundColor(Color.LTGRAY);
-                tv_doctor_three.setBackgroundColor(Color.WHITE);
+                mVp_doctor_myviewpage.setCurrentItem(1);
+                mTv_doctor_one.setBackgroundColor(Color.WHITE);
+                mTv_doctor_two.setBackgroundColor(Color.LTGRAY);
+                mTv_doctor_three.setBackgroundColor(Color.WHITE);
                 break;
             case R.id.tv_doctor_three:
-                vp_doctor_myviewpage.setCurrentItem(2);
-                tv_doctor_one.setBackgroundColor(Color.WHITE);
-                tv_doctor_two.setBackgroundColor(Color.WHITE);
-                tv_doctor_three.setBackgroundColor(Color.LTGRAY);
+                mVp_doctor_myviewpage.setCurrentItem(2);
+                mTv_doctor_one.setBackgroundColor(Color.WHITE);
+                mTv_doctor_two.setBackgroundColor(Color.WHITE);
+                mTv_doctor_three.setBackgroundColor(Color.LTGRAY);
                 break;
         }
     }
@@ -97,19 +97,19 @@ public class DoctorNursingPlanActivity extends AppCompatActivity implements View
         public void onPageSelected(int arg0) {
             switch (arg0) {
                 case 0:
-                    tv_doctor_one.setBackgroundColor(Color.LTGRAY);
-                    tv_doctor_two.setBackgroundColor(Color.WHITE);
-                    tv_doctor_three.setBackgroundColor(Color.WHITE);
+                    mTv_doctor_one.setBackgroundColor(Color.LTGRAY);
+                    mTv_doctor_two.setBackgroundColor(Color.WHITE);
+                    mTv_doctor_three.setBackgroundColor(Color.WHITE);
                     break;
                 case 1:
-                    tv_doctor_one.setBackgroundColor(Color.WHITE);
-                    tv_doctor_two.setBackgroundColor(Color.LTGRAY);
-                    tv_doctor_three.setBackgroundColor(Color.WHITE);
+                    mTv_doctor_one.setBackgroundColor(Color.WHITE);
+                    mTv_doctor_two.setBackgroundColor(Color.LTGRAY);
+                    mTv_doctor_three.setBackgroundColor(Color.WHITE);
                     break;
                 case 2:
-                    tv_doctor_one.setBackgroundColor(Color.WHITE);
-                    tv_doctor_two.setBackgroundColor(Color.WHITE);
-                    tv_doctor_three.setBackgroundColor(Color.LTGRAY);
+                    mTv_doctor_one.setBackgroundColor(Color.WHITE);
+                    mTv_doctor_two.setBackgroundColor(Color.WHITE);
+                    mTv_doctor_three.setBackgroundColor(Color.LTGRAY);
                     break;
             }
         }

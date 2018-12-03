@@ -21,9 +21,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class Portrait extends CircleImageView {
 
-    private String account;
+    private String mAccount;
 
-    private String url;
+    private String mUrl;
 
     public Portrait(Context context) {
         super(context);
@@ -50,7 +50,7 @@ public class Portrait extends CircleImageView {
             //if (!account.equals(userAccount)) {
             Intent intent = new Intent(getContext(), DoctorChatActivity.class);
 
-            intent.putExtra("account", account);
+            intent.putExtra("account", mAccount);
 
             getContext().startActivity(intent);
             //}
@@ -58,12 +58,12 @@ public class Portrait extends CircleImageView {
     }
 
     public Portrait setUserAccount(String account) {
-        this.account = account;
+        this.mAccount = account;
         return this;
     }
 
     public Portrait setUrl(String url) {
-        this.url = url;
+        this.mUrl = url;
         return this;
     }
 

@@ -9,37 +9,37 @@ package com.funnyseals.app.model;
  * </pre>
  */
 public class InstrumentPlan {
-    private String instrumentName;
-    private String instrumentTracks;
-    private String instrumentNote;
+    private String mInstrumentName;
+    private String mInstrumentTracks;
+    private String mInstrumentNote;
 
     public InstrumentPlan(String instrumentName, String instrumentNote, String instrumentTracks) {
-        this.instrumentName = instrumentName;
-        this.instrumentNote = instrumentNote;
-        this.instrumentTracks = instrumentTracks;
+        this.mInstrumentName = instrumentName;
+        this.mInstrumentNote = instrumentNote;
+        this.mInstrumentTracks = instrumentTracks;
     }
 
     public String getInstrumentName() {
-        return instrumentName;
+        return mInstrumentName;
     }
 
-    public void setInstrumentName() {
-        this.instrumentName = instrumentName;
+    public void setInstrumentName(String instrumentName) {
+        this.mInstrumentName = instrumentName;
     }
 
     public String getInstrumentTracks() {
-        return instrumentTracks;
+        return mInstrumentTracks;
     }
 
-    public void setInstrumentTracks() {
-        this.instrumentTracks = instrumentTracks;
+    public void setInstrumentTracks(String instrumentTracks) {
+        this.mInstrumentTracks = instrumentTracks;
     }
 
     public String getInstrumentNote() {
-        return instrumentNote;
+        return mInstrumentNote;
     }
 
-    public void setInstrumentNote() {
-        this.instrumentNote = instrumentNote;
+    public void setInstrumentNote(String instrumentNote) {
+        this.mInstrumentNote = instrumentNote;
     }
 }

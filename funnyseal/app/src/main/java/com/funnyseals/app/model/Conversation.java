@@ -12,39 +12,39 @@ import com.hyphenate.chat.EMMessage;
  */
 public class Conversation {
     //聊天对象信息
-    private User      user;
+    private User      mUser;
     //最后一条消息
-    private EMMessage lastMessage;
+    private EMMessage mLastMessage;
     //未读数量
-    private int       unReadNum;
+    private int       mUnReadNum;
 
     public Conversation(User user, EMMessage message, int unReadNum) {
-        this.user = user;
-        this.lastMessage = message;
-        this.unReadNum = unReadNum;
+        this.mUser = user;
+        this.mLastMessage = message;
+        this.mUnReadNum = unReadNum;
     }
 
     public User getUser() {
-        return user;
+        return mUser;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.mUser = user;
     }
 
     public EMMessage getMessage() {
-        return lastMessage;
+        return mLastMessage;
     }
 
     public void setMessage(EMMessage message) {
-        this.lastMessage = message;
+        this.mLastMessage = message;
     }
 
     public int getUnReadNum() {
-        return unReadNum;
+        return mUnReadNum;
     }
 
     public void setUnReadNum(int unReadNum) {
-        this.unReadNum = unReadNum;
+        this.mUnReadNum = unReadNum;
     }
 }

@@ -35,23 +35,28 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * <pre>
+ *     author : marin
+ *     time   : 2018/11/27
+ *     desc   : 医生端消息列表fragment
+ *     version: 1.0
+ * </pre>
  */
 public class DoctorMessageListFragment extends Fragment {
-    private View                   view;
-    private SwipeMenuListView      chatList;
-    private Connection             conn;
-    private MessageItemAdapter     adapter;
-    private List<EMConversation>   conversationList;
-    private List<ConversationTemp> conversationTemps;
-    private Map<String, User>      users;
-    private String                 myAccount;
+    private View                   mView;
+    private SwipeMenuListView      mChatList;
+    private Connection             mConn;
+    private MessageItemAdapter     mAdapter;
+    private List<EMConversation>   mConversationList;
+    private List<ConversationTemp> mConversationTemps;
+    private Map<String, User>      mUsers;
+    private String                 mMyAccount;
     private Thread                 mThread;
     //用于执行数据库线程
     private Handler                mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
-                users = (Map<String, User>) msg.obj;
+                mUsers = (Map<String, User>) msg.obj;
                 loadConversations();
             } else if (msg.what == 1) {
                 System.err.println(msg.obj);
@@ -62,16 +67,16 @@ public class DoctorMessageListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
+        mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
         MyApplication application = (MyApplication) getActivity().getApplication();
-        myAccount = application.getAccount();
+        mMyAccount = application.getAccount();
         if (mThread == null) {
             mThread = new Thread(runnable);
             mThread.start();
         }
         init();
 
-        return view;
+        return mView;
     }
 
     @Override
@@ -81,22 +86,22 @@ public class DoctorMessageListFragment extends Fragment {
 
     Runnable runnable = () -> {
         try {
-            conn = UserDao.getConnection();
-            if (conn != null) {
-                PreparedStatement statement = conn.prepareStatement("select * from hz where YS_ZH=?");
-                statement.setString(1, myAccount);
+            mConn = UserDao.getConnection();
+            if (mConn != null) {
+                PreparedStatement statement = mConn.prepareStatement("select * from hz where YS_ZH=?");
+                statement.setString(1, mMyAccount);
                 ResultSet rs = statement.executeQuery();
-                users = new HashMap<>();
+                mUsers = new HashMap<>();
                 while (rs.next()) {
-                    users.put(rs.getString("HZ_ZH"),
+                    mUsers.put(rs.getString("HZ_ZH"),
                             new User(rs.getString("HZ_ZH"), rs.getString("HZ_XM"),
                                     rs.getString("HZ_XB"), rs.getInt("HZ_NL")));
                 }
                 Message message = Message.obtain();
                 message.what = 0;
-                message.obj = users;
+                message.obj = mUsers;
                 mHandler.sendMessage(message);
-                conn.close();
+                mConn.close();
                 statement.close();
                 rs.close();
             }
@@ -113,11 +118,11 @@ public class DoctorMessageListFragment extends Fragment {
     }
 
     private void initUIComponents() {
-        chatList = view.findViewById(R.id.chat_list);
+        mChatList = mView.findViewById(R.id.chat_list);
 
         SwipeMenuCreator creator = menu -> {
             // 创建删除选项
-            SwipeMenuItem deleteItem = new SwipeMenuItem(view.getContext());
+            SwipeMenuItem deleteItem = new SwipeMenuItem(mView.getContext());
             // 设置属性
             deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
             deleteItem.setWidth(200);
@@ -128,9 +133,9 @@ public class DoctorMessageListFragment extends Fragment {
             menu.addMenuItem(deleteItem);
         };
 
-        chatList.setMenuCreator(creator);
+        mChatList.setMenuCreator(creator);
         // 设置左划
-        chatList.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        mChatList.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
     }
 
     /**
@@ -139,21 +144,21 @@ public class DoctorMessageListFragment extends Fragment {
     private void loadConversations() {
         Map<String, EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversations();
         System.err.println(conversations.isEmpty());
-        conversationList = new ArrayList<>();
-        conversationTemps = new ArrayList<>();
+        mConversationList = new ArrayList<>();
+        mConversationTemps = new ArrayList<>();
         //StringBuilder param = new StringBuilder();
         for (Map.Entry<String, EMConversation> entry : conversations.entrySet()) {
-            conversationList.add(entry.getValue());
+            mConversationList.add(entry.getValue());
 
             EMMessage message = entry.getValue().getLastMessage();
             String account = getChatTarget(message);
             //头像，账号，用户名，最后一条消息的时间，最后一条消息，未读取消息数量
-            conversationTemps.add(new ConversationTemp(R.mipmap.portrait0, account, users.get(account).getNickName(),
+            mConversationTemps.add(new ConversationTemp(R.mipmap.portrait0, account, mUsers.get(account).getNickName(),
                     TimeUtil.getFormatTime(entry.getValue().getLastMessage().getMsgTime()),
                     entry.getValue().getLastMessage().getBody().toString(),
                     entry.getValue().getUnreadMsgCount()));
         }
-        chatList.setAdapter(new MessageItemAdapterTemp(getActivity(), conversationTemps));
+        mChatList.setAdapter(new MessageItemAdapterTemp(getActivity(), mConversationTemps));
         addListeners();
         //loadUserList(param.toString());
     }
@@ -180,21 +185,22 @@ public class DoctorMessageListFragment extends Fragment {
                     }
                 });
     }*/
+
     private void addListeners() {
         //获取聊天对象
-        chatList.setOnItemClickListener((parent, view, position, id) -> {
+        mChatList.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getContext(), DoctorChatActivity.class);
             //传递参数,聊天者的账号
-            intent.putExtra("myfriend", users.get(conversationTemps.get(position).getAccount()));
+            intent.putExtra("myfriend", mUsers.get(mConversationTemps.get(position).getAccount()));
             startActivity(intent);
         });
         //删除消息
-        chatList.setOnMenuItemClickListener((position, menu, index) -> {
+        mChatList.setOnMenuItemClickListener((position, menu, index) -> {
             if (index == 0) {
-                conversationList.remove(position);
-                conversationTemps.remove(position);
+                mConversationList.remove(position);
+                mConversationTemps.remove(position);
 
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
             }
             // false : close the menu; true : not close the menu
             return false;
@@ -205,7 +211,7 @@ public class DoctorMessageListFragment extends Fragment {
      * 获取消息对象的账号
      */
     private String getChatTarget(EMMessage message) {
-        if (myAccount.equals(message.getFrom())) {
+        if (mMyAccount.equals(message.getFrom())) {
             return message.getTo();
         }
 

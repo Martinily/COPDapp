@@ -78,7 +78,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    EventHandler sendSMSHandler = new EventHandler() {
+    private EventHandler sendSMSHandler = new EventHandler() {
         public void afterEvent(int event, int result, Object data) {
             Message msg = new Message();
             msg.arg1 = event;
@@ -144,7 +144,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 statement = conn.prepareStatement("insert into YS(HZ_ZH,HZ_MM) values(?,?)");
                             }
                             statement.setString(1, mEtAccount.getText().toString());
-                            statement.setString(m  2, mEtPassword.getText().toString());
+                            statement.setString(2, mEtPassword.getText().toString());
                             statement.executeUpdate();
                             EMClient.getInstance().createAccount(mEtAccount.getText().toString(), mEtPassword.getText().toString());
                             showToast("注册完成");

@@ -9,37 +9,37 @@ package com.funnyseals.app.model;
  * </pre>
  */
 public class SportsPlan {
-    private String sportsName;
-    private String sportsTracks;
-    private String sportsNote;
+    private String mSportsName;
+    private String mSportsTracks;
+    private String mSportsNote;
 
     public SportsPlan(String sportsName, String sportsTracks, String sportsNote) {
-        this.sportsName = sportsName;
-        this.sportsTracks = sportsTracks;
-        this.sportsNote = sportsNote;
+        this.mSportsName = sportsName;
+        this.mSportsTracks = sportsTracks;
+        this.mSportsNote = sportsNote;
     }
 
     public String getSportsName() {
-        return sportsName;
+        return mSportsName;
     }
 
     public void setSportsName(String sportsName) {
-        this.sportsName = sportsName;
+        this.mSportsName = sportsName;
     }
 
     public String getSportsTracks() {
-        return sportsTracks;
+        return mSportsTracks;
     }
 
     public void setSportsTracks(String sportsTracks) {
-        this.sportsTracks = sportsTracks;
+        this.mSportsTracks = sportsTracks;
     }
 
     public String getSportsNote() {
-        return sportsNote;
+        return mSportsNote;
     }
 
     public void setSportsNote(String sportsNote) {
-        this.sportsNote = sportsNote;
+        this.mSportsNote = sportsNote;
     }
 }

@@ -71,7 +71,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    EventHandler sendSMSHandler = new EventHandler() {
+    private EventHandler sendSMSHandler = new EventHandler() {
         public void afterEvent(int event, int result, Object data) {
             Message msg = new Message();
             msg.arg1 = event;

@@ -21,20 +21,20 @@ import java.util.List;
 
  */
 public class PatientListFragment extends Fragment {
-    private View                   view;
-    private SwipeMenuListView      patientlist;
-    private PatientListItemAdapter adapter;
-    private List<User>             users;
-    private List<UserTemp>         userTemps;
+    private View                   mView;
+    private SwipeMenuListView      mPatientlist;
+    private PatientListItemAdapter mAdapter;
+    private List<User>             mUsers;
+    private List<UserTemp>         mUserTemps;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_patient_list, container, false);
+        mView = inflater.inflate(R.layout.fragment_patient_list, container, false);
 
         init();
 
-        return view;
+        return mView;
     }
 
     @Override
@@ -43,29 +43,31 @@ public class PatientListFragment extends Fragment {
     }
 
     private void init() {
-        patientlist = view.findViewById(R.id.patient_list);
-        users=getAllUser(((MyApplication) getContext().getApplicationContext()).getUser().getAccount());
-        userTemps=new ArrayList<>();
-        for(User p:users){
-            userTemps.add(new UserTemp(R.mipmap.portrait0, p.getNickName(),p.getAccount(),p));
+        mPatientlist = mView.findViewById(R.id.patient_list);
+        mUsers = getAllUser(((MyApplication) getContext().getApplicationContext()).getUser().getAccount());
+        mUserTemps = new ArrayList<>();
+        for (User p : mUsers) {
+            mUserTemps.add(new UserTemp(R.mipmap.portrait0, p.getNickName(), p.getAccount(), p));
         }
-        patientlist.setAdapter(new PatientListItemAdapterTemp(getActivity(), userTemps));
+        mPatientlist.setAdapter(new PatientListItemAdapterTemp(getActivity(), mUserTemps));
         addListeners();
     }
 
 
-    //获取所有用户，数据库获取，index为账号
-    public List<User> getAllUser(String account){
-        List<User> users=new ArrayList<>();
+    /**
+     * 获取所有用户，数据库获取，index为账号
+     */
+    public List<User> getAllUser(String account) {
+        List<User> users = new ArrayList<>();
         //users.add(用户)；
         return users;
     }
 
-    private void addListeners(){
-        patientlist.setOnItemClickListener((parent, view, position, id) -> {
+    private void addListeners() {
+        mPatientlist.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getContext(), UserInfoActivity.class);
-            for(User p:users){
-                if(p.getAccount().equals(userTemps.get(position).getAccount())){
+            for (User p : mUsers) {
+                if (p.getAccount().equals(mUserTemps.get(position).getAccount())) {
                     intent.putExtra("user", p);
                     break;
                 }

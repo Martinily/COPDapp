@@ -33,60 +33,48 @@ import static com.funnyseals.app.R.id.edit_medicine;
 
 public class DoctorOneFragment extends Fragment {
     private        EditText        mEditText;
-    private static Connection      conn;
-    /**
-     * Context
-     */
+    private static Connection      CONN;
     private        Context         mContext;
-    /**
-     * listview
-     */
-    private        ListView        listView;
-    /**
-     * 适配器
-     */
-    private        ListViewAdapter listViewAdapter;
-    /**
-     * 保存数据
-     */
-    private        List<Bean>      medicineBeanList = new ArrayList<Bean>();
-    private        List<String>    medicineNames;
+    private        ListView        mListView;
+    private        ListViewAdapter mListViewAdapter;
+    private        List<Bean>      mMedicineBeanList = new ArrayList<Bean>();
+    private        List<String>    mMedicineNames;
     private        Thread          mThread;
     //用于执行数据库线程
-    private        Handler         mHandler         =new Handler(){
-        public void handleMessage(Message msg){
-            if(msg.what == 0){
-                medicineNames=(List<String>)msg.obj;
+    private        Handler         mHandler          = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                mMedicineNames = (List<String>) msg.obj;
             }
         }
     };
 
     @Override
     public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,  Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_one, null);
-        if(mThread==null){
-            mThread=new Thread(runnable);
+        if (mThread == null) {
+            mThread = new Thread(runnable);
             mThread.start();
         }
         return view;
     }
 
-    Runnable runnable = () -> {
+    private Runnable runnable = () -> {
         try {
-            conn=UserDao.getConnection();
-            if (conn != null) {
-                PreparedStatement statement = conn.prepareStatement("SELECT YWK_YWMC FROM ywk");
+            CONN = UserDao.getConnection();
+            if (CONN != null) {
+                PreparedStatement statement = CONN.prepareStatement("SELECT YWK_YWMC FROM ywk");
                 ResultSet rs = statement.executeQuery();
-                medicineNames = new ArrayList<>();
+                mMedicineNames = new ArrayList<>();
                 while (rs.next()) {
-                    medicineNames.add(rs.getString("YWK_YWMC"));
+                    mMedicineNames.add(rs.getString("YWK_YWMC"));
                 }
-                Message message=Message.obtain();
-                message.what=0;
-                message.obj=medicineNames;
+                Message message = Message.obtain();
+                message.what = 0;
+                message.obj = mMedicineNames;
                 mHandler.sendMessage(message);
-                conn.close();
+                CONN.close();
                 rs.close();
                 statement.close();
             } else {
@@ -128,20 +116,20 @@ public class DoctorOneFragment extends Fragment {
 
         //this.mContext = this;
         //加载listview
-        listView = getActivity().findViewById(R.id.listView);
-        listViewAdapter = new ListViewAdapter(getActivity(),medicineBeanList);
-        listView.setAdapter(listViewAdapter);
+        mListView = getActivity().findViewById(R.id.listView);
+        mListViewAdapter = new ListViewAdapter(getActivity(), mMedicineBeanList);
+        mListView.setAdapter(mListViewAdapter);
 
         //save button的点击事件
         Button saveButton = getActivity().findViewById(R.id.add);
         saveButton.setOnClickListener(v -> saveMedicineMessage());
 
-        listView.setOnItemClickListener((adapterView, view, position, id) -> {
-            Bean medicineBean = medicineBeanList.get(position);
-            String medicinename=medicineBean.getName();
+        mListView.setOnItemClickListener((adapterView, view, position, id) -> {
+            Bean medicineBean = mMedicineBeanList.get(position);
+            String medicinename = medicineBean.getName();
             Intent intent = new Intent(getActivity(), MedicineDetailActivity.class);
-            Bundle bundle=new Bundle();
-            bundle.putCharSequence("medicinename",medicinename);
+            Bundle bundle = new Bundle();
+            bundle.putCharSequence("medicinename", medicinename);
             intent.putExtras(bundle);
             startActivity(intent);
 
@@ -152,14 +140,14 @@ public class DoctorOneFragment extends Fragment {
     private void showListPopulWindow() {    //edit下拉列表
         final ListPopupWindow listPopupWindow;
         listPopupWindow = new ListPopupWindow(getActivity());
-        listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, medicineNames));//用android内置布局，或设计自己的样式
+        listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mMedicineNames));//用android内置布局，或设计自己的样式
         listPopupWindow.setAnchorView(mEditText);//以哪个控件为基准，在该处以mEditText为基准
         listPopupWindow.setModal(true);
 
         //设置项点击监听
 
         listPopupWindow.setOnItemClickListener((adapterView, view, i, l) -> {
-            mEditText.setText(medicineNames.get(i));//把选择的选项内容展示在EditText上
+            mEditText.setText(mMedicineNames.get(i));//把选择的选项内容展示在EditText上
             listPopupWindow.dismiss();//如果已经选择了，隐藏起来
         });
         //listPopupWindow.show();//把ListPopWindow展示出来
@@ -170,28 +158,25 @@ public class DoctorOneFragment extends Fragment {
     /**
      * 保存信息
      */
-    private void saveMedicineMessage()
-    {
+    private void saveMedicineMessage() {
         EditText nameEditText = getActivity().findViewById(edit_medicine);
 
-        if (StringUtils.isEmpty(nameEditText.getText().toString()))
-        {
-            Toast.makeText(getActivity(),"药品名不能为空",Toast.LENGTH_SHORT).show();
+        if (StringUtils.isEmpty(nameEditText.getText().toString())) {
+            Toast.makeText(getActivity(), "药品名不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
         //判断该药品是否存在
-        for (Bean medicineBean : medicineBeanList)   //添加了的药品列表
+        for (Bean medicineBean : mMedicineBeanList)   //添加了的药品列表
         {
-            if (StringUtils.equals(medicineBean.getName(),nameEditText.getText().toString()))
-            {
-                Toast.makeText(getActivity(),nameEditText.getText().toString() + "已经存在",Toast.LENGTH_SHORT).show();
+            if (StringUtils.equals(medicineBean.getName(), nameEditText.getText().toString())) {
+                Toast.makeText(getActivity(), nameEditText.getText().toString() + "已经存在", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
 
         Bean medicineBean = new Bean(nameEditText.getText().toString());
-        medicineBeanList.add(medicineBean);
+        mMedicineBeanList.add(medicineBean);
 
-        listViewAdapter.notifyDataSetChanged();
+        mListViewAdapter.notifyDataSetChanged();
     }
 }

@@ -15,9 +15,9 @@ import java.util.List;
 
 public class SportsRetimeActivity extends AppCompatActivity {
 
-    private Button       quit_button;
-    private Button       done_button;
-    private ListView     listView;
+    private Button       mQuit_button;
+    private Button       mDone_button;
+    private ListView     mListView;
     private List<String> mList = new ArrayList<>();
 
     @Override
@@ -30,21 +30,21 @@ public class SportsRetimeActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
-        this.listView = findViewById(R.id.listViewtime);
+        this.mListView = findViewById(R.id.listViewtime);
 
         final MyAdapter adapter = new MyAdapter(SportsRetimeActivity.this, mList);
-        listView.setAdapter(adapter);
+        mListView.setAdapter(adapter);
         //ListView item的点击事件
-        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+        mListView.setOnItemClickListener((adapterView, view, i, l) -> {
             TextView txt = view.findViewById(R.id.item_tv);
             Toast.makeText(SportsRetimeActivity.this, txt.getText().toString(), Toast.LENGTH_SHORT).show();
         });
-        quit_button = findViewById(R.id.quitit);
-        done_button = findViewById(R.id.done);
-        quit_button.setOnClickListener(v -> {
+        mQuit_button = findViewById(R.id.quitit);
+        mDone_button = findViewById(R.id.done);
+        mQuit_button.setOnClickListener(v -> {
             finish();  //关闭此activity
         });
-        done_button.setOnClickListener(v -> {
+        mDone_button.setOnClickListener(v -> {
             finish();  //关闭此activity
         });
 

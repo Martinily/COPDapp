@@ -32,26 +32,26 @@ import java.util.Map;
 /**
  */
 public class PatientThreeFragment extends Fragment {
-    private static Connection conn;
-    MyApplication application;
-    private List<SportsPlan> sportsPlans;
+    private static Connection                CONN;
+    private        MyApplication             mApplication;
+    private        List<SportsPlan>          mSportsPlans;
     //将数据封装成数据源
-    List<Map<String, Object>> sports_list = new ArrayList<>();
-    private Thread  mThread;
+    private        List<Map<String, Object>> mSports_list = new ArrayList<>();
+    private        Thread                    mThread;
     @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
+    private        Handler                   mHandler     = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
-                sportsPlans = (List<SportsPlan>) msg.obj;
+                mSportsPlans = (List<SportsPlan>) msg.obj;
 
-                for (SportsPlan p : sportsPlans) {
+                for (SportsPlan p : mSportsPlans) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("sportstitle", p.getSportsName());
                     map.put("sportsimg", R.drawable.sports);
                     map.put("sportscontent", p.getSportsTracks());
                     map.put("sportsattention", p.getSportsNote());
                     map.put("sportstime", "10:00");
-                    sports_list.add(map);
+                    mSports_list.add(map);
                 }
 
                 ListView listview = getActivity().findViewById(R.id.listViewsports);
@@ -76,28 +76,28 @@ public class PatientThreeFragment extends Fragment {
         return view;
     }
 
-    Runnable runnable = () -> {
+    private Runnable runnable = () -> {
         try {
-            conn = UserDao.getConnection();
-            application = (MyApplication) getActivity().getApplication();
-            String id = application.getAccount();
-            if (conn != null) {
-                PreparedStatement statement = conn.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
+            CONN = UserDao.getConnection();
+            mApplication = (MyApplication) getActivity().getApplication();
+            String id = mApplication.getAccount();
+            if (CONN != null) {
+                PreparedStatement statement = CONN.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
                 statement.setString(1, id);
                 ResultSet rs = statement.executeQuery();
                 if (rs.next()) {
-                    PreparedStatement sportsS = conn.prepareStatement("SELECT * FROM HLJHYD WHERE HLJH_BH=?");  //！！！！
+                    PreparedStatement sportsS = CONN.prepareStatement("SELECT * FROM HLJHYD WHERE HLJH_BH=?");
                     sportsS.setString(1, rs.getString(1));
                     rs = sportsS.executeQuery();
-                    sportsPlans = new ArrayList<>();
+                    mSportsPlans = new ArrayList<>();
                     while (rs.next()) {
-                        sportsPlans.add(new SportsPlan(rs.getString("HLJHYD_YDZL"), rs.getString("HLJHYD_JYSJ"), rs.getString("HLJHYD_ZYSX")));
+                        mSportsPlans.add(new SportsPlan(rs.getString("HLJHYD_YDZL"), rs.getString("HLJHYD_JYSJ"), rs.getString("HLJHYD_ZYSX")));
                     }
                     Message message = Message.obtain();
                     message.what = 0;
-                    message.obj = sportsPlans;
+                    message.obj = mSportsPlans;
                     mHandler.sendMessage(message);
-                    conn.close();
+                    CONN.close();
                     sportsS.close();
                     rs.close();
                     statement.close();
@@ -119,12 +119,12 @@ public class PatientThreeFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return sports_list.size();
+            return mSports_list.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return sports_list.get(position);
+            return mSports_list.get(position);
         }
 
         @Override
@@ -139,21 +139,21 @@ public class PatientThreeFragment extends Fragment {
             if (convertView == null) {
                 view = LayoutInflater.from(getActivity()).inflate(R.layout.sports_list_item, null);
                 mHolder = new ViewHolder();
-                mHolder.cardsports_title = view.findViewById(R.id.sports);
-                mHolder.cardsports_image = view.findViewById(R.id.sportsImg);
-                mHolder.cardsports_content = view.findViewById(R.id.sportsnum);
-                mHolder.cardsports_attention = view.findViewById(R.id.sportsattention);
-                mHolder.cardsports_time = view.findViewById(R.id.sportstime);
-                view.setTag(mHolder);  //将ViewHolder存储在View中
+                mHolder.mCardsports_title = view.findViewById(R.id.sports);
+                mHolder.mCardsports_image = view.findViewById(R.id.sportsImg);
+                mHolder.mCardsports_content = view.findViewById(R.id.sportsnum);
+                mHolder.mCardsports_attention = view.findViewById(R.id.sportsattention);
+                mHolder.mCardsports_time = view.findViewById(R.id.sportstime);
+                view.setTag(mHolder);
             } else {
                 view = convertView;
-                mHolder = (PatientThreeFragment.ViewHolder) view.getTag();  //重新获得ViewHolder
+                mHolder = (PatientThreeFragment.ViewHolder) view.getTag();
             }
-            mHolder.cardsports_title.setText(sports_list.get(position).get("sportstitle").toString());
-            mHolder.cardsports_image.setImageResource((int) sports_list.get(position).get("sportsimg"));
-            mHolder.cardsports_content.setText(sports_list.get(position).get("sportscontent").toString());
-            mHolder.cardsports_attention.setText(sports_list.get(position).get("sportsattention").toString());
-            mHolder.cardsports_time.setText(sports_list.get(position).get("sportstime").toString());
+            mHolder.mCardsports_title.setText(mSports_list.get(position).get("sportstitle").toString());
+            mHolder.mCardsports_image.setImageResource((int) mSports_list.get(position).get("sportsimg"));
+            mHolder.mCardsports_content.setText(mSports_list.get(position).get("sportscontent").toString());
+            mHolder.mCardsports_attention.setText(mSports_list.get(position).get("sportsattention").toString());
+            mHolder.mCardsports_time.setText(mSports_list.get(position).get("sportstime").toString());
 
             Button moretime = view.findViewById(R.id.moresportstime);
             moretime.setOnClickListener(v -> {
@@ -164,11 +164,11 @@ public class PatientThreeFragment extends Fragment {
         }
     }
 
-    class ViewHolder {
-        TextView  cardsports_title;
-        ImageView cardsports_image;
-        TextView  cardsports_content;
-        TextView  cardsports_attention;
-        TextView  cardsports_time;
+    private class ViewHolder {
+        private TextView  mCardsports_title;
+        private ImageView mCardsports_image;
+        private TextView  mCardsports_content;
+        private TextView  mCardsports_attention;
+        private TextView  mCardsports_time;
     }
 }
