@@ -152,7 +152,7 @@ public class PatientMessageListFragment extends Fragment {
             EMMessage message = entry.getValue().getLastMessage();
             String account = getChatTarget(message);
             //头像，账号，用户名，最后一条消息的时间，最后一条消息，未读取消息数量
-            mConversationTemps.add(new ConversationTemp(R.mipmap.portrait0, account, mUsers.get((String) account).getNickName(),
+            mConversationTemps.add(new ConversationTemp(R.mipmap.portrait0, account, mUsers.get(account).getNickName(),
                     TimeUtil.getFormatTime(entry.getValue().getLastMessage().getMsgTime()),
                     entry.getValue().getLastMessage().getBody().toString(),
                     entry.getValue().getUnreadMsgCount()));

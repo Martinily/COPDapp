@@ -34,12 +34,12 @@ public class MedicineDetailActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
-        mBmorning = (CheckBox) findViewById(R.id.aa);
-        mAmorning = (CheckBox) findViewById(R.id.bb);
-        mBlunch = (CheckBox) findViewById(R.id.cc);
-        mAlunch = (CheckBox) findViewById(R.id.dd);
-        mBdinner = (CheckBox) findViewById(R.id.ee);
-        mAdinner = (CheckBox) findViewById(R.id.ff);
+        mBmorning = findViewById(R.id.aa);
+        mAmorning = findViewById(R.id.bb);
+        mBlunch = findViewById(R.id.cc);
+        mAlunch = findViewById(R.id.dd);
+        mBdinner = findViewById(R.id.ee);
+        mAdinner = findViewById(R.id.ff);
         final int[] time = {0, 0, 0, 0, 0, 0};
         mBmorning.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
@@ -95,8 +95,8 @@ public class MedicineDetailActivity extends AppCompatActivity {
                 time[5] = 0;
         });
 
-        final EditText medicinenum = (EditText) findViewById(R.id.medicinenum);
-        final EditText medicine_editor_detail = (EditText) findViewById(R.id.medicine_editor_detail);
+        final EditText medicinenum = findViewById(R.id.medicinenum);
+        final EditText medicine_editor_detail = findViewById(R.id.medicine_editor_detail);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
