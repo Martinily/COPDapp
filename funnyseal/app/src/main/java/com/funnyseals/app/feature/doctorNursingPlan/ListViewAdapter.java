@@ -7,16 +7,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.funnyseals.app.R;
-
 import java.util.List;
 
 /**
  * <pre>
  *     author : marin
  *     time   : 2018/11/30
- *     desc   :
+ *     desc   :详细内容添加的列表adapter
  *     version: 1.0
  * </pre>
  */
@@ -33,7 +31,6 @@ public class ListViewAdapter extends BaseAdapter {
 
     /**
      * How many items are in the data set represented by this Adapter.
-     *
      * @return Count of items.
      */
     @Override
@@ -43,9 +40,7 @@ public class ListViewAdapter extends BaseAdapter {
 
     /**
      * Get the data item associated with the specified position in the data set.
-     *
-     * @param position Position of the item whose data we want within the adapter's
-     *                 data set.
+     *Position of the item whose data we want within the adapter'sdata set.
      * @return The data at the specified position.
      */
     @Override
@@ -55,8 +50,7 @@ public class ListViewAdapter extends BaseAdapter {
 
     /**
      * Get the row id associated with the specified position in the list.
-     *
-     * @param position The position of the item within the adapter's data set whose row id we want.
+     *The position of the item within the adapter's data set whose row id we want.
      * @return The id of the item at the specified position.
      */
     @Override
@@ -65,6 +59,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     /**
+     * detail listview
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -92,14 +87,11 @@ public class ListViewAdapter extends BaseAdapter {
             Toast.makeText(mContext, "已删除", Toast.LENGTH_SHORT).show();
             deleteButtonAction(removePosition);
         });
-
-
         return view;
     }
-
+    //删除按钮操作
     private void deleteButtonAction(int position) {
         mBeanList.remove(position);
-
         notifyDataSetChanged();
     }
 

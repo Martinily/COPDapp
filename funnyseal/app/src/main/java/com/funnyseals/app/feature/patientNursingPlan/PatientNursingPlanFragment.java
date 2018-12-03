@@ -12,7 +12,7 @@ import com.funnyseals.app.R;
 import java.util.Objects;
 
 /**
-
+护理计划to fragment
  */
 public class PatientNursingPlanFragment extends Fragment {
     private View mView;

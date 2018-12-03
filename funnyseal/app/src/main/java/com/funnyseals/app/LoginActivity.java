@@ -21,6 +21,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+登录界面
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mEtAccount;

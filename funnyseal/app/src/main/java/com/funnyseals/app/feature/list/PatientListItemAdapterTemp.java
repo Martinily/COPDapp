@@ -17,7 +17,7 @@ import java.util.List;
  * <pre>
  *     author : marin
  *     time   : 2018/11/30
- *     desc   :
+ *     desc   :患者列表adapter
  *     version: 1.0
  * </pre>
  */

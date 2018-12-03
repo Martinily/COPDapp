@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.funnyseals.app.R;
 
+/*
+患者端个人中心
+ */
 public class PatientMyInfoActivity extends AppCompatActivity {
 
     @Override

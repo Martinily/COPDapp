@@ -139,25 +139,25 @@
         android:layout_marginLeft="25dp">
 
         <CheckBox
-            android:id="@+id/aa"
+            android:id="@+id/bmorning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="早饭前" />
 
         <CheckBox
-            android:id="@+id/bb"
+            android:id="@+id/amorning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="早饭后" />
 
         <CheckBox
-            android:id="@+id/cc"
+            android:id="@+id/blunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="午饭前" />
 
         <CheckBox
-            android:id="@+id/dd"
+            android:id="@+id/alunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="午饭后" />
@@ -170,13 +170,13 @@
         android:layout_marginLeft="25dp">
 
         <CheckBox
-            android:id="@+id/ee"
+            android:id="@+id/bdinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="晚饭前" />
 
         <CheckBox
-            android:id="@+id/ff"
+            android:id="@+id/adinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="晚饭后" />

@@ -13,6 +13,9 @@ import com.funnyseals.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+the activity that can change the instrument reminding time
+ */
 public class InstrumentRetimeActivity extends AppCompatActivity {
 
     private Button       mQuit_button;

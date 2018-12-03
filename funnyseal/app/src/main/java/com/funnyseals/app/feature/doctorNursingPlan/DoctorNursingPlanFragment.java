@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
+ * 医生端护理计划fragment
  */
 public class DoctorNursingPlanFragment extends Fragment {
     private View mView;

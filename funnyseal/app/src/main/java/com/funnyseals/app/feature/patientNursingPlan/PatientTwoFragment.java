@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
-
+患者端护理计划two fragment about instrument
  */
 public class PatientTwoFragment extends Fragment {
     private        View                      mView;
@@ -125,6 +125,7 @@ public class PatientTwoFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    //当前card adapter
     class MyAdapter extends BaseAdapter {
 
         @Override
@@ -175,6 +176,7 @@ public class PatientTwoFragment extends Fragment {
 
     }
 
+    //变量声明
     private class ViewHolder {
         private TextView  mCardinstrument_title;
         private ImageView mCardinstrument_image;

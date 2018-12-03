@@ -16,21 +16,19 @@ import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.funnyseals.app.R;
 import com.funnyseals.app.model.UserDao;
-
 import org.apache.commons.lang3.StringUtils;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.funnyseals.app.R.id.edit_medicine;
-
+/*
+护理计划Onefragment,about medicine
+ */
 public class DoctorOneFragment extends Fragment {
     private        EditText        mEditText;
     private static Connection      CONN;
@@ -114,7 +112,6 @@ public class DoctorOneFragment extends Fragment {
             }
         });
 
-        //this.mContext = this;
         //加载listview
         mListView = getActivity().findViewById(R.id.listView);
         mListViewAdapter = new ListViewAdapter(getActivity(), mMedicineBeanList);
@@ -136,8 +133,10 @@ public class DoctorOneFragment extends Fragment {
         });
     }
 
-
-    private void showListPopulWindow() {    //edit下拉列表
+    /*
+    *edit下拉列表
+     */
+    private void showListPopulWindow() {
         final ListPopupWindow listPopupWindow;
         listPopupWindow = new ListPopupWindow(getActivity());
         listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mMedicineNames));//用android内置布局，或设计自己的样式
@@ -145,7 +144,6 @@ public class DoctorOneFragment extends Fragment {
         listPopupWindow.setModal(true);
 
         //设置项点击监听
-
         listPopupWindow.setOnItemClickListener((adapterView, view, i, l) -> {
             mEditText.setText(mMedicineNames.get(i));//把选择的选项内容展示在EditText上
             listPopupWindow.dismiss();//如果已经选择了，隐藏起来
@@ -176,7 +174,6 @@ public class DoctorOneFragment extends Fragment {
 
         Bean medicineBean = new Bean(nameEditText.getText().toString());
         mMedicineBeanList.add(medicineBean);
-
         mListViewAdapter.notifyDataSetChanged();
     }
 }

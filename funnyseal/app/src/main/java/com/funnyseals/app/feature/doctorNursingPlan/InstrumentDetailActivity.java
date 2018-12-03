@@ -6,9 +6,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.funnyseals.app.R;
 
+/*
+*insturment详细内容
+ */
 public class InstrumentDetailActivity extends AppCompatActivity {
 
     private TextView mTv;
@@ -30,9 +32,11 @@ public class InstrumentDetailActivity extends AppCompatActivity {
         mTv.setText(bundle.getString("instrumentname"));
         mQuit_button = findViewById(R.id.quititinstrument);
         mDone_button = findViewById(R.id.doneinstrument);
+        //返回按钮的监听
         mQuit_button.setOnClickListener(v -> {
             finish();
         });
+        //完成按钮的监听
         mDone_button.setOnClickListener(v -> {
             finish();
         });

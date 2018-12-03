@@ -18,23 +18,19 @@ import android.widget.ImageView;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.funnyseals.app.R;
 import com.funnyseals.app.model.UserDao;
-
 import org.apache.commons.lang3.StringUtils;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.funnyseals.app.R.id.edit_instrument;
 
 /**
-
+ *护理计划two fragment, about instrument
  */
 public class DoctorTwoFragment extends Fragment {
     private        EditText        mEditText;
@@ -85,7 +81,8 @@ public class DoctorTwoFragment extends Fragment {
                 CONN.close();
                 rs.close();
                 statement.close();
-            } else {
+            }
+            else {
                 System.err.println("警告: DbConnectionManager.getConnection() 获得数据库链接失败.");
             }
         } catch (SQLException e) {
@@ -123,8 +120,6 @@ public class DoctorTwoFragment extends Fragment {
             }
         });
 
-        //this.mContext = this;
-
         //加载listview
         mListView = getActivity().findViewById(R.id.listViewinstrument);
         mListViewAdapter = new ListViewAdapter(getActivity(), mInstrumentBeanList);
@@ -146,6 +141,9 @@ public class DoctorTwoFragment extends Fragment {
         });
     }
 
+    /*
+    *展示下拉列表
+     */
     private void showListPopulWindow() {
         final ListPopupWindow listPopupWindow;
         listPopupWindow = new ListPopupWindow(getActivity());

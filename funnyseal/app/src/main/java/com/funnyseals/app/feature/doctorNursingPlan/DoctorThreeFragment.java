@@ -14,17 +14,14 @@ import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.funnyseals.app.R;
-
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.funnyseals.app.R.id.edit_sports;
 
 /**
+ * 护理计划three fragment,about sports
  */
 public class DoctorThreeFragment extends Fragment {
     private EditText mEditText;
@@ -53,7 +50,7 @@ public class DoctorThreeFragment extends Fragment {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getX() >= (mEditText.getWidth() - mEditText
                         .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    // your action here
+                    //my action here
                     mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_nadown), null);
                     showListPopulWindow();
                     return true;
@@ -66,8 +63,6 @@ public class DoctorThreeFragment extends Fragment {
                 showListPopulWindow();
             }
         });
-
-        //this.mContext = this;
 
         //加载listview
         mListView = getActivity().findViewById(R.id.listViewsports);
@@ -101,7 +96,6 @@ public class DoctorThreeFragment extends Fragment {
         //以哪个控件为基准，在该处以mEditText为基准
         listPopupWindow.setAnchorView(mEditText);
         listPopupWindow.setModal(true);
-
         listPopupWindow.setOnItemClickListener((adapterView, view, i, l) -> {
             mEditText.setText(list[i]);
             listPopupWindow.dismiss();

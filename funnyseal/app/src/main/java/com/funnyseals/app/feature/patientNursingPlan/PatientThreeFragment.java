@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 患者端three fragment about sports
  */
 public class PatientThreeFragment extends Fragment {
     private static Connection                CONN;
@@ -115,6 +116,8 @@ public class PatientThreeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+
+    //当前card的adapter
     class MyAdapter extends BaseAdapter {
 
         @Override
@@ -164,6 +167,7 @@ public class PatientThreeFragment extends Fragment {
         }
     }
 
+    //变量声明
     private class ViewHolder {
         private TextView  mCardsports_title;
         private ImageView mCardsports_image;

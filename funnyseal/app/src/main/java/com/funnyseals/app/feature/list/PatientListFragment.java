@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-
+患者列表
  */
 public class PatientListFragment extends Fragment {
     private View                   mView;
@@ -63,6 +63,9 @@ public class PatientListFragment extends Fragment {
         return users;
     }
 
+    /*
+    列表点击事件
+     */
     private void addListeners() {
         mPatientlist.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getContext(), UserInfoActivity.class);

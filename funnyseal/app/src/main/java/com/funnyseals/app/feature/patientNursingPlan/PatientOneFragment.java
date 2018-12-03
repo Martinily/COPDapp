@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * 患者端护理计划 onfragment about medicine
  */
 public class PatientOneFragment extends Fragment {
     private static Connection                CONN;
@@ -121,6 +121,7 @@ public class PatientOneFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    //当前card adapter
     private class MyAdapter extends BaseAdapter {
 
         @Override
@@ -175,6 +176,7 @@ public class PatientOneFragment extends Fragment {
         }
     }
 
+    //变量声明
     private class ViewHolder {
         private TextView  mCardmedicine_title;
         private ImageView mCardmedicine_image;

@@ -47,6 +47,9 @@ public class PatientListItemAdapter extends BaseAdapter {
         return position;
     }
 
+    /*
+    列表内容
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;

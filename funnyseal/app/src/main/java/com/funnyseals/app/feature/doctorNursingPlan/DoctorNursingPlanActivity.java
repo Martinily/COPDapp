@@ -7,12 +7,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-
 import com.funnyseals.app.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/*医生护理计划总页面*/
 public class DoctorNursingPlanActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTv_doctor_title, mTv_doctor_one, mTv_doctor_two, mTv_doctor_three;
@@ -53,7 +52,7 @@ public class DoctorNursingPlanActivity extends AppCompatActivity implements View
     }
 
     /**
-     * 点击事件
+     * 菜单栏点击事件
      */
     @Override
     public void onClick(View v) {

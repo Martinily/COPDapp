@@ -6,9 +6,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.funnyseals.app.R;
-
+/*
+the activity that set details for sports
+ */
 public class SportsDetailActivity extends AppCompatActivity {
 
     private TextView mTv;

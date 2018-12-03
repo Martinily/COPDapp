@@ -10,9 +10,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.funnyseals.app.R;
 
+/*
+the avtivity that set details for medicine
+ */
 public class MedicineDetailActivity extends AppCompatActivity {
 
     private TextView mTv;
@@ -34,13 +36,14 @@ public class MedicineDetailActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
-        mBmorning = findViewById(R.id.aa);
-        mAmorning = findViewById(R.id.bb);
-        mBlunch = findViewById(R.id.cc);
-        mAlunch = findViewById(R.id.dd);
-        mBdinner = findViewById(R.id.ee);
-        mAdinner = findViewById(R.id.ff);
+        mBmorning = findViewById(R.id.bmorning);
+        mAmorning = findViewById(R.id.amorning);
+        mBlunch = findViewById(R.id.blunch);
+        mAlunch = findViewById(R.id.alunch);
+        mBdinner = findViewById(R.id.bdinner);
+        mAdinner = findViewById(R.id.adinner);
         final int[] time = {0, 0, 0, 0, 0, 0};
+        //判断时间checkbox的点击事件
         mBmorning.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
             if (isChecked) {
@@ -107,6 +110,7 @@ public class MedicineDetailActivity extends AppCompatActivity {
         mQuit_button.setOnClickListener(v -> {
             finish();
         });
+        //完成时进行检查并给出输入提示
         mDone_button.setOnClickListener(v -> {
 
             if ((time[0] * 100000 + time[1] * 10000 + time[2] * 1000 + time[3] * 100 + time[4] * 10 + time[5]) == 0) {

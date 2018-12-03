@@ -14,6 +14,9 @@ import com.funnyseals.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+患者端护理计划页面
+ */
 public class PatientNursingPlanActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView                  mTv_patient_one;

@@ -3,14 +3,13 @@ package com.funnyseals.app.feature.doctorNursingPlan;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
 import java.util.List;
 
 /**
  * <pre>
  *     author : marin
  *     time   : 2018/11/30
- *     desc   :
+ *     desc   :fragment'sets
  *     version: 1.0
  * </pre>
  */

@@ -13,6 +13,9 @@ import com.funnyseals.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+change the reminding time for sports
+ */
 public class SportsRetimeActivity extends AppCompatActivity {
 
     private Button       mQuit_button;

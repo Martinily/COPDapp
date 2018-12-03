@@ -15,7 +15,7 @@ import java.util.List;
  * <pre>
  *     author : marin
  *     time   : 2018/11/30
- *     desc   :
+ *     desc   :card adapter for patient
  *     version: 1.0
  * </pre>
  */

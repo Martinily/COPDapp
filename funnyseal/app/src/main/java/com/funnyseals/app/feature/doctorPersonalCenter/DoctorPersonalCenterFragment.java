@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
 
 /**
+ * 个人中心
  */
 public class DoctorPersonalCenterFragment extends Fragment {
     private View mView;
@@ -39,7 +39,6 @@ public class DoctorPersonalCenterFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         this.mPatientBottomActivity = ((PatientBottomActivity) getActivity());
     }
 
@@ -69,16 +68,15 @@ public class DoctorPersonalCenterFragment extends Fragment {
     }
 
     private void addListeners() {
-
         //ib_doctor_perinfo.setOnClickListener(e->openNew(DoctorMyInfoActivity.class));
         mIb_doctor_sign.setOnClickListener(e -> openNew(DoctorSignActivity.class));
+
         mIb_doctor_setting.setOnClickListener(e -> openNew(DoctorSettingActivity.class));
     }
 
     private void openNew(Class c) {
         //是否更新界面
         Intent intent = new Intent(mPatientBottomActivity, c);
-
         startActivity(intent);
     }
 }

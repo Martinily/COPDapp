@@ -13,6 +13,9 @@ import com.funnyseals.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+the activity that can change the medicine reminding time
+ */
 public class MedicineRetimeActivity extends AppCompatActivity {
 
     private Button       mQuit_button;
