@@ -77,7 +77,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
     <ImageButton
         android:id="@+id/ib_doctor_sign"
@@ -88,7 +88,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
     <ImageButton
         android:id="@+id/ib_doctor_setting"
@@ -100,7 +100,7 @@
         android:layout_marginLeft="620px"
         android:layout_toRightOf="@id/tv_doctor_setting"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
 
 </RelativeLayout>

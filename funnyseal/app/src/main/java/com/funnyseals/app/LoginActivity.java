@@ -13,8 +13,6 @@ import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
 import com.funnyseals.app.model.UserDao;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -94,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (rs.getRow() == 0) {
                                 showToast("此用户不存在！");
                             } else if (rs.getString(1).equals(mEtPassword.getText().toString())) {
-                                EMClient.getInstance().login(mEtAccount.getText().toString(), mEtPassword.getText().toString(), new EMCallBack() {
+                                /*EMClient.getInstance().login(mEtAccount.getText().toString(), mEtPassword.getText().toString(), new EMCallBack() {
                                     @Override
                                     public void onSuccess() {
                                     }
@@ -106,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     @Override
                                     public void onProgress(int progress, String status) {
                                     }
-                                });
+                                });*/
                                 ((MyApplication) getBaseContext().getApplicationContext()).setAccount(mEtAccount.getText().toString());
                                 conn.close();
                                 statement.close();
@@ -116,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 finish();
                             }
                         } else if (rs.getString(1).equals(mEtPassword.getText().toString())) {
-                            EMClient.getInstance().login(mEtAccount.getText().toString(), mEtPassword.getText().toString(), new EMCallBack() {
+                            /*EMClient.getInstance().login(mEtAccount.getText().toString(), mEtPassword.getText().toString(), new EMCallBack() {
                                 @Override
                                 public void onSuccess() {
                                 }
@@ -128,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onProgress(int progress, String status) {
                                 }
-                            });
+                            });*/
                             ((MyApplication) getBaseContext().getApplicationContext()).setAccount(mEtAccount.getText().toString());
                             conn.close();
                             statement.close();

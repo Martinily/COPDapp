@@ -45,8 +45,10 @@
                     android:background="@color/transparent"
                     android:button="@null"
                     android:checked="true"
+                    android:drawableTop="@drawable/ic_account_box_black_24dp"
                     android:gravity="center|bottom"
-                    android:text="患者列表" />
+                    android:text="患者列表"
+                    android:textColor="@drawable/selector_text" />
 
                 <RadioButton
                     android:id="@+id/doctor_message_tab"
@@ -55,8 +57,10 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@null"
+                    android:drawableTop="@drawable/ic_sms_black_24dp"
                     android:gravity="center|bottom"
-                    android:text="消息" />
+                    android:text="消息"
+                    android:textColor="@drawable/selector_text" />
 
                 <RadioButton
                     android:id="@+id/doctor_nursingPlan_tab"
@@ -65,8 +69,10 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@null"
+                    android:drawableTop="@drawable/ic_assignment_black_24dp"
                     android:gravity="center|bottom"
-                    android:text="护理计划" />
+                    android:text="护理计划"
+                    android:textColor="@drawable/selector_text" />
 
                 <RadioButton
                     android:id="@+id/doctor_personalCenter_tab"
@@ -75,8 +81,10 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@null"
+                    android:drawableTop="@drawable/ic_person_black_24dp"
                     android:gravity="center|bottom"
-                    android:text="个人中心" />
+                    android:text="个人中心"
+                    android:textColor="@drawable/selector_text" />
             </RadioGroup>
         </LinearLayout>
     </RelativeLayout>

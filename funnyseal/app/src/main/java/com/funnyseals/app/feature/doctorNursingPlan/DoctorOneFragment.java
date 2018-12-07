@@ -99,7 +99,7 @@ public class DoctorOneFragment extends Fragment {
                 if (event.getX() >= (mEditText.getWidth() - mEditText
                         .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                     // your action here
-                    mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_nadown), null);
+                    mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_less_black_24dp), null);
                     showListPopulWindow();
                     return true;
                 }
@@ -150,7 +150,7 @@ public class DoctorOneFragment extends Fragment {
         });
         //listPopupWindow.show();//把ListPopWindow展示出来
 
-        listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_na), null));
+        listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
     }
 
     /**

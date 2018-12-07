@@ -234,7 +234,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
     <ImageButton
         android:id="@+id/imageButton1"
@@ -244,7 +244,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="200px"
         android:layout_toLeftOf="@+id/textView"
-        android:src="@drawable/tx" />
+        android:src="@drawable/ic_chevron_left_black_24dp" />
 
 
 

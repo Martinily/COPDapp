@@ -96,7 +96,7 @@
         android:layout_marginTop="100px"
         android:layout_toRightOf="@+id/textView2"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
     <ImageButton
         android:id="@+id/imageButton1"
@@ -108,7 +108,7 @@
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/textView3"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -119,7 +119,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/textView4"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -130,7 +130,7 @@
         android:layout_marginTop="1dp"
         android:layout_toRightOf="@+id/textView6"
         android:background="@null"
-        android:src="@drawable/tm2" />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 
 
 </RelativeLayout>
