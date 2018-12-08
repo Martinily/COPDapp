@@ -1,5 +1,6 @@
 package com.funnyseals.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,15 +13,18 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.funnyseals.app.model.UserDao;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
+import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
+import com.funnyseals.app.util.SocketUtil;
 import com.mob.MobSDK;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -93,6 +97,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         showToast("验证码已发送");
                     } else {
                         showToast("输入的手机号不正确，请检查！");
+                        System.err.println(data1.toString());
                     }
                 } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
@@ -125,42 +130,44 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     public void writeIntoDB() {
         new Thread(() -> {
-            try {
-                Connection conn = UserDao.getConnection();
-                if (conn != null) {
-                    PreparedStatement statement = conn.prepareStatement("select * from hz where HZ_ZH=?");
-                    statement.setString(1, mEtAccount.getText().toString());
-                    ResultSet rs = statement.executeQuery();
-                    rs.last();
-                    if (rs.getRow() == 0) {
-                        statement = conn.prepareStatement("select * from ys where YS_ZH=?");
-                        statement.setString(1, mEtAccount.getText().toString());
-                        rs = statement.executeQuery();
-                        rs.last();
-                        if (rs.getRow() == 0) {
-                            if (mRbAccountTypeDoctor.isChecked()) {
-                                statement = conn.prepareStatement("insert into YS(YS_ZH,YS_MM) values(?,?)");
-                            } else {
-                                statement = conn.prepareStatement("insert into YS(HZ_ZH,HZ_MM) values(?,?)");
-                            }
-                            statement.setString(1, mEtAccount.getText().toString());
-                            statement.setString(2, mEtPassword.getText().toString());
-                            statement.executeUpdate();
-                            EMClient.getInstance().createAccount(mEtAccount.getText().toString(), mEtPassword.getText().toString());
-                            showToast("注册完成");
-                        } else {
-                            showToast("账号已存在");
+            String send="";
+            Socket socket;
+            try{
+                JSONObject jsonObject=new JSONObject();
+                jsonObject.put("request_type","2");
+                jsonObject.put("ID",mEtAccount.getText().toString());
+                jsonObject.put("Password",mEtPassword.getText().toString());
+                jsonObject.put("register_type",mRbAccountTypeDoctor.isChecked()?"d":"p");
+                send=jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(send);
+                out.close();
+
+                socket = SocketUtil.getGetSocket();
+                DataInputStream datainputstream=new DataInputStream(socket.getInputStream());
+                String message=datainputstream.readUTF();
+
+                jsonObject=new JSONObject(message);
+                switch (jsonObject.getString("reg_result")) {
+                    case "成功":
+                        //EMClient.getInstance().createAccount(mEtAccount.getText().toString(), mEtPassword.getText().toString());
+                        showToast("注册成功！");
+                        //destorySendSMSHandler();
+                        if(mRbAccountTypeDoctor.isChecked()){
+                            startActivity(new Intent(SignupActivity.this,DoctorBottomActivity.class));
+                            finish();
+                        }else if(mRbAccountTypePatient.isChecked()){
+                            startActivity(new Intent(SignupActivity.this,PatientBottomActivity.class));
+                            finish();
                         }
-                    }
-                    conn.close();
-                    statement.close();
-                    rs.close();
-                    destorySendSMSHandler();
-                } else {
-                    // 输出连接信息
-                    showToast("数据库连接失败！");
+                        break;
+                    case "用户已存在":
+                        showToast("该账号已被注册！");
+                        break;
                 }
-            } catch (ClassNotFoundException | SQLException | HyphenateException e) {
+                socket.close();
+            } catch (IOException | JSONException e /*| HyphenateException e*/) {
                 e.printStackTrace();
             }
         }).start();
