@@ -20,4 +20,5 @@
     <dimen name="edittext_text">15sp</dimen>
 
     <dimen name="ContentBlock">50dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

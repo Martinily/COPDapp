@@ -68,10 +68,7 @@ public class DoctorPersonalCenterFragment extends Fragment {
     }
 
     private void addListeners() {
-        //ib_doctor_perinfo.setOnClickListener(e->openNew(DoctorMyInfoActivity.class));
-        mIb_doctor_sign.setOnClickListener(e -> openNew(DoctorSignActivity.class));
 
-        mIb_doctor_setting.setOnClickListener(e -> openNew(DoctorSettingActivity.class));
     }
 
     private void openNew(Class c) {

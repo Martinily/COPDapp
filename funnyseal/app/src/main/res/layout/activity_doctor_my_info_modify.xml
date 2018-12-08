@@ -1,0 +1,219 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".feature.doctorPersonalCenter.DoctorMyInfoModifyActivity"
+
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="我的资料"
+        android:id="@+id/tv_doctor_modify_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="完成"
+        android:id="@+id/bt_doctor_modify_complete"
+        android:background="@null"
+        android:layout_alignBottom="@+id/tv_doctor_modify_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="头像"
+        android:id="@+id/tv_doctor_modify_portrait"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tv_doctor_modify_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="姓名"
+        android:id="@+id/tv_doctor_modify_name"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_portrait"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="性别"
+        android:id="@+id/tv_doctor_modify_sex"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="年龄"
+        android:id="@+id/tv_doctor_modify_age"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_sex"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="我的账号"
+        android:id="@+id/tv_doctor_modify_account"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_age"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="修改密码"
+        android:id="@+id/tv_doctor_modify_password"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_account"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="入驻时间"
+        android:id="@+id/tv_doctor_modify_settlingtime"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_password"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="所在地"
+        android:id="@+id/tv_doctor_modify_location"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_settlingtime"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="小乔"
+        android:background="@null"
+        android:id="@+id/et_doctor_modify_mynaame"
+        android:layout_alignTop="@+id/tv_doctor_modify_name"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="女"
+        android:background="@null"
+        android:id="@+id/et_doctor_modify_mysex"
+        android:layout_alignTop="@+id/tv_doctor_modify_sex"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="18"
+        android:background="@null"
+        android:id="@+id/et_doctor_modify_myage"
+        android:layout_alignTop="@+id/tv_doctor_modify_age"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="xxxxxxxxxxx"
+        android:id="@+id/tv_doctor_modify_myaccount"
+        android:layout_alignTop="@+id/tv_doctor_modify_account"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="2018-10-13"
+        android:id="@+id/tv_doctor_modify_mytime"
+        android:layout_alignTop="@+id/tv_doctor_modify_settlingtime"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="湖南长沙 "
+        android:background="@null"
+        android:id="@+id/et_doctor_modify_mylocation"
+        android:layout_alignTop="@+id/tv_doctor_modify_location"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="单位"
+        android:id="@+id/tv_doctor_modify_company"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_location"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="职位"
+        android:id="@+id/tv_doctor_modify_post"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_doctor_modify_company"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="xx医院"
+        android:id="@+id/et_doctor_modify_myhospital"
+        android:background="@null"
+        android:layout_alignTop="@+id/tv_doctor_modify_company"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="专家"
+        android:background="@null"
+        android:id="@+id/et_doctor_modify_mypost"
+        android:layout_alignTop="@+id/tv_doctor_modify_post"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ib_doctor_modify_return"
+        android:src="@drawable/tx"
+        android:background="@null"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/tv_doctor_modify_portrait"
+        android:layout_toLeftOf="@+id/tv_doctor_modify_title"
+        android:layout_marginRight="200px"
+        />
+
+</RelativeLayout>

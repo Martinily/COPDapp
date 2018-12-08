@@ -1,5 +1,6 @@
 package com.funnyseals.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,20 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
-import com.funnyseals.app.util.SocketUtil;
+import com.funnyseals.app.model.UserDao;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
-
-/**
- *
+/*
+登录界面
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button   mBtnLogin;
     private Button   mBtnSignup;
     private Button   mBtnForgetPwd;
+    private Context  context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,52 +78,76 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             showToast("请输入密码！");
         } else {
             new Thread(() -> {
-                String send="";
-                Socket socket=null;
-                try{
-                    JSONObject jsonObject=new JSONObject();
-                    jsonObject.put("request_type","1");
-                    jsonObject.put("user_name",getAccount());
-                    jsonObject.put("user_pw",getPassword());
-                    send=jsonObject.toString();
-                    socket = SocketUtil.getSendSocket();
-                    DataOutputStream out=new DataOutputStream(socket.getOutputStream());
-                    out.writeUTF(send);
-                    out.close();
+                try {
+                    Connection conn = UserDao.getConnection();
+                    if (conn != null) {
+                        PreparedStatement statement = null;
+                        statement = conn.prepareStatement("select YS_MM from ys where YS_ZH=?");
+                        statement.setString(1, mEtAccount.getText().toString());
+                        ResultSet rs = statement.executeQuery();
+                        rs.last();
+                        if (rs.getRow() == 0) {
+                            statement = conn.prepareStatement("select HZ_MM from hz where HZ_ZH=?");
+                            statement.setString(1, mEtAccount.getText().toString());
+                            rs = statement.executeQuery();
+                            rs.last();
+                            if (rs.getRow() == 0) {
+                                showToast("此用户不存在！");
+                            } else if (rs.getString(1).equals(mEtPassword.getText().toString())) {
+                                EMClient.getInstance().login(mEtAccount.getText().toString(), mEtPassword.getText().toString(), new EMCallBack() {
+                                    @Override
+                                    public void onSuccess() {
+                                    }
 
-                    socket = SocketUtil.getGetSocket();
-                    DataInputStream datainputstream=new DataInputStream(socket.getInputStream());
-                    String message=datainputstream.readUTF();
+                                    @Override
+                                    public void onError(int code, String error) {
+                                    }
 
-                    jsonObject=new JSONObject(message);
-                    switch (jsonObject.getString("login_state")) {
-                        case "成功":
-                            showToast("登录成功！");
-                            switch (jsonObject.getString("user_type")){
-                                case "d":
-                                    startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
-                                    finish();
-                                    break;
-                                case "p":
-                                    startActivity(new Intent(LoginActivity.this,PatientBottomActivity.class));
-                                    finish();
-                                    break;
+                                    @Override
+                                    public void onProgress(int progress, String status) {
+                                    }
+                                });
+                                ((MyApplication) getBaseContext().getApplicationContext()).setAccount(mEtAccount.getText().toString());
+                                conn.close();
+                                statement.close();
+                                rs.close();
+                                startActivity(new Intent(LoginActivity.this, PatientBottomActivity.class));
+
+                                finish();
                             }
-                            break;
-                        case "用户不存在":
-                            showToast("该用户不存在！");
-                            break;
-                        case "密码错误":
-                            showToast("密码错误！");
-                            break;
+                        } else if (rs.getString(1).equals(mEtPassword.getText().toString())) {
+                            EMClient.getInstance().login(mEtAccount.getText().toString(), mEtPassword.getText().toString(), new EMCallBack() {
+                                @Override
+                                public void onSuccess() {
+                                }
+
+                                @Override
+                                public void onError(int code, String error) {
+                                }
+
+                                @Override
+                                public void onProgress(int progress, String status) {
+                                }
+                            });
+                            ((MyApplication) getBaseContext().getApplicationContext()).setAccount(mEtAccount.getText().toString());
+                            conn.close();
+                            statement.close();
+                            rs.close();
+                            startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
+                            finish();
+                        }
+
+                    } else {
+                        // 输出连接信息
+                        showToast("数据库连接失败！");
                     }
-                    socket.close();
-                } catch (IOException | JSONException e) {
+                } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }
             }).start();
         }
     }
+
 
     public String getAccount() {
         return mEtAccount.getText().toString().trim();

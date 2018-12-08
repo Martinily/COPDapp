@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_access_alarms_black_24dp" />
+        android:src="@drawable/alarm" />
 
     <TextView
         android:id="@+id/item_tv"

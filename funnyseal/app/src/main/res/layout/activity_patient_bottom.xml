@@ -45,10 +45,8 @@
                     android:background="@color/transparent"
                     android:button="@null"
                     android:checked="true"
-                    android:drawableTop="@drawable/ic_assignment_black_24dp"
                     android:gravity="center|bottom"
-                    android:text="护理计划"
-                    android:textColor="@drawable/selector_text" />
+                    android:text="护理计划" />
 
                 <RadioButton
                     android:id="@+id/patient_message_tab"
@@ -57,10 +55,8 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@null"
-                    android:drawableTop="@drawable/ic_sms_black_24dp"
                     android:gravity="center|bottom"
-                    android:text="消息"
-                    android:textColor="@drawable/selector_text" />
+                    android:text="消息" />
 
                 <RadioButton
                     android:id="@+id/patient_health_tab"
@@ -69,10 +65,8 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@null"
-                    android:drawableTop="@drawable/vector_drawable_shuju"
                     android:gravity="center|bottom"
-                    android:text="健康中心"
-                    android:textColor="@drawable/selector_text" />
+                    android:text="健康中心" />
 
                 <RadioButton
                     android:id="@+id/patient_personalcenter_tab"
@@ -81,10 +75,8 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@null"
-                    android:drawableTop="@drawable/ic_person_black_24dp"
                     android:gravity="center|bottom"
-                    android:text="个人中心"
-                    android:textColor="@drawable/selector_text" />
+                    android:text="个人中心" />
             </RadioGroup>
         </LinearLayout>
     </RelativeLayout>
