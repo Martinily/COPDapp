@@ -1,5 +1,6 @@
 package com.funnyseals.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,25 +12,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.funnyseals.app.model.UserDao;
+import com.funnyseals.app.util.SocketUtil;
+import com.funnyseals.app.util.TimeDownUtil;
 import com.mob.MobSDK;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 public class ForgetPwdActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String REGEX_MOBILE="^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
+    private static final String REGEX_PASSWORD="^[a-zA-Z0-9]{6,20}$";
 
-    private EditText mEtAccount;
-    private EditText mEtPassword;
-    private EditText mEtPasswordAgain;
-    private EditText mEtIdentifyingCode;
-    private Button   mBtnCodeSend;
-    private Button   mBtnChangePwd;
+    private EditText     mEtAccount;
+    private EditText     mEtPassword;
+    private EditText     mEtPasswordAgain;
+    private EditText     mEtIdentifyingCode;
+    private Button       mBtnCodeSend;
+    private Button       mBtnChangePwd;
+    private TimeDownUtil timeDownUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +66,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
     private void initEvents() {
         mBtnCodeSend.setOnClickListener(this);
         mBtnChangePwd.setOnClickListener(this);
+        timeDownUtil=new TimeDownUtil(180000, 1000, mBtnCodeSend);
     }
 
     @Override
@@ -103,17 +113,18 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         if (TextUtils.isEmpty(mEtAccount.getText())) {
             showToast("手机号不能为空");
             return;
-        } else if (mEtAccount.getText().length() != 11) {
+        } else if (!Pattern.matches(REGEX_MOBILE,mEtAccount.getText().toString())) {
             showToast("输入的手机号不正确，请检查！");
             return;
         }
         SMSSDK.registerEventHandler(sendSMSHandler);
         SMSSDK.getVerificationCode("86", mEtAccount.getText().toString());
+        timeDownUtil.start();
     }
 
     public void changePwd() {
-        if (mEtPassword.getText().toString().length() < 6 || mEtPassword.getText().toString().length() > 16) {
-            showToast("请输入6-16位密码");
+        if (!Pattern.matches(REGEX_PASSWORD,mEtPassword.getText().toString())) {
+            showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString())) {
             showToast("两次输入的密码不同");
         } else {
@@ -123,42 +134,37 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
 
     public void updateDB() {
         new Thread(() -> {
-            try {
-                Connection conn = UserDao.getConnection();
-                if (conn != null) {
-                    PreparedStatement statement = conn.prepareStatement("select * from hz where HZ_ZH=?");
-                    statement.setString(1, mEtAccount.getText().toString());
-                    ResultSet rs = statement.executeQuery();
-                    rs.last();
-                    if (rs.getRow() == 0) {
-                        statement = conn.prepareStatement("select * from ys where YS_ZH=?");
-                        statement.setString(1, mEtAccount.getText().toString());
-                        rs = statement.executeQuery();
-                        rs.last();
-                        if (rs.getRow() == 0) {
-                            showToast("此用户不存在！");
-                        } else {
-                            statement = conn.prepareStatement("update ys set YS_MM=? where YS_ZH=?");
-                            statement.setString(1, mEtPassword.getText().toString());
-                            statement.setString(2, mEtAccount.getText().toString());
-                            statement.executeUpdate();
-                            showToast("修改成功！");
-                        }
-                    } else {
-                        statement = conn.prepareStatement("update hz set YS_MM=? where YS_ZH=?");
-                        statement.setString(1, mEtPassword.getText().toString());
-                        statement.setString(2, mEtAccount.getText().toString());
-                        statement.executeUpdate();
-                        showToast("修改成功！");
-                    }
-                    conn.close();
-                    statement.close();
-                    rs.close();
-                } else {
-                    // 输出连接信息
-                    showToast("数据库连接失败！");
+            String send="";
+            Socket socket;
+            try{
+                JSONObject jsonObject=new JSONObject();
+                jsonObject.put("request_type","8");
+                jsonObject.put("modify_type", "forget");
+                jsonObject.put("user_name",mEtAccount.getText().toString());
+                jsonObject.put("user_pw",mEtPassword.getText().toString());
+                send=jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(send);
+                out.close();
+
+                socket = SocketUtil.getGetSocket();
+                DataInputStream datainputstream=new DataInputStream(socket.getInputStream());
+                String message=datainputstream.readUTF();
+
+                jsonObject=new JSONObject(message);
+                switch (jsonObject.getString("password_result")) {
+                    case "true":
+                        showToast("密码修改成功！");
+                        startActivity(new Intent(ForgetPwdActivity.this, LoginActivity.class));
+                        finish();
+                        break;
+                    case "false":
+                        showToast("密码修改失败！");
+                        break;
                 }
-            } catch (ClassNotFoundException | SQLException e) {
+                socket.close();
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
         }).start();

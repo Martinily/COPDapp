@@ -19,11 +19,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.regex.Pattern;
 
 /**
  *
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String REGEX_PASSWORD="^[a-zA-Z0-9]{6,20}$";
 
     private EditText mEtAccount;
     private EditText mEtPassword;
@@ -72,8 +74,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login() {
         if (getAccount().isEmpty()) {
             showToast("请输入账号！");
-        } else if (getPassword().isEmpty()) {
-            showToast("请输入密码！");
+        } else if (!Pattern.matches(REGEX_PASSWORD,mEtPassword.getText().toString())) {
+            showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else {
             new Thread(() -> {
                 String send="";
