@@ -48,6 +48,18 @@
     <!-- ************************* 消息界面 ******************** -->
     <string name="message_title">消息通知</string>
 
+    <!-- *************************健康中心********************** -->
+    <string name="healthcenter_project1">FEV1(第一秒用力呼气容积):</string>
+    <string name="healthcenter_project2">FVC(用力肺活量):</string>
+    <string name="healthcenter_project3">VC(肺活量):</string>
+    <string name="healthcenter_unit">ml</string>
+    <string name="healthcenter_center2">更新数据</string>
+    <string name="healthcenter_center3">历史数据</string>
+    <string name="healthcenter_cancel">取消</string>
+    <string name="healthcenter_submit">提交</string>
+    <string name="healthcenter_returnback">返回</string>
+    <string name="healthcenter_defaultdata">0ml</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

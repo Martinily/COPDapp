@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.health.HealthCenterUpdateActivity">
+
+    <TextView
+        android:id="@+id/titleofcentre2"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="@string/healthcenter_center2"
+        android:textSize="40sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/updatetext1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/healthcenter_project1"
+        android:textSize="25sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleofcentre2" />
+
+    <EditText
+        android:id="@+id/updatedata1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:textSize="25sp"
+        android:inputType="number"
+        android:background="@drawable/edit_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updatetext1" />
+
+    <TextView
+        android:id="@+id/unit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/healthcenter_unit"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/updatedata1"
+        app:layout_constraintTop_toBottomOf="@id/updatetext1"/>
+
+    <TextView
+        android:id="@+id/updatetext2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/healthcenter_project2"
+        android:textSize="25sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updatedata1" />
+
+    <EditText
+        android:id="@+id/updatedata2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:textSize="25sp"
+        android:inputType="number"
+        android:background="@drawable/edit_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updatetext2" />
+
+    <TextView
+        android:id="@+id/unit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/healthcenter_unit"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/updatedata2"
+        app:layout_constraintTop_toBottomOf="@id/updatetext2"/>
+
+    <TextView
+        android:id="@+id/updatetext3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/healthcenter_project3"
+        android:textSize="25sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updatedata2" />
+
+    <EditText
+        android:id="@+id/updatedata3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:textSize="25sp"
+        android:inputType="number"
+        android:background="@drawable/edit_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updatetext3" />
+
+    <TextView
+        android:id="@+id/unit3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/healthcenter_unit"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/updatedata3"
+        app:layout_constraintTop_toBottomOf="@id/updatetext3"/>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/healthcenter_cancel"
+        android:textColor="#ffff0000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/submit"
+        app:layout_constraintTop_toBottomOf="@id/updatedata3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/healthcenter_submit"
+        android:textColor="#ff00ff00"
+        tools:layout_editor_absoluteY="360dp"
+        app:layout_constraintStart_toEndOf="@id/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updatedata3"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

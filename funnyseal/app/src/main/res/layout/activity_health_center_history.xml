@@ -4,7 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.health.HealthCenterFragment">
+    tools:context=".feature.health.HealthCenterHistoryActivity">
+
+    <TextView
+        android:id="@+id/titleofcentre3"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="@string/healthcenter_center3"
+        android:textSize="40sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Spinner
+        android:id="@+id/history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleofcentre3">
+    </Spinner>
 
     <TextView
         android:id="@+id/text1"
@@ -15,7 +36,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history"
         app:layout_constraintBottom_toTopOf="@id/data1"/>
 
     <TextView
@@ -108,21 +129,13 @@
         app:layout_constraintTop_toBottomOf="@id/text3"/>
 
     <Button
-        android:id="@+id/gotocentre2"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="@string/healthcenter_center2"
+        android:id="@+id/gotocentre1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/healthcenter_returnback"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/data3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/gotocentre3"
-        app:layout_constraintTop_toBottomOf="@id/data3" />
-
-    <Button
-        android:id="@+id/gotocentre3"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="@string/healthcenter_center3"
-        app:layout_constraintStart_toEndOf="@id/gotocentre2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data3"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
