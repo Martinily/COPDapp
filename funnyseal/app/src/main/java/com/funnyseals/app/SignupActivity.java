@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
 import com.funnyseals.app.util.SocketUtil;
+import com.funnyseals.app.util.TimeDownUtil;
 import com.mob.MobSDK;
 
 import org.json.JSONException;
@@ -25,11 +26,14 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String REGEX_MOBILE="^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
+    private static final String REGEX_PASSWORD="^[a-zA-Z0-9]{6,20}$";
 
     private EditText    mEtAccount;
     private EditText    mEtPassword;
@@ -39,6 +43,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private RadioButton mRbAccountTypePatient;
     private RadioButton mRbAccountTypeDoctor;
     private Button      mBtnSignup;
+    private TimeDownUtil timeDownUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +64,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mRbAccountTypePatient = findViewById(R.id.rb_signup_accountTypePatient);
         mRbAccountTypeDoctor = findViewById(R.id.rb_signup_accountTypeDoctor);
         mBtnSignup = findViewById(R.id.btn_signup_signup);
+
     }
 
     private void initEvents() {
         mBtnCodeSend.setOnClickListener(this);
         mBtnSignup.setOnClickListener(this);
+        timeDownUtil=new TimeDownUtil(180000, 1000, mBtnCodeSend);
     }
 
     private void initSDK() {
@@ -96,7 +103,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
                         showToast("验证码已发送");
                     } else {
-                        showToast("输入的手机号不正确，请检查！");
+                        showToast("输入的手机号不正..确，请检查！");
                         System.err.println(data1.toString());
                     }
                 } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
@@ -115,12 +122,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if (TextUtils.isEmpty(mEtAccount.getText())) {
             showToast("手机号不能为空");
             return;
-        } else if (mEtAccount.getText().length() != 11) {
+        } else if (!Pattern.matches(REGEX_MOBILE,mEtAccount.getText().toString().trim())) {
             showToast("输入的手机号不正确，请检查！");
             return;
         }
         SMSSDK.registerEventHandler(sendSMSHandler);
         SMSSDK.getVerificationCode("86", mEtAccount.getText().toString());
+        timeDownUtil.start();
     }
 
     public void destorySendSMSHandler() {
@@ -174,10 +182,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void signup() {
-        if (mEtPassword.getText().toString().length() < 6 || mEtPassword.getText().toString().length() > 16) {
-            showToast("请输入6-16位密码");
+        if (!Pattern.matches(REGEX_PASSWORD,mEtPassword.getText().toString())) {
+            showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString())) {
-            showToast("两次输入的密码不同");
+            showToast("两次输入的密码不同！");
         } else {
             SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(), mEtIdentifyingCode.getText().toString());
         }
