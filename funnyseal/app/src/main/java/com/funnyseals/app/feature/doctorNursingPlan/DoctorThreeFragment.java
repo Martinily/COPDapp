@@ -1,6 +1,8 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +11,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.funnyseals.app.R;
 import org.apache.commons.lang3.StringUtils;
@@ -27,8 +31,9 @@ public class DoctorThreeFragment extends Fragment {
     private EditText mEditText;
     private Context  mContext;
     private ListView mListView;
-    private ListViewAdapter mListViewAdapter;
+    private MyListViewAdapter mListViewAdapter;
     private List<Bean> mSportsBeanList = new ArrayList<Bean>();
+    private int mSportssave = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -66,23 +71,71 @@ public class DoctorThreeFragment extends Fragment {
 
         //加载listview
         mListView = getActivity().findViewById(R.id.listViewsports);
-        mListViewAdapter = new ListViewAdapter(getActivity(), mSportsBeanList);
+        mListViewAdapter = new MyListViewAdapter(getActivity(), mSportsBeanList);
         mListView.setAdapter(mListViewAdapter);
 
         //save button的点击事件
-        Button saveButton = getActivity().findViewById(R.id.addsports);
-        saveButton.setOnClickListener(v -> savesportsMessage());
+        final Button saveButton = getActivity().findViewById(R.id.addsports);
+        saveButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(mSportssave==0) {
+                    savesportsMessage();
+                }
+                else
+                    saveButton.setEnabled(false);
+            }
+        });
 
         mListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            Bean sportsBean = mSportsBeanList.get(position);
-            String sportsname = sportsBean.getName();
-            Intent intent = new Intent(getActivity(), SportsDetailActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putCharSequence("sportsname", sportsname);
-            intent.putExtras(bundle);
-            startActivity(intent);
-
+            if(mSportssave==0) {
+                Bean sportsBean = mSportsBeanList.get(position);
+                String sportsname = sportsBean.getName();
+                String sportscontent = sportsBean.getContent();
+                String sportsattention = sportsBean.getAttention();
+                Intent intent = new Intent(getActivity(), SportsDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putCharSequence("position", position + "");
+                bundle.putCharSequence("sportsname", sportsname);
+                bundle.putCharSequence("sportscontent", sportscontent);
+                bundle.putCharSequence("sportsattention", sportsattention);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 1000);
+            }
         });
+        final Button sportssaveall = (Button) getActivity().findViewById(R.id.saveallsports);
+        sportssaveall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要保存吗？保存后不可更改")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getActivity(), "已保存", Toast.LENGTH_SHORT).show();
+                                sportssaveall.setTextColor(0xFFD0EFC6);
+                                sportssaveall.setEnabled(false);
+                                mSportssave=1;
+                                //((MainActivity)getActivity()).setmtestsports("1");
+                            }
+                        }).show();
+            }
+        });
+    }
+
+    //接收返回数据
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000 && resultCode == 1001)
+        {
+            int nowposition=Integer.valueOf(data.getStringExtra("reposition")).intValue();
+            Bean sportsBean = mSportsBeanList.get(nowposition);
+            sportsBean.setattention(data.getStringExtra("resportsattention"));
+            sportsBean.setcontent(data.getStringExtra("resportsnum"));
+        }
     }
 
     /**
@@ -102,6 +155,17 @@ public class DoctorThreeFragment extends Fragment {
         });
         listPopupWindow.show();
         listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
+    }
+
+    public void showInfo(final int position) {
+        new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要删除吗？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mSportsBeanList.remove(position);
+                        mListViewAdapter.notifyDataSetChanged();
+                    }
+                }).show();
     }
 
     /**
@@ -124,7 +188,90 @@ public class DoctorThreeFragment extends Fragment {
 
         Bean sportsBean = new Bean(nameEditText.getText().toString());
         mSportsBeanList.add(sportsBean);
-
+        //((MainActivity)getActivity()).setmtestsports("0");
         mListViewAdapter.notifyDataSetChanged();
+    }
+
+    public class MyListViewAdapter extends BaseAdapter {
+        /**
+         * Context
+         */
+        private Context mContext;
+
+        /**
+         * 数据
+         */
+        private String name;
+        private List<Bean> BeanList;
+
+        /**
+         * 构造函数
+         */
+        public MyListViewAdapter(Context context, List<Bean> BeanList) {
+            this.mContext = context;
+            this.BeanList = BeanList;
+        }
+
+        @Override
+        public int getCount() {
+            return BeanList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = null;
+            if (convertView != null) {
+                view = convertView;
+            } else {
+                view = View.inflate(mContext, R.layout.list_view, null);
+            }
+
+            Bean bean = BeanList.get(position);
+            if (bean == null) {
+                bean = new Bean("NoName");
+            }
+
+            //更新数据
+            final TextView nameTextView = (TextView) view.findViewById(R.id.showName);
+            nameTextView.setText(bean.getName());
+
+            final int removePosition = position;
+
+            //删除按钮点击事件
+            final Button deleteButton = (Button) view.findViewById(R.id.showDeleteButton);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mSportssave==0){
+                        deleteButtonAction(removePosition);
+                        mListViewAdapter.notifyDataSetChanged();
+                    }
+                    else {
+                        deleteButton.setEnabled(false);
+                    }
+                }
+            });
+            return view;
+        }
+
+        public void deleteButtonAction(int position) {
+            showInfo(position);
+            notifyDataSetChanged();
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

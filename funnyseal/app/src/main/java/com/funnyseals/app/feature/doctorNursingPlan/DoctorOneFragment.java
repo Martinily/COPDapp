@@ -1,6 +1,8 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,10 +13,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.funnyseals.app.R;
 import com.funnyseals.app.model.UserDao;
@@ -34,10 +38,11 @@ public class DoctorOneFragment extends Fragment {
     private static Connection      CONN;
     private        Context         mContext;
     private        ListView        mListView;
-    private        ListViewAdapter mListViewAdapter;
+    private        MyListViewAdapter mListViewAdapter;
     private        List<Bean>      mMedicineBeanList = new ArrayList<Bean>();
     private        List<String>    mMedicineNames;
     private        Thread          mThread;
+    private int mMedicinesave = 0;
     //用于执行数据库线程
     private        Handler         mHandler          = new Handler() {
         public void handleMessage(Message msg) {
@@ -114,27 +119,74 @@ public class DoctorOneFragment extends Fragment {
 
         //加载listview
         mListView = getActivity().findViewById(R.id.listView);
-        mListViewAdapter = new ListViewAdapter(getActivity(), mMedicineBeanList);
+        mListViewAdapter = new MyListViewAdapter(getActivity(), mMedicineBeanList);
         mListView.setAdapter(mListViewAdapter);
 
         //save button的点击事件
-        Button saveButton = getActivity().findViewById(R.id.add);
-        saveButton.setOnClickListener(v -> saveMedicineMessage());
+        final Button saveButton = getActivity().findViewById(R.id.add);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mMedicinesave==0)
+                    saveMedicineMessage();
+                else
+                    saveButton.setEnabled(false);
+            }
+        });
 
         mListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            Bean medicineBean = mMedicineBeanList.get(position);
-            String medicinename = medicineBean.getName();
-            Intent intent = new Intent(getActivity(), MedicineDetailActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putCharSequence("medicinename", medicinename);
-            intent.putExtras(bundle);
-            startActivity(intent);
+            if(mMedicinesave==0) {
+                Bean medicineBean = mMedicineBeanList.get(position);
+                String medicinename = medicineBean.getName();
+                String medicinecontent = medicineBean.getContent();
+                String medicineattention = medicineBean.getAttention();
+                String medicinetime = medicineBean.gettime();
+                Intent intent = new Intent(getActivity(), MedicineDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putCharSequence("position", position + "");
+                bundle.putCharSequence("medicinename", medicinename);
+                bundle.putCharSequence("medicinecontent", medicinecontent);
+                bundle.putCharSequence("medicineattention", medicineattention);
+                bundle.putCharSequence("medicinetime", medicinetime);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 1000);
+            }
+        });
 
+        final Button medicinesaveall = (Button) getActivity().findViewById(R.id.saveallmedicine);
+        medicinesaveall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要保存吗？保存后不可更改")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Toast.makeText(getActivity(), "已保存", Toast.LENGTH_SHORT).show();
+                                medicinesaveall.setTextColor(0xFFD0EFC6);
+                                medicinesaveall.setEnabled(false);
+                                // ((MainActivity)getActivity()).setmtestmedicine("1");
+                                mMedicinesave=1;
+                            }
+                        }).show();
+            }
         });
     }
 
+    //接收制定计划界面的返回数据
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && resultCode == 1001) {
+            int nowposition = Integer.valueOf(data.getStringExtra("reposition")).intValue();
+            Bean medicineBean = mMedicineBeanList.get(nowposition);
+            medicineBean.setattention(data.getStringExtra("remedicineattention"));
+            medicineBean.settime(data.getStringExtra("remedicinetime"));
+            medicineBean.setcontent(data.getStringExtra("remedicinenum"));
+        }
+    }
+
     /*
-    *edit下拉列表
+     *edit下拉列表
      */
     private void showListPopulWindow() {
         final ListPopupWindow listPopupWindow;
@@ -153,6 +205,18 @@ public class DoctorOneFragment extends Fragment {
         listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
     }
 
+    public void showInfo(final int position) {
+        new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要删除吗？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        System.err.print("111");
+                        mMedicineBeanList.remove(position);
+                        mListViewAdapter.notifyDataSetChanged();
+                    }
+                }).show();
+    }
+
     /**
      * 保存信息
      */
@@ -168,6 +232,7 @@ public class DoctorOneFragment extends Fragment {
         {
             if (StringUtils.equals(medicineBean.getName(), nameEditText.getText().toString())) {
                 Toast.makeText(getActivity(), nameEditText.getText().toString() + "已经存在", Toast.LENGTH_SHORT).show();
+                System.err.print(medicineBean.getName());
                 return;
             }
         }
@@ -175,5 +240,87 @@ public class DoctorOneFragment extends Fragment {
         Bean medicineBean = new Bean(nameEditText.getText().toString());
         mMedicineBeanList.add(medicineBean);
         mListViewAdapter.notifyDataSetChanged();
+    }
+
+    public class MyListViewAdapter extends BaseAdapter {
+        /**
+         * Context
+         */
+        private Context mContext;
+
+        /**
+         * 数据
+         */
+        private String name;
+        private List<Bean> BeanList;
+
+        /**
+         * 构造函数
+         */
+        public MyListViewAdapter(Context context, List<Bean> BeanList) {
+            this.mContext = context;
+            this.BeanList = BeanList;
+        }
+
+        @Override
+        public int getCount() {
+            return BeanList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = null;
+            if (convertView != null) {
+                view = convertView;
+            } else {
+                view = View.inflate(mContext, R.layout.list_view, null);
+            }
+
+            Bean bean = BeanList.get(position);
+            if (bean == null) {
+                bean = new Bean("NoName");
+            }
+
+            //更新数据
+            final TextView nameTextView = (TextView) view.findViewById(R.id.showName);
+            nameTextView.setText(bean.getName());
+
+            final int removePosition = position;
+
+            //删除按钮点击事件
+            final Button deleteButton = (Button) view.findViewById(R.id.showDeleteButton);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mMedicinesave==0) {
+                        deleteButtonAction(removePosition);
+                        mListViewAdapter.notifyDataSetChanged();
+                    }
+                    else
+                        deleteButton.setEnabled(false);
+                }
+            });
+            return view;
+        }
+
+        public void deleteButtonAction(int position) {
+            showInfo(position);
+            notifyDataSetChanged();
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

@@ -35,9 +35,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        initViews();
-        initEvents();
+        startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
+        //initViews();
+        //initEvents();
     }
 
     private void initViews() {
