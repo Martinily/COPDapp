@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,34 +14,38 @@ import com.funnyseals.app.R;
 
 public class PatientMyDoctorActivity extends AppCompatActivity {
 
-    private TextView tv_patient_doctor_name,tv_patient_doctor_number,tv_patient_doctor_percentage,tv_patient_doctor_fraction;
+    private TextView tv_patient_doctor_name;
     private ImageButton ib_patient_doctor_return;
+    private Intent intent1,intent2;
+    private String str_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_my_doctor);
-        ib_patient_doctor_return=(ImageButton)findViewById(R.id.imageButton);
+        ib_patient_doctor_return=(ImageButton)findViewById(R.id.ib_patient_doctor_return);
         initUIComponents();
-        addListeners();
+
     }
     //更新，其余写死
     void   initUIComponents()
     {
         tv_patient_doctor_name=findViewById(R.id.tv_doctor_perinfo);
-        tv_patient_doctor_number=findViewById(R.id.tv_doctor_perinfo);
-        tv_patient_doctor_percentage=findViewById(R.id.tv_doctor_perinfo);
-        tv_patient_doctor_fraction=findViewById(R.id.tv_doctor_perinfo);
-
         tv_patient_doctor_name.setText();
-        tv_patient_doctor_number.setText();
-        tv_patient_doctor_percentage.setText();
-        tv_patient_doctor_fraction.setText();
-
-
     }
     //监听
-    private void addListeners() {
+    private class addListeners implements View.OnClickListener{
 
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.ib_patient_doctor_return:
+                    intent1 = new Intent(PatientMyDoctorActivity.this,PatientPersonalCenterFragment.class);
+                    startActivity( intent1);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 }

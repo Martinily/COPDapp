@@ -27,71 +27,33 @@ import java.net.Socket;
 
 public class DoctorMyInfoActivity extends AppCompatActivity {
 
-    private View view;
+
     private TextView tv_doctor_info_myname,tv_doctor_info_myage,tv_doctor_info_mycompany,tv_doctor_info_mylocation,tv_doctor_info_mysex,tv_doctor_info_myposition;
-    private ImageButton ib_doctor_info_return;
+    private ImageButton ib_doctor_info_return,ib_doctor_info_portrait,ib_doctor_info_password;
     private Button bt_doctor_info_changeinfo;
-    private ImageView iv_doctor_info_portrait;
+    private Intent intent_return,intent_portrait,intent_password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_my_info);
         initUIComponents();
     }
-    public void writeIntoDB() {
-        new Thread(() -> {
-            String send="";
-            Socket socket;
-            try{
-                JSONObject jsonObject=new JSONObject();
-                jsonObject.put("request_type","2");
-                jsonObject.put("ID",mEtAccount.getText().toString());
-                jsonObject.put("Password",mEtPassword.getText().toString());
-                jsonObject.put("register_type",mRbAccountTypeDoctor.isChecked()?"d":"p");
-                send=jsonObject.toString();
-                socket = SocketUtil.getSendSocket();
-                DataOutputStream out=new DataOutputStream(socket.getOutputStream());
-                out.writeUTF(send);
-                out.close();
-
-                socket = SocketUtil.getGetSocket();
-                DataInputStream datainputstream=new DataInputStream(socket.getInputStream());
-                String message=datainputstream.readUTF();
-
-                jsonObject=new JSONObject(message);
-                switch (jsonObject.getString("reg_result")) {
-                    case "成功":
-                        //EMClient.getInstance().createAccount(mEtAccount.getText().toString(), mEtPassword.getText().toString());
-                        showToast("注册成功！");
-                        //destorySendSMSHandler();
-                        if(mRbAccountTypeDoctor.isChecked()){
-                            startActivity(new Intent(SignupActivity.this,DoctorBottomActivity.class));
-                            finish();
-                        }else if(mRbAccountTypePatient.isChecked()){
-                            startActivity(new Intent(SignupActivity.this,PatientBottomActivity.class));
-                            finish();
-                        }
-                        break;
-                    case "用户已存在":
-                        showToast("该账号已被注册！");
-                        break;
-                }
-                socket.close();
-            } catch (IOException | JSONException e /*| HyphenateException e*/) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
 
     //更新或者说初始化，其余的写死
     void   initUIComponents()
     {
-        tv_doctor_info_mysex=view.findViewById(R.id. tv_doctor_info_mysex);
-        tv_doctor_info_myname=view.findViewById(R.id.tv_doctor_info_myname);
-        tv_doctor_info_myage=view.findViewById(R.id.tv_doctor_info_myage);
-        tv_doctor_info_mycompany=view.findViewById(R.id.tv_doctor_info_mycompany);
-        tv_doctor_info_mylocation=view.findViewById(R.id.tv_doctor_info_mylocation);
-        tv_doctor_info_myposition=view.findViewById(R.id.tv_doctor_info_myposition);
+        tv_doctor_info_mysex=findViewById(R.id. tv_doctor_info_mysex);
+        tv_doctor_info_myname=findViewById(R.id.tv_doctor_info_myname);
+        tv_doctor_info_myage=findViewById(R.id.tv_doctor_info_myage);
+        tv_doctor_info_mycompany=findViewById(R.id.tv_doctor_info_mycompany);
+        tv_doctor_info_mylocation=findViewById(R.id.tv_doctor_info_mylocation);
+        tv_doctor_info_myposition=findViewById(R.id.tv_doctor_info_myposition);
+        ib_doctor_info_return=findViewById(R.id.ib_doctor_info_return);
+        ib_doctor_info_return.setOnClickListener(new addListeners());
+        ib_doctor_info_portrait=findViewById(R.id.ib_doctor_info_portrait);
+        ib_doctor_info_portrait.setOnClickListener(new addListeners());
+        ib_doctor_info_password=findViewById(R.id.ib_doctor_info_changepass);
+        ib_doctor_info_password.setOnClickListener(new addListeners());
 
         tv_doctor_info_mysex.setText();
         tv_doctor_info_myname.setText();
@@ -103,8 +65,28 @@ public class DoctorMyInfoActivity extends AppCompatActivity {
 
     }
     //监听
-    private void addListeners() {
+    private class addListeners implements View.OnClickListener{
 
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.ib_doctor_info_portrait:
+                    intent_portrait = new Intent(DoctorMyInfoActivity.this,DoctorChangePortraitAcitivity.class);
+                    startActivity( intent_portrait);
+                    break;
+                case  R.id.ib_doctor_info_return:
+                    intent_return = new Intent(DoctorMyInfoActivity.this,DoctorPersonalCenterFragment.class);
+                    startActivity( intent_return );
+                    break;
+                case R.id.ib_doctor_info_changepass:
+                    intent_password= new Intent(DoctorMyInfoActivity.this,DoctorPasswordActivity.class);
+                    startActivity(intent_password);
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
 }

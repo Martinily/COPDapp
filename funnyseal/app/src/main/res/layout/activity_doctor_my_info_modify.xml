@@ -116,7 +116,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:hint="小乔"
         android:background="@null"
-        android:id="@+id/et_doctor_modify_mynaame"
+        android:id="@+id/et_doctor_modify_myname"
         android:layout_alignTop="@+id/tv_doctor_modify_name"
         android:layout_centerHorizontal="true" />
     <EditText
