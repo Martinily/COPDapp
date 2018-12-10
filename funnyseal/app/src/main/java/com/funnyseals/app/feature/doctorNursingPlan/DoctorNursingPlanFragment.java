@@ -27,13 +27,17 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     private ViewPager  mVp_doctor_myviewpage;
     private Button     mBtnSend;
     private String     planID;
-    private List<Bean> mAllItem;
+    private List<Bean> mAllMedicineItem;
+    private List<Bean> mAllInstrumentItem;
+    private List<Bean> mAllSportsItem;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View mView = inflater.inflate(R.layout.fragment_doctor_nursing_plan, null);
-        mAllItem = new ArrayList<>();
+        mAllMedicineItem= new ArrayList<>();
+        mAllInstrumentItem= new ArrayList<>();
+        mAllSportsItem= new ArrayList<>();
         return mView;
     }
 
@@ -83,8 +87,21 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 mTv_doctor_three.setBackgroundColor(Color.LTGRAY);
                 break;
             case R.id.send:
-                for (Bean p : mAllItem) {
-                    System.err.println(p.getName());
+                for (Bean Medicine : mAllMedicineItem) {
+                    System.err.println(Medicine.getName());
+                    System.err.println(Medicine.getContent());
+                    System.err.println(Medicine.getAttention());
+                    System.err.println(Medicine.gettime());
+                }
+                for (Bean Instrument : mAllInstrumentItem) {
+                    System.err.println(Instrument.getName());
+                    System.err.println(Instrument.getContent());
+                    System.err.println(Instrument.getAttention());
+                }
+                for (Bean Sports : mAllSportsItem) {
+                    System.err.println(Sports.getName());
+                    System.err.println(Sports.getContent());
+                    System.err.println(Sports.getAttention());
                 }
                 break;
         }
@@ -133,7 +150,15 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         }
     }
 
-    public void setAllItem(Bean item) {
-        mAllItem.add(item);
+    public void setAllMedicineItem(Bean item) {
+        mAllMedicineItem.add(item);
+    }
+
+    public void setAllInstrumentItem(Bean item) {
+        mAllInstrumentItem.add(item);
+    }
+
+    public void setAllSportsItem(Bean item) {
+        mAllSportsItem.add(item);
     }
 }

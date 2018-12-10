@@ -40,6 +40,7 @@ public class SportsDetailActivity extends AppCompatActivity {
         dialogsports_editor_detail=(EditText)findViewById(R.id.sports_editor_detail);
         dialogsports_editor_detail.setText(bundle.getString("sportsattention"));
 
+        mQuit_button = findViewById(R.id.quititsports);
         mDone_button = findViewById(R.id.donesports);
         mQuit_button.setOnClickListener(v -> {
             finish();

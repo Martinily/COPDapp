@@ -188,6 +188,7 @@ public class DoctorThreeFragment extends Fragment {
 
         Bean sportsBean = new Bean(nameEditText.getText().toString());
         mSportsBeanList.add(sportsBean);
+        ((DoctorNursingPlanFragment)(DoctorThreeFragment.this.getParentFragment())).setAllSportsItem(sportsBean);
         //((MainActivity)getActivity()).setmtestsports("0");
         mListViewAdapter.notifyDataSetChanged();
     }

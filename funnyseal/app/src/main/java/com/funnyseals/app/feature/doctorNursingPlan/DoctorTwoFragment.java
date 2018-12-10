@@ -244,7 +244,7 @@ public class DoctorTwoFragment extends Fragment {
         }
         Bean instrumentBean = new Bean(nameEditText.getText().toString());
         mInstrumentBeanList.add(instrumentBean);
-        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment())).setAllItem(instrumentBean);
+        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment())).setAllInstrumentItem(instrumentBean);
         mListViewAdapter.notifyDataSetChanged();
         //((MainActivity)getActivity()).setmtestinstrument("0");
     }
