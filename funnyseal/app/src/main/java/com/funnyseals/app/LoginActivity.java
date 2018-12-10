@@ -1,11 +1,13 @@
 package com.funnyseals.app;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
@@ -25,13 +27,13 @@ import java.util.regex.Pattern;
  *
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String REGEX_PASSWORD="^[a-zA-Z0-9]{6,20}$";
+    private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
     private EditText mEtAccount;
     private EditText mEtPassword;
     private Button   mBtnLogin;
-    private Button   mBtnSignup;
-    private Button   mBtnForgetPwd;
+    private TextView mLinkSignup;
+    private TextView mLinkForgetPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +48,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mEtAccount = findViewById(R.id.et_login_AccountInput);
         mEtPassword = findViewById(R.id.et_login_PasswordInput);
         mBtnLogin = findViewById(R.id.btn_login_login);
-        mBtnSignup = findViewById(R.id.btn_login_signup);
-        mBtnForgetPwd = findViewById(R.id.btn_login_forgetpwd);
+        mLinkSignup = findViewById(R.id.link_signup);
+        mLinkForgetPwd = findViewById(R.id.link_register);
     }
 
     private void initEvents() {
         mBtnLogin.setOnClickListener(this);
-        mBtnSignup.setOnClickListener(this);
-        mBtnForgetPwd.setOnClickListener(this);
+        mLinkSignup.setOnClickListener(this);
+        mLinkForgetPwd.setOnClickListener(this);
     }
 
     @Override
@@ -62,10 +64,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_login_login:
                 login();
                 break;
-            case R.id.btn_login_signup:
+            case R.id.link_signup:
                 startActivity(new Intent(this, SignupActivity.class));
                 break;
-            case R.id.btn_login_forgetpwd:
+            case R.id.link_register:
                 startActivity(new Intent(this, ForgetPwdActivity.class));
                 break;
         }
@@ -74,38 +76,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login() {
         if (getAccount().isEmpty()) {
             showToast("请输入账号！");
-        } else if (!Pattern.matches(REGEX_PASSWORD,mEtPassword.getText().toString())) {
+        } else if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else {
+            final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("正在登录。。。");
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
             new Thread(() -> {
-                String send="";
-                Socket socket=null;
-                try{
-                    JSONObject jsonObject=new JSONObject();
-                    jsonObject.put("request_type","1");
-                    jsonObject.put("user_name",getAccount());
-                    jsonObject.put("user_pw",getPassword());
-                    send=jsonObject.toString();
+                String send = "";
+                Socket socket;
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("request_type", "1");
+                    jsonObject.put("user_name", getAccount());
+                    jsonObject.put("user_pw", getPassword());
+                    send = jsonObject.toString();
                     socket = SocketUtil.getSendSocket();
-                    DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                    DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                     out.writeUTF(send);
                     out.close();
 
                     socket = SocketUtil.getGetSocket();
-                    DataInputStream datainputstream=new DataInputStream(socket.getInputStream());
-                    String message=datainputstream.readUTF();
+                    DataInputStream datainputstream = new DataInputStream(socket.getInputStream());
+                    String message = datainputstream.readUTF();
 
-                    jsonObject=new JSONObject(message);
+                    jsonObject = new JSONObject(message);
+                    progressDialog.dismiss();
                     switch (jsonObject.getString("login_state")) {
                         case "成功":
                             showToast("登录成功！");
-                            switch (jsonObject.getString("user_type")){
+                            switch (jsonObject.getString("user_type")) {
                                 case "d":
                                     startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
                                     finish();
                                     break;
                                 case "p":
-                                    startActivity(new Intent(LoginActivity.this,PatientBottomActivity.class));
+                                    startActivity(new Intent(LoginActivity.this, PatientBottomActivity.class));
                                     finish();
                                     break;
                             }
@@ -121,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
+                progressDialog.dismiss();
             }).start();
         }
     }
