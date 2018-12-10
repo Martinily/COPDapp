@@ -232,7 +232,6 @@ public class DoctorOneFragment extends Fragment {
         {
             if (StringUtils.equals(medicineBean.getName(), nameEditText.getText().toString())) {
                 Toast.makeText(getActivity(), nameEditText.getText().toString() + "已经存在", Toast.LENGTH_SHORT).show();
-                System.err.print(medicineBean.getName());
                 return;
             }
         }
