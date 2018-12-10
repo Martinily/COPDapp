@@ -69,8 +69,6 @@
         <activity android:name=".feature.doctorNursingPlan.MedicineDetailActivity" />
         <activity android:name=".feature.doctorNursingPlan.InstrumentDetailActivity" />
         <activity android:name=".feature.doctorNursingPlan.SportsDetailActivity" />
-        <activity android:name=".feature.doctorNursingPlan.DoctorNursingPlanActivity" />
-        <activity android:name=".feature.patientNursingPlan.PatientNursingPlanActivity" />
         <activity android:name=".feature.patientNursingPlan.MedicineRetimeActivity" />
         <activity android:name=".feature.patientNursingPlan.InstrumentRetimeActivity" />
         <activity android:name=".feature.patientNursingPlan.SportsRetimeActivity" />

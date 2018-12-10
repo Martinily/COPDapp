@@ -22,30 +22,34 @@ import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.funnyseals.app.R;
 import com.funnyseals.app.model.UserDao;
+
 import org.apache.commons.lang3.StringUtils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.funnyseals.app.R.id.edit_instrument;
 
 /**
- *护理计划two fragment, about instrument
+ * 护理计划two fragment, about instrument
  */
 public class DoctorTwoFragment extends Fragment {
-    private        EditText        mEditText;
-    private        Context         mContext;
-    private        ListView        mListView;
+    private        EditText          mEditText;
+    private        Context           mContext;
+    private        ListView          mListView;
     private        MyListViewAdapter mListViewAdapter;
-    private static Connection      CONN;
-    private        List<Bean>      mInstrumentBeanList = new ArrayList<Bean>();
-    private        List<String>    mInstrumentNames;
-    private        Thread          mThread;
-    private int mInstrumentsave = 0;
+    private static Connection        CONN;
+    private        List<Bean>        mInstrumentBeanList = new ArrayList<Bean>();
+    private        List<String>      mInstrumentNames;
+    private        Thread            mThread;
+    private        int               mInstrumentsave     = 0;
 
     //用于执行数据库线程
     @SuppressLint("HandlerLeak")
@@ -86,8 +90,7 @@ public class DoctorTwoFragment extends Fragment {
                 CONN.close();
                 rs.close();
                 statement.close();
-            }
-            else {
+            } else {
                 System.err.println("警告: DbConnectionManager.getConnection() 获得数据库链接失败.");
             }
         } catch (SQLException e) {
@@ -132,21 +135,18 @@ public class DoctorTwoFragment extends Fragment {
 
         //save button的点击事件
         Button saveButton = getActivity().findViewById(R.id.addinstrument);
-        saveButton.setOnClickListener(new View.OnClickListener()
-        {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if(mInstrumentsave==0) {
+            public void onClick(View v) {
+                if (mInstrumentsave == 0) {
                     saveinstrumentMessage();
-                }
-                else
+                } else
                     saveButton.setEnabled(false);
             }
         });
 
         mListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            if(mInstrumentsave==0) {
+            if (mInstrumentsave == 0) {
                 Bean instrumentBean = mInstrumentBeanList.get(position);
                 String instrumentname = instrumentBean.getName();
                 String instrumentcontent = instrumentBean.getContent();
@@ -174,7 +174,7 @@ public class DoctorTwoFragment extends Fragment {
                                 instrumentsaveall.setTextColor(0xFFD0EFC6);
                                 instrumentsaveall.setEnabled(false);
                                 // ((MainActivity)getActivity()).setmtestinstrument("1");
-                                mInstrumentsave=1;
+                                mInstrumentsave = 1;
                             }
                         }).show();
             }
@@ -183,12 +183,10 @@ public class DoctorTwoFragment extends Fragment {
 
     //接收返回数据
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1000 && resultCode == 1001)
-        {
-            int nowposition=Integer.valueOf(data.getStringExtra("reposition")).intValue();
+        if (requestCode == 1000 && resultCode == 1001) {
+            int nowposition = Integer.valueOf(data.getStringExtra("reposition")).intValue();
             Bean instrumentBean = mInstrumentBeanList.get(nowposition);
             instrumentBean.setattention(data.getStringExtra("reinstrumentattention"));
             instrumentBean.setcontent(data.getStringExtra("reinstrumentnum"));
@@ -211,8 +209,8 @@ public class DoctorTwoFragment extends Fragment {
             mEditText.setText(mInstrumentNames.get(i));
             listPopupWindow.dismiss();
         });
-//        listPopupWindow.show();
-      //  listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
+        //        listPopupWindow.show();
+        //  listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
     }
 
     public void showInfo(final int position) {
@@ -246,6 +244,7 @@ public class DoctorTwoFragment extends Fragment {
         }
         Bean instrumentBean = new Bean(nameEditText.getText().toString());
         mInstrumentBeanList.add(instrumentBean);
+        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment())).setAllItem(instrumentBean);
         mListViewAdapter.notifyDataSetChanged();
         //((MainActivity)getActivity()).setmtestinstrument("0");
     }
@@ -259,7 +258,7 @@ public class DoctorTwoFragment extends Fragment {
         /**
          * 数据
          */
-        private String name;
+        private String     name;
         private List<Bean> BeanList;
 
         /**
@@ -311,11 +310,10 @@ public class DoctorTwoFragment extends Fragment {
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mInstrumentsave==0) {
+                    if (mInstrumentsave == 0) {
                         deleteButtonAction(removePosition);
                         mListViewAdapter.notifyDataSetChanged();
-                    }
-                    else
+                    } else
                         deleteButton.setEnabled(false);
                 }
             });

@@ -2,12 +2,14 @@ package com.funnyseals.app.feature.doctorNursingPlan;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
@@ -18,17 +20,20 @@ import java.util.List;
 /**
  * 医生端护理计划fragment
  */
-public class DoctorNursingPlanFragment extends Fragment implements View.OnClickListener{
-    private View     mView;
-    private TextView mTv_doctor_title, mTv_doctor_one, mTv_doctor_two, mTv_doctor_three;
-    private ViewPager                     mVp_doctor_myviewpage;
-    private List<Fragment>                mList;
-    private DoctorTabFragmentPagerAdapter mAdapter;
+public class DoctorNursingPlanFragment extends Fragment implements View.OnClickListener {
+    private TextView   mTv_doctor_one;
+    private TextView   mTv_doctor_two;
+    private TextView   mTv_doctor_three;
+    private ViewPager  mVp_doctor_myviewpage;
+    private Button     mBtnSend;
+    private String     planID;
+    private List<Bean> mAllItem;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mView=inflater.inflate(R.layout.fragment_doctor_nursing_plan, null);
+        View mView = inflater.inflate(R.layout.fragment_doctor_nursing_plan, null);
+        mAllItem = new ArrayList<>();
         return mView;
     }
 
@@ -42,13 +47,14 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         mTv_doctor_two.setOnClickListener(this);
         mTv_doctor_three.setOnClickListener(this);
         mVp_doctor_myviewpage.setOnPageChangeListener(new MyPagerChangeListener());
+        mBtnSend.setOnClickListener(this);
 
         //把Fragment添加到List集合里面
-        mList = new ArrayList<>();
+        List<Fragment> mList = new ArrayList<>();
         mList.add(new DoctorOneFragment());
         mList.add(new DoctorTwoFragment());
         mList.add(new DoctorThreeFragment());
-        mAdapter = new DoctorTabFragmentPagerAdapter(getChildFragmentManager(), mList);
+        DoctorTabFragmentPagerAdapter mAdapter = new DoctorTabFragmentPagerAdapter(getChildFragmentManager(), mList);
         mVp_doctor_myviewpage.setAdapter(mAdapter);
         mVp_doctor_myviewpage.setCurrentItem(0);  //初始化显示第一个页面
         mTv_doctor_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
@@ -76,6 +82,11 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 mTv_doctor_two.setBackgroundColor(Color.WHITE);
                 mTv_doctor_three.setBackgroundColor(Color.LTGRAY);
                 break;
+            case R.id.send:
+                for (Bean p : mAllItem) {
+                    System.err.println(p.getName());
+                }
+                break;
         }
     }
 
@@ -84,6 +95,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         mTv_doctor_two = getActivity().findViewById(R.id.tv_doctor_two);
         mTv_doctor_three = getActivity().findViewById(R.id.tv_doctor_three);
         mVp_doctor_myviewpage = getActivity().findViewById(R.id.vp_doctor_myViewPager);
+        mBtnSend = getActivity().findViewById(R.id.send);
     }
 
     /**
@@ -119,5 +131,9 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                     break;
             }
         }
+    }
+
+    public void setAllItem(Bean item) {
+        mAllItem.add(item);
     }
 }

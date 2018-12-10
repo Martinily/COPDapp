@@ -239,6 +239,7 @@ public class DoctorOneFragment extends Fragment {
 
         Bean medicineBean = new Bean(nameEditText.getText().toString());
         mMedicineBeanList.add(medicineBean);
+        ((DoctorNursingPlanFragment)(DoctorOneFragment.this.getParentFragment())).setAllItem(medicineBean);
         mListViewAdapter.notifyDataSetChanged();
     }
 
