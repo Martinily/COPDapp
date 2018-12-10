@@ -20,6 +20,7 @@ public class User implements Serializable {
     private int mAge;
     private String mSex;
     private String mIconUrl;
+    private String mLocation;
 
     public User() {
     }
@@ -94,6 +95,10 @@ public class User implements Serializable {
     public void setIconUrl(String iconurl) {
         this.mIconUrl = iconurl;
     }
+
+    public String getLocation(){return mLocation;}
+
+    public void setLocation(String location){this.mLocation=location;}
 
     @Override
     public String toString() {

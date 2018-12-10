@@ -59,6 +59,18 @@
     <string name="healthcenter_submit">提交</string>
     <string name="healthcenter_returnback">返回</string>
     <string name="healthcenter_defaultdata">0ml</string>
+    
+    <!--***************************患者列表*********************** -->
+    <string name="patientlist_title">患者列表</string>
+    <string name="patientlist_photo">头像</string>
+    <string name="patientlist_name">姓名</string>
+    <string name="patientlist_sex">性别</string>
+    <string name="patientlist_sex_man">男</string>
+    <string name="patientlist_sex_woman">女</string>
+    <string name="patientlist_age">年龄</string>
+    <string name="patientlist_account">账号</string>
+    <string name="patientlist_location">所在地</string>
+    <string name="patientlist_returnback">返回</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
