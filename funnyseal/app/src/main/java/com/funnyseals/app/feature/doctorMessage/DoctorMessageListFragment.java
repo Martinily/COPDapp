@@ -105,8 +105,8 @@ public class DoctorMessageListFragment extends Fragment {
                 statement.close();
                 rs.close();
             }
-        } catch (SQLException SQLe) {
-            System.err.println(SQLe.getMessage());
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

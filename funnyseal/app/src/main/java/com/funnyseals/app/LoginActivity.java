@@ -2,10 +2,13 @@ package com.funnyseals.app;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,16 +32,20 @@ import java.util.regex.Pattern;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
-    private EditText mEtAccount;
-    private EditText mEtPassword;
-    private Button   mBtnLogin;
-    private TextView mLinkSignup;
-    private TextView mLinkForgetPwd;
+    private EditText                 mEtAccount;
+    private EditText                 mEtPassword;
+    private Button                   mBtnLogin;
+    private TextView                 mLinkSignup;
+    private TextView                 mLinkForgetPwd;
+    private CheckBox                 mCbRememberPassword;
+    private SharedPreferences        pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         initViews();
         initEvents();
@@ -49,13 +56,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mEtPassword = findViewById(R.id.et_login_PasswordInput);
         mBtnLogin = findViewById(R.id.btn_login_login);
         mLinkSignup = findViewById(R.id.link_signup);
-        mLinkForgetPwd = findViewById(R.id.link_register);
+        mLinkForgetPwd = findViewById(R.id.link_forgetPWD);
+        mCbRememberPassword = findViewById(R.id.remember_password);
     }
 
     private void initEvents() {
         mBtnLogin.setOnClickListener(this);
         mLinkSignup.setOnClickListener(this);
         mLinkForgetPwd.setOnClickListener(this);
+
+        boolean isRemember = pref.getBoolean("remember_password", false);
+        if (isRemember) {
+            String account = pref.getString("account", "");
+            String password = pref.getString("password", "");
+            mEtAccount.setText(account);
+            mEtPassword.setText(password);
+            mCbRememberPassword.setChecked(true);
+        }
     }
 
     @Override
@@ -67,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.link_signup:
                 startActivity(new Intent(this, SignupActivity.class));
                 break;
-            case R.id.link_register:
+            case R.id.link_forgetPWD:
                 startActivity(new Intent(this, ForgetPwdActivity.class));
                 break;
         }
@@ -109,6 +126,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     switch (jsonObject.getString("login_state")) {
                         case "成功":
                             showToast("登录成功！");
+
+                            editor = pref.edit();
+                            if (mCbRememberPassword.isChecked()) {
+                                editor.putBoolean("remember_password", true);
+                                editor.putString("account", getAccount());
+                                editor.putString("password", getPassword());
+                            } else {
+                                editor.clear();
+                            }
+                            editor.apply();
+
                             switch (jsonObject.getString("user_type")) {
                                 case "d":
                                     startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));

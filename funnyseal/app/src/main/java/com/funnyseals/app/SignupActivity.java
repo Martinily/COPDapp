@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
@@ -44,6 +45,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private RadioButton  mRbAccountTypePatient;
     private RadioButton  mRbAccountTypeDoctor;
     private Button       mBtnSignup;
+    private TextView     mLinkLogin;
     private TimeDownUtil timeDownUtil;
 
     @Override
@@ -65,12 +67,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mRbAccountTypePatient = findViewById(R.id.rb_signup_accountTypePatient);
         mRbAccountTypeDoctor = findViewById(R.id.rb_signup_accountTypeDoctor);
         mBtnSignup = findViewById(R.id.btn_signup_signup);
+        mLinkLogin = findViewById(R.id.link_register_login);
 
     }
 
     private void initEvents() {
         mBtnCodeSend.setOnClickListener(this);
         mBtnSignup.setOnClickListener(this);
+        mLinkLogin.setOnClickListener(this);
         timeDownUtil = new TimeDownUtil(180000, 1000, mBtnCodeSend);
     }
 
@@ -87,6 +91,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_signup_signup:
                 signup();
                 break;
+            case R.id.link_register_login:
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
         }
     }
 
