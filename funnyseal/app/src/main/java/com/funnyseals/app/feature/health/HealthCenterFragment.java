@@ -48,6 +48,21 @@ public class HealthCenterFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_health_center, container, false);
         Button button1=view.findViewById(R.id.gotocentre2);
         Button button2=view.findViewById(R.id.gotocentre3);
+        SimpleChartView simpleChartView=view.findViewById(R.id.datachart);
+        simpleChartView.data.add(4500);
+        simpleChartView.data.add(5000);
+        simpleChartView.data.add(3200);
+        simpleChartView.data.add(2000);
+        simpleChartView.data.add(1800);
+        simpleChartView.data.add(1500);
+        simpleChartView.data.add(1000);
+        simpleChartView.data2.add(95);
+        simpleChartView.data2.add(90);
+        simpleChartView.data2.add(85);
+        simpleChartView.data2.add(82);
+        simpleChartView.data2.add(70);
+        simpleChartView.data2.add(63);
+        simpleChartView.data2.add(50);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

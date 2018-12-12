@@ -15,8 +15,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/data1"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/data1"
@@ -27,8 +26,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text1"
-        app:layout_constraintBottom_toTopOf="@id/text2"/>
+        app:layout_constraintTop_toBottomOf="@id/text1" />
 
     <TextView
         android:id="@+id/unit1"
@@ -49,8 +47,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data1"
-        app:layout_constraintBottom_toTopOf="@id/data2" />
+        app:layout_constraintTop_toBottomOf="@id/data1" />
 
     <TextView
         android:id="@+id/data2"
@@ -61,8 +58,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text2"
-        app:layout_constraintBottom_toTopOf="@id/text3"/>
+        app:layout_constraintTop_toBottomOf="@id/text2" />
 
     <TextView
         android:id="@+id/unit2"
@@ -75,6 +71,37 @@
         app:layout_constraintTop_toBottomOf="@id/text2"/>
 
     <TextView
+        android:id="@+id/text_caculate"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/healthcenter_projectcaculate"
+        android:textSize="25sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data2"/>
+
+    <TextView
+        android:id="@+id/data_caculate"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textSize="25sp"
+        android:textColor="#00FF00"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/text_caculate"
+        app:layout_constraintTop_toBottomOf="@id/data2"/>
+
+    <TextView
+        android:id="@+id/notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notice"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data_caculate"/>
+
+    <TextView
         android:id="@+id/text3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -83,8 +110,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data2"
-        app:layout_constraintBottom_toTopOf="@id/data3"/>
+        app:layout_constraintTop_toBottomOf="@id/notice" />
 
     <TextView
         android:id="@+id/data3"
@@ -124,5 +150,13 @@
         app:layout_constraintStart_toEndOf="@id/gotocentre2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/data3"/>
+
+    <com.funnyseals.app.feature.health.SimpleChartView
+        android:id="@+id/datachart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gotocentre2"/>
 
 </android.support.constraint.ConstraintLayout>

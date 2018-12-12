@@ -52,6 +52,8 @@
     <string name="healthcenter_project1">FEV1(第一秒用力呼气容积):</string>
     <string name="healthcenter_project2">FVC(用力肺活量):</string>
     <string name="healthcenter_project3">VC(肺活量):</string>
+    <string name="healthcenter_projectcaculate">FEV1/FVC:</string>
+    <string name="notice">正常范围：FEV1/FVC>70%</string>
     <string name="healthcenter_unit">ml</string>
     <string name="healthcenter_center2">更新数据</string>
     <string name="healthcenter_center3">历史数据</string>
