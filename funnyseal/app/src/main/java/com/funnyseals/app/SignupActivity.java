@@ -174,7 +174,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 progressDialog.dismiss();
                 switch (jsonObject.getString("reg_result")) {
                     case "成功":
-                        //EMClient.getInstance().createAccount(mEtAccount.getText().toString(), mEtPassword.getText().toString());
                         showToast("注册成功！");
                         //destorySendSMSHandler();
                         if (mRbAccountTypeDoctor.isChecked()) {
@@ -203,7 +202,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString())) {
             showToast("两次输入的密码不同！");
         } else {
-            SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(), mEtIdentifyingCode.getText().toString());
+            writeIntoDB();
+            //SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(), mEtIdentifyingCode.getText().toString());
         }
     }
 

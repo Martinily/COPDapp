@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
 import com.funnyseals.app.util.SocketUtil;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -136,6 +138,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 editor.clear();
                             }
                             editor.apply();
+
+                            EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
+                                @Override
+                                public void onSuccess() {
+
+                                }
+
+                                @Override
+                                public void onError(int code, String error) {
+
+                                }
+
+                                @Override
+                                public void onProgress(int progress, String status) {
+
+                                }
+                            });
 
                             switch (jsonObject.getString("user_type")) {
                                 case "d":
