@@ -12,7 +12,7 @@ import java.util.Locale;
  *     version: 1.0
  * </pre>
  */
-public enum TimeUtil {
+public enum imeUtil {
     ;
 
     private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("M月d日", Locale.CHINESE);

@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.doctorMessage.ChatMessageAdapter;
-import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -23,16 +22,16 @@ import java.util.List;
 
 public class PatientChatActivity extends AppCompatActivity {
 
-    private ListView mLv_message;
-    private EditText mEt_input;
-    private Button mBtn_send;
+    private ListView           mLv_message;
+    private EditText           mEt_input;
+    private Button             mBtn_send;
     private ChatMessageAdapter mCurrentChatadapter;
-    private User mMyfriend;
-    private List<EMMessage> mMessageList;
-    private EMConversation mConversation;
+    private String             mMyfriend;
+    private List<EMMessage>    mMessageList;
+    private EMConversation     mConversation;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_chat);
 
@@ -40,7 +39,7 @@ public class PatientChatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume () {
         super.onResume();
 
         loadAllMessage();
@@ -49,15 +48,15 @@ public class PatientChatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop () {
         super.onStop();
         // 退出前将所有消息导入数据库
         EMClient.getInstance().chatManager().importMessages(mMessageList);
         EMClient.getInstance().chatManager().removeMessageListener(msgListener);
     }
 
-    private void init() {
-        mMyfriend = (User) getIntent().getSerializableExtra("myfriend");
+    private void init () {
+        mMyfriend = (String) getIntent().getSerializableExtra("myfriend");
 
         initUIComponents();
 
@@ -66,7 +65,7 @@ public class PatientChatActivity extends AppCompatActivity {
         loadAllMessage();
     }
 
-    private void initUIComponents() {
+    private void initUIComponents () {
         initToolbar();
 
         mLv_message = findViewById(R.id.lv_patient_chat_message_container);
@@ -78,20 +77,20 @@ public class PatientChatActivity extends AppCompatActivity {
         sendEnabled(false);
     }
 
-    private void addListener() {
+    private void addListener () {
         mEt_input.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
 
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged (Editable s) {
                 if ("".equals(mEt_input.getText().toString())) {
                     sendEnabled(false);
                 } else {
@@ -105,9 +104,9 @@ public class PatientChatActivity extends AppCompatActivity {
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
     }
 
-    private void initToolbar() {
+    private void initToolbar () {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_patient_chat_toolbar);
-        toolbar.setTitle(mMyfriend.getNickName());
+        toolbar.setTitle(mMyfriend);
 
         setSupportActionBar(toolbar);
 
@@ -117,8 +116,9 @@ public class PatientChatActivity extends AppCompatActivity {
     /**
      * 加载所有聊天
      */
-    private void loadAllMessage() {
-        mConversation = EMClient.getInstance().chatManager().getConversation(mMyfriend.getAccount(), EMConversation.EMConversationType.Chat, true);
+    private void loadAllMessage () {
+        mConversation = EMClient.getInstance().chatManager().getConversation(mMyfriend,
+                EMConversation.EMConversationType.Chat, true);
 
         // 设置当前会话未读数为 0
         mConversation.markAllMessagesAsRead();
@@ -135,7 +135,8 @@ public class PatientChatActivity extends AppCompatActivity {
             EMMessage message = mConversation.getLastMessage();
             EMTextMessageBody body = (EMTextMessageBody) message.getBody();
             // 将消息内容和时间显示出来
-            //mContentText.setText(body.getMessage() + " - " + conversation.getLastMessage().getMsgTime());
+            //mContentText.setText(body.getMessage() + " - " + conversation.getLastMessage()
+            // .getMsgTime());
         }
 
         if (mConversation != null) {
@@ -148,7 +149,7 @@ public class PatientChatActivity extends AppCompatActivity {
         initMessageList();
     }
 
-    private void initMessageList() {
+    private void initMessageList () {
         mCurrentChatadapter = new ChatMessageAdapter(this, mMyfriend, mMessageList);
 
         mLv_message.setAdapter(mCurrentChatadapter);
@@ -156,16 +157,17 @@ public class PatientChatActivity extends AppCompatActivity {
         mLv_message.smoothScrollToPositionFromTop(mMessageList.size(), 0);
     }
 
-    private void onSend() {
+    private void onSend () {
         //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户
-        EMMessage message = EMMessage.createTxtSendMessage(mEt_input.getText().toString(), mMyfriend.getAccount());
+        EMMessage message = EMMessage.createTxtSendMessage(mEt_input.getText().toString(),
+                mMyfriend);
         //发送消息
         EMClient.getInstance().chatManager().sendMessage(message);
 
         onAddMessage(message);
     }
 
-    private void onAddMessage(EMMessage message) {
+    private void onAddMessage (EMMessage message) {
         mMessageList.add(message);
         mEt_input.setText("");
         mLv_message.smoothScrollToPositionFromTop(mMessageList.size(), 0);
@@ -173,7 +175,7 @@ public class PatientChatActivity extends AppCompatActivity {
         System.out.println("DoctorChatActivity.onAddMessage");
     }
 
-    private void sendEnabled(boolean enabled) {
+    private void sendEnabled (boolean enabled) {
         mBtn_send.setEnabled(enabled);
 
         if (enabled) {
@@ -186,10 +188,10 @@ public class PatientChatActivity extends AppCompatActivity {
     private EMMessageListener msgListener = new EMMessageListener() {
 
         @Override
-        public void onMessageReceived(List<EMMessage> messages) {
+        public void onMessageReceived (List<EMMessage> messages) {
             // 循环遍历当前收到的消息
             for (EMMessage message : messages) {
-                if (message.getFrom().equals(mMyfriend.getAccount())) {
+                if (message.getFrom().equals(mMyfriend)) {
                     // 设置消息为已读
                     mConversation.markMessageAsRead(message.getMsgId());
 
@@ -201,30 +203,30 @@ public class PatientChatActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onCmdMessageReceived(List<EMMessage> messages) {
+        public void onCmdMessageReceived (List<EMMessage> messages) {
             //收到透传消息
             System.out.println("DoctorChatActivity.onCmdMessageReceived");
         }
 
         @Override
-        public void onMessageRead(List<EMMessage> messages) {
+        public void onMessageRead (List<EMMessage> messages) {
             //收到已读回执
             System.out.println("DoctorChatActivity.onMessageRead");
         }
 
         @Override
-        public void onMessageDelivered(List<EMMessage> message) {
+        public void onMessageDelivered (List<EMMessage> message) {
             //收到已送达回执
             System.out.println("DoctorChatActivity.onMessageDelivered");
         }
 
         @Override
-        public void onMessageRecalled(List<EMMessage> messages) {
+        public void onMessageRecalled (List<EMMessage> messages) {
 
         }
 
         @Override
-        public void onMessageChanged(EMMessage message, Object change) {
+        public void onMessageChanged (EMMessage message, Object change) {
             //消息状态变动
             System.out.println("DoctorChatActivity.onMessageChanged");
         }

@@ -10,16 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
-import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
-import com.funnyseals.app.util.SocketUtil;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
@@ -86,11 +81,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             progressDialog.setMessage("正在登录。。。");
             progressDialog.show();
             progressDialog.setCanceledOnTouchOutside(false);
+            EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
+                @Override
+                public void onSuccess () {
+
+                }
+
+                @Override
+                public void onError (int code, String error) {
+
+                }
+
+                @Override
+                public void onProgress (int progress, String status) {
+
+                }
+            });
             new Thread(() -> {
                 String send = "";
                 Socket socket;
-                try {
-                    JSONObject jsonObject = new JSONObject();
+                //try {
+                    /*JSONObject jsonObject = new JSONObject();
                     jsonObject.put("request_type", "1");
                     jsonObject.put("user_name", getAccount());
                     jsonObject.put("user_pw", getPassword());
@@ -108,12 +119,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     progressDialog.dismiss();
                     switch (jsonObject.getString("login_state")) {
                         case "成功":
-                            showToast("登录成功！");
-                            switch (jsonObject.getString("user_type")) {
-                                case "d":
+                            showToast("登录成功！");*/
+                            MyApplication application = (MyApplication) getApplication();
+                            application.setAccount(getAccount());
+                            /*switch (jsonObject.getString("user_type")) {
+                                case "d":*/
                                     startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
                                     finish();
-                                    break;
+                                    /*break;
                                 case "p":
                                     startActivity(new Intent(LoginActivity.this, PatientBottomActivity.class));
                                     finish();
@@ -127,10 +140,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             showToast("密码错误！");
                             break;
                     }
-                    socket.close();
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
+                    socket.close();*/
+                //} catch (IOException | JSONException e) {
+                //    e.printStackTrace();
+                //}
                 progressDialog.dismiss();
             }).start();
         }

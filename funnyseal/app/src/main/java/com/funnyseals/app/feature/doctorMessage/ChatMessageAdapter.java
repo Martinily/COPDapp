@@ -10,7 +10,6 @@ import com.cpiz.android.bubbleview.BubbleTextView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.custom_view.Portrait;
 import com.funnyseals.app.feature.MyApplication;
-import com.funnyseals.app.model.User;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
@@ -26,14 +25,17 @@ import java.util.List;
  */
 public class ChatMessageAdapter extends BaseAdapter {
 
-    private LayoutInflater mInflater;
-
+    private LayoutInflater  mInflater;
     private List<EMMessage> mMessageList;
+    private String          mMyfriend;
+    private MyApplication   mApplication;
 
-    private User          mMyfriend;
-    private MyApplication mApplication;
+    private class ViewHolder {
+        private Portrait       portrait;
+        private BubbleTextView text;
+    }
 
-    public ChatMessageAdapter(Context context, User user, List<EMMessage> messageList) {
+    public ChatMessageAdapter (Context context, String user, List<EMMessage> messageList) {
         this.mInflater = LayoutInflater.from(context);
         this.mMyfriend = user;
         this.mMessageList = messageList;
@@ -41,50 +43,45 @@ public class ChatMessageAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getCount () {
         return mMessageList.size();
     }
 
     @Override
-    public EMMessage getItem(int position) {
+    public EMMessage getItem (int position) {
         return mMessageList.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId (int position) {
         return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+    public View getView (int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder = new ViewHolder();
 
         EMMessage message = mMessageList.get(position);
 
-        if (convertView == null) {
-            viewHolder = new ViewHolder();
+        if (mApplication.getAccount().equals(message.getFrom())) {
 
-            if (mApplication.getAccount().equals(message.getFrom())) {
-                convertView = mInflater.inflate(R.layout.chat_send, parent, false);
+            convertView = mInflater.inflate(R.layout.chat_send, parent, false);
 
-                viewHolder.portrait = convertView.findViewById(R.id.chat_send_portrait);
-                viewHolder.text = convertView.findViewById(R.id.chat_send_text);
-            } else {
-                convertView = mInflater.inflate(R.layout.chat_receive, parent, false);
-
-                viewHolder.portrait = convertView.findViewById(R.id.chat_receive_portrait);
-                viewHolder.text = convertView.findViewById(R.id.chat_receive_text);
-            }
-
-            convertView.setTag(viewHolder);
+            viewHolder.portrait = convertView.findViewById(R.id.chat_send_portrait);
+            viewHolder.text = convertView.findViewById(R.id.chat_send_text);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            convertView = mInflater.inflate(R.layout.chat_receive, parent, false);
+
+            viewHolder.portrait = convertView.findViewById(R.id.chat_receive_portrait);
+            viewHolder.text = convertView.findViewById(R.id.chat_receive_text);
         }
+
+        convertView.setTag(viewHolder);
 
         if (mApplication.getAccount().equals(message.getFrom())) {
             viewHolder.portrait.setUserAccount(mApplication.getAccount()).setUrl(null);
         } else {
-            viewHolder.portrait.setUserAccount(mMyfriend.getAccount()).setUrl(null);
+            viewHolder.portrait.setUserAccount(mMyfriend).setUrl(null);
         }
 
         viewHolder.portrait.show();
@@ -93,13 +90,4 @@ public class ChatMessageAdapter extends BaseAdapter {
         return convertView;
     }
 
-    /**
-     * 此处将发送的消息和接受的消息合并
-     */
-    private class ViewHolder {
-
-        private Portrait portrait;
-
-        private BubbleTextView text;
-    }
 }
