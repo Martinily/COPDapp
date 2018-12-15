@@ -1,11 +1,13 @@
 package com.funnyseals.app.feature.doctorMessage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.funnyseals.app.R;
@@ -24,6 +26,9 @@ public class DoctorChatActivity extends AppCompatActivity {
     private ListView           mLv_message;
     private EditText           mEt_input;
     private Button             mBtn_send;
+    private ImageButton        mVioce;
+    private ImageButton        mNursingPlan;
+    private ImageButton        mVideo;
     private MyApplication      myApplication;
     private ChatMessageAdapter CurrentChatadapter;
     private String             mMyfriend;
@@ -74,6 +79,10 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         mBtn_send = findViewById(R.id.btn_doctor_chat_send);
 
+        mVioce = findViewById(R.id.ibtn_vioce);
+        mNursingPlan = findViewById(R.id.ibtn_nursingplan);
+        mVideo=findViewById(R.id.ibtn_video);
+
         sendEnabled(false);
     }
 
@@ -100,6 +109,20 @@ public class DoctorChatActivity extends AppCompatActivity {
         });
 
         mBtn_send.setOnClickListener(v -> onSend());
+        mVioce.setOnClickListener(v -> {
+            Intent intent = new Intent(DoctorChatActivity.this, VoiceCallActivity.class);
+            CallManager.getInstance().setChatId(mMyfriend);
+            CallManager.getInstance().setInComingCall(false);
+            CallManager.getInstance().setCallType(CallManager.CallType.VOICE);
+            startActivity(intent);
+        });
+        mVideo.setOnClickListener(v -> {
+            Intent intent = new Intent(DoctorChatActivity.this, VideoCallActivity.class);
+            CallManager.getInstance().setChatId(mMyfriend);
+            CallManager.getInstance().setInComingCall(false);
+            CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);
+            startActivity(intent);
+        });
 
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
     }
