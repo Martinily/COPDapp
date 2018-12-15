@@ -20,4 +20,10 @@
     <dimen name="edittext_text">15sp</dimen>
 
     <dimen name="ContentBlock">50dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
 </resources>
