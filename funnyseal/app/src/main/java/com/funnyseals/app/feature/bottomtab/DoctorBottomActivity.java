@@ -97,7 +97,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
-
             Thread.interrupted();
         }).start();
     }

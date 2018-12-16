@@ -106,22 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             progressDialog.setMessage("正在登录。。。");
             progressDialog.show();
             progressDialog.setCanceledOnTouchOutside(false);
-            EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
-                @Override
-                public void onSuccess () {
-
-                }
-
-                @Override
-                public void onError (int code, String error) {
-
-                }
-
-                @Override
-                public void onProgress (int progress, String status) {
-
-                }
-            });
+            loginEM();
             new Thread(() -> {
                 String send;
                 Socket socket;
@@ -145,34 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     switch (jsonObject.getString("login_state")) {
                         case "成功":
                             showToast("登录成功！");
-
-                            editor = pref.edit();
-                            if (mCbRememberPassword.isChecked()) {
-                                editor.putBoolean("remember_password", true);
-                                editor.putString("account", getAccount());
-                                editor.putString("password", getPassword());
-                            } else {
-                                editor.clear();
-                            }
-                            editor.apply();
-
-                            EMClient.getInstance().login(getAccount(), getPassword(), new
-                                    EMCallBack() {
-                                        @Override
-                                        public void onSuccess () {
-
-                                        }
-
-                                        @Override
-                                        public void onError (int code, String error) {
-
-                                        }
-
-                                        @Override
-                                        public void onProgress (int progress, String status) {
-
-                                        }
-                                    });
+                            rememberPassword();
 
                             MyApplication myApplication = (MyApplication) getApplication();
                             myApplication.setAccount(getAccount());
@@ -224,6 +182,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Thread.interrupted();
             }).start();
         }
+    }
+
+    public void loginEM(){
+        EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
+            @Override
+            public void onSuccess () {
+
+            }
+
+            @Override
+            public void onError (int code, String error) {
+
+            }
+
+            @Override
+            public void onProgress (int progress, String status) {
+
+            }
+        });
+    }
+
+    public void rememberPassword(){
+        editor = pref.edit();
+        if (mCbRememberPassword.isChecked()) {
+            editor.putBoolean("remember_password", true);
+            editor.putString("account", getAccount());
+            editor.putString("password", getPassword());
+        } else {
+            editor.clear();
+        }
+        editor.apply();
     }
 
     public String getAccount () {

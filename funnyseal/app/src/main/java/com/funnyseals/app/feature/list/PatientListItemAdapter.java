@@ -79,8 +79,8 @@ public class PatientListItemAdapter extends BaseAdapter {
 
         private void init(UserTemp item) {
             User user = item.getUser();
-            mPortrait.setUserAccount(user.getAccount()).setUrl(user.getIconUrl()).show();
-            mName.setText(user.getNickName());
+            mPortrait.setUserAccount(user.getAccount()).setUrl(null).show();
+            mName.setText(user.getName());
         }
     }
 }
