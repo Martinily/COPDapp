@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick (View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
-           //     login();
+                login();
                 break;
             case R.id.link_signup:
                 startActivity(new Intent(this, SignupActivity.class));
@@ -167,33 +167,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     finish();
                                     break;
                             }
-                        } else if (rs.getString(1).equals(mEtPassword.getText().toString())) {
-                            EMClient.getInstance().login(mEtAccount.getText().toString(), mEtPassword.getText().toString(), new EMCallBack() {
-                                @Override
-                                public void onSuccess() {
-                                }
-
-                                @Override
-                                public void onError(int code, String error) {
-                                }
-
-                                @Override
-                                public void onProgress(int progress, String status) {
-                                }
-                            });
-                            ((MyApplication) getBaseContext().getApplicationContext()).setAccount(mEtAccount.getText().toString());
-                            conn.close();
-                            statement.close();
-                            rs.close();
-                            startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
-                            finish();
-                        }
-
-                    } else {
-                        // 输出连接信息
-                        showToast("数据库连接失败！");
+                        case "用户不存在":
+                            showToast("该用户不存在！");
+                            break;
+                        case "密码错误":
+                            showToast("密码错误！");
+                            break;
                     }
-                } catch (ClassNotFoundException | SQLException e) {
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
                 progressDialog.dismiss();
@@ -202,7 +183,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void loginEM(){
+    public void loginEM () {
         EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
             @Override
             public void onSuccess () {
@@ -221,7 +202,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    public void rememberPassword(){
+    public void rememberPassword () {
         editor = pref.edit();
         if (mCbRememberPassword.isChecked()) {
             editor.putBoolean("remember_password", true);

@@ -144,7 +144,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void writeIntoDB() {
-
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
                 R.style.AppTheme_Dark_Dialog);
 
@@ -184,16 +183,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             startActivity(new Intent(SignupActivity.this, PatientBottomActivity.class));
                             finish();
                         }
-                    }
-                    conn.close();
-                    statement.close();
-                    rs.close();
-                    destorySendSMSHandler();
-                } else {
-                    // 输出连接信息
-                    showToast("数据库连接失败！");
+                        break;
+                    case "用户已存在":
+                        showToast("该账号已被注册！");
+                        break;
                 }
-            } catch (ClassNotFoundException | SQLException | HyphenateException e) {
+                socket.close();
+            } catch (IOException | JSONException e /*| HyphenateException e*/) {
                 e.printStackTrace();
             }
             progressDialog.dismiss();
