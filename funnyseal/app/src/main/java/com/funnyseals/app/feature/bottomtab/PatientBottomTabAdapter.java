@@ -41,12 +41,12 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
     private void init() {
 
         FragmentTransaction ft = mFragmentActivity.getSupportFragmentManager().beginTransaction();
-        ft.add(mFragmentContentId, mFragmentMap.get(R.id.patient_nursingplan_tab));
+        ft.add(mFragmentContentId, mFragmentMap.get(R.id.patient_personalcenter_tab));
         ft.commit();
 
         mRadioGroup.setOnCheckedChangeListener(this);
 
-        mCurrentTabId = R.id.patient_nursingplan_tab;
+        mCurrentTabId = R.id.patient_personalcenter_tab;
     }
 
     @Override

@@ -14,7 +14,7 @@ import com.funnyseals.app.R;
 
 public class PatientMyDoctorActivity extends AppCompatActivity {
 
-    private TextView tv_patient_doctor_name;
+    private TextView tv_patient_doctor_name,tv_patient_doctor_hospital,tv_patient_doctor_post;
     private ImageButton ib_patient_doctor_return;
     private Intent intent1,intent2;
     private String str_name;
@@ -22,15 +22,18 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_my_doctor);
-        ib_patient_doctor_return=(ImageButton)findViewById(R.id.ib_patient_doctor_return);
-        initUIComponents();
+        init();
 
     }
     //更新，其余写死
-    void   initUIComponents()
+    void   init()
     {
         tv_patient_doctor_name=findViewById(R.id.tv_doctor_perinfo);
-        tv_patient_doctor_name.setText();
+        tv_patient_doctor_hospital=findViewById(R.id.tv_patient_doctor_hospital);
+        tv_patient_doctor_post=findViewById(R.id.tv_patient_doctor_post);
+
+        ib_patient_doctor_return=findViewById(R.id.ib_patient_doctor_return);
+        ib_patient_doctor_return.setOnClickListener(new addListeners());
     }
     //监听
     private class addListeners implements View.OnClickListener{
@@ -39,8 +42,7 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.ib_patient_doctor_return:
-                    intent1 = new Intent(PatientMyDoctorActivity.this,PatientPersonalCenterFragment.class);
-                    startActivity( intent1);
+                    finish();
                     break;
                 default:
                     break;

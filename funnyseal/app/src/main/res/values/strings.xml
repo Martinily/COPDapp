@@ -52,12 +52,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_doctor_my_info">DoctorMyInfoActivity</string>
     <string name="title_activity_doctor_my_info_modify">DoctorMyInfoModifyActivity</string>
-    <string name="title_activity_doctor_pass_succeed">DoctorPassSucceedActivity</string>
     <string name="title_activity_doctor_password">DoctorPasswordActivity</string>
     <string name="title_activity_doctor_signing">DoctorSigningActivity</string>
     <string name="title_activity_patient_add_equipment">PatientAddEquipmentActivity</string>
-    <string name="title_activity_doctor_change_portrait_acitivity">DoctorChangePortraitAcitivity
-    </string>
     <string name="title_activity_patient_change_portrait">PatientChangePortraitActivity</string>
     <string name="title_activity_patient_my_doctor">PatientMyDoctorActivity</string>
     <string name="title_activity_patient_my_equipment">PatientMyEquipmentActivity</string>
@@ -65,4 +62,9 @@
     <string name="title_activity_patient_pass_succeed">PatientPassSucceedActivity</string>
     <string name="title_activity_patient_password">PatientPasswordActivity</string>
     <string name="title_activity_patient_per_info_modify">PatientPerInfoModifyActivity</string>
+    <string name="title_activity_patient_person_center">PatientPersonCenterActivity</string>
+    <string name="title_activity_doctor_person_center">DoctorPersonCenter</string>
+
+    <!--  ***********************患者端个人中心界面********************-->
+
 </resources>

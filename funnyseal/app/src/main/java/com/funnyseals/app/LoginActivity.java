@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
+import com.funnyseals.app.feature.doctorPersonalCenter.DoctorMyInfoModifyActivity;
+import com.funnyseals.app.feature.doctorPersonalCenter.DoctorPersonalCenterFragment;
+import com.funnyseals.app.feature.patientPersonalCenter.PatientMyInfoModifyActivity;
 import com.funnyseals.app.model.UserDao;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
@@ -24,6 +27,7 @@ import java.sql.SQLException;
 /*
 登录界面
  */
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mEtAccount;
@@ -58,9 +62,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
+   //     finish();
+
+    }
+    /*    switch (v.getId()) {
             case R.id.btn_login_login:
-                login();
+           //     login();
                 break;
             case R.id.btn_login_signup:
                 startActivity(new Intent(this, SignupActivity.class));
@@ -148,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
+*/
     public String getAccount() {
         return mEtAccount.getText().toString().trim();
     }

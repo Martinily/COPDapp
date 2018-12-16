@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -7,131 +8,144 @@
     tools:context=".feature.patientPersonalCenter.PatientPersonalCenterFragment"
 
     android:background="#FFFFFF"
-    >
+    android:id="@+id/relativeLayout">
 
 
     <TextView
+        android:id="@+id/tv_patient_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="个人中心"
-        android:id="@+id/tv_patient_title"
-        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
 
-        android:layout_alignParentTop="true" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/iv_patient_portrait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:background="@null"
         android:src="@drawable/user"
-        android:background="@null"
-        android:layout_below="@+id/tv_patient_title"
-        android:layout_centerHorizontal="true" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_title" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="个人信息"
         android:id="@+id/tv_patient_perinfo"
-        android:layout_marginTop="190dp"
-        android:layout_below="@+id/tv_patient_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="216dp"
+        android:text="个人信息"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="我的医生"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tv_patient_doctor"
-        android:layout_below="@+id/tv_patient_perinfo"
-        android:layout_marginTop="20dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="我的医生"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="我的设备"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_perinfo" />
+
+    <TextView
         android:id="@+id/tv_patient_equipment"
-        android:layout_below="@+id/tv_patient_doctor"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="我的设备"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="设置"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor" />
+
+    <TextView
         android:id="@+id/tv_patient_setting"
-        android:layout_below="@+id/tv_patient_equipment"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="设置"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="用户名"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_equipment" />
+
+    <TextView
         android:id="@+id/tv_patient_username"
-        android:layout_below="@+id/tv_patient_title"
-        android:layout_marginTop="120dp"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="142dp"
+        android:text="用户名"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="50dp"
         android:id="@+id/ib_patient_perinfo"
-        android:src="@drawable/tm2"
-        android:background="@null"
-        android:layout_below="@+id/tv_patient_username"
-        android:layout_marginTop="100px"
-        android:layout_above="@+id/tv_patient_doctor"
-        android:layout_toRightOf="@+id/tv_patient_perinfo"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="450px"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="100px"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:src="@drawable/tm2"
+        app:layout_constraintBottom_toTopOf="@+id/tv_patient_doctor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_patient_perinfo"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_username"
+        app:layout_constraintVertical_bias="1.0" />
+
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="50dp"
         android:id="@+id/ib_patient_doctor"
-        android:src="@drawable/tm2"
-        android:layout_below="@+id/ib_patient_perinfo"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="216dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="20dp"
         android:background="@null"
-        android:layout_toRightOf="@+id/tv_patient_doctor"
-        android:layout_marginLeft="460px"
-        android:layout_above="@+id/tv_patient_equipment"
-        />
+        android:src="@drawable/tm2"
+        app:layout_constraintBottom_toTopOf="@+id/tv_patient_equipment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_patient_doctor"
+        app:layout_constraintTop_toBottomOf="@+id/ib_patient_perinfo"
+        app:layout_constraintVertical_bias="1.0" />
+
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="50dp"
         android:id="@+id/ib_patient_equipment"
-        android:src="@drawable/tm2"
-        android:layout_below="@+id/ib_patient_doctor"
-        android:layout_marginTop="10dp"
-        android:background="@null"
-        android:layout_toRightOf="@+id/tv_patient_equipment"
-        android:layout_marginLeft="460px"
-        />
-    <ImageButton
         android:layout_width="30dp"
         android:layout_height="50dp"
-        android:id="@+id/ib_patient_setting"
-        android:src="@drawable/tm2"
-        android:layout_below="@+id/ib_patient_equipment"
-        android:layout_marginTop="1dp"
+        android:layout_marginLeft="216dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@null"
-        android:layout_toRightOf="@+id/tv_patient_setting"
-        android:layout_marginLeft="550px"
-        />
+        android:src="@drawable/tm2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_patient_equipment"
+        app:layout_constraintTop_toBottomOf="@+id/ib_patient_doctor" />
+
+    <ImageButton
+        android:id="@+id/ib_patient_setting"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@null"
+        android:src="@drawable/tm2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_patient_setting"
+        app:layout_constraintTop_toBottomOf="@+id/ib_patient_equipment" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

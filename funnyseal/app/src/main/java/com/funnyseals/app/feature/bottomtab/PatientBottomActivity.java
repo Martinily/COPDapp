@@ -48,8 +48,8 @@ public class PatientBottomActivity extends AppCompatActivity {
     }
 
     private void initBottomTabs() {
-        mIndexTab = findViewById(R.id.patient_nursingplan_tab);
-        mPreviousTabId = R.id.patient_nursingplan_tab;
+        mIndexTab = findViewById(R.id.patient_personalcenter_tab);
+        mPreviousTabId = R.id.patient_personalcenter_tab;
 
         RadioGroup bottomTabs = findViewById(R.id.patient_bottom_tabs);
 
