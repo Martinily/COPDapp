@@ -205,7 +205,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             showToast("两次输入的密码不同！");
         } else {
             writeIntoDB();
-            //SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(), mEtIdentifyingCode.getText().toString());
+            SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(), mEtIdentifyingCode.getText().toString());
         }
     }
 
