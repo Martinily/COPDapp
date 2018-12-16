@@ -47,7 +47,7 @@ public class PatientListFragment extends Fragment {
         mUsers = getAllUser(((MyApplication) getContext().getApplicationContext()).getUser().getAccount());
         mUserTemps = new ArrayList<>();
         for (User p : mUsers) {
-            mUserTemps.add(new UserTemp(R.mipmap.portrait0, p.getNickName(), p.getAccount(), p));
+            mUserTemps.add(new UserTemp(R.mipmap.portrait0, p.getName(), p.getAccount(), p));
         }
         mPatientlist.setAdapter(new PatientListItemAdapterTemp(getActivity(), mUserTemps));
         addListeners();

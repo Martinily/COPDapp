@@ -47,4 +47,10 @@ dependencies {
     implementation 'com.koushikdutta.ion:ion:2.1.9'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.cpiz.bubbleview:bubbleview:1.0.2'
+    implementation 'com.j256.ormlite:ormlite-android:5.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.vmloft.library:vmtools:0.0.2'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
 }

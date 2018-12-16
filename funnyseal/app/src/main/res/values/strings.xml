@@ -8,10 +8,8 @@
 
     <!-- ************************* 登录界面 ******************** -->
     <string name="login_titleName">登陆界面</string>
-    <string name="login_accountTitleName">账号</string>
-    <string name="login_accountInputHint">手机号</string>
-    <string name="login_passwordTitleName">密码</string>
-    <string name="login_passwordInputHint">请输入登录密码</string>
+    <string name="login_accountInputHint">账号</string>
+    <string name="login_passwordInputHint">密码</string>
     <string name="login_loginButtonName">登录</string>
     <string name="login_signupButtonName">注册账号</string>
     <string name="login_forgetPwdButtonName">忘记密码</string>
@@ -76,4 +74,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

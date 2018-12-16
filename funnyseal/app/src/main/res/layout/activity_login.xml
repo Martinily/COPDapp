@@ -6,124 +6,97 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/tv_login_titleName"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ContentBlock"
-        android:gravity="center"
-        android:text="@string/login_titleName"
-        android:textSize="@dimen/titleName_larger"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/v_login_SplitLine"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/orange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_titleName" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingTop="56dp"
+        android:paddingRight="24dp">
 
-    <RelativeLayout
-        android:id="@+id/rl_login_AccountGroup"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ContentBlock"
-        android:layout_marginTop="@dimen/margin_normaltop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/v_login_SplitLine">
-
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/margin_mostleft"
-            android:text="@string/login_accountTitleName"
-            android:textSize="@dimen/titleName_larger" />
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/logo" />
 
-        <EditText
-            android:id="@+id/et_login_AccountInput"
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/margin_normalleft"
-            android:layout_marginEnd="@dimen/margin_mostright"
-            android:hint="@string/login_accountInputHint"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray"
-            android:textSize="@dimen/edittext_text" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/et_login_AccountInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_accountInputHint"
+                android:inputType="phone"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_login_PasswordGroup"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ContentBlock"
-        android:layout_marginTop="@dimen/margin_mosttop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rl_login_AccountGroup">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/margin_mostleft"
-            android:text="@string/login_passwordTitleName"
-            android:textSize="@dimen/titleName_larger" />
-
-
-        <EditText
-            android:id="@+id/et_login_PasswordInput"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/margin_normalleft"
-            android:layout_marginEnd="@dimen/margin_mostright"
-            android:hint="@string/login_passwordInputHint"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray"
-            android:textSize="@dimen/edittext_text" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/et_login_PasswordInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_passwordInputHint"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_login_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normaltop"
-        android:text="@string/login_loginButtonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rl_login_PasswordGroup" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_login_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_mostleft"
-        android:layout_marginTop="@dimen/margin_mosttop"
-        android:background="@color/white"
-        android:text="@string/login_signupButtonName"
-        android:textColor="@color/red"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login_login" />
+            <CheckBox
+                android:id="@+id/remember_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/btn_login_forgetpwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_mosttop"
-        android:layout_marginEnd="@dimen/margin_mostright"
-        android:background="@color/white"
-        android:text="@string/login_forgetPwdButtonName"
-        android:textColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login_login" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="记住密码" />
+
+            <TextView
+                android:id="@+id/link_forgetPWD"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:gravity="right"
+                android:text="忘记密码？"
+                android:textSize="16dip" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_login_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/lightsteelblue"
+            android:text="@string/login_loginButtonName" />
+
+        <TextView
+            android:id="@+id/link_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="没有账号？注册一个"
+            android:textSize="16dip" />
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
