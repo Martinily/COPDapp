@@ -16,10 +16,17 @@ import android.widget.Toast;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
+import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.SocketUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
@@ -39,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private SharedPreferences.Editor editor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -47,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initEvents();
     }
 
-    private void initViews() {
+    private void initViews () {
         mEtAccount = findViewById(R.id.et_login_AccountInput);
         mEtPassword = findViewById(R.id.et_login_PasswordInput);
         mBtnLogin = findViewById(R.id.btn_login_login);
@@ -56,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mCbRememberPassword = findViewById(R.id.remember_password);
     }
 
-    private void initEvents() {
+    private void initEvents () {
         mBtnLogin.setOnClickListener(this);
         mLinkSignup.setOnClickListener(this);
         mLinkForgetPwd.setOnClickListener(this);
@@ -72,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick (View v) {
         switch (v.getId()) {
             case R.id.btn_login_login:
                 login();
@@ -86,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void login() {
+    private void login () {
         if (getAccount().isEmpty()) {
             showToast("请输入账号！");
         } else if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
@@ -116,10 +123,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
             new Thread(() -> {
-                String send = "";
+                String send;
                 Socket socket;
-                //try {
-                    /*JSONObject jsonObject = new JSONObject();
+                try {
+                    JSONObject jsonObject = new JSONObject();
                     jsonObject.put("request_type", "1");
                     jsonObject.put("user_name", getAccount());
                     jsonObject.put("user_pw", getPassword());
@@ -149,30 +156,55 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                             editor.apply();
 
-                            EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
-                                @Override
-                                public void onSuccess() {
+                            EMClient.getInstance().login(getAccount(), getPassword(), new
+                                    EMCallBack() {
+                                        @Override
+                                        public void onSuccess () {
 
-                                }
+                                        }
 
-                                @Override
-                                public void onError(int code, String error) {
+                                        @Override
+                                        public void onError (int code, String error) {
 
-                                }
+                                        }
 
-                                @Override
-                                public void onProgress(int progress, String status) {
+                                        @Override
+                                        public void onProgress (int progress, String status) {
 
-                                }
-                            });
+                                        }
+                                    });
+
+                            MyApplication myApplication = (MyApplication) getApplication();
+                            myApplication.setAccount(getAccount());
 
                             switch (jsonObject.getString("user_type")) {
                                 case "d":
-                                    startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
+                                    myApplication.setUser(
+                                            new User(jsonObject.getString("docID"),
+                                                    jsonObject.getString("docName"),
+                                                    jsonObject.getString("docSex"),
+                                                    Integer.valueOf(jsonObject.getString("docAge")),
+                                                    jsonObject.getString("docTime"),
+                                                    jsonObject.getString("docAddress"),
+                                                    jsonObject.getString("docCompany"),
+                                                    jsonObject.getString("docTitle")));
+                                    startActivity(new Intent(LoginActivity.this,
+                                            DoctorBottomActivity.class));
                                     finish();
-                                    /*break;
+                                    break;
                                 case "p":
-                                    startActivity(new Intent(LoginActivity.this, PatientBottomActivity.class));
+                                    myApplication.setUser(
+                                            new User(jsonObject.getString("pID"),
+                                                    jsonObject.getString("pName"),
+                                                    jsonObject.getString("pSex"),
+                                                    Integer.valueOf(jsonObject.getString("pAge")),
+                                                    jsonObject.getString("pTime"),
+                                                    jsonObject.getString("pAddress"),
+                                                    jsonObject.getString("HistoryCondition"),
+                                                    jsonObject.getString("HistoryAdvice"),
+                                                    jsonObject.getString("docID")));
+                                    startActivity(new Intent(LoginActivity.this,
+                                            PatientBottomActivity.class));
                                     finish();
                                     break;
                             }
@@ -184,24 +216,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             showToast("密码错误！");
                             break;
                     }
-                    socket.close();*/
-                //} catch (IOException | JSONException e) {
-                //    e.printStackTrace();
-                //}
+                    socket.close();
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
                 progressDialog.dismiss();
+                Thread.interrupted();
             }).start();
         }
     }
 
-    public String getAccount() {
+    public String getAccount () {
         return mEtAccount.getText().toString().trim();
     }
 
-    public String getPassword() {
+    public String getPassword () {
         return mEtPassword.getText().toString().trim();
     }
 
-    public void showToast(final String msg) {
+    public void showToast (final String msg) {
         runOnUiThread(() -> Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show());
     }
 }

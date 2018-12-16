@@ -101,6 +101,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
                 } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
                         updateDB();
+                        destorySendSMSHandler();
                     } else {
                         showToast("验证码不正确！");
                     }
@@ -123,6 +124,11 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         timeDownUtil.start();
     }
 
+    public void destorySendSMSHandler() {
+        super.onDestroy();
+        SMSSDK.unregisterEventHandler(sendSMSHandler);
+    }
+
     public void changePwd() {
         if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
@@ -143,7 +149,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
         new Thread(() -> {
-            String send = "";
+            String send;
             Socket socket;
             try {
                 JSONObject jsonObject = new JSONObject();
@@ -178,6 +184,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
                 e.printStackTrace();
             }
             progressDialog.dismiss();
+            Thread.interrupted();
         }).start();
     }
 

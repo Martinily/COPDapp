@@ -115,6 +115,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
                         writeIntoDB();
+                        destorySendSMSHandler();
                     } else {
                         showToast("验证码不正确！");
                     }
@@ -152,7 +153,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
         new Thread(() -> {
-            String send = "";
+            String send;
             Socket socket;
             try {
                 JSONObject jsonObject = new JSONObject();
@@ -193,6 +194,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 e.printStackTrace();
             }
             progressDialog.dismiss();
+            Thread.interrupted();
         }).start();
     }
 

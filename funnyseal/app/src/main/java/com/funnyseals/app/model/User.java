@@ -13,99 +13,139 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private String mAccount;
-    private String mNickName;
+    private String mName;
+    private String mSex;
+    private int    mAge;
+    private String mRegisterTime;
+    private String mAddress;
+    private String mCompany;
+    private String mPosition;
+    private String mPortrait;
     private String mMedicalHistory;
     private String mMedicalOrder;
-    private String mDoctorAccount;
-    private int mAge;
-    private String mSex;
-    private String mIconUrl;
+    private String mMyDoctor;
 
-    public User() {
+    public User () {
     }
 
-    public User(String account, String name, String sex, int age) {
+    public User (String account, String name, String sex, int age, String registerTime, String
+            address, String medicalHistory, String medicalOrder, String myDoctor) {
         this.mAccount = account;
-        this.mNickName = name;
+        this.mName = name;
         this.mSex = sex;
         this.mAge = age;
+        this.mRegisterTime = registerTime;
+        this.mAddress = address;
+        this.mMedicalHistory = medicalHistory;
+        this.mMedicalOrder = medicalOrder;
+        this.mMyDoctor = myDoctor;
     }
 
-    public String getAccount() {
+    public User (String account, String name, String sex, int age, String registerTime, String
+            address, String company, String position) {
+        this.mAccount = account;
+        this.mName = name;
+        this.mSex = sex;
+        this.mAge = age;
+        this.mRegisterTime = registerTime;
+        this.mAddress = address;
+        this.mPosition = position;
+        this.mCompany = company;
+    }
+
+    public String getAccount () {
         return mAccount;
     }
 
-    public void setAccount(String account) {
+    public void setAccount (String account) {
         this.mAccount = account;
     }
 
-    public int getAge() {
-        return mAge;
+    public String getName () {
+        return mName;
     }
 
-    public void setAge(int age) {
-        this.mAge = age;
+    public void setName (String nickname) {
+        this.mName = nickname;
     }
 
-    public String getNickName() {
-        return mNickName;
-    }
-
-    public void setNickName(String nickname) {
-        this.mNickName = nickname;
-    }
-
-    public String getSex() {
+    public String getSex () {
         return mSex;
     }
 
-    public void setSex(String sex) {
+    public void setSex (String sex) {
         this.mSex = sex;
     }
 
-    public String getMedicalHistory() {
+    public int getAge () {
+        return mAge;
+    }
+
+    public void setAge (int age) {
+        this.mAge = age;
+    }
+
+    public String getRegisterTime () {
+        return mRegisterTime;
+    }
+
+    public void setRegisterTime (String registerTime) {
+        this.mRegisterTime = registerTime;
+    }
+
+    public String getAddress () {
+        return mAddress;
+    }
+
+    public void setAddress (String address) {
+        this.mAddress = address;
+    }
+
+    public String getCompany () {
+        return mCompany;
+    }
+
+    public void setCompany (String company) {
+        this.mCompany = company;
+    }
+
+    public String getPosition () {
+        return mPosition;
+    }
+
+    public void setPosition (String position) {
+        this.mPosition = position;
+    }
+
+    public String getPortrait () {
+        return mPortrait;
+    }
+
+    public void setPortrait (String portrait) {
+        this.mPortrait = portrait;
+    }
+
+    public String getMedicalHistory () {
         return mMedicalHistory;
     }
 
-    public void setMedicalHistory(String medicalhistory) {
+    public void setMedicalHistory (String medicalhistory) {
         this.mMedicalHistory = medicalhistory;
     }
 
-    public String getMedicalOrder() {
+    public String getMedicalOrder () {
         return mMedicalOrder;
     }
 
-    public void setMedicalOrder(String medicalorder) {
+    public void setMedicalOrder (String medicalorder) {
         this.mMedicalOrder = medicalorder;
     }
 
-    public String getDoctorAccount() {
-        return mDoctorAccount;
+    public String getMyDoctor () {
+        return mMyDoctor;
     }
 
-    public void setDoctorAccount(String doctoraccount) {
-        this.mDoctorAccount = doctoraccount;
-    }
-
-    public String getIconUrl() {
-        return mIconUrl;
-    }
-
-    public void setIconUrl(String iconurl) {
-        this.mIconUrl = iconurl;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "Account=" + mAccount +
-                ", age='" + mAge + '\'' +
-                ", medicalhistory='" + mMedicalHistory + '\'' +
-                ", medicalorder='" + mMedicalOrder + '\'' +
-                ", doctoraccount='" + mDoctorAccount + '\'' +
-                ", nickname='" + mNickName + '\'' +
-                ", sex='" + mSex + '\'' +
-                ", iconUrl='" + mIconUrl + '\'' +
-                '}';
+    public void setMyDoctor (String doctoraccount) {
+        this.mMyDoctor = doctoraccount;
     }
 }
