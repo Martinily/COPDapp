@@ -25,7 +25,7 @@ public class MyApplication extends Application {
     private boolean mIsInit = false;
 
     //用户账号
-    private String mAccount;
+    private String mAccount="12345";
     private User   mUser;
 
     public String getAccount() {

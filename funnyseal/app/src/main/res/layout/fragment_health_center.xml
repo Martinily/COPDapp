@@ -21,9 +21,9 @@
         android:id="@+id/data1"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text=""
         android:textSize="25sp"
         android:gravity="center"
+        android:ems="4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text1" />
@@ -53,9 +53,9 @@
         android:id="@+id/data2"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text=""
         android:textSize="25sp"
         android:gravity="center"
+        android:ems="4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text2" />
@@ -88,6 +88,7 @@
         android:textSize="25sp"
         android:textColor="#00FF00"
         android:gravity="center"
+        android:ems="3"
         app:layout_constraintStart_toEndOf="@id/text_caculate"
         app:layout_constraintTop_toBottomOf="@id/data2"/>
 
@@ -116,9 +117,9 @@
         android:id="@+id/data3"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text=""
         android:textSize="25sp"
         android:gravity="center"
+        android:ems="4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text3"/>

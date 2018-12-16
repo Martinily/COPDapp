@@ -19,12 +19,11 @@ public class HealthCenterHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_center_history);
-        String[] m_time={"134","3247","42"};
+        String[] m_time=HealthCenterFragment.datatime.toArray(new String[HealthCenterFragment.datatime.size()]);
         //找到组件
         Spinner spinner=findViewById(R.id.history);
         TextView m_data1=findViewById(R.id.data1);
         TextView m_data2=findViewById(R.id.data2);
-        TextView m_datacaculate=findViewById(R.id.data_caculate);
         TextView m_data3=findViewById(R.id.data3);
         Button button=findViewById(R.id.gotocentre1);
         //设置选择框
@@ -33,8 +32,9 @@ public class HealthCenterHistoryActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String m_choice=(String) spinner.getSelectedItem();
-                m_data1.setText(m_choice);
+                m_data1.setText(HealthCenterFragment.data1.get(position));
+                m_data2.setText(HealthCenterFragment.data2.get(position));
+                m_data3.setText(HealthCenterFragment.data3.get(position));
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

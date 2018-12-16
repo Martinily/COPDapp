@@ -85,13 +85,31 @@ public class SimpleChartView extends View {
         canvas.drawText("FEV1/FVC",Xstart+Xlength-80,Ystart+Ylength+50,paint2);
         //画折线
         if (data.size()>1){
-            for (int i = 0; i < data.size()-1; i++) {
-                canvas.drawLine(Xstart+(i+1)*100, Ystart+Ylength-(data.get(i)-1000)/10, Xstart+(i+2)*100, Ystart+Ylength-(data.get(i+1)-1000)/10, paint);
+            if (data.size()>=7){
+                for (int i = data.size()-7; i < data.size()-1; i++) {
+                    if (data.get(i) == 0 | data.get(i+1) == 0) continue;
+                    canvas.drawLine(Xstart+(i+1)*100, Ystart+Ylength-(data.get(i)-1000)/10, Xstart+(i+2)*100, Ystart+Ylength-(data.get(i+1)-1000)/10, paint);
+                }
+            }
+            else {
+                for (int i = 0; i < data.size()-1; i++) {
+                    if (data.get(i) == 0 | data.get(i+1) == 0) continue;
+                    canvas.drawLine(Xstart+(i+1)*100, Ystart+Ylength-(data.get(i)-1000)/10, Xstart+(i+2)*100, Ystart+Ylength-(data.get(i+1)-1000)/10, paint);
+                }
             }
         }
         if (data2.size()>1){
-            for (int i = 0; i < data2.size()-1; i++) {
-                canvas.drawLine(Xstart+(i+1)*100, Ystart+Ylength-(data2.get(i)-50)*8, Xstart+(i+2)*100, Ystart+Ylength-(data2.get(i+1)-50)*8, paint2);
+            if (data2.size()>=7){
+                for (int i = data2.size()-7; i < data2.size()-1; i++) {
+                    if (data2.get(i) == 0 | data2.get(i+1) == 0) continue;
+                    canvas.drawLine(Xstart+(i+1)*100, Ystart+Ylength-(data2.get(i)-50)*8, Xstart+(i+2)*100, Ystart+Ylength-(data2.get(i+1)-50)*8, paint2);
+                }
+            }
+            else {
+                for (int i = 0; i < data2.size()-1; i++) {
+                    if (data2.get(i) == 0 | data2.get(i+1) == 0) continue;
+                    canvas.drawLine(Xstart+(i+1)*100, Ystart+Ylength-(data2.get(i)-50)*8, Xstart+(i+2)*100, Ystart+Ylength-(data2.get(i+1)-50)*8, paint2);
+                }
             }
         }
     }
