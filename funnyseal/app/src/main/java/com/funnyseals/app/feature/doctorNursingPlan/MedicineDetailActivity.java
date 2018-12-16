@@ -126,4 +126,10 @@ public class MedicineDetailActivity extends AppCompatActivity {
             //finish();
         });
     }
+
+    @Override
+    public void onBackPressed () {
+
+        super.onBackPressed();
+    }
 }
