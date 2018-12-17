@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 import com.funnyseals.app.util.TimeDownUtil;
 import com.mob.MobSDK;
@@ -30,74 +31,37 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
+import butterknife.BindView;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String REGEX_MOBILE   = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
+    private static final String REGEX_MOBILE   = "^(0|86|17951)?" +
+            "(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
-    private EditText     mEtAccount;
-    private EditText     mEtPassword;
-    private EditText     mEtPasswordAgain;
-    private EditText     mEtIdentifyingCode;
-    private Button       mBtnCodeSend;
-    private RadioButton  mRbAccountTypePatient;
-    private RadioButton  mRbAccountTypeDoctor;
-    private Button       mBtnSignup;
-    private TextView     mLinkLogin;
+    @BindView(R.id.et_signup_AccountInput)
+    EditText    mEtAccount;
+    @BindView(R.id.et_signup_PasswordInput)
+    EditText    mEtPassword;
+    @BindView(R.id.et_signup_PasswordInputAgain)
+    EditText    mEtPasswordAgain;
+    @BindView(R.id.et_signup_IdentifyingCode)
+    EditText    mEtIdentifyingCode;
+    @BindView(R.id.btn_signup_CodeSend)
+    Button      mBtnCodeSend;
+    @BindView(R.id.rb_signup_accountTypePatient)
+    RadioButton mRbAccountTypePatient;
+    @BindView(R.id.rb_signup_accountTypeDoctor)
+    RadioButton mRbAccountTypeDoctor;
+    @BindView(R.id.btn_signup_signup)
+    Button      mBtnSignup;
+    @BindView(R.id.link_register_login)
+    TextView    mLinkLogin;
+
     private TimeDownUtil timeDownUtil;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-
-        initViews();
-        initEvents();
-        initSDK();
-    }
-
-    private void initViews() {
-        mEtAccount = findViewById(R.id.et_signup_AccountInput);
-        mEtPassword = findViewById(R.id.et_signup_PasswordInput);
-        mEtPasswordAgain = findViewById(R.id.et_signup_PasswordInputAgain);
-        mEtIdentifyingCode = findViewById(R.id.et_signup_IdentifyingCode);
-        mBtnCodeSend = findViewById(R.id.btn_signup_CodeSend);
-        mRbAccountTypePatient = findViewById(R.id.rb_signup_accountTypePatient);
-        mRbAccountTypeDoctor = findViewById(R.id.rb_signup_accountTypeDoctor);
-        mBtnSignup = findViewById(R.id.btn_signup_signup);
-        mLinkLogin = findViewById(R.id.link_register_login);
-
-    }
-
-    private void initEvents() {
-        mBtnCodeSend.setOnClickListener(this);
-        mBtnSignup.setOnClickListener(this);
-        mLinkLogin.setOnClickListener(this);
-        timeDownUtil = new TimeDownUtil(180000, 1000, mBtnCodeSend);
-    }
-
-    private void initSDK() {
-        MobSDK.init(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_signup_CodeSend:
-                sendSMS();
-                break;
-            case R.id.btn_signup_signup:
-                signup();
-                break;
-            case R.id.link_register_login:
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-        }
-    }
-
     private EventHandler sendSMSHandler = new EventHandler() {
-        public void afterEvent(int event, int result, Object data) {
+        public void afterEvent (int event, int result, Object data) {
             Message msg = new Message();
             msg.arg1 = event;
             msg.arg2 = result;
@@ -114,7 +78,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
-                        writeIntoDB();
+                        linkToServer();
                         destorySendSMSHandler();
                     } else {
                         showToast("验证码不正确！");
@@ -125,7 +89,43 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
 
-    public void sendSMS() {
+    @Override
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup);
+
+        initEvents();
+        initSDK();
+    }
+
+    private void initEvents () {
+        mBtnCodeSend.setOnClickListener(this);
+        mBtnSignup.setOnClickListener(this);
+        mLinkLogin.setOnClickListener(this);
+        timeDownUtil = new TimeDownUtil(180000, 1000, mBtnCodeSend);
+    }
+
+    private void initSDK () {
+        MobSDK.init(this);
+    }
+
+    @Override
+    public void onClick (View v) {
+        if (BtnClickLimitUtil.isFastClick()) {
+            switch (v.getId()) {
+                case R.id.btn_signup_CodeSend:
+                    sendSMS();
+                    break;
+                case R.id.btn_signup_signup:
+                    signup();
+                    break;
+                case R.id.link_register_login:
+                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+            }
+        }
+    }
+
+    public void sendSMS () {
         if (TextUtils.isEmpty(mEtAccount.getText())) {
             showToast("手机号不能为空");
             return;
@@ -138,12 +138,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         timeDownUtil.start();
     }
 
-    public void destorySendSMSHandler() {
+    public void destorySendSMSHandler () {
         super.onDestroy();
         SMSSDK.unregisterEventHandler(sendSMSHandler);
     }
 
-    public void writeIntoDB() {
+    public void linkToServer () {
 
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -178,10 +178,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         showToast("注册成功！");
                         //destorySendSMSHandler();
                         if (mRbAccountTypeDoctor.isChecked()) {
-                            startActivity(new Intent(SignupActivity.this, DoctorBottomActivity.class));
+                            startActivity(new Intent(SignupActivity.this, DoctorBottomActivity
+                                    .class));
                             finish();
                         } else if (mRbAccountTypePatient.isChecked()) {
-                            startActivity(new Intent(SignupActivity.this, PatientBottomActivity.class));
+                            startActivity(new Intent(SignupActivity.this, PatientBottomActivity
+                                    .class));
                             finish();
                         }
                         break;
@@ -190,7 +192,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         break;
                 }
                 socket.close();
-            } catch (IOException | JSONException e /*| HyphenateException e*/) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             progressDialog.dismiss();
@@ -198,18 +200,19 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }).start();
     }
 
-    public void signup() {
+    public void signup () {
         if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
-        } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString())) {
+        } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString()
+        )) {
             showToast("两次输入的密码不同！");
         } else {
-            writeIntoDB();
-            SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(), mEtIdentifyingCode.getText().toString());
+            SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(),
+                    mEtIdentifyingCode.getText().toString());
         }
     }
 
-    public void showToast(final String msg) {
+    public void showToast (final String msg) {
         runOnUiThread(() -> Toast.makeText(SignupActivity.this, msg, Toast.LENGTH_SHORT).show());
     }
 }

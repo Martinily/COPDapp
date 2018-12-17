@@ -17,6 +17,7 @@ import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
 import com.funnyseals.app.model.User;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
@@ -30,18 +31,27 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
+import butterknife.BindView;
+
 /**
  *
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
-    private EditText                 mEtAccount;
-    private EditText                 mEtPassword;
-    private Button                   mBtnLogin;
-    private TextView                 mLinkSignup;
-    private TextView                 mLinkForgetPwd;
-    private CheckBox                 mCbRememberPassword;
+    @BindView(R.id.et_login_AccountInput)
+    EditText mEtAccount;
+    @BindView(R.id.et_login_PasswordInput)
+    EditText mEtPassword;
+    @BindView(R.id.btn_login_login)
+    Button   mBtnLogin;
+    @BindView(R.id.link_signup)
+    TextView mLinkSignup;
+    @BindView(R.id.link_forgetPWD)
+    TextView mLinkForgetPwd;
+    @BindView(R.id.remember_password)
+    CheckBox mCbRememberPassword;
+
     private SharedPreferences        pref;
     private SharedPreferences.Editor editor;
 
@@ -50,17 +60,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        initViews();
-        initEvents();
-    }
 
-    private void initViews () {
-        mEtAccount = findViewById(R.id.et_login_AccountInput);
-        mEtPassword = findViewById(R.id.et_login_PasswordInput);
-        mBtnLogin = findViewById(R.id.btn_login_login);
-        mLinkSignup = findViewById(R.id.link_signup);
-        mLinkForgetPwd = findViewById(R.id.link_forgetPWD);
-        mCbRememberPassword = findViewById(R.id.remember_password);
+        initEvents();
     }
 
     private void initEvents () {
@@ -80,20 +81,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick (View v) {
-        switch (v.getId()) {
-            case R.id.btn_login_login:
-                login();
-                break;
-            case R.id.link_signup:
-                startActivity(new Intent(this, SignupActivity.class));
-                break;
-            case R.id.link_forgetPWD:
-                startActivity(new Intent(this, ForgetPwdActivity.class));
-                break;
+        if (BtnClickLimitUtil.isFastClick()) {
+            switch (v.getId()) {
+                case R.id.btn_login_login:
+                    linkToServer();
+                    break;
+                case R.id.link_signup:
+                    startActivity(new Intent(this, SignupActivity.class));
+                    break;
+                case R.id.link_forgetPWD:
+                    startActivity(new Intent(this, ForgetPwdActivity.class));
+                    break;
+            }
         }
     }
 
-    private void login () {
+    private void linkToServer () {
         if (getAccount().isEmpty()) {
             showToast("请输入账号！");
         } else if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
@@ -184,7 +187,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void loginEM(){
+    public void loginEM () {
         EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
             @Override
             public void onSuccess () {
@@ -203,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    public void rememberPassword(){
+    public void rememberPassword () {
         editor = pref.edit();
         if (mCbRememberPassword.isChecked()) {
             editor.putBoolean("remember_password", true);
