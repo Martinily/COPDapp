@@ -2,8 +2,6 @@ package com.funnyseals.app.feature.doctorMessage;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,14 +20,11 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.media.EMCallSurfaceView;
 import com.superrtc.sdk.VideoView;
 import com.vmloft.develop.library.tools.utils.VMDimen;
-import com.vmloft.develop.library.tools.utils.VMFile;
 import com.vmloft.develop.library.tools.utils.VMLog;
 import com.vmloft.develop.library.tools.utils.VMViewUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,49 +32,55 @@ import butterknife.OnClick;
 
 public class VideoCallActivity extends CallActivity {
 
-    // 视频通话帮助类
-    private EMVideoCallHelper videoCallHelper;
-    // SurfaceView 控件状态，-1 表示通话未接通，0 表示本小远大，1 表示远小本大
-    private int               surfaceState = -1;
-    private boolean           isMonitor = false;
-
-    private int littleWidth;
-    private int littleHeight;
-    private int rightMargin;
-    private int topMargin;
-
-    private EMCallSurfaceView localSurface = null;
-    private EMCallSurfaceView oppositeSurface = null;
-    private RelativeLayout.LayoutParams localParams = null;
-    private RelativeLayout.LayoutParams oppositeParams = null;
-
     // 使用 ButterKnife 注解的方式获取控件
-    @BindView(R.id.layout_root)        View rootView;
-    @BindView(R.id.layout_call_control)View controlLayout;
-    @BindView(R.id.layout_surface_container)RelativeLayout surfaceLayout;
+    @BindView(R.id.layout_root)
+    View                 rootView;
+    @BindView(R.id.layout_call_control)
+    View                 controlLayout;
+    @BindView(R.id.layout_surface_container)
+    RelativeLayout       surfaceLayout;
     @BindView(R.id.surface_view)
-                                            SurfaceView    surfaceView;
-
+    SurfaceView          surfaceView;
     @BindView(R.id.btn_exit_full_screen)
-                                      ImageButton exitFullScreenBtn;
+    ImageButton          exitFullScreenBtn;
     @BindView(R.id.text_call_state)
-                                     TextView    callStateView;
-    @BindView(R.id.text_call_time)   TextView    callTimeView;
-    @BindView(R.id.btn_call_info)    ImageButton callInfoBtn;
-    @BindView(R.id.text_call_info)   TextView    callInfoView;
-    @BindView(R.id.btn_mic_switch)   ImageButton micSwitch;
-    @BindView(R.id.btn_camera_switch)ImageButton cameraSwitch;
-    @BindView(R.id.btn_speaker_switch)ImageButton speakerSwitch;
-    @BindView(R.id.btn_record_switch)       ImageButton          recordSwitch;
-    @BindView(R.id.btn_screenshot)          ImageButton          screenshotSwitch;
-    @BindView(R.id.btn_change_camera_switch)ImageButton          changeCameraSwitch;
+    TextView             callStateView;
+    @BindView(R.id.text_call_time)
+    TextView             callTimeView;
+    @BindView(R.id.btn_call_info)
+    ImageButton          callInfoBtn;
+    @BindView(R.id.text_call_info)
+    TextView             callInfoView;
+    @BindView(R.id.btn_mic_switch)
+    ImageButton          micSwitch;
+    @BindView(R.id.btn_camera_switch)
+    ImageButton          cameraSwitch;
+    @BindView(R.id.btn_speaker_switch)
+    ImageButton          speakerSwitch;
+    @BindView(R.id.btn_change_camera_switch)
+    ImageButton          changeCameraSwitch;
     @BindView(R.id.fab_reject_call)
-                                            FloatingActionButton rejectCallFab;
-    @BindView(R.id.fab_end_call)            FloatingActionButton endCallFab;
-    @BindView(R.id.fab_answer_call)         FloatingActionButton answerCallFab;
+    FloatingActionButton rejectCallFab;
+    @BindView(R.id.fab_end_call)
+    FloatingActionButton endCallFab;
+    @BindView(R.id.fab_answer_call)
+    FloatingActionButton answerCallFab;
+    // 视频通话帮助类
+    private EMVideoCallHelper           videoCallHelper;
+    // SurfaceView 控件状态，-1 表示通话未接通，0 表示本小远大，1 表示远小本大
+    private int                         surfaceState    = -1;
+    private boolean                     isMonitor       = false;
+    private int                         littleWidth;
+    private int                         littleHeight;
+    private int                         rightMargin;
+    private int                         topMargin;
+    private EMCallSurfaceView           localSurface    = null;
+    private EMCallSurfaceView           oppositeSurface = null;
+    private RelativeLayout.LayoutParams localParams     = null;
+    private RelativeLayout.LayoutParams oppositeParams  = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_call);
 
@@ -93,7 +94,7 @@ public class VideoCallActivity extends CallActivity {
      */
     @SuppressLint("RestrictedApi")
     @Override
-    protected void initView() {
+    protected void initView () {
         VMViewUtil.getAllChildViews(activity.getWindow().getDecorView(), 1);
 
         littleWidth = VMDimen.dp2px(96);
@@ -117,7 +118,6 @@ public class VideoCallActivity extends CallActivity {
         micSwitch.setActivated(!CallManager.getInstance().isOpenMic());
         cameraSwitch.setActivated(!CallManager.getInstance().isOpenCamera());
         speakerSwitch.setActivated(CallManager.getInstance().isOpenSpeaker());
-        recordSwitch.setActivated(CallManager.getInstance().isOpenRecord());
 
         // 初始化视频通话帮助类
         videoCallHelper = EMClient.getInstance().callManager().getVideoCallHelper();
@@ -157,7 +157,7 @@ public class VideoCallActivity extends CallActivity {
             R.id.btn_record_switch, R.id.btn_screenshot, R.id.btn_change_camera_switch,
             R.id.fab_reject_call, R.id.fab_end_call, R.id.fab_answer_call
     })
-    void onClick(View v) {
+    void onClick (View v) {
         switch (v.getId()) {
             case R.id.layout_call_control:
                 onControlLayout();
@@ -181,14 +181,6 @@ public class VideoCallActivity extends CallActivity {
                 // 扬声器开关
                 onSpeaker();
                 break;
-            case R.id.btn_screenshot:
-                // 保存通话截图
-                onScreenShot();
-                break;
-            case R.id.btn_record_switch:
-                // 录制开关
-                onRecordCall();
-                break;
             case R.id.btn_change_camera_switch:
                 // 切换摄像头
                 changeCamera();
@@ -211,7 +203,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 控制界面的显示与隐藏
      */
-    private void onControlLayout() {
+    private void onControlLayout () {
         if (controlLayout.isShown()) {
             controlLayout.setVisibility(View.GONE);
         } else {
@@ -222,7 +214,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 退出全屏通话界面
      */
-    private void exitFullScreen() {
+    private void exitFullScreen () {
         CallManager.getInstance().addFloatWindow();
         // 结束当前界面
         onFinish();
@@ -231,7 +223,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 通话信息监听器
      */
-    private void callInfoMonitor() {
+    private void callInfoMonitor () {
         if (isMonitor) {
             isMonitor = false;
             callInfoView.setVisibility(View.GONE);
@@ -240,20 +232,23 @@ public class VideoCallActivity extends CallActivity {
             isMonitor = true;
             callInfoView.setVisibility(View.VISIBLE);
             callInfoBtn.setActivated(isMonitor);
-            new Thread(new Runnable() {
-                public void run() {
-                    while (isMonitor) {
-                        final String info = String.format("分辨率: %d*%d, \n延迟: %d, \n帧率: %d, \n丢失: %d, \n本地码率: %d, \n远端码率: %d, \n直连: %b", videoCallHelper
-                                .getVideoWidth(), videoCallHelper.getVideoHeight(), videoCallHelper.getVideoLatency(), videoCallHelper
-                                .getVideoFrameRate(), videoCallHelper.getVideoLostRate(), videoCallHelper
-                                .getLocalBitrate(), videoCallHelper.getRemoteBitrate(), EMClient.getInstance()
-                                .callManager()
-                                .isDirectCall());
-                        runOnUiThread(() -> callInfoView.setText(info));
-                        try {
-                            Thread.sleep(1500);
-                        } catch (InterruptedException e) {
-                        }
+            new Thread(() -> {
+                while (isMonitor) {
+                    @SuppressLint("DefaultLocale") final String info = String.format("分辨率: %d*%d, \n延迟: %d, \n帧率: %d, \n丢失: " +
+                                    "%d, \n本地码率: %d, \n远端码率: %d, \n直连: %b", videoCallHelper
+                                    .getVideoWidth(), videoCallHelper.getVideoHeight(),
+                            videoCallHelper.getVideoLatency(), videoCallHelper
+                                    .getVideoFrameRate(), videoCallHelper.getVideoLostRate(),
+                            videoCallHelper
+                                    .getLocalBitrate(), videoCallHelper.getRemoteBitrate(),
+                            EMClient
+                                    .getInstance()
+                                    .callManager()
+                                    .isDirectCall());
+                    runOnUiThread(() -> callInfoView.setText(info));
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException ignored) {
                     }
                 }
             }).start();
@@ -263,7 +258,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 麦克风开关，主要调用环信语音数据传输方法
      */
-    private void onMicrophone() {
+    private void onMicrophone () {
         try {
             // 根据麦克风开关是否被激活来进行判断麦克风状态，然后进行下一步操作
             if (micSwitch.isActivated()) {
@@ -288,7 +283,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 摄像头开关
      */
-    private void onCamera() {
+    private void onCamera () {
         try {
             // 根据摄像头开关按钮状态判断摄像头状态，然后进行下一步操作
             if (cameraSwitch.isActivated()) {
@@ -313,7 +308,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 扬声器开关
      */
-    private void onSpeaker() {
+    private void onSpeaker () {
         // 根据按钮状态决定打开还是关闭扬声器
         if (speakerSwitch.isActivated()) {
             // 设置按钮状态
@@ -329,63 +324,9 @@ public class VideoCallActivity extends CallActivity {
     }
 
     /**
-     * 录制视屏通话内容
-     */
-    private void onRecordCall() {
-        // 根据开关状态决定是否开启录制
-        if (recordSwitch.isActivated()) {
-            // 设置按钮状态
-            recordSwitch.setActivated(false);
-            String path = videoCallHelper.stopVideoRecord();
-            CallManager.getInstance().setOpenRecord(false);
-            File file = new File(path);
-            if (file.exists()) {
-                Toast.makeText(activity, "录制视频成功 " + path, Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(activity, "录制失败/(ㄒoㄒ)/~~", Toast.LENGTH_LONG).show();
-            }
-        } else {
-            // 设置按钮状态
-            recordSwitch.setActivated(true);
-            // 先创建文件夹
-            String dirPath = getExternalFilesDir("").getAbsolutePath() + "/videos";
-            File dir = new File(dirPath);
-            if (!dir.isDirectory()) {
-                dir.mkdirs();
-            }
-            videoCallHelper.startVideoRecord(dirPath);
-            VMLog.d("开始录制视频");
-            Toast.makeText(activity, "开始录制", Toast.LENGTH_LONG).show();
-            CallManager.getInstance().setOpenRecord(true);
-        }
-    }
-
-    /**
-     * 保存通话截图
-     */
-    private void onScreenShot() {
-        String dirPath = VMFile.getFilesFromSDCard() + "videos/";
-        File dir = new File(dirPath);
-        if (!dir.isDirectory()) {
-            dir.mkdirs();
-        }
-        String path = dirPath + "IMG_" + System.currentTimeMillis() + ".jpg";
-        videoCallHelper.takePicture(path);
-        Toast.makeText(activity, "拍照保存成功 " + path, Toast.LENGTH_LONG).show();
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
-        //        testImgView.setImageBitmap(bitmap);
-        //        testImgView.setVisibility(View.VISIBLE);
-        //        testImgView.setOnClickListener(new View.OnClickListener() {
-        //            @Override public void onClick(View v) {
-        //                testImgView.setVisibility(View.GONE);
-        //            }
-        //        });
-    }
-
-    /**
      * 切换摄像头
      */
-    private void changeCamera() {
+    private void changeCamera () {
         // 根据切换摄像头开关是否被激活确定当前是前置还是后置摄像头
         try {
             if (EMClient.getInstance().callManager().getCameraFacing() == 1) {
@@ -405,7 +346,7 @@ public class VideoCallActivity extends CallActivity {
      */
     @SuppressLint("RestrictedApi")
     @Override
-    protected void answerCall() {
+    protected void answerCall () {
         super.answerCall();
         endCallFab.setVisibility(View.VISIBLE);
         rejectCallFab.setVisibility(View.GONE);
@@ -415,7 +356,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 初始化通话界面控件
      */
-    private void initCallSurface() {
+    private void initCallSurface () {
         // 初始化显示远端画面控件
         oppositeSurface = new EMCallSurfaceView(activity);
         oppositeParams = new RelativeLayout.LayoutParams(0, 0);
@@ -448,7 +389,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 接通通话，这个时候要做的只是改变本地画面 view 大小，不需要做其他操作
      */
-    private void onCallSurface() {
+    private void onCallSurface () {
         // 更新通话界面控件状态
         surfaceState = 0;
 
@@ -468,7 +409,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 切换通话界面，这里就是交换本地和远端画面控件设置，以达到通话大小画面的切换
      */
-    private void changeCallSurface() {
+    private void changeCallSurface () {
         if (surfaceState == 0) {
             surfaceState = 1;
             EMClient.getInstance().callManager().setSurfaceView(oppositeSurface, localSurface);
@@ -479,7 +420,7 @@ public class VideoCallActivity extends CallActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(CallEvent event) {
+    public void onEventBus (CallEvent event) {
         if (event.isState()) {
             refreshCallView(event);
         }
@@ -492,7 +433,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 刷新通话界面
      */
-    private void refreshCallView(CallEvent event) {
+    private void refreshCallView (CallEvent event) {
         EMCallStateChangeListener.CallError callError = event.getCallError();
         EMCallStateChangeListener.CallState callState = event.getCallState();
         switch (callState) {
@@ -555,7 +496,7 @@ public class VideoCallActivity extends CallActivity {
     /**
      * 刷新通话时间显示
      */
-    private void refreshCallTime() {
+    private void refreshCallTime () {
         int t = CallManager.getInstance().getCallTime();
         int h = t / 60 / 60;
         int m = t / 60 % 60;
@@ -586,12 +527,12 @@ public class VideoCallActivity extends CallActivity {
      * 屏幕方向改变回调方法
      */
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged (Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
     @Override
-    protected void onUserLeaveHint() {
+    protected void onUserLeaveHint () {
         //super.onUserLeaveHint();
         exitFullScreen();
     }
@@ -600,13 +541,13 @@ public class VideoCallActivity extends CallActivity {
      * 通话界面拦截 Back 按键，不能返回
      */
     @Override
-    public void onBackPressed() {
+    public void onBackPressed () {
         //super.onBackPressed();
         exitFullScreen();
     }
 
     @Override
-    public void onFinish() {
+    public void onFinish () {
         // release surface view
         if (localSurface != null) {
             if (localSurface.getRenderer() != null) {

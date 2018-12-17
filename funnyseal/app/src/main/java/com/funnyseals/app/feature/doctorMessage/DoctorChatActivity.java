@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.doctorNursingPlan.DoctorNursingPlanFragment;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -21,19 +22,73 @@ import com.hyphenate.chat.EMTextMessageBody;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 public class DoctorChatActivity extends AppCompatActivity {
 
-    private ListView           mLv_message;
-    private EditText           mEt_input;
-    private Button             mBtn_send;
-    private ImageButton        mVioce;
-    private ImageButton        mNursingPlan;
-    private ImageButton        mVideo;
+    @BindView(R.id.lv_doctor_chat_message_container)
+    private ListView    mLv_message;
+    @BindView(R.id.et_doctor_chat_input)
+    private EditText    mEt_input;
+    @BindView(R.id.btn_doctor_chat_send)
+    private Button      mBtn_send;
+    @BindView(R.id.ibtn_vioce)
+    private ImageButton mVioce;
+    @BindView(R.id.ibtn_nursingplan)
+    private ImageButton mNursingPlan;
+    @BindView(R.id.ibtn_video)
+    private ImageButton mVideo;
+
     private MyApplication      myApplication;
     private ChatMessageAdapter CurrentChatadapter;
     private String             mMyfriend;
     private List<EMMessage>    mMessageList;
     private EMConversation     mConversation;
+    private EMMessageListener msgListener = new EMMessageListener() {
+
+        @Override
+        public void onMessageReceived (List<EMMessage> messages) {
+            // 循环遍历当前收到的消息
+            for (EMMessage message : messages) {
+                if (message.getFrom().equals(mMyfriend)) {
+                    // 设置消息为已读
+                    mConversation.markMessageAsRead(message.getMsgId());
+
+                    onAddMessage(message);
+                    break;
+                }
+            }
+        }
+
+        @Override
+        public void onCmdMessageReceived (List<EMMessage> messages) {
+            //收到透传消息
+            System.out.println("DoctorChatActivity.onCmdMessageReceived");
+        }
+
+        @Override
+        public void onMessageRead (List<EMMessage> messages) {
+            //收到已读回执
+            System.out.println("DoctorChatActivity.onMessageRead");
+        }
+
+        @Override
+        public void onMessageDelivered (List<EMMessage> message) {
+            //收到已送达回执
+            System.out.println("DoctorChatActivity.onMessageDelivered");
+        }
+
+        @Override
+        public void onMessageRecalled (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageChanged (EMMessage message, Object change) {
+            //消息状态变动
+            System.out.println("DoctorChatActivity.onMessageChanged");
+        }
+    };
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -64,24 +119,12 @@ public class DoctorChatActivity extends AppCompatActivity {
         mMyfriend = (String) getIntent().getSerializableExtra("myfriend");
 
         initUIComponents();
-
         addListener();
-
         loadAllMessage();
     }
 
     private void initUIComponents () {
         initToolbar();
-
-        mLv_message = findViewById(R.id.lv_doctor_chat_message_container);
-
-        mEt_input = findViewById(R.id.et_doctor_chat_input);
-
-        mBtn_send = findViewById(R.id.btn_doctor_chat_send);
-
-        mVioce = findViewById(R.id.ibtn_vioce);
-        mNursingPlan = findViewById(R.id.ibtn_nursingplan);
-        mVideo=findViewById(R.id.ibtn_video);
 
         sendEnabled(false);
     }
@@ -109,6 +152,7 @@ public class DoctorChatActivity extends AppCompatActivity {
         });
 
         mBtn_send.setOnClickListener(v -> onSend());
+
         mVioce.setOnClickListener(v -> {
             Intent intent = new Intent(DoctorChatActivity.this, VoiceCallActivity.class);
             CallManager.getInstance().setChatId(mMyfriend);
@@ -116,11 +160,18 @@ public class DoctorChatActivity extends AppCompatActivity {
             CallManager.getInstance().setCallType(CallManager.CallType.VOICE);
             startActivity(intent);
         });
+
         mVideo.setOnClickListener(v -> {
             Intent intent = new Intent(DoctorChatActivity.this, VideoCallActivity.class);
             CallManager.getInstance().setChatId(mMyfriend);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);
+            startActivity(intent);
+        });
+
+        mNursingPlan.setOnClickListener(v -> {
+            Intent intent=new Intent(DoctorChatActivity.this,DoctorNursingPlanFragment.class);
+            intent.putExtra("myFriend", mMyfriend);
             startActivity(intent);
         });
 
@@ -207,49 +258,4 @@ public class DoctorChatActivity extends AppCompatActivity {
             mBtn_send.setBackgroundResource(R.drawable.bordered_button_disable);
         }
     }
-
-    private EMMessageListener msgListener = new EMMessageListener() {
-
-        @Override
-        public void onMessageReceived (List<EMMessage> messages) {
-            // 循环遍历当前收到的消息
-            for (EMMessage message : messages) {
-                if (message.getFrom().equals(mMyfriend)) {
-                    // 设置消息为已读
-                    mConversation.markMessageAsRead(message.getMsgId());
-
-                    onAddMessage(message);
-                }
-            }
-        }
-
-        @Override
-        public void onCmdMessageReceived (List<EMMessage> messages) {
-            //收到透传消息
-            System.out.println("DoctorChatActivity.onCmdMessageReceived");
-        }
-
-        @Override
-        public void onMessageRead (List<EMMessage> messages) {
-            //收到已读回执
-            System.out.println("DoctorChatActivity.onMessageRead");
-        }
-
-        @Override
-        public void onMessageDelivered (List<EMMessage> message) {
-            //收到已送达回执
-            System.out.println("DoctorChatActivity.onMessageDelivered");
-        }
-
-        @Override
-        public void onMessageRecalled (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageChanged (EMMessage message, Object change) {
-            //消息状态变动
-            System.out.println("DoctorChatActivity.onMessageChanged");
-        }
-    };
 }

@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorMessage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,8 +16,12 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
+import com.funnyseals.app.model.User;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +42,38 @@ public class DoctorMessageListFragment extends Fragment {
     private MessageItemAdapter   mAdapter;
     private List<EMConversation> mConversationList;
     private String               mMyAccount;
+    private List<User>           mAllMyPatient;
+    private EMMessageListener    mMsgListener = new EMMessageListener() {
+        @Override
+        public void onMessageReceived (List<EMMessage> messages) {
+            mAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCmdMessageReceived (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageRead (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageDelivered (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageRecalled (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageChanged (EMMessage message, Object change) {
+
+        }
+    };
 
 
     @Override
@@ -45,16 +82,22 @@ public class DoctorMessageListFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
         MyApplication application = (MyApplication) getActivity().getApplication();
         mMyAccount = application.getAccount();
-
         initUIComponents();
 
         return mView;
     }
 
     @Override
+    public void onAttach (Activity activity) {
+        super.onAttach(activity);
+        mAllMyPatient = ((DoctorBottomActivity) activity).getAllMyPatient();
+    }
+
+    @Override
     public void onResume () {
         super.onResume();
         loadConversations();
+        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
     }
 
     private void initUIComponents () {
@@ -86,7 +129,7 @@ public class DoctorMessageListFragment extends Fragment {
                 .getAllConversations();
         mConversationList = new ArrayList<>();
         mConversationList.addAll(conversations.values());
-        mAdapter = new MessageItemAdapter(getActivity(), mConversationList);
+        mAdapter = new MessageItemAdapter(getActivity(), mConversationList, mAllMyPatient);
         mChatList.setAdapter(mAdapter);
         mChatList.setOnItemClickListener((parent, view, position, id) -> {
             EMConversation conversation = (EMConversation) mChatList.getItemAtPosition(position);

@@ -101,6 +101,10 @@ public class DoctorBottomActivity extends AppCompatActivity {
         }).start();
     }
 
+    public List<User> getAllMyPatient(){
+        return mAllMyPatient;
+    }
+
     @Override
     protected void onResume () {
         super.onResume();

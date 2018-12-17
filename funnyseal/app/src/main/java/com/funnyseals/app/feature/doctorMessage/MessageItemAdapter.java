@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.model.User;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.util.DateUtils;
@@ -30,29 +31,13 @@ public class MessageItemAdapter extends BaseAdapter {
 
     private LayoutInflater       mInflater;
     private List<EMConversation> mConversationList;
+    private List<User>           mAllMyPatient;
 
-    private class ViewHolder {
-
-        private ImageView mPortrait;
-
-        private String mAccount;
-
-        private TextView mName;
-
-        private TextView mTime;
-
-        private TextView mContent;
-
-        private BGABadgeTextView mMessageNum;
-
-        public String getAccount () {
-            return mAccount;
-        }
-    }
-
-    public MessageItemAdapter (Context context, List<EMConversation> conversationList) {
+    public MessageItemAdapter (Context context, List<EMConversation> conversationList, List<User>
+            allMyPatient) {
         this.mInflater = LayoutInflater.from(context);
         this.mConversationList = conversationList;
+        this.mAllMyPatient = allMyPatient;
     }
 
     @Override
@@ -93,17 +78,39 @@ public class MessageItemAdapter extends BaseAdapter {
         viewHolder.mPortrait.setImageResource(R.drawable.portrait);
         EMConversation conversation = getItem(position);
         viewHolder.mAccount = conversation.conversationId();
-        viewHolder.mName.setText(conversation.getLastMessage().getStringAttribute("nickName",
-                conversation.conversationId()));
+        String account = viewHolder.mAccount;
+        for (User p : mAllMyPatient) {
+            if (p.getAccount().equals(account)) {
+                viewHolder.mName.setText(p.getName().isEmpty() ? account : p.getName());
+                break;
+            }
+        }
         viewHolder.mContent.setText(((EMTextMessageBody) conversation.getLastMessage().getBody())
                 .getMessage());
+
         int unread = conversation.getUnreadMsgCount();
-        viewHolder.mMessageNum.showCirclePointBadge();
-        viewHolder.mMessageNum.showTextBadge(unread + "");
+        if(unread!=0){
+            viewHolder.mMessageNum.showCirclePointBadge();
+            viewHolder.mMessageNum.showTextBadge(unread + "");
+        }
+
         viewHolder.mTime.setText(DateUtils.getTimestampString(new Date(conversation
                 .getLastMessage().getMsgTime())));
 
         return convertView;
+    }
+
+    private class ViewHolder {
+        private ImageView        mPortrait;
+        private String           mAccount;
+        private TextView         mName;
+        private TextView         mTime;
+        private TextView         mContent;
+        private BGABadgeTextView mMessageNum;
+
+        public String getAccount () {
+            return mAccount;
+        }
     }
 
 }
