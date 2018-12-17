@@ -31,13 +31,18 @@ public class MessageItemAdapter extends BaseAdapter {
 
     private LayoutInflater       mInflater;
     private List<EMConversation> mConversationList;
-    private List<User>           mAllMyPatient;
+    private List<User>           mAllMyFriend;
 
     public MessageItemAdapter (Context context, List<EMConversation> conversationList, List<User>
-            allMyPatient) {
+            allMyFriend) {
         this.mInflater = LayoutInflater.from(context);
         this.mConversationList = conversationList;
-        this.mAllMyPatient = allMyPatient;
+        this.mAllMyFriend = allMyFriend;
+    }
+
+    public MessageItemAdapter (Context context, List<EMConversation> conversationList) {
+        this.mInflater = LayoutInflater.from(context);
+        this.mConversationList = conversationList;
     }
 
     @Override
@@ -79,7 +84,7 @@ public class MessageItemAdapter extends BaseAdapter {
         EMConversation conversation = getItem(position);
         viewHolder.mAccount = conversation.conversationId();
         String account = viewHolder.mAccount;
-        for (User p : mAllMyPatient) {
+        for (User p : mAllMyFriend) {
             if (p.getAccount().equals(account)) {
                 viewHolder.mName.setText(p.getName().isEmpty() ? account : p.getName());
                 break;
@@ -92,6 +97,7 @@ public class MessageItemAdapter extends BaseAdapter {
         if(unread!=0){
             viewHolder.mMessageNum.showCirclePointBadge();
             viewHolder.mMessageNum.showTextBadge(unread + "");
+            viewHolder.mMessageNum.setOnClickListener(v -> conversation.markAllMessagesAsRead());
         }
 
         viewHolder.mTime.setText(DateUtils.getTimestampString(new Date(conversation

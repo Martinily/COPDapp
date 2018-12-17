@@ -154,8 +154,8 @@ public class VideoCallActivity extends CallActivity {
     @OnClick({
             R.id.layout_call_control, R.id.btn_exit_full_screen, R.id.btn_call_info,
             R.id.btn_mic_switch, R.id.btn_camera_switch, R.id.btn_speaker_switch,
-            R.id.btn_record_switch, R.id.btn_screenshot, R.id.btn_change_camera_switch,
-            R.id.fab_reject_call, R.id.fab_end_call, R.id.fab_answer_call
+            R.id.btn_change_camera_switch, R.id.fab_reject_call, R.id.fab_end_call,
+            R.id.fab_answer_call
     })
     void onClick (View v) {
         switch (v.getId()) {
@@ -234,7 +234,8 @@ public class VideoCallActivity extends CallActivity {
             callInfoBtn.setActivated(isMonitor);
             new Thread(() -> {
                 while (isMonitor) {
-                    @SuppressLint("DefaultLocale") final String info = String.format("分辨率: %d*%d, \n延迟: %d, \n帧率: %d, \n丢失: " +
+                    @SuppressLint("DefaultLocale") final String info = String.format("分辨率: %d*%d," +
+                                    " \n延迟: %d, \n帧率: %d, \n丢失: " +
                                     "%d, \n本地码率: %d, \n远端码率: %d, \n直连: %b", videoCallHelper
                                     .getVideoWidth(), videoCallHelper.getVideoHeight(),
                             videoCallHelper.getVideoLatency(), videoCallHelper

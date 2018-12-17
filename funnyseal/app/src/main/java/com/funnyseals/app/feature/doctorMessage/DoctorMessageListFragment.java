@@ -1,6 +1,5 @@
 package com.funnyseals.app.feature.doctorMessage;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -43,6 +42,7 @@ public class DoctorMessageListFragment extends Fragment {
     private List<EMConversation> mConversationList;
     private String               mMyAccount;
     private List<User>           mAllMyPatient;
+    //消息监听，如果有新的消息就更新消息列表
     private EMMessageListener    mMsgListener = new EMMessageListener() {
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
@@ -79,27 +79,29 @@ public class DoctorMessageListFragment extends Fragment {
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
+
         mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
+
         MyApplication application = (MyApplication) getActivity().getApplication();
         mMyAccount = application.getAccount();
+
+        mAllMyPatient = ((DoctorBottomActivity) getActivity()).getAllMyPatient();
+
+        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
         initUIComponents();
 
         return mView;
     }
 
     @Override
-    public void onAttach (Activity activity) {
-        super.onAttach(activity);
-        mAllMyPatient = ((DoctorBottomActivity) activity).getAllMyPatient();
-    }
-
-    @Override
     public void onResume () {
         super.onResume();
         loadConversations();
-        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
     }
 
+    /*
+    * 创建自定义菜单，设置左划删除
+    * */
     private void initUIComponents () {
         mChatList = mView.findViewById(R.id.chat_list);
 
@@ -130,6 +132,7 @@ public class DoctorMessageListFragment extends Fragment {
         mConversationList = new ArrayList<>();
         mConversationList.addAll(conversations.values());
         mAdapter = new MessageItemAdapter(getActivity(), mConversationList, mAllMyPatient);
+
         mChatList.setAdapter(mAdapter);
         mChatList.setOnItemClickListener((parent, view, position, id) -> {
             EMConversation conversation = (EMConversation) mChatList.getItemAtPosition(position);

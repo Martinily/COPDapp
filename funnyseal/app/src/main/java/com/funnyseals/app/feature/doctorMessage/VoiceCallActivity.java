@@ -94,8 +94,8 @@ public class VoiceCallActivity extends CallActivity {
      * 界面控件点击监听器
      */
     @OnClick({
-            R.id.btn_exit_full_screen, R.id.btn_mic_switch, R.id.btn_speaker_switch, R.id
-            .btn_record_switch, R.id.fab_reject_call,
+            R.id.btn_exit_full_screen, R.id.btn_mic_switch, R.id.btn_speaker_switch,
+            R.id.fab_reject_call,
             R.id.fab_end_call, R.id.fab_answer_call
     })
     void onClick (View v) {

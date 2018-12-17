@@ -27,24 +27,24 @@ import butterknife.BindView;
 public class DoctorChatActivity extends AppCompatActivity {
 
     @BindView(R.id.lv_doctor_chat_message_container)
-    private ListView    mLv_message;
+    ListView    mLv_message;
     @BindView(R.id.et_doctor_chat_input)
-    private EditText    mEt_input;
+    EditText    mEt_input;
     @BindView(R.id.btn_doctor_chat_send)
-    private Button      mBtn_send;
+    Button      mBtn_send;
     @BindView(R.id.ibtn_vioce)
-    private ImageButton mVioce;
+    ImageButton mVioce;
     @BindView(R.id.ibtn_nursingplan)
-    private ImageButton mNursingPlan;
+    ImageButton mNursingPlan;
     @BindView(R.id.ibtn_video)
-    private ImageButton mVideo;
+    ImageButton mVideo;
 
     private MyApplication      myApplication;
     private ChatMessageAdapter CurrentChatadapter;
     private String             mMyfriend;
     private List<EMMessage>    mMessageList;
     private EMConversation     mConversation;
-    private EMMessageListener msgListener = new EMMessageListener() {
+    private EMMessageListener  msgListener = new EMMessageListener() {
 
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
@@ -170,7 +170,7 @@ public class DoctorChatActivity extends AppCompatActivity {
         });
 
         mNursingPlan.setOnClickListener(v -> {
-            Intent intent=new Intent(DoctorChatActivity.this,DoctorNursingPlanFragment.class);
+            Intent intent = new Intent(DoctorChatActivity.this, DoctorNursingPlanFragment.class);
             intent.putExtra("myFriend", mMyfriend);
             startActivity(intent);
         });

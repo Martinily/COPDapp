@@ -42,6 +42,16 @@ public class User implements Serializable {
     }
 
     public User (String account, String name, String sex, int age, String registerTime, String
+            address) {
+        this.mAccount = account;
+        this.mName = name;
+        this.mSex = sex;
+        this.mAge = age;
+        this.mRegisterTime = registerTime;
+        this.mAddress = address;
+    }
+
+    public User (String account, String name, String sex, int age, String registerTime, String
             address, String company, String position) {
         this.mAccount = account;
         this.mName = name;
