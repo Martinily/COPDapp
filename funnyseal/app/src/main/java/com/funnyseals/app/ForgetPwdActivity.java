@@ -26,64 +26,31 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
+import butterknife.BindView;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 public class ForgetPwdActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String REGEX_MOBILE   = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
+    private static final String REGEX_MOBILE   = "^(0|86|17951)?" +
+            "(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
-    private EditText     mEtAccount;
-    private EditText     mEtPassword;
-    private EditText     mEtPasswordAgain;
-    private EditText     mEtIdentifyingCode;
-    private Button       mBtnCodeSend;
-    private Button       mBtnChangePwd;
+    @BindView(R.id.et_forgetPwd_AccountInput)
+    EditText mEtAccount;
+    @BindView(R.id.et_forgetpwd_PasswordInput)
+    EditText mEtPassword;
+    @BindView(R.id.et_forgetpwd_PasswordInputAgain)
+    EditText mEtPasswordAgain;
+    @BindView(R.id.et_forgetpwd_IdentifyingCode)
+    EditText mEtIdentifyingCode;
+    @BindView(R.id.btn_forgetPwd_CodeSend)
+    Button   mBtnCodeSend;
+    @BindView(R.id.btn_forgetPwd_ChangePwd)
+    Button   mBtnChangePwd;
+
     private TimeDownUtil timeDownUtil;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forget_pwd);
-
-        initViews();
-        initEvents();
-        initSDK();
-    }
-
-    private void initSDK() {
-        MobSDK.init(this);
-    }
-
-    private void initViews() {
-        mEtAccount = findViewById(R.id.et_forgetPwd_AccountInput);
-        mEtPassword = findViewById(R.id.et_forgetpwd_PasswordInput);
-        mEtPasswordAgain = findViewById(R.id.et_forgetpwd_PasswordInputAgain);
-        mEtIdentifyingCode = findViewById(R.id.et_forgetpwd_IdentifyingCode);
-        mBtnCodeSend = findViewById(R.id.btn_forgetPwd_CodeSend);
-        mBtnChangePwd = findViewById(R.id.btn_forgetPwd_ChangePwd);
-    }
-
-    private void initEvents() {
-        mBtnCodeSend.setOnClickListener(this);
-        mBtnChangePwd.setOnClickListener(this);
-        timeDownUtil = new TimeDownUtil(180000, 1000, mBtnCodeSend);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_forgetPwd_CodeSend:
-                SendSMS();
-                break;
-            case R.id.btn_forgetPwd_ChangePwd:
-                changePwd();
-                break;
-        }
-    }
-
     private EventHandler sendSMSHandler = new EventHandler() {
-        public void afterEvent(int event, int result, Object data) {
+        public void afterEvent (int event, int result, Object data) {
             Message msg = new Message();
             msg.arg1 = event;
             msg.arg2 = result;
@@ -100,7 +67,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
                     }
                 } else if (event1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (result1 == SMSSDK.RESULT_COMPLETE) {
-                        updateDB();
+                        linkToServer();
                         destorySendSMSHandler();
                     } else {
                         showToast("验证码不正确！");
@@ -111,7 +78,38 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         }
     };
 
-    public void SendSMS() {
+    @Override
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_forget_pwd);
+
+        initEvents();
+        initSDK();
+    }
+
+    private void initSDK () {
+        MobSDK.init(this);
+    }
+
+    private void initEvents () {
+        mBtnCodeSend.setOnClickListener(this);
+        mBtnChangePwd.setOnClickListener(this);
+        timeDownUtil = new TimeDownUtil(180000, 1000, mBtnCodeSend);
+    }
+
+    @Override
+    public void onClick (View v) {
+        switch (v.getId()) {
+            case R.id.btn_forgetPwd_CodeSend:
+                SendSMS();
+                break;
+            case R.id.btn_forgetPwd_ChangePwd:
+                changePwd();
+                break;
+        }
+    }
+
+    public void SendSMS () {
         if (TextUtils.isEmpty(mEtAccount.getText())) {
             showToast("手机号不能为空");
             return;
@@ -124,22 +122,24 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         timeDownUtil.start();
     }
 
-    public void destorySendSMSHandler() {
+    public void destorySendSMSHandler () {
         super.onDestroy();
         SMSSDK.unregisterEventHandler(sendSMSHandler);
     }
 
-    public void changePwd() {
+    public void changePwd () {
         if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
-        } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString())) {
+        } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString()
+        )) {
             showToast("两次输入的密码不同");
         } else {
-            SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(), mEtIdentifyingCode.getText().toString());
+            SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(),
+                    mEtIdentifyingCode.getText().toString());
         }
     }
 
-    public void updateDB() {
+    public void linkToServer () {
 
         final ProgressDialog progressDialog = new ProgressDialog(ForgetPwdActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -188,7 +188,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         }).start();
     }
 
-    public void showToast(final String msg) {
+    public void showToast (final String msg) {
         runOnUiThread(() -> Toast.makeText(ForgetPwdActivity.this, msg, Toast.LENGTH_SHORT).show());
     }
 }

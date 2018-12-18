@@ -15,10 +15,14 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
 import com.funnyseals.app.feature.doctorMessage.DoctorChatActivity;
 import com.funnyseals.app.feature.doctorMessage.MessageItemAdapter;
+import com.funnyseals.app.model.User;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,38 @@ public class PatientMessageListFragment extends Fragment {
     private MessageItemAdapter   mAdapter;
     private String               mMyAccount;
     private List<EMConversation> mConversationList;
+    private List<User>           mAllMyDoctocr;
+    private EMMessageListener    mMsgListener = new EMMessageListener() {
+        @Override
+        public void onMessageReceived (List<EMMessage> messages) {
+            mAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCmdMessageReceived (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageRead (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageDelivered (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageRecalled (List<EMMessage> messages) {
+
+        }
+
+        @Override
+        public void onMessageChanged (EMMessage message, Object change) {
+
+        }
+    };
 
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
@@ -40,6 +76,10 @@ public class PatientMessageListFragment extends Fragment {
 
         MyApplication application = (MyApplication) getActivity().getApplication();
         mMyAccount = application.getAccount();
+
+        mAllMyDoctocr = ((PatientBottomActivity) getActivity()).getAllMyDoctor();
+
+        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
         initUIComponents();
         return mView;
     }

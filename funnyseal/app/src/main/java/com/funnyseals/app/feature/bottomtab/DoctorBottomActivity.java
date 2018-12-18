@@ -87,10 +87,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
                             patient.getString("pSex"),
                             Integer.valueOf(patient.getString("pAge")),
                             patient.getString("pTime"),
-                            patient.getString("pAddress"),
-                            patient.getString("HistoryCondition"),
-                            patient.getString("HistoryAdvice"),
-                            patient.getString("docID")));
+                            patient.getString("pAddress")));
                 }
                 socket.close();
 
@@ -99,6 +96,10 @@ public class DoctorBottomActivity extends AppCompatActivity {
             }
             Thread.interrupted();
         }).start();
+    }
+
+    public List<User> getAllMyPatient(){
+        return mAllMyPatient;
     }
 
     @Override
