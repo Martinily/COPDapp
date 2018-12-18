@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,8 +42,6 @@ public class VoiceCallActivity extends CallActivity {
     ImageButton          micSwitch;
     @BindView(R.id.btn_speaker_switch)
     ImageButton          speakerSwitch;
-    @BindView(R.id.btn_record_switch)
-    ImageButton          recordSwitch;
     @BindView(R.id.fab_reject_call)
     FloatingActionButton rejectCallFab;
     @BindView(R.id.fab_end_call)
@@ -82,7 +79,6 @@ public class VoiceCallActivity extends CallActivity {
         usernameView.setText(CallManager.getInstance().getChatId());
         micSwitch.setActivated(!CallManager.getInstance().isOpenMic());
         speakerSwitch.setActivated(CallManager.getInstance().isOpenSpeaker());
-        recordSwitch.setActivated(CallManager.getInstance().isOpenRecord());
 
         // 判断当前通话时刚开始，还是从后台恢复已经存在的通话
         if (CallManager.getInstance().getCallState() == CallManager.CallState.ACCEPTED) {
@@ -98,8 +94,8 @@ public class VoiceCallActivity extends CallActivity {
      * 界面控件点击监听器
      */
     @OnClick({
-            R.id.btn_exit_full_screen, R.id.btn_mic_switch, R.id.btn_speaker_switch, R.id
-            .btn_record_switch, R.id.fab_reject_call,
+            R.id.btn_exit_full_screen, R.id.btn_mic_switch, R.id.btn_speaker_switch,
+            R.id.fab_reject_call,
             R.id.fab_end_call, R.id.fab_answer_call
     })
     void onClick (View v) {
@@ -115,10 +111,6 @@ public class VoiceCallActivity extends CallActivity {
             case R.id.btn_speaker_switch:
                 // 扬声器开关
                 onSpeaker();
-                break;
-            case R.id.btn_record_switch:
-                // 录制开关
-                recordCall();
                 break;
             case R.id.fab_end_call:
                 // 结束通话
@@ -199,22 +191,6 @@ public class VoiceCallActivity extends CallActivity {
         }
     }
 
-    /**
-     * 录制通话内容 TODO 后期实现
-     */
-    private void recordCall () {
-        Snackbar.make(rootView, "暂未实现", Snackbar.LENGTH_LONG).show();
-        // 根据开关状态决定是否开启录制
-        if (recordSwitch.isActivated()) {
-            // 设置按钮状态
-            recordSwitch.setActivated(false);
-            CallManager.getInstance().setOpenRecord(false);
-        } else {
-            // 设置按钮状态
-            recordSwitch.setActivated(true);
-            CallManager.getInstance().setOpenRecord(true);
-        }
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventBus (CallEvent event) {
