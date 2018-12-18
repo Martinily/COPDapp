@@ -31,26 +31,18 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
-import butterknife.BindView;
-
 /**
  *
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
-    @BindView(R.id.et_login_AccountInput)
-    EditText mEtAccount;
-    @BindView(R.id.et_login_PasswordInput)
-    EditText mEtPassword;
-    @BindView(R.id.btn_login_login)
-    Button   mBtnLogin;
-    @BindView(R.id.link_signup)
-    TextView mLinkSignup;
-    @BindView(R.id.link_forgetPWD)
-    TextView mLinkForgetPwd;
-    @BindView(R.id.remember_password)
-    CheckBox mCbRememberPassword;
+    private EditText mEtAccount;
+    private EditText mEtPassword;
+    private Button   mBtnLogin;
+    private TextView mLinkSignup;
+    private TextView mLinkForgetPwd;
+    private CheckBox mCbRememberPassword;
 
     private SharedPreferences        pref;
     private SharedPreferences.Editor editor;
@@ -61,7 +53,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
+        initView();
         initEvents();
+    }
+
+    private void initView(){
+        mEtAccount=findViewById(R.id.et_login_AccountInput);
+        mEtPassword=findViewById(R.id.et_login_PasswordInput);
+        mBtnLogin=findViewById(R.id.btn_login_login);
+        mLinkSignup=findViewById(R.id.link_signup);
+        mLinkForgetPwd=findViewById(R.id.link_forgetPWD);
+        mCbRememberPassword=findViewById(R.id.remember_password);
     }
 
     private void initEvents () {
