@@ -1,22 +1,37 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.funnyseals.app.LoginActivity;
 import com.funnyseals.app.R;
+import com.funnyseals.app.util.SocketUtil;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 public class PatientAddEquipmentActivity extends AppCompatActivity {
-    private String m_str1,m_str2;
+
     private EditText ev_patient_add_name,ev_patient_add_state;
     private Button bt_patient_add_complete;
     private ImageButton ib_patient_add_return;
-    private Intent intent1,intent2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +44,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         builder.setMessage("修改未保存，确定退出？");
         builder.setPositiveButton("确定", (dialog, which) -> {
             dialog.dismiss();
-         finish();
+             finish();
         });
         builder.setNegativeButton("取消", (dialog, which) -> {
             //取消对话框，返回界面
@@ -45,8 +60,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         //获取各个edittext值
         ev_patient_add_name=findViewById(R.id.ev_patient_add_name);
         ev_patient_add_state=findViewById(R.id.ev_patient_add_state);
-        m_str1=ev_patient_add_name.getText().toString();
-        m_str2=ev_patient_add_state.getText().toString();
+
 
         ib_patient_add_return=findViewById(R.id.ib_patient_add_return);
         ib_patient_add_return.setOnClickListener(new addListeners());
@@ -56,6 +70,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
     //监听
     private class addListeners implements View.OnClickListener{
 
+        @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -63,12 +78,64 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     Sure();
                     break;
                 case  R.id. bt_patient_add_complete:
-                    intent2 = new Intent(PatientAddEquipmentActivity.this,PatientMyEquipmentActivity.class);
-                    startActivity(intent2);
+                   addEquipment();
                     break;
                 default:
                     break;
             }
         }
+    }
+    //连接服务器
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    private void addEquipment(){
+        if (getName().isEmpty()||getState().isEmpty()){
+           showToast("设备名称或者状态不能为空");
+        }
+        else {
+            new Thread(()->{
+                String send="";
+                Socket socket;
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("pID","xxxxxx");
+                    jsonObject.put("request_type","1");
+                    jsonObject.put("equipment_name", getName());
+                    jsonObject.put("equipment_state", getState());
+                    send = jsonObject.toString();
+                    socket = SocketUtil.getSendSocket();
+                    DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                    out.writeUTF(send);
+                    out.close();
+
+                    socket = SocketUtil.getGetSocket();
+                    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                    String message = dataInputStream.readUTF();
+
+                    jsonObject = new JSONObject(message);
+                    switch (jsonObject.getString("xx")){
+                        case "true":
+                            showToast("添加成功");
+                            finish();
+                            break;
+                        case "false":
+                            showToast("添加失败");
+                            break;
+                    }
+                    socket.close();
+                }catch (IOException | JSONException e){
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
+    private String getName(){
+        return ev_patient_add_name.getText().toString().trim();
+    }
+    private String getState(){
+        return ev_patient_add_state.getText().toString().trim();
+    }
+
+    public void showToast(final String msg) {
+        runOnUiThread(() -> Toast.makeText(PatientAddEquipmentActivity.this, msg, Toast.LENGTH_SHORT).show());
     }
 }

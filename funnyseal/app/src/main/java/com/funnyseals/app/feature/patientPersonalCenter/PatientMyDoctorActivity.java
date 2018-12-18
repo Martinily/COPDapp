@@ -11,13 +11,20 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.util.SocketUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 public class PatientMyDoctorActivity extends AppCompatActivity {
 
     private TextView tv_patient_doctor_name,tv_patient_doctor_hospital,tv_patient_doctor_post;
     private ImageButton ib_patient_doctor_return;
-    private Intent intent1,intent2;
-    private String str_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +42,15 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         ib_patient_doctor_return=findViewById(R.id.ib_patient_doctor_return);
         ib_patient_doctor_return.setOnClickListener(new addListeners());
     }
+    public void setDoctorName(String name){
+        tv_patient_doctor_name.setText(name.toCharArray(),0,name.length());
+    }
+    public void setDoctorHosptial(String hosptial){
+        tv_patient_doctor_hospital.setText(hosptial.toCharArray(),0,hosptial.length());
+    }
+    public void setDoctorPost(String post){
+         tv_patient_doctor_post.setText(post.toCharArray(),0,post.length());
+    }
     //监听
     private class addListeners implements View.OnClickListener{
 
@@ -42,6 +58,35 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.ib_patient_doctor_return:
+                    new Thread(()->{
+                        String send="";
+                        Socket socket;
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("pID","xxxxxx");
+                            jsonObject.put("request_type","1");
+                            send = jsonObject.toString();
+                            socket = SocketUtil.getSendSocket();
+                            DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                            out.writeUTF(send);
+                            out.close();
+
+                            socket = SocketUtil.getGetSocket();
+                            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                            String message = dataInputStream.readUTF();
+
+                            jsonObject = new JSONObject(message);
+                            String name=jsonObject.get("doctorname").toString();
+                            String hosptial=jsonObject.get("doctorhosptia;").toString();
+                            String post=jsonObject.get("doctorpost").toString();
+                            setDoctorName(name);
+                            setDoctorHosptial(hosptial);
+                            setDoctorPost(post);
+                            socket.close();
+                        }catch (IOException | JSONException e){
+                            e.printStackTrace();
+                        }
+                    }).start();
                     finish();
                     break;
                 default:

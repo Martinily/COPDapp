@@ -11,8 +11,17 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.patientPersonalCenter.PatientPasswordActivity;
+import com.funnyseals.app.util.SocketUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,17 +29,16 @@ public class DoctorPasswordActivity extends AppCompatActivity {
     private EditText et_doctor_change_oldpassword,et_doctor_change_newpassword,et_doctor_change_againpassword;
     private Button bt_doctor_change_complete;
     private ImageButton ib_doctor_change_return;
-    private Intent intent2;
-    private String  newpassword,oldpassword,againpassword;
+    private MyApplication
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_doctor_password);
             init();
-            myCorrectPas();
+
     }
     //密码判断
-    public boolean myCorrectPas(){
+    public boolean myCorrectPas(String oldpassword,String newpassword,String againpassword){
 
         if (oldpassword.equals("")||newpassword.equals("")||againpassword.equals(""))
         {
@@ -41,8 +49,8 @@ public class DoctorPasswordActivity extends AppCompatActivity {
             Toast.makeText(this,"密码不能包含特殊字符",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(newpassword.length()<6 || newpassword.length()>16){
-            Toast.makeText(this,"密码长度应为6-16位",Toast.LENGTH_SHORT).show();
+        if(newpassword.length()<6 || newpassword.length()>20){
+            Toast.makeText(this,"密码长度应为6-20位",Toast.LENGTH_SHORT).show();
             return false;
         }
         if(!isSame(newpassword, againpassword)){
@@ -68,33 +76,20 @@ public class DoctorPasswordActivity extends AppCompatActivity {
     //判断两次密码一致
     public boolean isSame(String str1,String str2){
             boolean isSame = false;
-            if(newpassword==againpassword){
+            if(str1.equals(str2)){
                 isSame=true;
             }
             return isSame;
     }
 
-    //延时
-    public void runTime(){
-        Timer timer=new Timer();
-        TimerTask timerTask=new TimerTask() {
-            @Override
-            public void run() {
-                Toast.makeText(DoctorPasswordActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        };
-        timer.schedule(timerTask,2000);
-    }
+
 
     private void init(){
         //获取各个edittext值
         et_doctor_change_oldpassword=findViewById(R.id.et_doctor_change_oldpassword);
         et_doctor_change_newpassword=findViewById(R.id.et_doctor_change_newpassword);
         et_doctor_change_againpassword=findViewById(R.id.et_doctor_change_againpassword);
-        oldpassword=et_doctor_change_oldpassword.getText().toString();
-        newpassword=et_doctor_change_newpassword.getText().toString();
-        againpassword=et_doctor_change_againpassword.getText().toString();
+
 
         ib_doctor_change_return=findViewById(R.id. ib_doctor_change_return);
         ib_doctor_change_return.setOnClickListener(new addListeners());
@@ -118,6 +113,18 @@ public class DoctorPasswordActivity extends AppCompatActivity {
 
 
     }
+    public String getOldpassword(){
+        return et_doctor_change_oldpassword.getText().toString().trim();
+    }
+    public String getNewpassword(){
+        return et_doctor_change_newpassword.getText().toString().trim();
+    }
+    public String getAgainpassword(){
+        return et_doctor_change_againpassword.getText().toString().trim();
+    }
+    public void showToast(final String msg) {
+        runOnUiThread(() -> Toast.makeText(DoctorPasswordActivity.this, msg, Toast.LENGTH_SHORT).show());
+    }
     //监听
     private class addListeners implements View.OnClickListener{
 
@@ -128,8 +135,42 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                     Sure();
                     break;
                 case  R.id.bt_doctor_change_complete:
-                    if (myCorrectPas()==true){
-                        runTime();
+                    if (myCorrectPas(getOldpassword(),getNewpassword(),getAgainpassword())){
+                        new Thread(()->{
+                            String send="";
+                            Socket socket;
+                            try{
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("pID","xxxxxx");
+                                jsonObject.put("request_type","1");
+                                jsonObject.put("oldpassword", getOldpassword());
+                                jsonObject.put("newpassword",getNewpassword());
+                                jsonObject.put("againpassword",getAgainpassword());
+                                send = jsonObject.toString();
+                                socket = SocketUtil.getSendSocket();
+                                DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                                out.writeUTF(send);
+                                out.close();
+
+                                socket = SocketUtil.getGetSocket();
+                                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                                String message = dataInputStream.readUTF();
+
+                                jsonObject = new JSONObject(message);
+                                switch (jsonObject.getString("xx")){
+                                    case "true":
+                                        showToast("修改密码成功");
+                                        finish();
+                                        break;
+                                    case "密码错误":
+                                        showToast("密码错误");
+                                        break;
+                                }
+                                socket.close();
+                            }catch (IOException | JSONException e){
+                                e.printStackTrace();
+                            }
+                        }).start();
                     }
                     break;
                 default:

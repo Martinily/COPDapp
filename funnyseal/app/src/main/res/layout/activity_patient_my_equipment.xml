@@ -70,10 +70,11 @@
 
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_patient_equipment_addPage"
+    <ListView
+        android:id="@+id/patient_lv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_below="@+id/tv_patient_equipment_name"></ListView>
+
 
 </LinearLayout>

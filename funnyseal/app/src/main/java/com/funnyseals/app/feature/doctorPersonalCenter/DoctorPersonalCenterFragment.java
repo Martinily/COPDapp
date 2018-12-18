@@ -44,10 +44,10 @@ public class DoctorPersonalCenterFragment extends Fragment {
     private View mView;
     //  private DoctorTabFragmentPagerAdapter mAdapter;
     private ImageButton ib_doctor_perinfo,ib_doctor_sign,ib_doctor_setting;
-    private ImageView iv_doctor_portrait;
+    private ImageButton iv_doctor_portrait;
 
     private Bitmap head;//头像
-    private static String path="/sdcard/myHead/";//照片路径
+    private static String path="/sdcard/";//照片路径
 
 
     @Override
@@ -202,6 +202,9 @@ public class DoctorPersonalCenterFragment extends Fragment {
                     break;
                 case R.id.ib_patient_setting:
                     //   startActivity(new Intent(getActivity(),Pa));
+                    break;
+                case R.id.iv_doctor_portrait:
+                    showTypeDialog();
                     break;
                 default:
                     break;
