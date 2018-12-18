@@ -14,11 +14,11 @@ import java.sql.SQLException;
  */
 public class UserDao {
 
-    private static String URL      = "jdbc:mysql://10.63.60.135:3306/copd";
-    private static String USERNAME = "copd";
-    private static String PASSWORD= "123456";
+    private static final String URL      = "jdbc:mysql://10.63.60.135:3306/copd";
+    private static final String USERNAME = "copd";
+    private static final String PASSWORD = "123456";
 
-    public static Connection getConnection() throws ClassNotFoundException {
+    public static Connection getConnection () throws ClassNotFoundException {
         Connection conn = null;
         Class.forName("com.mysql.jdbc.Driver");
         try {
