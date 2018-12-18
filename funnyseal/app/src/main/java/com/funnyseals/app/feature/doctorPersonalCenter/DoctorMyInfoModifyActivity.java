@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.model.User;
 
 public class DoctorMyInfoModifyActivity extends AppCompatActivity {
 
@@ -18,6 +20,10 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
     private Button bt_doctor_modify_complete;
     private ImageButton ib_doctor_modify_return,ib_doctor_modify_changepassword;
     private Intent intent1;
+    private User myUser;
+    private MyApplication myApplication;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,29 +33,15 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
 
     private void init(){
         //获取各个edittext值，并改变界面的值
+        myApplication=(MyApplication)getApplication();
+        myUser=myApplication.getUser();
+
         et_doctor_modify_myage=findViewById(R.id.et_doctor_modify_myage);
-        et1=et_doctor_modify_myage.getText().toString();
-
-
         et_doctor_modify_myhospital=findViewById(R.id.et_doctor_modify_myhospital);
-        et2=et_doctor_modify_myhospital.getText().toString();
-
-
         et_doctor_modify_myname=findViewById(R.id.et_doctor_modify_myname);
-        et3=et_doctor_modify_myname.getText().toString();
-
-
         et_doctor_modify_mysex=findViewById(R.id.et_doctor_modify_mysex);
-        et4=et_doctor_modify_myname.getText().toString();
-
-
         et_doctor_modify_mylocation=findViewById(R.id.et_doctor_modify_mylocation);
-        et5=et_doctor_modify_mylocation.getText().toString();
-
-
         et_doctor_modify_mypost=findViewById(R.id.et_doctor_modify_mypost);
-        et6=et_doctor_modify_mypost.getText().toString();
-
 
         ib_doctor_modify_return=findViewById(R.id. ib_doctor_modify_return);
         ib_doctor_modify_return.setOnClickListener(new addListeners());
@@ -57,6 +49,8 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
         bt_doctor_modify_complete.setOnClickListener(new addListeners());
         ib_doctor_modify_changepassword=findViewById(R.id.ib_doctor_modify_changepassword);
         ib_doctor_modify_changepassword.setOnClickListener(new addListeners());
+
+
     }
     //弹出框设置
     public void Sure(){
@@ -87,12 +81,19 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                     Sure();
                     break;
                 case  R.id.bt_doctor_modify_complete:
-                    et_doctor_modify_myage.setText(et1.toCharArray(),0,et1.length());
-                    et_doctor_modify_myhospital.setText(et2.toCharArray(),0,et2.length());
-                    et_doctor_modify_myname.setText(et3.toCharArray(),0,et3.length());
-                    et_doctor_modify_mysex.setText(et4.toCharArray(),0,et4.length());
-                    et_doctor_modify_mylocation.setText(et5.toCharArray(),0,et5.length());
-                    et_doctor_modify_mypost.setText(et6.toCharArray(),0,et6.length());
+                    myUser.setName(et_doctor_modify_myname.getText().toString().trim());
+                    myUser.setAge(Integer.parseInt(et_doctor_modify_myage.getText().toString().trim()));
+                    myUser.setCompany(et_doctor_modify_myhospital.getText().toString().trim());
+                    myUser.setPosition(et_doctor_modify_mypost.getText().toString().trim());
+                    myUser.setSex(et_doctor_modify_mysex.getText().toString().trim());
+                    myUser.setAddress(et_doctor_modify_mylocation.getText().toString().trim());
+
+                    et_doctor_modify_myage.setText(String.valueOf(myUser.getAge()).toCharArray(),0,et1.length());
+                    et_doctor_modify_myhospital.setText(myUser.getCompany().toCharArray(),0,et2.length());
+                    et_doctor_modify_myname.setText(myUser.getName().toCharArray(),0,et3.length());
+                    et_doctor_modify_mysex.setText(myUser.getSex().toCharArray(),0,et4.length());
+                    et_doctor_modify_mylocation.setText(myUser.getAddress().toCharArray(),0,et5.length());
+                    et_doctor_modify_mypost.setText(myUser.getPosition().toCharArray(),0,et6.length());
                     finish();
                     break;
                 case R.id.ib_doctor_modify_changepassword:

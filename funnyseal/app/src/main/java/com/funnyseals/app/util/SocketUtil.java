@@ -33,4 +33,8 @@ public class SocketUtil {
     public static Socket getInfo() throws IOException{
         return new Socket(IP_ADDR,PORT_GET_INFO);
     }
+
+    public static Socket setPort(int port) throws IOException {
+        return new Socket(IP_ADDR,port);
+    }
 }

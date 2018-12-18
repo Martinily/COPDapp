@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorPersonalCenter;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -29,7 +30,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
     private EditText et_doctor_change_oldpassword,et_doctor_change_newpassword,et_doctor_change_againpassword;
     private Button bt_doctor_change_complete;
     private ImageButton ib_doctor_change_return;
-    private MyApplication
+    private MyApplication myApplication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -89,7 +90,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
         et_doctor_change_oldpassword=findViewById(R.id.et_doctor_change_oldpassword);
         et_doctor_change_newpassword=findViewById(R.id.et_doctor_change_newpassword);
         et_doctor_change_againpassword=findViewById(R.id.et_doctor_change_againpassword);
-
+        myApplication=(MyApplication)getApplication();
 
         ib_doctor_change_return=findViewById(R.id. ib_doctor_change_return);
         ib_doctor_change_return.setOnClickListener(new addListeners());
@@ -141,11 +142,12 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                             Socket socket;
                             try{
                                 JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("pID","xxxxxx");
-                                jsonObject.put("request_type","1");
+
+                                jsonObject.put("request_type","8");
+                                jsonObject.put("modify_type","update");
+                                jsonObject.put("ID",myApplication.getAccount());
                                 jsonObject.put("oldpassword", getOldpassword());
                                 jsonObject.put("newpassword",getNewpassword());
-                                jsonObject.put("againpassword",getAgainpassword());
                                 send = jsonObject.toString();
                                 socket = SocketUtil.getSendSocket();
                                 DataOutputStream out=new DataOutputStream(socket.getOutputStream());
@@ -157,13 +159,19 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                                 String message = dataInputStream.readUTF();
 
                                 jsonObject = new JSONObject(message);
-                                switch (jsonObject.getString("xx")){
-                                    case "true":
+                                switch (jsonObject.getString("password_result")){
+                                    case "0":
                                         showToast("修改密码成功");
                                         finish();
                                         break;
-                                    case "密码错误":
+                                    case "1":
+                                        showToast("用户名错误");
+                                        break;
+                                    case "2":
                                         showToast("密码错误");
+                                        break;
+                                    case "3":
+                                        showToast("修改失败");
                                         break;
                                 }
                                 socket.close();

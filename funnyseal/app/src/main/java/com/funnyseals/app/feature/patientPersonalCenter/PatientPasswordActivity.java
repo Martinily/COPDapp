@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
     private Button bt_patient_change_complete;
     private ImageButton ib_patient_change_return;
     private EditText et_patient_change_oldpassword,et_patient_change_newpassword,et_patient_change_againpassword;
+    private MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
         et_patient_change_oldpassword=findViewById(R.id.et_patient_change_oldpassword);
         et_patient_change_newpassword=findViewById(R.id.et_patient_change_newpassword);
         et_patient_change_againpassword=findViewById(R.id.et_patient_change_againpassword);
-
+        myApplication=(MyApplication)getApplication();
 
         bt_patient_change_complete=findViewById(R.id.bt_patient_change_complete);
         ib_patient_change_return=findViewById(R.id.ib_patient_change_return);
@@ -135,11 +137,11 @@ public class PatientPasswordActivity extends AppCompatActivity {
                             Socket socket;
                             try{
                                 JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("pID","xxxxxx");
-                                jsonObject.put("request_type","1");
+                                jsonObject.put("request_type","8");
+                                jsonObject.put("modify_type","update");
+                                jsonObject.put("ID",myApplication.getAccount());
                                 jsonObject.put("oldpassword", getOldpassword());
                                 jsonObject.put("newpassword",getNewpassword());
-                                jsonObject.put("againpassword",getAgainpassword());
                                 send = jsonObject.toString();
                                 socket = SocketUtil.getSendSocket();
                                 DataOutputStream out=new DataOutputStream(socket.getOutputStream());
@@ -151,13 +153,19 @@ public class PatientPasswordActivity extends AppCompatActivity {
                                 String message = dataInputStream.readUTF();
 
                                 jsonObject = new JSONObject(message);
-                                switch (jsonObject.getString("xx")){
-                                    case "true":
+                                switch (jsonObject.getString("password_result")){
+                                    case "0":
                                         showToast("修改密码成功");
                                         finish();
                                         break;
-                                    case "密码错误":
+                                    case "1":
+                                        showToast("用户名错误");
+                                        break;
+                                    case "2":
                                         showToast("密码错误");
+                                        break;
+                                    case "3":
+                                        showToast("修改失败");
                                         break;
                                 }
                                 socket.close();
