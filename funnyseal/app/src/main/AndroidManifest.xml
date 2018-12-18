@@ -113,7 +113,7 @@
         <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
         <activity android:name=".feature.doctorMessage.DoctorVideoCallActivity" />
         <activity android:name=".feature.doctorMessage.CallActivity" />
-        <activity android:name=".feature.patientMessage.PatientVideoCallActivity"></activity>
+        <activity android:name=".feature.patientMessage.PatientVideoCallActivity" />
     </application>
 
 </manifest>

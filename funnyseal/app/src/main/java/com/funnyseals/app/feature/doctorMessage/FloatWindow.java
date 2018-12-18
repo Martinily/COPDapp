@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorMessage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -39,7 +40,7 @@ public class FloatWindow {
     // 当前单例类实例
     private static FloatWindow instance;
 
-    private WindowManager windowManager = null;
+    private WindowManager windowManager;
     private WindowManager.LayoutParams layoutParams = null;
 
     // 悬浮窗需要显示的布局
@@ -97,7 +98,7 @@ public class FloatWindow {
                     .setVisibility(View.VISIBLE);
             floatView.findViewById(R.id.layout_call_video)
                     .setVisibility(View.GONE);
-            callTimeView = (TextView) floatView.findViewById(R.id.text_call_time);
+            callTimeView = floatView.findViewById(R.id.text_call_time);
             refreshCallTime();
         } else {
             setupSurfaceView();
@@ -128,6 +129,7 @@ public class FloatWindow {
             float startX = 0;
             float startY = 0;
 
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -170,7 +172,7 @@ public class FloatWindow {
         floatView.findViewById(R.id.layout_call_video)
                 .setVisibility(View.VISIBLE);
 
-        RelativeLayout surfaceLayout = (RelativeLayout) floatView.findViewById(R.id.layout_call_video);
+        RelativeLayout surfaceLayout = floatView.findViewById(R.id.layout_call_video);
 
         // 将 SurfaceView设置给 SDK
         surfaceLayout.removeAllViews();
@@ -297,7 +299,7 @@ public class FloatWindow {
         int h = t / 60 / 60;
         int m = t / 60 % 60;
         int s = t % 60 % 60;
-        String time = "";
+        String time;
         if (h > 9) {
             time = "" + h;
         } else {

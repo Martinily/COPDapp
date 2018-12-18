@@ -116,7 +116,8 @@
             android:layout_height="30dp"
             android:layout_marginStart="180dp"
             android:background="@drawable/ic_arrow_forward_black_24dp"
-            android:clickable="true" />
+            android:clickable="true"
+            android:focusable="true" />
     </LinearLayout>
 
 </LinearLayout>

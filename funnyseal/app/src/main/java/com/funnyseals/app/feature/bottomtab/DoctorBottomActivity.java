@@ -79,7 +79,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
                 }
                 mAllMyPatient=new ArrayList<>();
                 JSONArray allMyPatient=new JSONArray(message);
-                int i=0;
+                int i;
                 for (i=0;i<allMyPatient.length();i++){
                     JSONObject patient=allMyPatient.getJSONObject(i);
                     mAllMyPatient.add(new User(patient.getString("pID"),

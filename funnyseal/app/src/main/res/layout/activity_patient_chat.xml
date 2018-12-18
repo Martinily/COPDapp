@@ -47,7 +47,9 @@
             android:background="@drawable/bordered_edit_text"
             android:gravity="center_vertical"
             android:inputType="text"
-            android:minLines="1" />
+            android:minLines="1"
+            android:autofillHints="请输入"
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/btn_patient_chat_send"

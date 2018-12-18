@@ -41,7 +41,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/vm_dimen_8"
                 android:background="@drawable/click_circle_transparent"
-                android:src="@drawable/ic_fullscreen_exit_24dp" />
+                android:src="@drawable/ic_fullscreen_exit_24dp"
+                android:contentDescription="最小化" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -80,7 +81,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/vm_dimen_8"
                 android:background="@drawable/click_circle_transparent"
-                android:src="@drawable/ic_info_outline_24dp" />
+                android:src="@drawable/ic_info_outline_24dp"
+                android:contentDescription="病史" />
         </RelativeLayout>
 
 
@@ -117,7 +119,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/click_circle_transparent"
-                    android:src="@drawable/ic_mic_off_24dp" />
+                    android:src="@drawable/ic_mic_off_24dp"
+                    android:contentDescription="麦克风" />
 
                 <!--扬声器开关-->
                 <ImageButton
@@ -125,7 +128,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/click_circle_transparent"
-                    android:src="@drawable/ic_volume_up_24dp" />
+                    android:src="@drawable/ic_volume_up_24dp"
+                    android:contentDescription="扬声器" />
 
                 <!--摄像头开关-->
                 <ImageButton
@@ -133,7 +137,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/click_circle_transparent"
-                    android:src="@drawable/ic_videocam_off_24dp" />
+                    android:src="@drawable/ic_videocam_off_24dp"
+                    android:contentDescription="摄像头" />
 
                 <!--切换摄像头-->
                 <ImageButton
@@ -143,7 +148,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/vm_dimen_16"
                     android:background="@drawable/click_circle_transparent"
-                    android:src="@drawable/ic_camera_change_24dp" />
+                    android:src="@drawable/ic_camera_change_24dp"
+                    android:contentDescription="切换" />
             </LinearLayout>
 
             <LinearLayout

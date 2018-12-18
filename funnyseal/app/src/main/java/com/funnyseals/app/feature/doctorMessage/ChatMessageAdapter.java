@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 import com.cpiz.android.bubbleview.BubbleTextView;
 import com.funnyseals.app.R;
-import com.funnyseals.app.custom_view.Portrait;
 import com.funnyseals.app.feature.MyApplication;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
@@ -31,7 +31,7 @@ public class ChatMessageAdapter extends BaseAdapter {
     private MyApplication   mApplication;
 
     private class ViewHolder {
-        private Portrait       portrait;
+        private ImageView      portrait;
         private BubbleTextView text;
     }
 
@@ -79,12 +79,11 @@ public class ChatMessageAdapter extends BaseAdapter {
         convertView.setTag(viewHolder);
 
         if (mApplication.getAccount().equals(message.getFrom())) {
-            viewHolder.portrait.setUserAccount(mApplication.getAccount()).setUrl(null);
+            viewHolder.portrait.setImageResource(R.drawable.user);
         } else {
-            viewHolder.portrait.setUserAccount(mMyfriend).setUrl(null);
+            viewHolder.portrait.setImageResource(R.drawable.user);
         }
 
-        viewHolder.portrait.show();
         viewHolder.text.setText(((EMTextMessageBody) message.getBody()).getMessage());
 
         return convertView;

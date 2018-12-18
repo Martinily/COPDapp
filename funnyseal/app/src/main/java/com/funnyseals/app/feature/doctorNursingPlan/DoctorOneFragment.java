@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -85,6 +86,7 @@ public class DoctorOneFragment extends Fragment {
         }
     };
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

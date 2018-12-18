@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"
-        />
+        android:src="@mipmap/applogo"
+        android:contentDescription="背景" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:layout_marginLeft="16dp"
                 android:background="@drawable/click_circle_transparent"
                 android:src="@drawable/ic_fullscreen_exit_24dp"
-                />
+                android:contentDescription="最小化" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,8 +89,8 @@
                 android:id="@+id/img_call_avatar"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:src="@mipmap/ic_launcher"
-                />
+                android:src="@mipmap/applogo"
+                android:contentDescription="头像" />
             <!--当前通话的账户名-->
             <TextView
                 android:id="@+id/text_call_username"
@@ -128,7 +128,7 @@
                     android:layout_margin="8dp"
                     android:background="@drawable/click_circle_transparent"
                     android:src="@drawable/ic_mic_off_24dp"
-                    />
+                    android:contentDescription="麦克风" />
 
                 <!--扬声器开关-->
                 <ImageButton
@@ -138,7 +138,7 @@
                     android:layout_margin="8dp"
                     android:background="@drawable/click_circle_transparent"
                     android:src="@drawable/ic_volume_up_24dp"
-                    />
+                    android:contentDescription="扬声器" />
 
             </LinearLayout>
 

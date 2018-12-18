@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:toolbar="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_doctor_chat"
@@ -54,20 +53,24 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
-            android:src="@drawable/ic_perm_phone_msg_black_24dp"/>
+            android:src="@drawable/ic_perm_phone_msg_black_24dp"
+            android:contentDescription="随访" />
 
         <ImageButton
             android:id="@+id/ibtn_nursingplan"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
-            android:src="@drawable/ic_assignment_black_24dp"/>
+            android:src="@drawable/ic_assignment_black_24dp"
+            android:contentDescription="问卷" />
+
         <ImageButton
             android:id="@+id/ibtn_video"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
-            android:src="@drawable/ic_videocam_black_24dp"/>
+            android:src="@drawable/ic_videocam_black_24dp"
+            android:contentDescription="问诊" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,7 +90,9 @@
             android:background="@drawable/bordered_edit_text"
             android:gravity="center_vertical"
             android:inputType="text"
-            android:minLines="1" />
+            android:minLines="1"
+            android:autofillHints="请输入"
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/btn_doctor_chat_send"

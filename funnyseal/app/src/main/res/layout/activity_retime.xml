@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/teal"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <Button
             android:id="@+id/quitit"

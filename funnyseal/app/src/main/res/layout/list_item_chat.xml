@@ -15,10 +15,11 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp">
 
-        <com.funnyseals.app.custom_view.Portrait
+        <ImageView
             android:id="@+id/chat_item_portrait"
             android:layout_width="48dp"
-            android:layout_height="48dp" />
+            android:layout_height="48dp"
+            android:contentDescription="头像" />
 
     </LinearLayout>
 

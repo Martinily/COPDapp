@@ -502,7 +502,7 @@ public class DoctorVideoCallActivity extends CallActivity {
         int h = t / 60 / 60;
         int m = t / 60 % 60;
         int s = t % 60 % 60;
-        String time = "";
+        String time;
         if (h > 9) {
             time = "" + h;
         } else {

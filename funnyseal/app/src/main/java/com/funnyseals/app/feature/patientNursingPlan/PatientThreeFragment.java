@@ -73,8 +73,7 @@ public class PatientThreeFragment extends Fragment {
             mThread = new Thread(runnable);
             mThread.start();
         }
-        View view = inflater.inflate(R.layout.fragment_patient_three, null);
-        return view;
+        return inflater.inflate(R.layout.fragment_patient_three, null);
     }
 
     private Runnable runnable = () -> {

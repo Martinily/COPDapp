@@ -16,10 +16,11 @@
         android:textColor="@android:color/white"
         app:bb_arrowDirection="None" />
 
-    <com.funnyseals.app.custom_view.Portrait
+    <ImageView
         android:id="@+id/chat_send_portrait"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@mipmap/avatar" />
+        android:src="@mipmap/avatar"
+        android:contentDescription="头像" />
 
 </LinearLayout>

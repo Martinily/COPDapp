@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="" />
+    <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../funnyseal/.idea/assetWizardSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/patientMessage/PatientVideoCallActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/patientMessage/PatientVideoCallActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_video_call.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_video_call.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-286">
-              <caret line="21" column="44" lean-forward="true" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+            <state relative-caret-position="352">
+              <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-646">
-              <caret line="42" column="56" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
+            <state relative-caret-position="220">
+              <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
               <folding>
                 <element signature="e#1410#2522#0" expanded="true" />
                 <element signature="e#1413#1450#0" expanded="true" />
@@ -101,8 +110,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -130,6 +137,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -262,16 +271,19 @@
       <workItem from="1545036438560" duration="1517000" />
       <workItem from="1545038096769" duration="501000" />
       <workItem from="1545112748922" duration="2272000" />
+      <workItem from="1545118203185" duration="619000" />
+      <workItem from="1545131626488" duration="613000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127880000" />
+    <option name="totallyTimeSpent" value="129112000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="878" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.20978552" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.14745308" />
       <window_info id="Structure" order="1" weight="0.18869936" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -280,7 +292,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32756132" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32756132" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -521,17 +533,17 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/as.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-286">
-          <caret line="21" column="44" lean-forward="true" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+        <state relative-caret-position="352">
+          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -540,8 +552,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-646">
-          <caret line="42" column="56" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
+        <state relative-caret-position="220">
+          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
           <folding>
             <element signature="e#1410#2522#0" expanded="true" />
             <element signature="e#1413#1450#0" expanded="true" />

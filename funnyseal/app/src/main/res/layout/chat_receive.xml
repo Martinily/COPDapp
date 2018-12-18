@@ -6,11 +6,12 @@
     android:layout_marginRight="64dp"
     android:orientation="horizontal">
 
-    <com.funnyseals.app.custom_view.Portrait
+    <ImageView
         android:id="@+id/chat_receive_portrait"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@mipmap/avatar" />
+        android:src="@mipmap/avatar"
+        android:contentDescription="头像" />
 
     <com.cpiz.android.bubbleview.BubbleTextView
         android:id="@+id/chat_receive_text"

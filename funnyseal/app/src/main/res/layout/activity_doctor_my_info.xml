@@ -50,7 +50,8 @@
         android:layout_above="@+id/textView10"
         android:layout_below="@id/tv_doctor_info_title"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/portrait" />
+        android:src="@drawable/portrait"
+        android:contentDescription="头像" />
 
     <TextView
         android:id="@+id/tv_doctor_info_name"
@@ -234,7 +235,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@null"
-        android:src="@drawable/ic_chevron_right_black_24dp" />
+        android:src="@drawable/ic_chevron_right_black_24dp"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/imageButton1"
