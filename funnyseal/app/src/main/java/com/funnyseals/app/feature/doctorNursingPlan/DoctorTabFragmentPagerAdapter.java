@@ -6,12 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * <pre>
- *     author : marin
  *     time   : 2018/11/30
  *     desc   :fragment'sets
- *     version: 1.0
- * </pre>
  */
 public class DoctorTabFragmentPagerAdapter extends FragmentPagerAdapter {
     private FragmentManager mFragmentManager;

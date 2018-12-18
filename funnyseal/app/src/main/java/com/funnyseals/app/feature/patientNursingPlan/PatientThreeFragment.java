@@ -33,33 +33,14 @@ import java.util.Map;
  * 患者端three fragment about sports
  */
 public class PatientThreeFragment extends Fragment {
-    private static Connection                CONN;
     private        MyApplication             mApplication;
     private        List<SportsPlan>          mSportsPlans;
     //将数据封装成数据源
     private        List<Map<String, Object>> mSports_list = new ArrayList<>();
-    private        Thread                    mThread;
-    @SuppressLint("HandlerLeak")
-    private        Handler                   mHandler     = new Handler() {
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                mSportsPlans = (List<SportsPlan>) msg.obj;
-
-                for (SportsPlan p : mSportsPlans) {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("sportstitle", p.getSportsName());
-                    map.put("sportsimg", R.drawable.sports);
-                    map.put("sportscontent", p.getSportsTracks());
-                    map.put("sportsattention", p.getSportsNote());
-                    map.put("sportstime", "10:00");
-                    mSports_list.add(map);
-                }
-
-                ListView listview = getActivity().findViewById(R.id.listViewsports);
-                listview.setAdapter(new MyAdapter());
-            }
-        }
-    };
+    private List<String>  mSports_Titles=new ArrayList<>();//名称
+    private List<String>  mSports_Contents=new ArrayList<>();  //时长
+    private List<String>  mSports_attentions=new ArrayList<>();//注意事项
+    private String[] sports_time={"10:00", "2:00", "3:00", "4:00", "3:00", "2:00", "1:00", "2:00", "3:00"}; //最近的时间
 
     @Override
     public void onResume() {
@@ -69,53 +50,39 @@ public class PatientThreeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if (mThread == null) {
-            mThread = new Thread(runnable);
-            mThread.start();
-        }
         View view = inflater.inflate(R.layout.fragment_patient_three, null);
         return view;
     }
 
-    private Runnable runnable = () -> {
-        try {
-            CONN = UserDao.getConnection();
-            mApplication = (MyApplication) getActivity().getApplication();
-            String id = mApplication.getAccount();
-            if (CONN != null) {
-                PreparedStatement statement = CONN.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
-                statement.setString(1, id);
-                ResultSet rs = statement.executeQuery();
-                if (rs.next()) {
-                    PreparedStatement sportsS = CONN.prepareStatement("SELECT * FROM HLJHYD WHERE HLJH_BH=?");
-                    sportsS.setString(1, rs.getString(1));
-                    rs = sportsS.executeQuery();
-                    mSportsPlans = new ArrayList<>();
-                    while (rs.next()) {
-                        mSportsPlans.add(new SportsPlan(rs.getString("HLJHYD_YDZL"), rs.getString("HLJHYD_JYSJ"), rs.getString("HLJHYD_ZYSX")));
-                    }
-                    Message message = Message.obtain();
-                    message.what = 0;
-                    message.obj = mSportsPlans;
-                    mHandler.sendMessage(message);
-                    CONN.close();
-                    sportsS.close();
-                    rs.close();
-                    statement.close();
-                }
-            } else {
-                System.err.println("警告: DbConnectionManager.getConnection() 获得数据库链接失败.");
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    };
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
 
+        mSports_Titles=((PatientNursingPlanFragment)(PatientThreeFragment.this.getParentFragment())).getmSports_Titles();
+        mSports_Contents=((PatientNursingPlanFragment)(PatientThreeFragment.this.getParentFragment())).getmSports_Contents();
+        mSports_attentions=((PatientNursingPlanFragment)(PatientThreeFragment.this.getParentFragment())).getmSports_attentions();
+
+        int size = mSports_Titles.size();
+        int size2 = mSports_Contents.size();
+        int size3 = mSports_attentions.size();
+
+        String[] sports_Title = (String[]) mSports_Titles.toArray(new String[size]);
+        String[] sports_Content = (String[]) mSports_Contents.toArray(new String[size2]);
+        String[] sports_attention = (String[]) mSports_attentions.toArray(new String[size3]);
+
+
+        for(int i=0;i<sports_Title.length;i++){
+            Map<String,Object> map=new HashMap<String, Object>();
+            map.put("sportstitle",sports_Title[i]);
+            map.put("sportsimg",R.drawable.sports);
+            map.put("sportscontent",sports_Content[i]);
+            map.put("sportsattention",sports_attention[i]);
+            map.put("sportstime",sports_time[i]);
+            mSports_list.add(map);
+        }
+        ListView listview = getActivity().findViewById(R.id.listViewsports);
+        listview.setAdapter(new MyAdapter());
+    }
 
     //当前card的adapter
     class MyAdapter extends BaseAdapter {
@@ -161,6 +128,9 @@ public class PatientThreeFragment extends Fragment {
             Button moretime = view.findViewById(R.id.moresportstime);
             moretime.setOnClickListener(v -> {
                 Intent intent = new Intent(getActivity(), SportsRetimeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putCharSequence("sportstitle", mSports_list.get(position).get("sportstitle").toString());
+                intent.putExtras(bundle);
                 startActivity(intent);
             });
             return view;

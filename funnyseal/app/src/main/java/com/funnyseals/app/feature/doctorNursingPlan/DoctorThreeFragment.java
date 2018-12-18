@@ -29,11 +29,9 @@ import static com.funnyseals.app.R.id.edit_sports;
  */
 public class DoctorThreeFragment extends Fragment {
     private EditText mEditText;
-    private Context  mContext;
     private ListView mListView;
     private MyListViewAdapter mListViewAdapter;
     private List<Bean> mSportsBeanList = new ArrayList<Bean>();
-    private int mSportssave = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -57,7 +55,7 @@ public class DoctorThreeFragment extends Fragment {
                         .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                     //my action here
                     mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_less_black_24dp), null);
-                    showListPopulWindow();
+                    ShowListPopulWindow();
                     return true;
                 }
             }
@@ -65,7 +63,7 @@ public class DoctorThreeFragment extends Fragment {
         });
         mEditText.setOnFocusChangeListener((view, b) -> {
             if (b) {
-                showListPopulWindow();
+                ShowListPopulWindow();
             }
         });
 
@@ -81,16 +79,11 @@ public class DoctorThreeFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                if(mSportssave==0) {
-                    savesportsMessage();
-                }
-                else
-                    saveButton.setEnabled(false);
+                    SavesportsMessage();
             }
         });
 
         mListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            if(mSportssave==0) {
                 Bean sportsBean = mSportsBeanList.get(position);
                 String sportsname = sportsBean.getName();
                 String sportscontent = sportsBean.getContent();
@@ -103,24 +96,6 @@ public class DoctorThreeFragment extends Fragment {
                 bundle.putCharSequence("sportsattention", sportsattention);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 1000);
-            }
-        });
-        final Button sportssaveall = (Button) getActivity().findViewById(R.id.saveallsports);
-        sportssaveall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要保存吗？保存后不可更改")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getActivity(), "已保存", Toast.LENGTH_SHORT).show();
-                                sportssaveall.setTextColor(0xFFD0EFC6);
-                                sportssaveall.setEnabled(false);
-                                mSportssave=1;
-                                //((MainActivity)getActivity()).setmtestsports("1");
-                            }
-                        }).show();
-            }
         });
     }
 
@@ -138,10 +113,8 @@ public class DoctorThreeFragment extends Fragment {
         }
     }
 
-    /**
-     * 下拉列表
-     */
-    private void showListPopulWindow() {
+     //edit下拉列表
+    private void ShowListPopulWindow() {
         final String[] list = {"跑步", "游泳", "羽毛球", "快走"};
         final ListPopupWindow listPopupWindow;
         listPopupWindow = new ListPopupWindow(getActivity());
@@ -157,21 +130,22 @@ public class DoctorThreeFragment extends Fragment {
         listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
     }
 
-    public void showInfo(final int position) {
+    //删除已添加药物
+    public void ShowInfo(final int position) {
         new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要删除吗？")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mSportsBeanList.remove(position);
+                        ((DoctorNursingPlanFragment)(DoctorThreeFragment.this.getParentFragment())).ChangemPlannum(-1);
                         mListViewAdapter.notifyDataSetChanged();
+                        ((DoctorNursingPlanFragment)(DoctorThreeFragment.this.getParentFragment())).deletemAllSportsItem(position);
                     }
                 }).show();
     }
 
-    /**
-     * 保存信息
-     */
-    private void savesportsMessage() {
+     //保存添加的运动到列表
+    private void SavesportsMessage() {
         EditText nameEditText = getActivity().findViewById(edit_sports);
 
         if (StringUtils.isEmpty(nameEditText.getText().toString())) {
@@ -187,16 +161,18 @@ public class DoctorThreeFragment extends Fragment {
         }
 
         Bean sportsBean = new Bean(nameEditText.getText().toString());
+        sportsBean.setcontent("");
+        sportsBean.setattention("");
         mSportsBeanList.add(sportsBean);
-        ((DoctorNursingPlanFragment)(DoctorThreeFragment.this.getParentFragment())).setAllSportsItem(sportsBean);
+        ((DoctorNursingPlanFragment)(DoctorThreeFragment.this.getParentFragment())).ChangemPlannum(1);
+        ((DoctorNursingPlanFragment)(DoctorThreeFragment.this.getParentFragment())).setmAllSportsItem(sportsBean);
         //((MainActivity)getActivity()).setmtestsports("0");
         mListViewAdapter.notifyDataSetChanged();
     }
 
+    //列表适配器
     public class MyListViewAdapter extends BaseAdapter {
-        /**
-         * Context
-         */
+
         private Context mContext;
 
         /**
@@ -228,7 +204,6 @@ public class DoctorThreeFragment extends Fragment {
             return 0;
         }
 
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = null;
@@ -254,20 +229,15 @@ public class DoctorThreeFragment extends Fragment {
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mSportssave==0){
                         deleteButtonAction(removePosition);
                         mListViewAdapter.notifyDataSetChanged();
-                    }
-                    else {
-                        deleteButton.setEnabled(false);
-                    }
                 }
             });
             return view;
         }
 
         public void deleteButtonAction(int position) {
-            showInfo(position);
+            ShowInfo(position);
             notifyDataSetChanged();
         }
 

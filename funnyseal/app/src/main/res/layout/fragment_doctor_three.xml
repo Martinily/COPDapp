@@ -45,15 +45,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
-    <Button
-        android:id="@+id/saveallsports"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/teal"
-        android:text="保存"
-        android:textColor="@color/white"
-        android:layout_marginRight="10dp"
-        />
-
 </LinearLayout>

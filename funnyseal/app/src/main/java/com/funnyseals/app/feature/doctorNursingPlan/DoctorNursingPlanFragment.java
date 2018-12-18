@@ -1,19 +1,33 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.patientNursingPlan.MedicineRetimeActivity;
+import com.funnyseals.app.util.SocketUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +40,14 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     private TextView   mTv_doctor_three;
     private ViewPager  mVp_doctor_myviewpage;
     private Button     mBtnSend;
-    private String     planID;
+    private Button     mBtnHistory;
+    private int mPlannum = 0;
+    private String     mDoctorID="11111";//传入的医生编号
     private List<Bean> mAllMedicineItem;
     private List<Bean> mAllInstrumentItem;
     private List<Bean> mAllSportsItem;
+    private String mPatientId;//患者id
+    private String mJudgesubmmit;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,7 +70,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         mTv_doctor_three.setOnClickListener(this);
         mVp_doctor_myviewpage.setOnPageChangeListener(new MyPagerChangeListener());
         mBtnSend.setOnClickListener(this);
-
+        mBtnHistory.setOnClickListener(this);
         //把Fragment添加到List集合里面
         List<Fragment> mList = new ArrayList<>();
         mList.add(new DoctorOneFragment());
@@ -64,6 +82,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         mTv_doctor_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
     }
 
+    //点击事件的集合
     @Override
     public void onClick(View v) {
 
@@ -86,24 +105,144 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 mTv_doctor_two.setBackgroundColor(Color.WHITE);
                 mTv_doctor_three.setBackgroundColor(Color.LTGRAY);
                 break;
-            case R.id.send:
-                for (Bean Medicine : mAllMedicineItem) {
-                    System.err.println(Medicine.getName());
-                    System.err.println(Medicine.getContent());
-                    System.err.println(Medicine.getAttention());
-                    System.err.println(Medicine.gettime());
+            case R.id.doctorhistory:  //查看历史计划
+                Intent intent = new Intent(getActivity(), DoctorHistoryActivity.class);
+                //传输医生编号
+                Bundle bundle = new Bundle();
+                bundle.putString("DoctorID", mDoctorID);//医生id
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+            case R.id.send:   //发送计划
+                if(mPlannum>0){
+                    Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);
+                    //传输医生编号
+                    Bundle bundle2= new Bundle();
+                    bundle2.putString("DoctorID", mDoctorID);//医生id
+                    intent2.putExtras(bundle2);
+                    startActivityForResult(intent2,1000);
                 }
-                for (Bean Instrument : mAllInstrumentItem) {
-                    System.err.println(Instrument.getName());
-                    System.err.println(Instrument.getContent());
-                    System.err.println(Instrument.getAttention());
-                }
-                for (Bean Sports : mAllSportsItem) {
-                    System.err.println(Sports.getName());
-                    System.err.println(Sports.getContent());
-                    System.err.println(Sports.getAttention());
+                else{
+                    Toast.makeText(getActivity(),"当前计划为空！", Toast.LENGTH_SHORT).show();
                 }
                 break;
+        }
+    }
+
+    //接收患者列表返回的患者Id
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && resultCode == 1001) {
+            mPatientId = data.getStringExtra("patientid");
+
+            Thread thread=new Thread(() -> {
+                Socket socket;
+                JSONArray nursingplan=new JSONArray();
+                JSONObject jsonObject=new JSONObject();
+                MyApplication application=(MyApplication) getActivity().getApplication();
+                try {
+                    jsonObject.put("request_type","3");
+                    //jsonObject.put("docID",application.getAccount());
+                    jsonObject.put("docID",mDoctorID);// mDoctorID
+                    jsonObject.put("pID",mPatientId );  //mPatientId
+                    socket=SocketUtil.getSendSocket();
+                    DataOutputStream out =new DataOutputStream(socket.getOutputStream());
+                    out.writeUTF(jsonObject.toString());
+                    out.close();
+
+                    Thread.sleep(1000);
+
+                    for (Bean Medicine : mAllMedicineItem) {
+                        JSONObject medicine=new JSONObject();
+                        medicine.put("item_type","med");
+                        medicine.put("mName",Medicine.getName());
+                        if(Medicine.getContent().isEmpty()){
+                            medicine.put("mDose","-");
+                        }else{
+                            medicine.put("mDose",Medicine.getContent());
+                        }
+                        if(Medicine.getAttention().isEmpty()){
+                            medicine.put("mAttention","-");
+                        }else{
+                            medicine.put("mAttention",Medicine.getAttention());
+                        }
+                        if(Medicine.gettime().equals("000000")){
+                            medicine.put("mTime","-");
+                            System.err.println("meiyou");
+                        }
+                        else{
+                            medicine.put("mTime",Medicine.gettime());
+                        }
+                        nursingplan.put(medicine);
+                    }
+                    for (Bean Instrument : mAllInstrumentItem) {
+                        JSONObject instrument=new JSONObject();
+                        instrument.put("item_type","app");
+                        instrument.put("appName",Instrument.getName());
+                        if(Instrument.getAttention().isEmpty()){
+                            instrument.put("appAttention","-");
+                        } else{
+                            instrument.put("appAttention",Instrument.getAttention());
+                        }
+                        if(Instrument.getContent().isEmpty()){
+                            instrument.put("appTime","-");
+                        }else{
+                            instrument.put("appTime",Instrument.getContent());
+                        }
+                        nursingplan.put(instrument);
+                    }
+                    for (Bean Sports : mAllSportsItem) {
+                        JSONObject sport=new JSONObject();
+                        sport.put("item_type","sports");
+                        sport.put("sType",Sports.getName());
+                        if(Sports.getAttention().isEmpty()){
+                            sport.put("sAttention","-");
+                        } else{
+                            sport.put("sAttention",Sports.getAttention());
+                        }
+                        if(Sports.getContent().isEmpty()){
+                            sport.put("sTime","-");
+                        }else{
+                            sport.put("sTime",Sports.getContent());
+                        }
+                        nursingplan.put(sport);
+                    }
+
+                    socket=SocketUtil.getArraySendSocket();
+                    System.err.println(socket.isConnected());
+                    out =new DataOutputStream(socket.getOutputStream());
+                    out.writeUTF(nursingplan.toString());
+                    out.close();
+
+                    Thread.sleep(1000);
+
+                    socket=SocketUtil.getGetSocket();
+                    DataInputStream dataInputStream=new DataInputStream(socket.getInputStream());
+                    dataInputStream=new DataInputStream(socket.getInputStream());
+                    String message=dataInputStream.readUTF();
+                    System.err.println(message);
+
+                    JSONObject jsonObject3=new JSONObject(message);
+                   mJudgesubmmit=jsonObject3.getString("item_result");
+
+                    socket.close();
+                } catch (JSONException | IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Thread.interrupted();
+            });
+            thread.start();
+            while(thread.isAlive()){
+
+            }
+
+            if(mJudgesubmmit.equals("true")) {
+                Toast.makeText(getActivity(), "发送成功", Toast.LENGTH_SHORT).show();
+            } else{
+                Toast.makeText(getActivity(), "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
+            }
+            System.err.println(mPatientId);
         }
     }
 
@@ -113,11 +252,10 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         mTv_doctor_three = getActivity().findViewById(R.id.tv_doctor_three);
         mVp_doctor_myviewpage = getActivity().findViewById(R.id.vp_doctor_myViewPager);
         mBtnSend = getActivity().findViewById(R.id.send);
+        mBtnHistory=getActivity().findViewById(R.id.doctorhistory);
     }
 
-    /**
-     * 设置一个ViewPager的侦听事件，当左右滑动ViewPager时菜单栏被选中状态跟着改变
-     */
+    //设置一个ViewPager的侦听事件，当左右滑动ViewPager时菜单栏被选中状态跟着改变
     public class MyPagerChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
@@ -128,6 +266,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         public void onPageScrolled(int arg0, float arg1, int arg2) {
         }
 
+        //页面选中时的颜色变化
         @Override
         public void onPageSelected(int arg0) {
             switch (arg0) {
@@ -150,15 +289,35 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         }
     }
 
-    public void setAllMedicineItem(Bean item) {
+    //添加和删除药物器械运动对象
+    public void setmAllMedicineItem(Bean item) {
         mAllMedicineItem.add(item);
     }
 
-    public void setAllInstrumentItem(Bean item) {
+    public void deletemAllMedicineItem(int position ) {
+        mAllMedicineItem.remove(position);
+    }
+
+    public void setmAllInstrumentItem(Bean item) {
         mAllInstrumentItem.add(item);
     }
 
-    public void setAllSportsItem(Bean item) {
+    public void deletemAllInstrumentItem(int position ) {
+        mAllInstrumentItem.remove(position);
+    }
+
+    public void setmAllSportsItem(Bean item) {
         mAllSportsItem.add(item);
+    }
+
+    public void deletemAllSportsItem(int position ) {
+        mAllSportsItem.remove(position);
+    }
+
+    //当前添加的总条目数，用于以后判断是否为空计划
+    public void ChangemPlannum(int i)
+    {
+        mPlannum+=i;
+        Toast.makeText(getActivity(), mPlannum+"", Toast.LENGTH_SHORT).show();
     }
 }

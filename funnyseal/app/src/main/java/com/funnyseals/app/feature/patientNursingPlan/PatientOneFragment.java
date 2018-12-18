@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.doctorNursingPlan.DoctorNursingPlanFragment;
+import com.funnyseals.app.feature.doctorNursingPlan.DoctorOneFragment;
 import com.funnyseals.app.model.MedicinePlan;
 import com.funnyseals.app.model.UserDao;
 
@@ -38,87 +40,71 @@ public class PatientOneFragment extends Fragment {
     private        List<MedicinePlan>        mMedicinePlans;
     //将数据封装成数据源
     private        List<Map<String, Object>> mMedicine_list = new ArrayList<Map<String, Object>>();
-    private        Thread                    mThread;
-
-    //用于执行数据库线程
-    @SuppressLint("HandlerLeak")
-    private        Handler                   mHandler       = new Handler() {
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                mMedicinePlans = (List<MedicinePlan>) msg.obj;
-
-
-                for (MedicinePlan p : mMedicinePlans) {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("medicinetitle", p.getMedicineName());
-                    map.put("medicineimg", R.drawable.pillow);
-                    map.put("medicinecontent", p.getMedicineDose());
-                    map.put("medicineattention", p.getMedicineNote());
-                    map.put("medicinetime", "10:00");
-                    map.put("realMedicineTime", p.getMedicineTime());
-                    mMedicine_list.add(map);
-                }
-
-                ListView listview = getActivity().findViewById(R.id.listViewmedicine);
-                listview.setAdapter(new MyAdapter());
-            }
-        }
-    };
-
-    @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        if (mThread == null) {
-            mThread = new Thread(runnable);
-            mThread.start();
-        }
-        return inflater.inflate(R.layout.fragment_patient_one, null);
-    }
+    private List<String> mMedicine_Titles=new ArrayList<>();
+    private List<String> mMedicine_Contents=new ArrayList<>();
+    private List<String> mMedicine_attentions=new ArrayList<>();
+    private List<String> mMedicine_needtimes=new ArrayList<>();
 
     @Override
     public void onResume() {
         super.onResume();
     }
 
-    private Runnable runnable = () -> {
-        try {
-            CONN = UserDao.getConnection();
-            mApplication = (MyApplication) getActivity().getApplication();
-            String id = mApplication.getAccount();
-            if (CONN != null) {
-                PreparedStatement statement = CONN.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
-                statement.setString(1, id);
-                ResultSet rs = statement.executeQuery();
-                if (rs.next()) {
-                    PreparedStatement medicineS = CONN.prepareStatement("SELECT * FROM HLJHYW WHERE HLJH_BH=?");
-                    medicineS.setString(1, rs.getString(1));
-                    rs = medicineS.executeQuery();
-                    mMedicinePlans = new ArrayList<>();
-                    while (rs.next()) {
-                        mMedicinePlans.add(new MedicinePlan(rs.getString("HLJHYW_YWMC"), rs.getString("HLJHYW_YWJL"), rs.getString("HLJHYW_ZYSX"), rs.getString("HLJHYW_FYSJ")));
-                    }
-                    Message message = Message.obtain();
-                    message.what = 0;
-                    message.obj = mMedicinePlans;
-                    mHandler.sendMessage(message);
-                    CONN.close();
-                    medicineS.close();
-                    rs.close();
-                    statement.close();
-                }
-            } else {
-                System.err.println("警告: DbConnectionManager.getConnection() 获得数据库链接失败.");
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    };
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_patient_one, null);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mMedicine_Titles=((PatientNursingPlanFragment)(PatientOneFragment.this.getParentFragment())).getmMedicine_Titles();
+        mMedicine_Contents=((PatientNursingPlanFragment)(PatientOneFragment.this.getParentFragment())).getmMedicine_Contents();
+        mMedicine_attentions=((PatientNursingPlanFragment)(PatientOneFragment.this.getParentFragment())).getmMedicine_attentions();
+        mMedicine_needtimes=((PatientNursingPlanFragment)(PatientOneFragment.this.getParentFragment())).getmMedicine_needtimes();
+        System.err.println(mMedicine_Titles);
+        int size = mMedicine_Titles.size();
+        int size2 = mMedicine_Contents.size();
+        int size3 = mMedicine_attentions.size();
+        int size4 = mMedicine_needtimes.size();
+
+        String[] medicine_Title = (String[]) mMedicine_Titles.toArray(new String[size]);
+        String[] medicine_Content = (String[]) mMedicine_Contents.toArray(new String[size2]);
+        String[] medicine_attention = (String[]) mMedicine_attentions.toArray(new String[size3]);
+        String[] medicine_needtime = (String[]) mMedicine_needtimes.toArray(new String[size4]);
+
+        for(int i=0;i<medicine_Title.length;i++){
+            Map<String,Object> map=new HashMap<String, Object>();
+            map.put("medicinetitle",medicine_Title[i]);
+            map.put("medicineimg",R.drawable.pillow);
+            map.put("medicinecontent",medicine_Content[i]);
+            map.put("medicineattention",medicine_attention[i]);
+            String needtime="";
+            if(medicine_needtime[i].equals("-")) {
+                needtime="-";
+            }else{
+                if(medicine_needtime[i].charAt(0)=='1')
+                    needtime+="早饭前 ";
+                if(medicine_needtime[i].charAt(1)=='1')
+                    needtime+="早饭后 ";
+                if(medicine_needtime[i].charAt(2) =='1')
+                    needtime+="午饭前 ";
+                if(medicine_needtime[i].charAt(3)=='1')
+                    needtime+="午饭后 ";
+                if(medicine_needtime[i].charAt(4)=='1')
+                    needtime+="晚饭前 ";
+                if(medicine_needtime[i].charAt(5)=='1')
+                    needtime+="晚饭后 ";
+            }
+            map.put("realMedicineTime",needtime);
+            System.err.println(needtime);
+            mMedicine_list.add(map);
+
+        }
+        ListView listview = getActivity().findViewById(R.id.listViewmedicine);
+        listview.setAdapter(new MyAdapter());
     }
 
     //当前card adapter
@@ -160,15 +146,14 @@ public class PatientOneFragment extends Fragment {
             mHolder.mCardmedicine_image.setImageResource((int) mMedicine_list.get(position).get("medicineimg"));
             mHolder.mCardmedicine_content.setText(mMedicine_list.get(position).get("medicinecontent").toString());
             mHolder.mCardmedicine_attention.setText(mMedicine_list.get(position).get("medicineattention").toString());
-            mHolder.mCardmedicine_time.setText(mMedicine_list.get(position).get("medicinetime").toString());
-            final String medicinenametime = mMedicine_list.get(position).get("realMedicineTime").toString();
+            mHolder.mCardmedicine_time.setText(mMedicine_list.get(position).get("realMedicineTime").toString());
             System.err.println(mMedicine_list.get(position).get("realMedicineTime").toString());
-            Button moretime = view.findViewById(R.id.moremedicinetime);
 
+            Button moretime = view.findViewById(R.id.moremedicinetime);
             moretime.setOnClickListener(v -> {
                 Intent intent = new Intent(getActivity(), MedicineRetimeActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putCharSequence("medicinenametime", medicinenametime);
+                bundle.putCharSequence("medicinetitle", mMedicine_list.get(position).get("medicinetitle").toString());
                 intent.putExtras(bundle);
                 startActivity(intent);
             });
