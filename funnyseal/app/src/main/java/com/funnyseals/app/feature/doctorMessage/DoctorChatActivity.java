@@ -162,7 +162,7 @@ public class DoctorChatActivity extends AppCompatActivity {
         });
 
         mVideo.setOnClickListener(v -> {
-            Intent intent = new Intent(DoctorChatActivity.this, VideoCallActivity.class);
+            Intent intent = new Intent(DoctorChatActivity.this, DoctorVideoCallActivity.class);
             CallManager.getInstance().setChatId(mMyfriend);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);

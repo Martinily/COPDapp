@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.funnyseals.app">
+
     <!-- 硬件功能请求 -->
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -41,7 +42,6 @@
     <!-- 悬浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
     <uses-permission android:name="android.permission.READ_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -111,8 +111,9 @@
         <activity android:name=".feature.patientMessage.PatientChatActivity" />
         <activity android:name=".feature.list.UserInfoActivity" />
         <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
-        <activity android:name=".feature.doctorMessage.VideoCallActivity" />
+        <activity android:name=".feature.doctorMessage.DoctorVideoCallActivity" />
         <activity android:name=".feature.doctorMessage.CallActivity" />
+        <activity android:name=".feature.patientMessage.PatientVideoCallActivity"></activity>
     </application>
 
 </manifest>

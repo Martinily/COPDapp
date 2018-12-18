@@ -526,7 +526,7 @@ public class CallManager {
         builder.setContentTitle(context.getString(R.string.app_name));
         Intent intent = new Intent();
         if (callType == CallType.VIDEO) {
-            intent.setClass(context, VideoCallActivity.class);
+            intent.setClass(context, DoctorVideoCallActivity.class);
         } else {
             intent.setClass(context, VoiceCallActivity.class);
         }

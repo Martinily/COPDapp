@@ -112,7 +112,7 @@ public class FloatWindow {
                         .getCallType() == CallManager.CallType.VOICE) {
                     intent.setClass(context, VoiceCallActivity.class);
                 } else {
-                    intent.setClass(context, VideoCallActivity.class);
+                    intent.setClass(context, DoctorVideoCallActivity.class);
                 }
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

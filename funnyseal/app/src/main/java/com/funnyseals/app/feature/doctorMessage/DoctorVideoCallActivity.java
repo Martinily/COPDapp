@@ -30,40 +30,40 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VideoCallActivity extends CallActivity {
+public class DoctorVideoCallActivity extends CallActivity {
 
     // 使用 ButterKnife 注解的方式获取控件
-    @BindView(R.id.layout_root)
+    @BindView(R.id.layout_doctor_video)
     View                 rootView;
-    @BindView(R.id.layout_call_control)
+    @BindView(R.id.layout_doctor_call_control)
     View                 controlLayout;
-    @BindView(R.id.layout_surface_container)
+    @BindView(R.id.layout_doctor_surface_container)
     RelativeLayout       surfaceLayout;
-    @BindView(R.id.surface_view)
+    @BindView(R.id.surface_doctor_view)
     SurfaceView          surfaceView;
-    @BindView(R.id.btn_exit_full_screen)
+    @BindView(R.id.btn_doctor_exit_full_screen)
     ImageButton          exitFullScreenBtn;
-    @BindView(R.id.text_call_state)
+    @BindView(R.id.text_doctor_call_state)
     TextView             callStateView;
-    @BindView(R.id.text_call_time)
+    @BindView(R.id.text_doctor_call_time)
     TextView             callTimeView;
-    @BindView(R.id.btn_call_info)
+    @BindView(R.id.btn_doctor_call_info)
     ImageButton          callInfoBtn;
-    @BindView(R.id.text_call_info)
+    @BindView(R.id.text_doctor_call_info)
     TextView             callInfoView;
-    @BindView(R.id.btn_mic_switch)
+    @BindView(R.id.btn_doctor_mic_switch)
     ImageButton          micSwitch;
-    @BindView(R.id.btn_camera_switch)
+    @BindView(R.id.btn_doctor_camera_switch)
     ImageButton          cameraSwitch;
-    @BindView(R.id.btn_speaker_switch)
+    @BindView(R.id.btn_doctor_speaker_switch)
     ImageButton          speakerSwitch;
-    @BindView(R.id.btn_change_camera_switch)
+    @BindView(R.id.btn_doctor_change_camera_switch)
     ImageButton          changeCameraSwitch;
-    @BindView(R.id.fab_reject_call)
+    @BindView(R.id.fab_doctor_reject_call)
     FloatingActionButton rejectCallFab;
-    @BindView(R.id.fab_end_call)
+    @BindView(R.id.fab_doctor_end_call)
     FloatingActionButton endCallFab;
-    @BindView(R.id.fab_answer_call)
+    @BindView(R.id.fab_doctor_answer_call)
     FloatingActionButton answerCallFab;
     // 视频通话帮助类
     private EMVideoCallHelper           videoCallHelper;
@@ -82,7 +82,7 @@ public class VideoCallActivity extends CallActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_call);
+        setContentView(R.layout.activity_doctor_video_call);
 
         ButterKnife.bind(this);
 
@@ -152,48 +152,48 @@ public class VideoCallActivity extends CallActivity {
      * 界面控件点击监听器
      */
     @OnClick({
-            R.id.layout_call_control, R.id.btn_exit_full_screen, R.id.btn_call_info,
-            R.id.btn_mic_switch, R.id.btn_camera_switch, R.id.btn_speaker_switch,
-            R.id.btn_change_camera_switch, R.id.fab_reject_call, R.id.fab_end_call,
-            R.id.fab_answer_call
+            R.id.layout_doctor_call_control, R.id.btn_doctor_exit_full_screen, R.id.btn_doctor_call_info,
+            R.id.btn_doctor_mic_switch, R.id.btn_doctor_camera_switch, R.id.btn_doctor_speaker_switch,
+            R.id.btn_doctor_change_camera_switch, R.id.fab_doctor_reject_call, R.id.fab_doctor_end_call,
+            R.id.fab_doctor_answer_call
     })
     void onClick (View v) {
         switch (v.getId()) {
-            case R.id.layout_call_control:
+            case R.id.layout_doctor_call_control:
                 onControlLayout();
                 break;
-            case R.id.btn_exit_full_screen:
+            case R.id.btn_doctor_exit_full_screen:
                 // 最小化通话界面
                 exitFullScreen();
                 break;
-            case R.id.btn_call_info:
+            case R.id.btn_doctor_call_info:
                 callInfoMonitor();
                 break;
-            case R.id.btn_mic_switch:
+            case R.id.btn_doctor_mic_switch:
                 // 麦克风开关
                 onMicrophone();
                 break;
-            case R.id.btn_camera_switch:
+            case R.id.btn_doctor_camera_switch:
                 // 摄像头开关
                 onCamera();
                 break;
-            case R.id.btn_speaker_switch:
+            case R.id.btn_doctor_speaker_switch:
                 // 扬声器开关
                 onSpeaker();
                 break;
-            case R.id.btn_change_camera_switch:
+            case R.id.btn_doctor_change_camera_switch:
                 // 切换摄像头
                 changeCamera();
                 break;
-            case R.id.fab_end_call:
+            case R.id.fab_doctor_end_call:
                 // 结束通话
                 endCall();
                 break;
-            case R.id.fab_reject_call:
+            case R.id.fab_doctor_reject_call:
                 // 拒绝接听通话
                 rejectCall();
                 break;
-            case R.id.fab_answer_call:
+            case R.id.fab_doctor_answer_call:
                 // 接听通话
                 answerCall();
                 break;
