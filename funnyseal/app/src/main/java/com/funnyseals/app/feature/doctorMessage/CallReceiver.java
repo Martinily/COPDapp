@@ -40,7 +40,7 @@ public class CallReceiver extends BroadcastReceiver {
         if (callType.equals("video")) {
             // 设置当前通话类型为视频通话
             CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);
-            callIntent.setClass(context, VideoCallActivity.class);
+            callIntent.setClass(context, DoctorVideoCallActivity.class);
         } else if (callType.equals("voice")) {
             // 设置当前通话类型为语音通话
             CallManager.getInstance().setCallType(CallManager.CallType.VOICE);

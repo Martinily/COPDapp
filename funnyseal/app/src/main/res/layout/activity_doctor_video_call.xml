@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_root"
+    android:id="@+id/layout_doctor_video"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -11,19 +11,19 @@
 
     <!--通话界面容器-->
     <RelativeLayout
-        android:id="@+id/layout_surface_container"
+        android:id="@+id/layout_doctor_surface_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true" />
 
     <SurfaceView
-        android:id="@+id/surface_view"
+        android:id="@+id/surface_doctor_view"
         android:layout_width="@dimen/vm_dimen_128"
         android:layout_height="@dimen/vm_dimen_128" />
 
     <!--控制按钮层布局-->
     <RelativeLayout
-        android:id="@+id/layout_call_control"
+        android:id="@+id/layout_doctor_call_control"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
@@ -35,7 +35,7 @@
             android:layout_marginTop="24dp">
             <!--界面最小化按钮-->
             <ImageButton
-                android:id="@+id/btn_exit_full_screen"
+                android:id="@+id/btn_doctor_exit_full_screen"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentLeft="true"
@@ -52,7 +52,7 @@
 
                 <!--通话状态-->
                 <TextView
-                    android:id="@+id/text_call_state"
+                    android:id="@+id/text_doctor_call_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:shadowColor="@color/vm_black_54"
@@ -62,7 +62,7 @@
                     android:textColor="@color/vm_white_87" />
                 <!--通话时间-->
                 <TextView
-                    android:id="@+id/text_call_time"
+                    android:id="@+id/text_doctor_call_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:shadowColor="@color/vm_black_54"
@@ -74,7 +74,7 @@
             </LinearLayout>
             <!--通话信息-->
             <ImageButton
-                android:id="@+id/btn_call_info"
+                android:id="@+id/btn_doctor_call_info"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentRight="true"
@@ -85,7 +85,7 @@
 
 
         <LinearLayout
-            android:id="@+id/layout_calling"
+            android:id="@+id/layout_doctor_calling"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -99,7 +99,7 @@
                 android:padding="@dimen/vm_dimen_8">
 
                 <TextView
-                    android:id="@+id/text_call_info"
+                    android:id="@+id/text_doctor_call_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/vm_white_87" />
@@ -113,7 +113,7 @@
 
                 <!--麦克风开关-->
                 <ImageButton
-                    android:id="@+id/btn_mic_switch"
+                    android:id="@+id/btn_doctor_mic_switch"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/click_circle_transparent"
@@ -121,7 +121,7 @@
 
                 <!--扬声器开关-->
                 <ImageButton
-                    android:id="@+id/btn_speaker_switch"
+                    android:id="@+id/btn_doctor_speaker_switch"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/click_circle_transparent"
@@ -129,7 +129,7 @@
 
                 <!--摄像头开关-->
                 <ImageButton
-                    android:id="@+id/btn_camera_switch"
+                    android:id="@+id/btn_doctor_camera_switch"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/click_circle_transparent"
@@ -137,7 +137,7 @@
 
                 <!--切换摄像头-->
                 <ImageButton
-                    android:id="@+id/btn_change_camera_switch"
+                    android:id="@+id/btn_doctor_change_camera_switch"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_alignParentRight="true"
@@ -154,7 +154,7 @@
 
                 <!--拒绝接听-->
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_reject_call"
+                    android:id="@+id/fab_doctor_reject_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -165,7 +165,7 @@
 
                 <!--结束通话-->
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_end_call"
+                    android:id="@+id/fab_doctor_end_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -177,7 +177,7 @@
 
                 <!--接听通话-->
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_answer_call"
+                    android:id="@+id/fab_doctor_answer_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
