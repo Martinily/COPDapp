@@ -57,13 +57,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initEvents();
     }
 
-    private void initView(){
-        mEtAccount=findViewById(R.id.et_login_AccountInput);
-        mEtPassword=findViewById(R.id.et_login_PasswordInput);
-        mBtnLogin=findViewById(R.id.btn_login_login);
-        mLinkSignup=findViewById(R.id.link_signup);
-        mLinkForgetPwd=findViewById(R.id.link_forgetPWD);
-        mCbRememberPassword=findViewById(R.id.remember_password);
+    private void initView () {
+        mEtAccount = findViewById(R.id.et_login_AccountInput);
+        mEtPassword = findViewById(R.id.et_login_PasswordInput);
+        mBtnLogin = findViewById(R.id.btn_login_login);
+        mLinkSignup = findViewById(R.id.link_signup);
+        mLinkForgetPwd = findViewById(R.id.link_forgetPWD);
+        mCbRememberPassword = findViewById(R.id.remember_password);
     }
 
     private void initEvents () {
