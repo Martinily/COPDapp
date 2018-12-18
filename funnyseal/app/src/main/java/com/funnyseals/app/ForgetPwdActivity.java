@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
-import butterknife.BindView;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
@@ -35,18 +34,12 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
             "(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
-    @BindView(R.id.et_forgetPwd_AccountInput)
-    EditText mEtAccount;
-    @BindView(R.id.et_forgetpwd_PasswordInput)
-    EditText mEtPassword;
-    @BindView(R.id.et_forgetpwd_PasswordInputAgain)
-    EditText mEtPasswordAgain;
-    @BindView(R.id.et_forgetpwd_IdentifyingCode)
-    EditText mEtIdentifyingCode;
-    @BindView(R.id.btn_forgetPwd_CodeSend)
-    Button   mBtnCodeSend;
-    @BindView(R.id.btn_forgetPwd_ChangePwd)
-    Button   mBtnChangePwd;
+    private EditText mEtAccount;
+    private EditText mEtPassword;
+    private EditText mEtPasswordAgain;
+    private EditText mEtIdentifyingCode;
+    private Button   mBtnCodeSend;
+    private Button   mBtnChangePwd;
 
     private TimeDownUtil timeDownUtil;
     private EventHandler sendSMSHandler = new EventHandler() {
@@ -83,8 +76,18 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_pwd);
 
+        initView();
         initEvents();
         initSDK();
+    }
+
+    private void initView () {
+        mEtAccount = findViewById(R.id.et_forgetPwd_AccountInput);
+        mEtPassword = findViewById(R.id.et_forgetpwd_PasswordInput);
+        mEtPasswordAgain = findViewById(R.id.et_forgetpwd_PasswordInputAgain);
+        mEtIdentifyingCode = findViewById(R.id.et_forgetpwd_IdentifyingCode);
+        mBtnCodeSend = findViewById(R.id.btn_forgetPwd_CodeSend);
+        mBtnChangePwd = findViewById(R.id.btn_forgetPwd_ChangePwd);
     }
 
     private void initSDK () {

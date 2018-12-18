@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
-import butterknife.BindView;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
@@ -40,24 +39,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             "(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$";
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 
-    @BindView(R.id.et_signup_AccountInput)
-    EditText    mEtAccount;
-    @BindView(R.id.et_signup_PasswordInput)
-    EditText    mEtPassword;
-    @BindView(R.id.et_signup_PasswordInputAgain)
-    EditText    mEtPasswordAgain;
-    @BindView(R.id.et_signup_IdentifyingCode)
-    EditText    mEtIdentifyingCode;
-    @BindView(R.id.btn_signup_CodeSend)
-    Button      mBtnCodeSend;
-    @BindView(R.id.rb_signup_accountTypePatient)
-    RadioButton mRbAccountTypePatient;
-    @BindView(R.id.rb_signup_accountTypeDoctor)
-    RadioButton mRbAccountTypeDoctor;
-    @BindView(R.id.btn_signup_signup)
-    Button      mBtnSignup;
-    @BindView(R.id.link_register_login)
-    TextView    mLinkLogin;
+    private EditText    mEtAccount;
+    private EditText    mEtPassword;
+    private EditText    mEtPasswordAgain;
+    private EditText    mEtIdentifyingCode;
+    private Button      mBtnCodeSend;
+    private RadioButton mRbAccountTypePatient;
+    private RadioButton mRbAccountTypeDoctor;
+    private Button      mBtnSignup;
+    private TextView    mLinkLogin;
 
     private TimeDownUtil timeDownUtil;
     private EventHandler sendSMSHandler = new EventHandler() {
@@ -94,8 +84,21 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        initView();
         initEvents();
         initSDK();
+    }
+
+    private void initView () {
+        mEtAccount = findViewById(R.id.et_signup_AccountInput);
+        mEtPassword = findViewById(R.id.et_signup_PasswordInput);
+        mEtPasswordAgain = findViewById(R.id.et_signup_PasswordInputAgain);
+        mEtIdentifyingCode = findViewById(R.id.et_signup_IdentifyingCode);
+        mBtnCodeSend = findViewById(R.id.btn_signup_CodeSend);
+        mRbAccountTypePatient = findViewById(R.id.rb_signup_accountTypePatient);
+        mRbAccountTypeDoctor = findViewById(R.id.rb_signup_accountTypeDoctor);
+        mBtnSignup = findViewById(R.id.btn_signup_signup);
+        mLinkLogin = findViewById(R.id.link_register_login);
     }
 
     private void initEvents () {
