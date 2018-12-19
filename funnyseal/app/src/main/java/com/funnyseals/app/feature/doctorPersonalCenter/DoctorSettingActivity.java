@@ -7,8 +7,9 @@ import android.widget.EditText;
 
 import com.funnyseals.app.R;
 
-/*
-医生端个人中心设置
+/**
+ * 医生端
+ * 设置界面 activity
  */
 public class DoctorSettingActivity extends AppCompatActivity {
 

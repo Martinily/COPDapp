@@ -4,9 +4,10 @@ import com.funnyseals.app.model.AddEquipment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-/*
-这里是获取array数据的部分
- */
+    /**
+     *我的设备信息
+     * 获取部分
+     */
 public class findAddEquipment {
     public String equipment_name,equipment_state;
     public String getEquipment_name(){

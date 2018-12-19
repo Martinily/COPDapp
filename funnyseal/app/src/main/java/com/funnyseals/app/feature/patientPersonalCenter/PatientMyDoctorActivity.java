@@ -26,7 +26,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-
+/**
+ * 我的医生界面
+ */
 public class PatientMyDoctorActivity extends AppCompatActivity {
 
     private TextView tv_patient_doctor_name,tv_patient_doctor_hospital,tv_patient_doctor_post;
@@ -37,7 +39,6 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
     private User myUser;
     private String name,hosptial,post;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,9 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         myUser=myApplication.getUser();
         init();
     }
-    //更新，其余写死
+    /**
+     * 初始化控件
+     */
     void   init()
     {
         tv_patient_doctor_name=findViewById(R.id.tv_patient_doctor_name);
@@ -59,6 +62,9 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         bt_patient_mydoctor_chat.setOnClickListener(new addListeners());
         myDoctor();
     }
+    /**
+     * 服务器获取我的医生的信息
+     */
     public void myDoctor(){
         Thread thread=new Thread(()->{
             String send="";
@@ -100,7 +106,11 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
 
     }
 
-    //监听
+    /**
+     * 监听事件
+     * 返回，跳转个人中心
+     * 发起聊天，跳转聊天界面
+     */
     private class addListeners implements View.OnClickListener{
 
         @Override

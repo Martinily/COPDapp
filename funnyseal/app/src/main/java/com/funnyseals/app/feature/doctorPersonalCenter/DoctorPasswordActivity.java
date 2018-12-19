@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.funnyseals.app.LoginActivity;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.patientPersonalCenter.PatientPasswordActivity;
@@ -26,6 +27,10 @@ import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * 医生端
+ * 修改密码界面 activity
+ */
 public class DoctorPasswordActivity extends AppCompatActivity {
     private EditText et_doctor_change_oldpassword,et_doctor_change_newpassword,et_doctor_change_againpassword;
     private Button bt_doctor_change_complete;
@@ -36,10 +41,17 @@ public class DoctorPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_doctor_password);
+        myApplication=(MyApplication)getApplication();
             init();
 
     }
-    //密码判断
+    /**
+    *检测密码的合法性
+    * 密码不为空
+    * 密码不包含特殊字符
+    * 密码为6-20位
+    * 两次密码一致
+     */
     public boolean myCorrectPas(String oldpassword,String newpassword,String againpassword){
 
         if (oldpassword.equals("")||newpassword.equals("")||againpassword.equals(""))
@@ -47,15 +59,15 @@ public class DoctorPasswordActivity extends AppCompatActivity {
             Toast.makeText(this,"密码不能为空",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(!isLetterOrDigit(newpassword)){
+        else if(!isLetterOrDigit(newpassword)){
             Toast.makeText(this,"密码不能包含特殊字符",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(newpassword.length()<6 || newpassword.length()>20){
+        else if(newpassword.length()<6 || newpassword.length()>20){
             Toast.makeText(this,"密码长度应为6-20位",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(!isSame(newpassword, againpassword)){
+        else if(!isSame(newpassword, againpassword)){
             Toast.makeText(this,"两次密码不一致，请重新输入", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -64,18 +76,21 @@ public class DoctorPasswordActivity extends AppCompatActivity {
         }
     }
 
-    //判断密码不能有特殊字符，只能是英文或者数字
+    /**
+    *判断密码不能有特殊字符，只能是英文或者数字
+     * 判断两次密码一致
+     */
     public static boolean isLetterOrDigit(String str){
             boolean isLetterOrDigit = false;
             for (int i=0;i<str.length();i++)
                    if (Character.isLetterOrDigit(str.charAt(i))){
                     isLetterOrDigit=true;
             }
-            String regex="^[a-zA-Z0-9]+$";
+            String regex="^[a-zA-Z0-9]{6,20}$";
             boolean isRight=isLetterOrDigit && str.matches(regex);
             return  isRight;
     }
-    //判断两次密码一致
+
     public boolean isSame(String str1,String str2){
             boolean isSame = false;
             if(str1.equals(str2)){
@@ -84,14 +99,15 @@ public class DoctorPasswordActivity extends AppCompatActivity {
             return isSame;
     }
 
-
-
+    /**
+    *初始化控件
+     */
     private void init(){
         //获取各个edittext值
         et_doctor_change_oldpassword=findViewById(R.id.et_doctor_change_oldpassword);
         et_doctor_change_newpassword=findViewById(R.id.et_doctor_change_newpassword);
         et_doctor_change_againpassword=findViewById(R.id.et_doctor_change_againpassword);
-        myApplication=(MyApplication)getApplication();
+
 
         ib_doctor_change_return=findViewById(R.id. ib_doctor_change_return);
         ib_doctor_change_return.setOnClickListener(new addListeners());
@@ -99,6 +115,11 @@ public class DoctorPasswordActivity extends AppCompatActivity {
         bt_doctor_change_complete.setOnClickListener(new addListeners());
 
     }
+        /**
+        *后退按钮提示
+        *确认 返回个人信息
+        * 取消  停留当前页面
+         */
     public void Sure(){
         AlertDialog.Builder builder=new AlertDialog.Builder(DoctorPasswordActivity.this);
         builder.setMessage("密码未修改，确定退出？");
@@ -115,6 +136,12 @@ public class DoctorPasswordActivity extends AppCompatActivity {
 
 
     }
+    /**
+    获取
+    旧密码
+    新密码
+    重复输入的新密码
+     */
     public String getOldpassword(){
         return et_doctor_change_oldpassword.getText().toString().trim();
     }
@@ -124,10 +151,11 @@ public class DoctorPasswordActivity extends AppCompatActivity {
     public String getAgainpassword(){
         return et_doctor_change_againpassword.getText().toString().trim();
     }
-    public void showToast(final String msg) {
-        runOnUiThread(() -> Toast.makeText(DoctorPasswordActivity.this, msg, Toast.LENGTH_SHORT).show());
-    }
-    //监听
+    /**
+    *按钮监听
+    *返回个人信息，取消修改密码操作
+    * 完成修改，连接服务器，更新密码
+     */
     private class addListeners implements View.OnClickListener{
 
         @Override
@@ -143,7 +171,6 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                             Socket socket;
                             try{
                                 JSONObject jsonObject = new JSONObject();
-
                                 jsonObject.put("request_type","8");
                                 jsonObject.put("modify_type","update");
                                 jsonObject.put("ID",myApplication.getAccount());
@@ -163,17 +190,16 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                                 switch (jsonObject.getString("password_result")){
                                     case "0":
                                         type=true;
-                                        showToast("修改密码成功");
-
+                                        Toast.makeText(DoctorPasswordActivity.this,"修改密码成功", Toast.LENGTH_LONG).show();
                                         break;
                                     case "1":
-                                        showToast("用户名错误");
+                                        Toast.makeText(DoctorPasswordActivity.this,"用户名错误", Toast.LENGTH_LONG).show();
                                         break;
                                     case "2":
-                                        showToast("密码错误");
+                                        Toast.makeText(DoctorPasswordActivity.this,"密码错误", Toast.LENGTH_LONG).show();
                                         break;
                                     case "3":
-                                        showToast("修改失败");
+                                        Toast.makeText(DoctorPasswordActivity.this,"修改失败", Toast.LENGTH_LONG).show();
                                         break;
                                 }
                                 socket.close();
@@ -182,8 +208,9 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                             }
                         }).start();
                     }
-                    if (type=true){
-                        finish();
+                    if (type){
+                        Intent intent = new Intent(DoctorPasswordActivity.this,LoginActivity.class);
+                        startActivity(intent);
                     }
                     break;
                 default:

@@ -25,6 +25,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+/**
+ * 医生端
+ * 签约界面 activity
+ */
 public class DoctorSigningActivity extends AppCompatActivity {
 
     private EditText et_doctor_signing_phone;
@@ -40,7 +44,9 @@ public class DoctorSigningActivity extends AppCompatActivity {
         init();
 
     }
-
+    /*
+    初始化控件
+     */
     public void init(){
         et_doctor_signing_phone=findViewById(R.id.et_doctor_signing_phone);
 
@@ -52,10 +58,12 @@ public class DoctorSigningActivity extends AppCompatActivity {
         ib_doctor_signing_return=findViewById(R.id.ib_doctor_signing_return);
         ib_doctor_signing_return.setOnClickListener(new addListeners());
     }
-    public void showToast(final String msg) {
-        runOnUiThread(() -> Toast.makeText(DoctorSigningActivity.this, msg, Toast.LENGTH_SHORT).show());
-    }
-    //监听
+    /*
+    *监听
+    *连接服务器，完成签约，跳转个人中心
+    *跳转个人中心
+    *连接服务器，删除签约人，跳转个人中心
+     */
     @SuppressWarnings("deprecation")
     private class addListeners implements View.OnClickListener{
         @Override
@@ -84,14 +92,14 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                 jsonObject = new JSONObject(message);
                                 switch (jsonObject.getString("sign_result")){
                                     case "0":
-                                        showToast("签约成功");
+                                        Toast.makeText(DoctorSigningActivity.this,"签约成功", Toast.LENGTH_LONG).show();
                                         finish();
                                         break;
                                     case "2":
-                                        showToast("用户不存在");
+                                        Toast.makeText(DoctorSigningActivity.this,"用户不存在", Toast.LENGTH_LONG).show();
                                         break;
                                     case "1":
-                                        showToast("签约失败");
+                                        Toast.makeText(DoctorSigningActivity.this,"签约失败", Toast.LENGTH_LONG).show();
                                         break;
                                 }
                                 socket.close();
@@ -127,14 +135,14 @@ public class DoctorSigningActivity extends AppCompatActivity {
                             jsonObject = new JSONObject(message);
                             switch (jsonObject.getString("sign_result")){
                                 case "0":
-                                    showToast("解约成功");
+                                    Toast.makeText(DoctorSigningActivity.this,"解约成功", Toast.LENGTH_LONG).show();
                                     finish();
                                     break;
                                 case "2":
-                                    showToast("没有该患者");
+                                    Toast.makeText(DoctorSigningActivity.this,"没有该患者", Toast.LENGTH_LONG).show();
                                     break;
                                 case "1":
-                                    showToast("解约失败");
+                                    Toast.makeText(DoctorSigningActivity.this,"解约失败", Toast.LENGTH_LONG).show();
                                     break;
                             }
                             socket.close();
@@ -148,6 +156,11 @@ public class DoctorSigningActivity extends AppCompatActivity {
 
         }
     }
+    /*
+    号码判定
+    不能为空
+    11位
+     */
     @SuppressLint("ShowToast")
     public boolean correctPhone(){
         if (str1.trim().equals("")){

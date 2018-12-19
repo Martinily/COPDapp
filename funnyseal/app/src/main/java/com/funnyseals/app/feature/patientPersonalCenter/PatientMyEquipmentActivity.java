@@ -29,7 +29,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 我的设备界面
+ */
 public class PatientMyEquipmentActivity extends AppCompatActivity {
 
     private Button bt_patient_equipment_add,bt_patient_equipment_return;
@@ -38,7 +40,9 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     private ListView listView = null;
     private  AddEquipmentAdapter addEquipmentAdapter;
     private String m_name,m_state;
-
+    /**
+     * 通过适配器完成动态加载
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +57,9 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         addEquipmentAdapter.notifyDataSetChanged();
         myAddEquipment();
     }
-
+    /**
+     * 初始化控件
+     */
     void   initUIComponents()
     {
         bt_patient_equipment_return=findViewById(R.id.bt_patient_equipment_return);
@@ -61,6 +67,9 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         bt_patient_equipment_add.setOnClickListener(new addListeners());
         bt_patient_equipment_return.setOnClickListener(new addListeners());
     }
+    /**
+     * 连接服务器，动态加载我的设备
+     */
     public void myAddEquipment(){
         Thread thread=new Thread(()->{
             Socket socket;
@@ -97,7 +106,11 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         }
 
     }
-    //监听
+    /**
+     * 监听事件
+     * 返回，返回个人中心
+     * 添加，跳转添加设备界面
+     */
     private class addListeners implements View.OnClickListener{
 
         @Override

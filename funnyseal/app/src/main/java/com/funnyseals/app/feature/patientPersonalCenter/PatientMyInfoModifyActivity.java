@@ -29,7 +29,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-
+/**
+ * 患者端
+ * 个人信息界面
+ */
 public class PatientMyInfoModifyActivity extends AppCompatActivity {
 
     private EditText  ed_patient_modify_myname,ed_patient_modify_mysex,ed_patient_modify_myage,ed_patient_modify_location;
@@ -39,7 +42,10 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
     private ImageButton ib_patient_modify_return,ib_patient_modify_password,ib_patient_modify_advice;
     private User myUser;
     private MyApplication myApplication;
-
+    /**
+     * 调用本地
+     * 工具类USER
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,9 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
         init();
 
     }
+    /**
+     * 初始化控件
+     */
     public void init(){
         ed_patient_modify_myname=findViewById(R.id.ed_patient_modify_myname);
         ed_patient_modify_mysex=findViewById(R.id.ed_patient_modify_mysex);
@@ -73,7 +82,11 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
         ib_patient_modify_advice=findViewById(R.id.ib_patient_modify_advice);
         ib_patient_modify_advice.setOnClickListener(new addListeners());
     }
-    //弹出框设置
+    /**
+     * 返回按钮
+     * 确认 返回个人中心
+     * 取消 停留当前界面
+     */
     public void Sure(){
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("修改未保存，确定退出？");
@@ -88,10 +101,13 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
         //只有点击按钮才行，点击空白无用
         builder.setCancelable(false);
     }
-    public void PatientMyInfo(){
-
-    }
-    //监听
+    /**
+     * 监听事件
+     * 完成 连接服务器，更新界面信息
+     * 返回 跳转个人中心
+     * 修改密码 跳转修改密码界面
+     * 医嘱  跳转医嘱病历界面
+     */
     private  class addListeners  implements View.OnClickListener{
         @Override
         public void onClick(View v) {

@@ -41,37 +41,23 @@ import static com.mob.tools.utils.DeviceHelper.getApplication;
  */
 @SuppressWarnings("deprecation")
 public class PatientPersonalCenterFragment extends Fragment {
-    private Context mContext;
     private View mView;
     private ImageView iv_patient_portrait;
     private ImageButton getIb_patient_perinfo,getIb_patient_doctor,getIb_patient_equipment,getIb_patient_setting;
-    private Bitmap head;//头像
-    private static String path="/sdcard/myHead";//照片路径
-    private MyApplication myApplication;
-
-    /*
-    监听
-    跳转我的医生
-        个人信息
-        我的设备
-        设置图片
-     */
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_patient_personal_center, container, false);
-        MyApplication application = (MyApplication) getActivity().getApplication();
 
         initUIComponents();
         return mView;
     }
 
-    //初始化
+    /**
+     * 初始化控件
+     */
     private void initUIComponents() {
-
-        iv_patient_portrait=mView.findViewById(R.id.iv_patient_portrait);
-        iv_patient_portrait.setOnClickListener(new addListeners());
         getIb_patient_perinfo=mView.findViewById(R.id.ib_patient_perinfo);
         getIb_patient_perinfo.setOnClickListener(new addListeners());
         getIb_patient_setting=mView.findViewById(R.id.ib_patient_setting);
@@ -81,7 +67,13 @@ public class PatientPersonalCenterFragment extends Fragment {
         getIb_patient_equipment=mView.findViewById(R.id.ib_patient_equipment);
         getIb_patient_equipment.setOnClickListener(new addListeners());
     }
-    //监听
+    /**
+     * 监听事件
+     *跳转 我的医生
+     *个人信息
+     *我的设备
+     *设置图片
+     */
     private  class addListeners  implements View.OnClickListener{
         @Override
         public void onClick(View v) {

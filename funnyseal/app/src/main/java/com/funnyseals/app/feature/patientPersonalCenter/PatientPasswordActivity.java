@@ -25,7 +25,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * 修改密码界面
+ */
 public class PatientPasswordActivity extends AppCompatActivity {
     private Button bt_patient_change_complete;
     private ImageButton ib_patient_change_return;
@@ -40,7 +42,13 @@ public class PatientPasswordActivity extends AppCompatActivity {
         init();
 
     }
-    //密码判断
+    /**
+     * 密码合法性判断
+     * 不能为空
+     * 不能包含特殊字符
+     * 长度为6-20
+     * 两次密码一致
+     */
     public boolean myCorrectPas(){
 
         if (getOldpassword().isEmpty()||getNewpassword().isEmpty()||getAgainpassword().isEmpty())
@@ -48,15 +56,15 @@ public class PatientPasswordActivity extends AppCompatActivity {
             Toast.makeText(this,"密码不能为空",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(!isLetterOrDigit(getNewpassword())){
+        else if(!isLetterOrDigit(getNewpassword())){
             Toast.makeText(this,"密码不能包含特殊字符",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(getNewpassword().length()<6 || getNewpassword().length()>16){
+        else if(getNewpassword().length()<6 || getNewpassword().length()>16){
             Toast.makeText(this,"密码长度应为6-20位",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(!isSame(getNewpassword(), getAgainpassword())){
+        else if(!isSame(getNewpassword(), getAgainpassword())){
             Toast.makeText(this,"两次密码不一致，请重新输入", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -65,9 +73,9 @@ public class PatientPasswordActivity extends AppCompatActivity {
         }
     }
 
-
-
-    //初始化
+    /**
+     * 初始化控件
+     */
     private void init(){
         //获取各个edittext值
         et_patient_change_oldpassword=findViewById(R.id.et_patient_change_oldpassword);
@@ -81,7 +89,10 @@ public class PatientPasswordActivity extends AppCompatActivity {
         ib_patient_change_return.setOnClickListener(new addListener());
     }
 
-    //判断密码不能有特殊字符，只能是英文或者数字
+    /**
+     * 判定密码不包含特殊字符
+     * 判定两次密码一致
+     */
     public static boolean isLetterOrDigit(String str){
         boolean isLetterOrDigit = false;
         for (int i=0;i<str.length();i++)
@@ -91,7 +102,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
         String regex= "^[a-zA-Z0-9]{6,20}$";
         return  (isLetterOrDigit && str.matches(regex));
     }
-    //判断两次密码一致
+
     public boolean isSame(String str1,String str2){
         boolean isSame = false;
         if(str1.equals(str2)){
@@ -99,7 +110,11 @@ public class PatientPasswordActivity extends AppCompatActivity {
         }
         return isSame;
     }
-    //提示
+    /**
+     * 返回按钮提示
+     * 确认 返回个人信息
+     * 取消 停留当前页面
+     */
     public void Sure(){
         AlertDialog.Builder builder=new AlertDialog.Builder(PatientPasswordActivity.this);
         builder.setMessage("密码未修改，确定退出？");
@@ -114,6 +129,13 @@ public class PatientPasswordActivity extends AppCompatActivity {
         //只有点击按钮才行，点击空白无用
         builder.setCancelable(false);
     }
+    /**
+     * 获取
+     * 旧密码
+     * 新密码
+     * 再次输入的新密码
+     * 提示函数
+     */
     public String getOldpassword(){
         return et_patient_change_oldpassword.getText().toString().trim();
     }
@@ -126,7 +148,11 @@ public class PatientPasswordActivity extends AppCompatActivity {
     public void showToast(final String msg) {
         runOnUiThread(() -> Toast.makeText(PatientPasswordActivity.this, msg, Toast.LENGTH_SHORT).show());
     }
-    //监听
+    /**
+     * 监听事件
+     * 完成 连接服务器 完成密码修改
+     * 返回 返回个人信息
+     */
    private class addListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -174,10 +200,9 @@ public class PatientPasswordActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }).start();
-                        if (type=true){
+                        if (type){
                             finish();
                         }
-
                     }
                     break;
                 case R.id.ib_patient_change_return:

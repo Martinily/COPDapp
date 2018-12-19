@@ -1,8 +1,7 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
-import android.os.Build;
+
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -24,7 +23,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+/**
+ * 患者端
+ * 添加设备界面 activity
 
+ */
 public class PatientAddEquipmentActivity extends AppCompatActivity {
 
     private Spinner sp_patient_add_name,sp_patient_add_state;
@@ -34,7 +37,10 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
     private String item_name,item_state;
     private boolean type=false;
 
-
+    /**
+     *适配器完成下拉控件
+     * 两个下拉控件
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +55,11 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence>adapter_state = ArrayAdapter.createFromResource(this,R.array.select_state,android.R.layout.simple_spinner_item);
         adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_patient_add_state.setOnItemSelectedListener(new spinnerStateListener());
-
-
-
-
     }
+    /**
+     *第一个下拉控件的监听
+     * 获取选择了下拉的那个选项
+     */
     class spinnerNameListener implements AdapterView.OnItemSelectedListener{
 
         @Override
@@ -66,6 +72,10 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
 
         }
     }
+    /**
+     *第二个下拉控件的监听
+     * 获取选择了下拉的那个选项
+     */
     class spinnerStateListener implements AdapterView.OnItemSelectedListener{
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -82,7 +92,12 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
 
         }
     }
-
+    /**
+     *返回按钮
+     * 提示
+     * 确认 返回我的设备
+     * 取消 停留当前页面
+     */
     public void Sure(){
         AlertDialog.Builder builder=new AlertDialog.Builder(PatientAddEquipmentActivity.this);
         builder.setMessage("修改未保存，确定退出？");
@@ -100,8 +115,10 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         Builder1.show();
 
     }
+    /**
+     *初始化控件
+     */
     private void init(){
-
         sp_patient_add_name=findViewById(R.id.sp_patient_add_name);
         sp_patient_add_state=findViewById(R.id.sp_patient_add_state);
 
@@ -110,12 +127,12 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         bt_patient_add_complete=findViewById(R.id. bt_patient_add_complete);
         bt_patient_add_complete.setOnClickListener(new addListeners());
     }
-
-
-    //监听
+    /**
+     *监听事件
+     * 返回 我的设备
+     * 添加完成
+     */
     private class addListeners implements View.OnClickListener{
-
-        @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -124,22 +141,18 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     break;
                 case  R.id. bt_patient_add_complete:
                    addEquipment();
-                    if (type){
-                        finish();
-                    }
+
                     break;
                 default:
                     break;
             }
         }
     }
-    //连接服务器
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    /**
+     *连接服务器
+     * 完成添加设备操作
+     */
     private void addEquipment(){
-        if (item_name.isEmpty()|item_state.isEmpty()){
-           showToast("设备名称或者状态不能为空");
-        }
-        else {
             new Thread(()->{
                 String send="";
                 Socket socket;
@@ -165,9 +178,10 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     switch (jsonObject.getString("device_result")){
                         case "true":
                             type=true;
+                            Toast.makeText(PatientAddEquipmentActivity.this,"添加成功", Toast.LENGTH_LONG).show();
                             break;
                         case "false":
-                            showToast("添加失败");
+                            Toast.makeText(PatientAddEquipmentActivity.this,"添加失败", Toast.LENGTH_LONG).show();
                             break;
                     }
                     socket.close();
@@ -175,10 +189,8 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }).start();
+                if (type){
+                    finish();
+                }
         }
-    }
-
-    public void showToast(final String msg) {
-        runOnUiThread(() -> Toast.makeText(PatientAddEquipmentActivity.this, msg, Toast.LENGTH_SHORT).show());
-    }
 }
