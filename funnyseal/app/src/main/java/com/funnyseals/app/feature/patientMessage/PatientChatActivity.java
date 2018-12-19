@@ -23,7 +23,7 @@ import com.hyphenate.chat.EMMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientChatActivity extends AppCompatActivity {
+public class PatientChatActivity extends AppCompatActivity implements EMMessageListener {
 
     private ListView    mLv_message;
     private EditText    mEt_input;
@@ -39,42 +39,14 @@ public class PatientChatActivity extends AppCompatActivity {
     private List<EMMessage>    mMessageList;
 
     private EMConversation    mConversation;
-    private EMMessageListener msgListener = new EMMessageListener() {
+    private EMMessageListener msgListener;
 
-        @Override
-        public void onMessageReceived (List<EMMessage> messages) {
-            // 循环遍历当前收到的消息
-            for (EMMessage message : messages) {
-                if (message.getFrom().equals(mDoctorAccount)) {
-                    // 设置消息为已读
-                    mConversation.markMessageAsRead(message.getMsgId());
-                    onAddMessage(message);
-                    break;
-                }
-            }
-        }
-
-        @Override
-        public void onCmdMessageReceived (List<EMMessage> messages) { }
-
-        @Override
-        public void onMessageRead (List<EMMessage> messages) { }
-
-        @Override
-        public void onMessageDelivered (List<EMMessage> message) { }
-
-        @Override
-        public void onMessageRecalled (List<EMMessage> messages) { }
-
-        @Override
-        public void onMessageChanged (EMMessage message, Object change) { }
-    };
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_chat);
-
+        msgListener=this;
         init();
     }
 
@@ -160,6 +132,8 @@ public class PatientChatActivity extends AppCompatActivity {
             CallManager.getInstance().setCallType(CallManager.CallType.VOICE);
             startActivity(intent);
         });
+
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
     }
 
     /**
@@ -167,7 +141,7 @@ public class PatientChatActivity extends AppCompatActivity {
      */
     private void loadAllMessage () {
         mConversation = EMClient.getInstance().chatManager().getConversation(mDoctorAccount,
-                EMConversation.EMConversationType.Chat, true);
+                null, true);
         mConversation.markAllMessagesAsRead();
 
         int count = mConversation.getAllMessages().size();
@@ -215,5 +189,42 @@ public class PatientChatActivity extends AppCompatActivity {
         } else {
             mBtn_send.setBackgroundResource(R.drawable.bordered_button_disable);
         }
+    }
+
+
+    @Override
+    public void onMessageReceived (List<EMMessage> messages) {
+        for (EMMessage message : messages) {
+            if (message.getFrom().equals(mDoctorAccount)) {
+                // 设置消息为已读
+                mConversation.markMessageAsRead(message.getMsgId());
+                runOnUiThread(() -> onAddMessage(message));
+            }
+        }
+    }
+
+    @Override
+    public void onCmdMessageReceived (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRead (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageDelivered (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRecalled (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageChanged (EMMessage message, Object change) {
+
     }
 }

@@ -21,7 +21,7 @@ import com.hyphenate.chat.EMMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorChatActivity extends AppCompatActivity {
+public class DoctorChatActivity extends AppCompatActivity implements EMMessageListener{
 
     private ListView    mLv_message;
     private EditText    mEt_input;
@@ -37,40 +37,7 @@ public class DoctorChatActivity extends AppCompatActivity {
     private List<EMMessage>    mMessageList;
 
     private EMConversation    mConversation;
-    private EMMessageListener msgListener = new EMMessageListener() {
-
-        @Override
-        public void onMessageReceived (List<EMMessage> messages) {
-            for (EMMessage message : messages) {
-                if (message.getFrom().equals(mPatientAccount)) {
-                    mConversation.markMessageAsRead(message.getMsgId());
-                    onAddMessage(message);
-                    break;
-                }
-            }
-        }
-
-        @Override
-        public void onCmdMessageReceived (List<EMMessage> messages) {
-        }
-
-        @Override
-        public void onMessageRead (List<EMMessage> messages) {
-        }
-
-        @Override
-        public void onMessageDelivered (List<EMMessage> message) {
-        }
-
-        @Override
-        public void onMessageRecalled (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageChanged (EMMessage message, Object change) {
-        }
-    };
+    private EMMessageListener msgListener;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -78,7 +45,7 @@ public class DoctorChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_chat);
         Intent intent = this.getIntent();
         mMyPatient = (User) intent.getSerializableExtra("myPatient");
-
+        msgListener=this;
         init();
     }
 
@@ -103,7 +70,6 @@ public class DoctorChatActivity extends AppCompatActivity {
         mPatientAccount = (String) getIntent().getSerializableExtra("myfriend");
 
         initView();
-        initUIComponents();
         addListener();
         loadAllMessage();
     }
@@ -115,10 +81,17 @@ public class DoctorChatActivity extends AppCompatActivity {
         mNursingPlan = findViewById(R.id.ibtn_doctor_nursingplan);
         mVioce = findViewById(R.id.ibtn_doctor_vioce);
         mVideo = findViewById(R.id.ibtn_doctor_video);
-    }
 
-    private void initUIComponents () {
-        initToolbar();
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_doctor_chat_toolbar);
+
+        if (!mMyPatient.getName().isEmpty()) {
+            toolbar.setTitle(mMyPatient.getName());
+        } else {
+            toolbar.setTitle(mPatientAccount);
+        }
+
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
         sendEnabled(false);
     }
 
@@ -172,19 +145,6 @@ public class DoctorChatActivity extends AppCompatActivity {
         });
 
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
-    }
-
-    private void initToolbar () {
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_doctor_chat_toolbar);
-
-        if (!mMyPatient.getName().isEmpty()) {
-            toolbar.setTitle(mMyPatient.getName());
-        } else {
-            toolbar.setTitle(mPatientAccount);
-        }
-
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     /**
@@ -244,5 +204,40 @@ public class DoctorChatActivity extends AppCompatActivity {
         } else {
             mBtn_send.setBackgroundResource(R.drawable.bordered_button_disable);
         }
+    }
+
+    @Override
+    public void onMessageReceived (List<EMMessage> messages) {
+        for (EMMessage message : messages) {
+            if (message.getFrom().equals(mPatientAccount)) {
+                mConversation.markMessageAsRead(message.getMsgId());
+                runOnUiThread(() -> onAddMessage(message));
+            }
+        }
+    }
+
+    @Override
+    public void onCmdMessageReceived (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRead (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageDelivered (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRecalled (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageChanged (EMMessage message, Object change) {
+
     }
 }
