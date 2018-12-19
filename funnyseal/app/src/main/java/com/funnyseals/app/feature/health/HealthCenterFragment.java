@@ -2,6 +2,7 @@ package com.funnyseals.app.feature.health;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +67,7 @@ public class HealthCenterFragment extends Fragment {
         myApplication=(MyApplication)getActivity().getApplication();
         //获取数据
         final String m_id=myApplication.getAccount();
-        new Thread(()->{
+        Thread thread=new Thread(()->{
             Socket socket;
             try {
                 JSONObject jsonObject=new JSONObject();
@@ -81,10 +83,13 @@ public class HealthCenterFragment extends Fragment {
                 socket=SocketUtil.getGetSocket();
                 DataInputStream dataInputStream=new DataInputStream(socket.getInputStream());
                 String get=dataInputStream.readUTF();
+                data1.clear();
+                data2.clear();
+                data3.clear();
+                datatime.clear();
+                SimpleChartView.data.clear();
+                SimpleChartView.data2.clear();
                 if (!get.equals("empty")){
-                    data1.clear();
-                    data2.clear();
-                    data3.clear();
                     JSONArray jsonArray=new JSONArray(get);
                     indexoffev1=jsonArray.length();
                     indexoffvc=jsonArray.length();
@@ -94,18 +99,17 @@ public class HealthCenterFragment extends Fragment {
                     for (int i=jsonArray.length()-1;i>=0;i--) {
                         jsonObject1=jsonArray.getJSONObject(i);
                         data1.add(jsonObject1.getString("FEV1"));
-                        System.err.println(data1.add(jsonObject1.getString("FEV1")));
                         data2.add(jsonObject1.getString("FVC"));
                         data3.add(jsonObject1.getString("VC"));
                         datatime.add(jsonObject1.getString("UpdateTime"));
-                        if (!jsonObject1.getString("FEV1").equals("null")) indexoffev1=jsonArray.length()-1-i;
-                        if (!jsonObject1.getString("FVC").equals("null")) indexoffvc=jsonArray.length()-1-i;
-                        if (!jsonObject1.getString("VC").equals("null")){
+                        if (!jsonObject1.getString("FEV1").equals("-1")) indexoffev1=jsonArray.length()-1-i;
+                        if (!jsonObject1.getString("FVC").equals("-1")) indexoffvc=jsonArray.length()-1-i;
+                        if (!jsonObject1.getString("VC").equals("-1")){
                             indexofvc=jsonArray.length()-1-i;
                             SimpleChartView.data.add(Integer.parseInt(jsonObject1.getString("VC")));
                         }
                         else SimpleChartView.data.add(0);
-                        if (!jsonObject1.getString("FEV1").equals("null") & !jsonObject1.getString("FVC").equals("null")){
+                        if (!jsonObject1.getString("FEV1").equals("-1") & !jsonObject1.getString("FVC").equals("-1")){
                             int a=Integer.parseInt(jsonObject1.getString("FEV1"));
                             int b=Integer.parseInt(jsonObject1.getString("FVC"));
                             SimpleChartView.data2.add(a*100/b);
@@ -117,22 +121,18 @@ public class HealthCenterFragment extends Fragment {
             }catch (IOException | JSONException e){
                 e.printStackTrace();
             }
-        }).start();
-        System.err.println(indexoffev1);
-        System.err.println(indexoffvc);
-        System.err.println(indexofvc);
-        System.err.println(data1.size());
-        System.err.println(data2.size());
-        System.err.println(data3.size());
+        });
+        thread.start();
+        while (thread.isAlive()){
+        }
         if (indexoffev1!=index) textView1.setText(data1.get(indexoffev1));
         if (indexoffvc!=index) textView2.setText(data2.get(indexoffvc));
         if (indexofvc!=index) textView3.setText(data3.get(indexofvc));
         if (indexoffev1!=index & indexoffvc!=index){
-            float percent=Float.parseFloat(data1.get(indexoffev1))/Float.parseFloat(data2.get(indexoffvc));
-            BigDecimal bigDecimal=new BigDecimal(percent);
-            bigDecimal=bigDecimal.setScale(2,4);
-            percent=bigDecimal.floatValue();
-            textView2c.setText(String.valueOf(percent));
+            int percent=Integer.parseInt(data1.get(indexoffev1))*100/Integer.parseInt(data2.get(indexoffvc));
+            if (percent<70) textView2c.setTextColor(Color.parseColor("#FF0000"));
+            String string=String.valueOf(percent)+"%";
+            textView2c.setText(string);
         }
         super.onResume();
     }

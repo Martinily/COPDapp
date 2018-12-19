@@ -25,21 +25,21 @@ import java.util.List;
 public class PatientListItemAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
-    private List<UserTemp> mUserTemps;
+    private List<User> mUsers;
 
-    public PatientListItemAdapter(Context context, List<UserTemp> userTemps) {
+    public PatientListItemAdapter(Context context, List<User> users) {
         this.mInflater = LayoutInflater.from(context);
-        this.mUserTemps = userTemps;
+        this.mUsers = users;
     }
 
     @Override
     public int getCount() {
-        return mUserTemps.size();
+        return mUsers.size();
     }
 
     @Override
-    public UserTemp getItem(int position) {
-        return mUserTemps.get(position);
+    public User getItem(int position) {
+        return mUsers.get(position);
     }
 
     @Override
@@ -77,8 +77,7 @@ public class PatientListItemAdapter extends BaseAdapter {
 
         private TextView mName;
 
-        private void init(UserTemp item) {
-            User user = item.getUser();
+        private void init(User user) {
             mPortrait.setUserAccount(user.getAccount()).setUrl(null).show();
             mName.setText(user.getName());
         }

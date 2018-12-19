@@ -27,34 +27,15 @@ public class Portrait extends CircleImageView {
 
     public Portrait(Context context) {
         super(context);
-
-        init();
     }
 
     public Portrait(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        init();
     }
 
     public Portrait(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        init();
-    }
-
-    private void init() {
-        setOnClickListener(v -> {
-            String userAccount = ((MyApplication) getContext().getApplicationContext()).getAccount();
-
-            //if (!account.equals(userAccount)) {
-            Intent intent = new Intent(getContext(), DoctorChatActivity.class);
-
-            intent.putExtra("account", mAccount);
-
-            getContext().startActivity(intent);
-            //}
-        });
     }
 
     public Portrait setUserAccount(String account) {
@@ -68,6 +49,6 @@ public class Portrait extends CircleImageView {
     }
 
     public void show() {
-        Glide.with(getContext()).load(/*Uri.parse(url)*/R.mipmap.portrait0).into(this);
+        Glide.with(getContext()).load(/*Uri.parse(url)*/R.drawable.user).into(this);
     }
 }
