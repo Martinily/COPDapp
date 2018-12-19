@@ -45,7 +45,6 @@ public class DoctorChatActivity extends AppCompatActivity {
                 if (message.getFrom().equals(mMyfriend)) {
                     // 设置消息为已读
                     mConversation.markMessageAsRead(message.getMsgId());
-
                     onAddMessage(message);
                     break;
                 }
@@ -54,20 +53,14 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         @Override
         public void onCmdMessageReceived (List<EMMessage> messages) {
-            //收到透传消息
-            System.out.println("DoctorChatActivity.onCmdMessageReceived");
         }
 
         @Override
         public void onMessageRead (List<EMMessage> messages) {
-            //收到已读回执
-            System.out.println("DoctorChatActivity.onMessageRead");
         }
 
         @Override
         public void onMessageDelivered (List<EMMessage> message) {
-            //收到已送达回执
-            System.out.println("DoctorChatActivity.onMessageDelivered");
         }
 
         @Override
@@ -77,8 +70,6 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         @Override
         public void onMessageChanged (EMMessage message, Object change) {
-            //消息状态变动
-            System.out.println("DoctorChatActivity.onMessageChanged");
         }
     };
 
@@ -112,7 +103,6 @@ public class DoctorChatActivity extends AppCompatActivity {
     private void init () {
         mMyfriend = (String) getIntent().getSerializableExtra("myfriend");
 
-
         initView();
         initUIComponents();
         addListener();
@@ -123,8 +113,8 @@ public class DoctorChatActivity extends AppCompatActivity {
         mLv_message=findViewById(R.id.lv_doctor_chat_message_container);
         mEt_input=findViewById(R.id.et_doctor_chat_input);
         mBtn_send=findViewById(R.id.btn_doctor_chat_send);
-        mVioce=findViewById(R.id.ibtn_vioce);
         mNursingPlan=findViewById(R.id.ibtn_nursingplan);
+        mVioce=findViewById(R.id.ibtn_vioce);
         mVideo=findViewById(R.id.ibtn_video);
     }
 
@@ -159,9 +149,6 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         mVioce.setOnClickListener(v -> {
             Intent intent = new Intent(DoctorChatActivity.this, VoiceCallActivity.class);
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("myPatient", mMyPatient);
-            intent.putExtras(bundle);
             CallManager.getInstance().setChatId(mMyfriend);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VOICE);
@@ -170,6 +157,9 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         mVideo.setOnClickListener(v -> {
             Intent intent = new Intent(DoctorChatActivity.this, DoctorVideoCallActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("myPatient", mMyPatient);
+            intent.putExtras(bundle);
             CallManager.getInstance().setChatId(mMyfriend);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);
@@ -187,7 +177,12 @@ public class DoctorChatActivity extends AppCompatActivity {
 
     private void initToolbar () {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_doctor_chat_toolbar);
-        toolbar.setTitle(mMyfriend);
+
+        if (!mMyPatient.getName().isEmpty()){
+            toolbar.setTitle(mMyPatient.getName());
+        }else{
+            toolbar.setTitle(mMyfriend);
+        }
 
         setSupportActionBar(toolbar);
 
@@ -199,7 +194,7 @@ public class DoctorChatActivity extends AppCompatActivity {
      */
     private void loadAllMessage () {
         mConversation = EMClient.getInstance().chatManager().getConversation(mMyfriend,
-                EMConversation.EMConversationType.Chat, false);
+                EMConversation.EMConversationType.Chat, true);
         // 设置当前会话未读数为 0
         mConversation.markAllMessagesAsRead();
 
@@ -231,9 +226,7 @@ public class DoctorChatActivity extends AppCompatActivity {
 
     private void initMessageList () {
         CurrentChatadapter = new ChatMessageAdapter(this, mMyfriend, mMessageList);
-
         mLv_message.setAdapter(CurrentChatadapter);
-
         mLv_message.smoothScrollToPositionFromTop(mMessageList.size(), 0);
     }
 
@@ -241,7 +234,6 @@ public class DoctorChatActivity extends AppCompatActivity {
         //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户
         EMMessage message = EMMessage.createTxtSendMessage(mEt_input.getText().toString(),
                 mMyfriend);
-        message.setAttribute("nickName", "医生");
         //发送消息
         EMClient.getInstance().chatManager().sendMessage(message);
 

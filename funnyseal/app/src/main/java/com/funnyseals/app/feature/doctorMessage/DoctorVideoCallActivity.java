@@ -1,11 +1,13 @@
 package com.funnyseals.app.feature.doctorMessage;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -81,6 +83,9 @@ public class DoctorVideoCallActivity extends CallActivity {
     private RelativeLayout.LayoutParams localParams     = null;
     private RelativeLayout.LayoutParams oppositeParams  = null;
     private User                        mMyPatient;
+    private AlertDialog                 alertDialog     = null;
+    private AlertDialog.Builder         builder         = null;
+    private View                        mView;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -152,6 +157,31 @@ public class DoctorVideoCallActivity extends CallActivity {
         if (CallManager.getInstance().isExternalInputData()) {
             new PreviewManager(surfaceView);
         }
+
+        builder = new AlertDialog.Builder(this);
+        final LayoutInflater inflater = this.getLayoutInflater();
+        mView = inflater.inflate(R.layout.view_dialog_medical_history, null, false);
+        builder.setView(mView);
+        builder.setCancelable(false);
+
+
+        setDialogOnClick();
+    }
+
+    private void setDialogOnClick () {
+        mView.findViewById(R.id.btn_dialog_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        mView.findViewById(R.id.btn_dialog_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                alertDialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -207,6 +237,13 @@ public class DoctorVideoCallActivity extends CallActivity {
                 answerCall();
                 break;
         }
+    }
+
+    protected void endCall () {
+        alertDialog = builder.create();
+
+        CallManager.getInstance().endCall();
+        onFinish();
     }
 
     /**

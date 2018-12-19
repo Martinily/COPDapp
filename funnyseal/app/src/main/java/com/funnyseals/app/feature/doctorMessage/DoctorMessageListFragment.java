@@ -45,7 +45,7 @@ public class DoctorMessageListFragment extends Fragment {
     private EMMessageListener    mMsgListener = new EMMessageListener() {
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
-            mAdapter.notifyDataSetChanged();
+            loadConversations();
         }
 
         @Override
@@ -138,7 +138,7 @@ public class DoctorMessageListFragment extends Fragment {
             for(User p:mAllMyPatient){
                 if(p.getAccount().equals(account)){
                     bundle.putSerializable("myPatient", p);
-                    return;
+                    break;
                 }
             }
             intent.putExtras(bundle);
