@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.WindowManager;
 
-import com.hyphenate.chat.EMClient;
 import com.vmloft.develop.library.tools.VMActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,8 +32,6 @@ public class CallActivity extends VMActivity {
     protected void initView() {
         activity = this;
 
-        initCallPushProvider();
-
         // 初始化振动器
         vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -51,13 +48,6 @@ public class CallActivity extends VMActivity {
         }
     }
 
-    /**
-     * 初始化通话推送提供者
-     */
-    private void initCallPushProvider() {
-        CallPushProvider pushProvider = new CallPushProvider();
-        EMClient.getInstance().callManager().setPushProvider(pushProvider);
-    }
 
     /**
      * 挂断通话

@@ -18,38 +18,32 @@
         toolbar:titleTextColor="@color/white" />
 
     <RelativeLayout
-        android:id="@+id/body"
+        android:id="@+id/rl_doctor_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/menu"
+        android:layout_above="@id/ll_doctor_menu"
         android:layout_below="@id/tb_doctor_chat_toolbar">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/chat_swipe_layout"
+        <ListView
+            android:id="@+id/lv_doctor_chat_message_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/transparent"
+            android:dividerHeight="5dp"
+            android:listSelector="#00000000"
+            android:scrollbarStyle="outsideOverlay"
+            android:transcriptMode="normal" />
 
-            <ListView
-                android:id="@+id/lv_doctor_chat_message_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:cacheColorHint="#00000000"
-                android:divider="@color/transparent"
-                android:dividerHeight="5dp"
-                android:listSelector="#00000000"
-                android:scrollbarStyle="outsideOverlay"
-                android:transcriptMode="normal" />
-
-        </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/menu"
+        android:id="@+id/ll_doctor_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/ll_doctor_chat_bottom_bar">
         <ImageButton
-            android:id="@+id/ibtn_vioce"
+            android:id="@+id/ibtn_doctor_vioce"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
@@ -57,7 +51,7 @@
             android:contentDescription="随访" />
 
         <ImageButton
-            android:id="@+id/ibtn_nursingplan"
+            android:id="@+id/ibtn_doctor_nursingplan"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
@@ -65,7 +59,7 @@
             android:contentDescription="问卷" />
 
         <ImageButton
-            android:id="@+id/ibtn_video"
+            android:id="@+id/ibtn_doctor_video"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"

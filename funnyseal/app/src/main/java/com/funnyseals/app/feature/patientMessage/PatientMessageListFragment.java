@@ -16,7 +16,6 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
-import com.funnyseals.app.feature.doctorMessage.DoctorChatActivity;
 import com.funnyseals.app.feature.doctorMessage.MessageItemAdapter;
 import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
@@ -27,47 +26,19 @@ import com.hyphenate.chat.EMMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  */
-public class PatientMessageListFragment extends Fragment {
+public class PatientMessageListFragment extends Fragment implements EMMessageListener{
     private View                 mView;
     private SwipeMenuListView    mChatList;
     private MessageItemAdapter   mAdapter;
     private String               mMyAccount;
     private List<EMConversation> mConversationList;
-    private List<User>           mAllMyDoctocr;
-    private EMMessageListener    mMsgListener = new EMMessageListener() {
-        @Override
-        public void onMessageReceived (List<EMMessage> messages) {
-            mAdapter.notifyDataSetChanged();
-        }
-
-        @Override
-        public void onCmdMessageReceived (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageRead (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageDelivered (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageRecalled (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageChanged (EMMessage message, Object change) {
-
-        }
-    };
+    private User                 mMyDoctocr;
+    //消息监听，如果有新的消息就更新消息列表
+    private EMMessageListener    mMsgListener;
 
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
@@ -76,11 +47,10 @@ public class PatientMessageListFragment extends Fragment {
 
         MyApplication application = (MyApplication) getActivity().getApplication();
         mMyAccount = application.getAccount();
-
-        mAllMyDoctocr = ((PatientBottomActivity) getActivity()).getAllMyDoctor();
-
-        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
+        mMyDoctocr = ((PatientBottomActivity) getActivity()).getMyDoctor();
+        mMsgListener=this;
         initUIComponents();
+
         return mView;
     }
 
@@ -89,6 +59,7 @@ public class PatientMessageListFragment extends Fragment {
     public void onResume () {
         super.onResume();
         loadConversations();
+        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
     }
 
     private void initUIComponents () {
@@ -108,6 +79,7 @@ public class PatientMessageListFragment extends Fragment {
         mChatList.setMenuCreator(creator);
         // 设置左划
         mChatList.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
     }
 
     /**
@@ -118,12 +90,13 @@ public class PatientMessageListFragment extends Fragment {
                 .getAllConversations();
         mConversationList = new ArrayList<>();
         mConversationList.addAll(conversations.values());
-        mAdapter = new MessageItemAdapter(getActivity(), mConversationList);
+        mAdapter = new MessageItemAdapter(getActivity(), mConversationList, mMyDoctocr);
         mChatList.setAdapter(mAdapter);
         mChatList.setOnItemClickListener((parent, view, position, id) -> {
-            EMConversation conversation = (EMConversation) mChatList.getItemAtPosition(position);
-            Intent intent = new Intent(getActivity(), DoctorChatActivity.class);
-            intent.putExtra("myfriend", conversation.conversationId());
+            Intent intent = new Intent(getActivity(), PatientChatActivity.class);
+            intent.putExtra("myAccount", mMyAccount);
+            intent.putExtra("myDoctor", mMyDoctocr);
+            EMClient.getInstance().chatManager().removeMessageListener(mMsgListener);
             startActivity(intent);
         });
 
@@ -136,5 +109,40 @@ public class PatientMessageListFragment extends Fragment {
             // false : close the menu; true : not close the menu
             return false;
         });
+    }
+
+    @Override
+    public void onMessageReceived (List<EMMessage> messages) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run () {
+                loadConversations();
+            }
+        });
+    }
+
+    @Override
+    public void onCmdMessageReceived (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRead (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageDelivered (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRecalled (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageChanged (EMMessage message, Object change) {
+
     }
 }

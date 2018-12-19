@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.funnyseals.app.LoginActivity;
 import com.funnyseals.app.R;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
@@ -95,8 +96,7 @@ public class VoiceCallActivity extends CallActivity {
      */
     @OnClick({
             R.id.btn_exit_full_screen, R.id.btn_mic_switch, R.id.btn_speaker_switch,
-            R.id.fab_reject_call,
-            R.id.fab_end_call, R.id.fab_answer_call
+            R.id.fab_reject_call, R.id.fab_end_call, R.id.fab_answer_call
     })
     void onClick (View v) {
         switch (v.getId()) {
@@ -232,7 +232,7 @@ public class VoiceCallActivity extends CallActivity {
                 onFinish();
                 break;
             case NETWORK_DISCONNECTED:
-                Toast.makeText(activity, "对方网络断开", Toast.LENGTH_SHORT).show();
+                showToast("对方网络断开");
                 VMLog.i("对方网络断开");
                 break;
             case NETWORK_NORMAL:
@@ -246,19 +246,19 @@ public class VoiceCallActivity extends CallActivity {
                 }
                 break;
             case VIDEO_PAUSE:
-                Toast.makeText(activity, "对方已暂停视频传输", Toast.LENGTH_SHORT).show();
+                showToast("对方已暂停视频传输");
                 VMLog.i("对方已暂停视频传输");
                 break;
             case VIDEO_RESUME:
-                Toast.makeText(activity, "对方已恢复视频传输", Toast.LENGTH_SHORT).show();
+                showToast("对方已恢复视频传输");
                 VMLog.i("对方已恢复视频传输");
                 break;
             case VOICE_PAUSE:
-                Toast.makeText(activity, "对方已暂停语音传输", Toast.LENGTH_SHORT).show();
+                showToast("对方已暂停语音传输");
                 VMLog.i("对方已暂停语音传输");
                 break;
             case VOICE_RESUME:
-                Toast.makeText(activity, "对方已恢复语音传输", Toast.LENGTH_SHORT).show();
+                showToast("对方已恢复语音传输");
                 VMLog.i("对方已恢复语音传输");
                 break;
             default:
@@ -317,5 +317,9 @@ public class VoiceCallActivity extends CallActivity {
     public void onBackPressed () {
         //super.onBackPressed();
         exitFullScreen();
+    }
+
+    public void showToast (final String msg) {
+        runOnUiThread(() -> Toast.makeText(VoiceCallActivity.this, msg, Toast.LENGTH_SHORT).show());
     }
 }

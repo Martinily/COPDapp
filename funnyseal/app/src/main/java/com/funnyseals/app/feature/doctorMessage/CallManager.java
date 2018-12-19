@@ -35,14 +35,11 @@ import java.util.TimerTask;
  * </pre>
  */
 public class CallManager {
-    // 上下文菜单
-    private Context context;
-
-    private BluetoothHeadset bluetoothHeadset;
-
     // 单例类实例
     private static CallManager instance;
-
+    // 上下文菜单
+    private Context context;
+    private BluetoothHeadset bluetoothHeadset;
     // 通知栏提醒管理类
     private NotificationManager notificationManager;
     private int                 callNotificationId = 0526;
@@ -119,8 +116,6 @@ public class CallManager {
          */
         EMClient.getInstance().callManager().getCallOptions().setEnableExternalVideoData
                 (isExternalInputData);
-        // 设置视频旋转角度，启动前和视频通话中均可设置
-        //EMClient.getInstance().callManager().getCallOptions().setRotation(90);
         // 设置自动调节分辨率，默认为 true
         EMClient.getInstance().callManager().getCallOptions().enableFixedVideoResolution(true);
         /*
@@ -144,9 +139,6 @@ public class CallManager {
         EMClient.getInstance().callManager().getCallOptions().setMaxAudioKbps(16);
         // 设置录制视频采用 mov 编码 TODO 后期这个而接口需要移动到 EMCallOptions 中
         EMClient.getInstance().callManager().getVideoCallHelper().setPreferMovFormatEnable(true);
-        // 设置通话音频源类型
-        //        EMClient.getInstance().callManager().getCallOptions().setCallAudioSource
-        // (MediaRecorder.AudioSource.MIC);
     }
 
     /**
@@ -166,38 +158,38 @@ public class CallManager {
         }
         switch (endType) {
             case NORMAL: // 正常结束通话
-                content = String.valueOf(getCallTime());
+                content = "通话已结束！";
                 break;
             case CANCEL: // 取消
-                content = "取消";
+                content = "您已取消此次通话！";
                 break;
             case CANCELLED: // 被取消
-                content = "被取消";
+                content = "对方拒绝与您通话！";
                 break;
             case BUSY: // 对方忙碌
-                content = "对方忙碌";
+                content = "对方暂时无法接听！";
                 break;
             case OFFLINE: // 对方不在线
-                content = "对方不在线";
+                content = "对方不在线上！";
                 break;
             case REJECT: // 拒绝的
-                content = "拒绝的";
+                content = "您已选择挂断！";
                 break;
             case REJECTED: // 被拒绝的
-                content = "被拒绝的";
+                content = "对方已挂断！";
                 break;
             case NORESPONSE: // 未响应
-                content = "未响应";
+                content = "未响应！";
                 break;
             case TRANSPORT: // 建立连接失败
-                content = "建立连接失败";
+                content = "建立连接失败！";
                 break;
             case DIFFERENT: // 通讯协议不同
-                content = "通讯协议不同";
+                content = "通讯协议不同！";
                 break;
             default:
                 // 默认取消
-                content = "取消";
+                content = "通话已取消！";
                 break;
         }
         body = new EMTextMessageBody(content);
@@ -211,6 +203,13 @@ public class CallManager {
         message.setUnread(false);
         // 调用sdk的保存消息方法
         EMClient.getInstance().chatManager().saveMessage(message);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        stopCallSound();
     }
 
     /**
@@ -363,8 +362,8 @@ public class CallManager {
     private void connectBluetoothAudio () {
         try {
             if (bluetoothHeadset != null) {
-                bluetoothHeadset.startVoiceRecognition(bluetoothHeadset.getConnectedDevices()
-                        .get(0));
+                bluetoothHeadset.startVoiceRecognition(bluetoothHeadset.getConnectedDevices().get
+                        (0));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -458,10 +457,6 @@ public class CallManager {
         if (soundPool != null) {
             // 停止播放音效
             soundPool.stop(streamID);
-            // 卸载音效
-            //soundPool.unload(loadId);
-            // 释放资源
-            //soundPool.release();
         }
     }
 
@@ -646,12 +641,12 @@ public class CallManager {
         return callTime;
     }
 
-    public void setEndType (EndType endType) {
-        this.endType = endType;
-    }
-
     public EndType getEndType () {
         return endType;
+    }
+
+    public void setEndType (EndType endType) {
+        this.endType = endType;
     }
 
     public boolean isExternalInputData () {
@@ -684,14 +679,6 @@ public class CallManager {
 
     public void setOpenSpeaker (boolean openSpeaker) {
         isOpenSpeaker = openSpeaker;
-    }
-
-    public boolean isOpenRecord () {
-        return isOpenRecord;
-    }
-
-    public void setOpenRecord (boolean openRecord) {
-        isOpenRecord = openRecord;
     }
 
     /**

@@ -34,7 +34,7 @@ import java.util.Objects;
  *     version: 1.0
  * </pre>
  */
-public class DoctorMessageListFragment extends Fragment {
+public class DoctorMessageListFragment extends Fragment implements EMMessageListener{
 
     private View                 mView;
     private SwipeMenuListView    mChatList;
@@ -42,37 +42,7 @@ public class DoctorMessageListFragment extends Fragment {
     private List<EMConversation> mConversationList;
     private List<User>           mAllMyPatient;
     //消息监听，如果有新的消息就更新消息列表
-    private EMMessageListener    mMsgListener = new EMMessageListener() {
-        @Override
-        public void onMessageReceived (List<EMMessage> messages) {
-            mAdapter.notifyDataSetChanged();
-        }
-
-        @Override
-        public void onCmdMessageReceived (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageRead (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageDelivered (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageRecalled (List<EMMessage> messages) {
-
-        }
-
-        @Override
-        public void onMessageChanged (EMMessage message, Object change) {
-
-        }
-    };
+    private EMMessageListener    mMsgListener;
 
 
     @Override
@@ -82,7 +52,8 @@ public class DoctorMessageListFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
         mAllMyPatient = ((DoctorBottomActivity) Objects.requireNonNull(getActivity()))
                 .getAllMyPatient();
-        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
+
+        mMsgListener=this;
         initUIComponents();
 
         return mView;
@@ -92,6 +63,7 @@ public class DoctorMessageListFragment extends Fragment {
     public void onResume () {
         super.onResume();
         loadConversations();
+        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
     }
 
     /*
@@ -116,6 +88,7 @@ public class DoctorMessageListFragment extends Fragment {
         mChatList.setMenuCreator(creator);
         // 设置左划
         mChatList.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
     }
 
     /**
@@ -138,10 +111,11 @@ public class DoctorMessageListFragment extends Fragment {
             for(User p:mAllMyPatient){
                 if(p.getAccount().equals(account)){
                     bundle.putSerializable("myPatient", p);
-                    return;
+                    break;
                 }
             }
             intent.putExtras(bundle);
+            EMClient.getInstance().chatManager().removeMessageListener(mMsgListener);
             startActivity(intent);
         });
 
@@ -154,5 +128,40 @@ public class DoctorMessageListFragment extends Fragment {
             // false : close the menu; true : not close the menu
             return false;
         });
+    }
+
+    @Override
+    public void onMessageReceived (List<EMMessage> messages) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run () {
+                loadConversations();
+            }
+        });
+    }
+
+    @Override
+    public void onCmdMessageReceived (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRead (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageDelivered (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageRecalled (List<EMMessage> messages) {
+
+    }
+
+    @Override
+    public void onMessageChanged (EMMessage message, Object change) {
+
     }
 }

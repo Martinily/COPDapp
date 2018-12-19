@@ -31,18 +31,24 @@ public class MessageItemAdapter extends BaseAdapter {
 
     private LayoutInflater       mInflater;
     private List<EMConversation> mConversationList;
-    private List<User>           mAllMyFriend;
+    private List<User>           mAllMyPatient;
+    private User                 mMyDoctor;
+    private String               mUserType;
 
     public MessageItemAdapter (Context context, List<EMConversation> conversationList, List<User>
-            allMyFriend) {
+            allMyPatient) {
         this.mInflater = LayoutInflater.from(context);
         this.mConversationList = conversationList;
-        this.mAllMyFriend = allMyFriend;
+        this.mAllMyPatient = allMyPatient;
+        mUserType = "doctor";
     }
 
-    public MessageItemAdapter (Context context, List<EMConversation> conversationList) {
+    public MessageItemAdapter (Context context, List<EMConversation> conversationList, User
+            myDoctor) {
         this.mInflater = LayoutInflater.from(context);
         this.mConversationList = conversationList;
+        this.mMyDoctor = myDoctor;
+        mUserType = "patient";
     }
 
     @Override
@@ -63,38 +69,37 @@ public class MessageItemAdapter extends BaseAdapter {
     @Override
     public View getView (int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item_chat, parent, false);
+        convertView = mInflater.inflate(R.layout.list_item_chat, parent, false);
 
-            viewHolder = new ViewHolder();
+        viewHolder = new ViewHolder();
 
-            viewHolder.mPortrait = convertView.findViewById(R.id.chat_item_portrait);
-            viewHolder.mName = convertView.findViewById(R.id.chat_item_name);
-            viewHolder.mTime = convertView.findViewById(R.id.chat_item_time);
-            viewHolder.mContent = convertView.findViewById(R.id.chat_item_content);
-            viewHolder.mMessageNum = convertView.findViewById(R.id.chat_item_message_num);
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+        viewHolder.mPortrait = convertView.findViewById(R.id.chat_item_portrait);
+        viewHolder.mName = convertView.findViewById(R.id.chat_item_name);
+        viewHolder.mTime = convertView.findViewById(R.id.chat_item_time);
+        viewHolder.mContent = convertView.findViewById(R.id.chat_item_content);
+        viewHolder.mMessageNum = convertView.findViewById(R.id.chat_item_message_num);
 
         viewHolder.mPortrait.setImageResource(R.drawable.portrait);
         EMConversation conversation = getItem(position);
         viewHolder.mAccount = conversation.conversationId();
         String account = viewHolder.mAccount;
-        for (User p : mAllMyFriend) {
-            if (p.getAccount().equals(account)) {
-                viewHolder.mName.setText(p.getName().isEmpty() ? account : p.getName());
-                break;
+        if (mUserType.equals("doctor")) {
+            for (User p : mAllMyPatient) {
+                if (p.getAccount().equals(account)) {
+                    viewHolder.mName.setText(p.getName().isEmpty() ? account : p.getName());
+                    break;
+                }
             }
+        } else if (mUserType.equals("patient")) {
+            viewHolder.mName.setText(mMyDoctor.getName().isEmpty() ? account : mMyDoctor.getName());
         }
+
 
         viewHolder.mContent.setText(((EMTextMessageBody) conversation.getLastMessage().getBody())
                 .getMessage());
 
         int unread = conversation.getUnreadMsgCount();
-        if(unread!=0){
+        if (unread != 0) {
             viewHolder.mMessageNum.showCirclePointBadge();
             viewHolder.mMessageNum.showTextBadge(unread + "");
             viewHolder.mMessageNum.setOnClickListener(v -> conversation.markAllMessagesAsRead());

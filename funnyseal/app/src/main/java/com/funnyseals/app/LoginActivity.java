@@ -20,6 +20,7 @@ import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 import com.hyphenate.EMCallBack;
+import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 
 import org.json.JSONException;
@@ -104,108 +105,151 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else {
-            final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                    R.style.AppTheme_Dark_Dialog);
-
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("正在登录。。。");
-            progressDialog.show();
-            progressDialog.setCanceledOnTouchOutside(false);
-            loginEM();
-            new Thread(() -> {
-                String send;
-                Socket socket;
-                try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("request_type", "1");
-                    jsonObject.put("user_name", getAccount());
-                    jsonObject.put("user_pw", getPassword());
-                    send = jsonObject.toString();
-                    socket = SocketUtil.getSendSocket();
-                    DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                    out.writeUTF(send);
-                    out.close();
-
-                    socket = SocketUtil.getGetSocket();
-                    DataInputStream datainputstream = new DataInputStream(socket.getInputStream());
-                    String message = datainputstream.readUTF();
-
-                    jsonObject = new JSONObject(message);
-                    progressDialog.dismiss();
-                    switch (jsonObject.getString("login_state")) {
-                        case "成功":
-                            showToast("登录成功！");
-                            rememberPassword();
-
-                            MyApplication myApplication = (MyApplication) getApplication();
-                            myApplication.setAccount(getAccount());
-
-                            switch (jsonObject.getString("user_type")) {
-                                case "d":
-                                    myApplication.setUser(
-                                            new User(jsonObject.getString("docID"),
-                                                    jsonObject.getString("docName"),
-                                                    jsonObject.getString("docSex"),
-                                                    Integer.valueOf(jsonObject.getString("docAge")),
-                                                    jsonObject.getString("docTime"),
-                                                    jsonObject.getString("docAddress"),
-                                                    jsonObject.getString("docCompany"),
-                                                    jsonObject.getString("docTitle")));
-                                    startActivity(new Intent(LoginActivity.this,
-                                            DoctorBottomActivity.class));
-                                    finish();
-                                    break;
-                                case "p":
-                                    myApplication.setUser(
-                                            new User(jsonObject.getString("pID"),
-                                                    jsonObject.getString("pName"),
-                                                    jsonObject.getString("pSex"),
-                                                    Integer.valueOf(jsonObject.getString("pAge")),
-                                                    jsonObject.getString("pTime"),
-                                                    jsonObject.getString("pAddress"),
-                                                    jsonObject.getString("HistoryCondition"),
-                                                    jsonObject.getString("HistoryAdvice"),
-                                                    jsonObject.getString("docID")));
-                                    startActivity(new Intent(LoginActivity.this,
-                                            PatientBottomActivity.class));
-                                    finish();
-                                    break;
-                            }
-                            break;
-                        case "用户不存在":
-                            showToast("该用户不存在！");
-                            break;
-                        case "密码错误":
-                            showToast("密码错误！");
-                            break;
-                    }
-                    socket.close();
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
+            EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
+                @Override
+                public void onSuccess () {
+                    runOnUiThread(() -> Login());
                 }
-                progressDialog.dismiss();
-                Thread.interrupted();
-            }).start();
+
+                @Override
+                public void onError (int code, String error) {
+                    runOnUiThread(() -> {
+                        String err;
+                        switch (code) {
+                            // 网络异常 2
+                            case EMError.NETWORK_ERROR:
+                                err="网络错误 code: " + code + ", message:" + error;
+                                break;
+                            // 无效的用户名 101
+                            case EMError.INVALID_USER_NAME:
+                                err="无效的用户名 code: " + code + ", message:" + error;
+                                break;
+                            // 无效的密码 102
+                            case EMError.INVALID_PASSWORD:
+                                err="无效的密码 code: " + code + ", message:" + error;
+                                break;
+                            // 用户认证失败，用户名或密码错误 202
+                            case EMError.USER_AUTHENTICATION_FAILED:
+                                err="用户认证失败，用户名或密码错误 code: " + code + ", message:" + error;
+                                break;
+                            // 用户不存在 204
+                            case EMError.USER_NOT_FOUND:
+                                err="用户不存在 code: " + code + ", message:" + error;
+                                break;
+                            // 无法访问到服务器 300
+                            case EMError.SERVER_NOT_REACHABLE:
+                                err="无法访问到服务器 code: " + code + ", message:" + error;
+                                break;
+                            // 等待服务器响应超时 301
+                            case EMError.SERVER_TIMEOUT:
+                                err="等待服务器响应超时 code: " + code + ", message:" + error;
+                                break;
+                            // 服务器繁忙 302
+                            case EMError.SERVER_BUSY:
+                                err="服务器繁忙 code: " + code + ", message:" + error;
+                                break;
+                            // 未知 Server 异常 303 一般断网会出现这个错误
+                            case EMError.SERVER_UNKNOWN_ERROR:
+                                err="未知的服务器异常 code: " + code + ", message:" + error;
+                                break;
+                            default:
+                                err="ml_sign_in_failed code: " + code + ", message:";
+                                break;
+                        }
+                        showToast(err);
+                    });
+                }
+
+                @Override
+                public void onProgress (int progress, String status) {
+                    runOnUiThread(() -> showToast("网络连接失败！"));
+                }
+            });
         }
     }
 
-    public void loginEM () {
-        EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
-            @Override
-            public void onSuccess () {
+    public void Login () {
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppTheme_Dark_Dialog);
 
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("正在登录。。。");
+        progressDialog.show();
+        progressDialog.setCanceledOnTouchOutside(false);
+        new Thread(() -> {
+            String send;
+            Socket socket;
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("request_type", "1");
+                jsonObject.put("user_name", getAccount());
+                jsonObject.put("user_pw", getPassword());
+                send = jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(send);
+                out.close();
+
+                socket = SocketUtil.getGetSocket();
+                DataInputStream datainputstream = new DataInputStream(socket.getInputStream());
+                String message = datainputstream.readUTF();
+
+                jsonObject = new JSONObject(message);
+                progressDialog.dismiss();
+                switch (jsonObject.getString("login_state")) {
+                    case "成功":
+                        showToast("登录成功！");
+                        rememberPassword();
+
+                        MyApplication myApplication = (MyApplication) getApplication();
+                        myApplication.setAccount(getAccount());
+
+                        switch (jsonObject.getString("user_type")) {
+                            case "d":
+                                myApplication.setUser(
+                                        new User(jsonObject.getString("docID"),
+                                                jsonObject.getString("docName"),
+                                                jsonObject.getString("docSex"),
+                                                Integer.valueOf(jsonObject.getString("docAge")),
+                                                jsonObject.getString("docTime"),
+                                                jsonObject.getString("docAddress"),
+                                                jsonObject.getString("docCompany"),
+                                                jsonObject.getString("docTitle")));
+                                startActivity(new Intent(LoginActivity.this,
+                                        DoctorBottomActivity.class));
+                                finish();
+                                break;
+                            case "p":
+                                myApplication.setUser(
+                                        new User(jsonObject.getString("pID"),
+                                                jsonObject.getString("pName"),
+                                                jsonObject.getString("pSex"),
+                                                Integer.valueOf(jsonObject.getString("pAge")),
+                                                jsonObject.getString("pTime"),
+                                                jsonObject.getString("pAddress"),
+                                                jsonObject.getString("HistoryCondition"),
+                                                jsonObject.getString("HistoryAdvice"),
+                                                jsonObject.getString("docID")));
+                                startActivity(new Intent(LoginActivity.this,
+                                        PatientBottomActivity.class));
+                                finish();
+                                break;
+                        }
+                        break;
+                    case "用户不存在":
+                        showToast("该用户不存在！");
+                        break;
+                    case "密码错误":
+                        showToast("密码错误！");
+                        break;
+                }
+                socket.close();
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
             }
-
-            @Override
-            public void onError (int code, String error) {
-
-            }
-
-            @Override
-            public void onProgress (int progress, String status) {
-
-            }
-        });
+            progressDialog.dismiss();
+            Thread.interrupted();
+        }).start();
     }
 
     public void rememberPassword () {

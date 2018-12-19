@@ -1,11 +1,13 @@
 package com.funnyseals.app.feature.doctorMessage;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -81,6 +83,9 @@ public class DoctorVideoCallActivity extends CallActivity {
     private RelativeLayout.LayoutParams localParams     = null;
     private RelativeLayout.LayoutParams oppositeParams  = null;
     private User                        mMyPatient;
+    private AlertDialog                 alertDialog     = null;
+    private AlertDialog.Builder         builder         = null;
+    private View                        mView;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -130,7 +135,7 @@ public class DoctorVideoCallActivity extends CallActivity {
 
         // 初始化显示通话画面
         initCallSurface();
-        // 判断当前通话时刚开始，还是从后台恢复已经存在的通话
+        // 判断当前通话是刚开始，还是从后台恢复已经存在的通话
         if (CallManager.getInstance().getCallState() == CallManager.CallState.ACCEPTED) {
             endCallFab.setVisibility(View.VISIBLE);
             answerCallFab.setVisibility(View.GONE);
@@ -143,28 +148,49 @@ public class DoctorVideoCallActivity extends CallActivity {
 
         try {
             // 设置默认摄像头为前置
-            EMClient.getInstance()
-                    .callManager()
-                    .setCameraFacing(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            EMClient.getInstance().callManager().setCameraFacing(Camera.CameraInfo.CAMERA_FACING_FRONT);
         } catch (HyphenateException e) {
             e.printStackTrace();
         }
         if (CallManager.getInstance().isExternalInputData()) {
             new PreviewManager(surfaceView);
         }
+
+        builder = new AlertDialog.Builder(this);
+        final LayoutInflater inflater = this.getLayoutInflater();
+        mView = inflater.inflate(R.layout.view_dialog_medical_history, null, false);
+        builder.setView(mView);
+        builder.setCancelable(false);
+
+
+        setDialogOnClick();
+    }
+
+    private void setDialogOnClick () {
+        mView.findViewById(R.id.btn_dialog_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        mView.findViewById(R.id.btn_dialog_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                alertDialog.dismiss();
+            }
+        });
     }
 
     /**
      * 界面控件点击监听器
      */
     @OnClick({
-            R.id.layout_doctor_call_control, R.id.btn_doctor_exit_full_screen, R.id
-            .btn_doctor_call_info,
-            R.id.btn_doctor_mic_switch, R.id.btn_doctor_camera_switch, R.id
-            .btn_doctor_speaker_switch,
-            R.id.btn_doctor_change_camera_switch, R.id.fab_doctor_reject_call, R.id
-            .fab_doctor_end_call,
-            R.id.fab_doctor_answer_call
+            R.id.layout_doctor_call_control, R.id.btn_doctor_exit_full_screen,
+            R.id.btn_doctor_call_info, R.id.btn_doctor_mic_switch,
+            R.id.btn_doctor_camera_switch, R.id.btn_doctor_speaker_switch,
+            R.id.btn_doctor_change_camera_switch, R.id.fab_doctor_reject_call,
+            R.id.fab_doctor_end_call, R.id.fab_doctor_answer_call
     })
     void onClick (View v) {
         switch (v.getId()) {
@@ -176,7 +202,7 @@ public class DoctorVideoCallActivity extends CallActivity {
                 exitFullScreen();
                 break;
             case R.id.btn_doctor_call_info:
-                callInfoMonitor();
+                medicalHistory();
                 break;
             case R.id.btn_doctor_mic_switch:
                 // 麦克风开关
@@ -209,6 +235,13 @@ public class DoctorVideoCallActivity extends CallActivity {
         }
     }
 
+    protected void endCall () {
+        alertDialog = builder.create();
+
+        CallManager.getInstance().endCall();
+        onFinish();
+    }
+
     /**
      * 控制界面的显示与隐藏
      */
@@ -232,7 +265,7 @@ public class DoctorVideoCallActivity extends CallActivity {
     /**
      * 通话信息监听器
      */
-    private void callInfoMonitor () {
+    private void medicalHistory () {
         if (isMonitor) {
             isMonitor = false;
             callInfoView.setVisibility(View.GONE);
