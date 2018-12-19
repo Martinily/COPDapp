@@ -31,18 +31,23 @@ public class MessageItemAdapter extends BaseAdapter {
 
     private LayoutInflater       mInflater;
     private List<EMConversation> mConversationList;
-    private List<User>           mAllMyFriend;
+    private List<User>           mAllMyPatient;
+    private User mMyDoctor;
+    private String mUserType;
 
     public MessageItemAdapter (Context context, List<EMConversation> conversationList, List<User>
-            allMyFriend) {
+            allMyPatient) {
         this.mInflater = LayoutInflater.from(context);
         this.mConversationList = conversationList;
-        this.mAllMyFriend = allMyFriend;
+        this.mAllMyPatient = allMyPatient;
+        mUserType="doctor";
     }
 
-    public MessageItemAdapter (Context context, List<EMConversation> conversationList) {
+    public MessageItemAdapter (Context context, List<EMConversation> conversationList,User myDoctor) {
         this.mInflater = LayoutInflater.from(context);
         this.mConversationList = conversationList;
+        this.mMyDoctor=myDoctor;
+        mUserType="patient";
     }
 
     @Override
@@ -83,12 +88,17 @@ public class MessageItemAdapter extends BaseAdapter {
         EMConversation conversation = getItem(position);
         viewHolder.mAccount = conversation.conversationId();
         String account = viewHolder.mAccount;
-        for (User p : mAllMyFriend) {
-            if (p.getAccount().equals(account)) {
-                viewHolder.mName.setText(p.getName().isEmpty() ? account : p.getName());
-                break;
+        if(mUserType.equals("doctor")){
+            for (User p : mAllMyPatient) {
+                if (p.getAccount().equals(account)) {
+                    viewHolder.mName.setText(p.getName().isEmpty() ? account : p.getName());
+                    break;
+                }
             }
+        }else if(mUserType.equals("patient")){
+            viewHolder.mName.setText(mMyDoctor.getName().isEmpty() ? account : mMyDoctor.getName());
         }
+
 
         viewHolder.mContent.setText(((EMTextMessageBody) conversation.getLastMessage().getBody())
                 .getMessage());

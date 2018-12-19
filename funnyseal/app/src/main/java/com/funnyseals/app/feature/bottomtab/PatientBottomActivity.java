@@ -17,7 +17,6 @@ import com.funnyseals.app.feature.patientPersonalCenter.PatientPersonalCenterFra
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.SocketUtil;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,15 +24,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PatientBottomActivity extends AppCompatActivity {
 
     private RadioButton             mIndexTab;
     private int                     mPreviousTabId;
     private PatientBottomTabAdapter mFragmentTabAdapter;
-    private List<User>              mAllMyDoctor;
+    private User                    mMyDoctor;
     private MyApplication           myApplication;
 
     @Override
@@ -55,7 +52,7 @@ public class PatientBottomActivity extends AppCompatActivity {
         }
     }
 
-    public void initData(){
+    public void initData () {
         new Thread(() -> {
             String send;
             Socket socket;
@@ -63,34 +60,25 @@ public class PatientBottomActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("request_type", "6");
                 jsonObject.put("ID", myApplication.getUser().getMyDoctor());
-                jsonObject.put("user_type","d");
+                jsonObject.put("user_type", "d");
                 send = jsonObject.toString();
                 socket = SocketUtil.getSendSocket();
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 out.writeUTF(send);
                 out.close();
 
-                socket=SocketUtil.getInfo();
-                DataInputStream in=new DataInputStream(socket.getInputStream());
-                String message=in.readUTF();
-                if(message.contains("empty")&&message.length()<10){
-                    mAllMyDoctor=null;
-                    Thread.interrupted();
-                }
-                mAllMyDoctor=new ArrayList<>();
-                JSONArray allMyPatient=new JSONArray(message);
-                int i;
-                for (i=0;i<allMyPatient.length();i++){
-                    JSONObject patient=allMyPatient.getJSONObject(i);
-                    mAllMyDoctor.add(new User(myApplication.getUser().getMyDoctor(),
-                            patient.getString("docName"),
-                            patient.getString("docSex"),
-                            Integer.valueOf(patient.getString("docAge")),
-                            patient.getString("docTime"),
-                            patient.getString("docAddress"),
-                            jsonObject.getString("docCompany"),
-                            jsonObject.getString("docTitle")));
-                }
+                socket = SocketUtil.getInfo();
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                String message = in.readUTF();
+                JSONObject myDoctor = new JSONObject(message);
+                mMyDoctor = new User(myDoctor.getString("docID"),
+                        myDoctor.getString("docName"),
+                        myDoctor.getString("docSex"),
+                        Integer.valueOf(myDoctor.getString("docAge")),
+                        myDoctor.getString("docTime"),
+                        myDoctor.getString("docAddress"),
+                        myDoctor.getString("docCompany"),
+                        myDoctor.getString("docTitle"));
                 socket.close();
 
             } catch (JSONException | IOException e) {
@@ -100,8 +88,8 @@ public class PatientBottomActivity extends AppCompatActivity {
         }).start();
     }
 
-    public List<User> getAllMyDoctor(){
-        return mAllMyDoctor;
+    public User getMyDoctor () {
+        return mMyDoctor;
     }
 
     @Override

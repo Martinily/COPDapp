@@ -25,19 +25,15 @@ import java.util.List;
  */
 public class ChatMessageAdapter extends BaseAdapter {
 
+    private String mMyfriend;
+
     private LayoutInflater  mInflater;
     private List<EMMessage> mMessageList;
-    private String          mMyfriend;
     private MyApplication   mApplication;
 
-    private class ViewHolder {
-        private ImageView      portrait;
-        private BubbleTextView text;
-    }
-
-    public ChatMessageAdapter (Context context, String user, List<EMMessage> messageList) {
+    public ChatMessageAdapter (Context context, String friend, List<EMMessage> messageList) {
         this.mInflater = LayoutInflater.from(context);
-        this.mMyfriend = user;
+        this.mMyfriend = friend;
         this.mMessageList = messageList;
         mApplication = (MyApplication) context.getApplicationContext();
     }
@@ -64,14 +60,11 @@ public class ChatMessageAdapter extends BaseAdapter {
         EMMessage message = mMessageList.get(position);
 
         if (mApplication.getAccount().equals(message.getFrom())) {
-
             convertView = mInflater.inflate(R.layout.chat_send, parent, false);
-
             viewHolder.portrait = convertView.findViewById(R.id.chat_send_portrait);
             viewHolder.text = convertView.findViewById(R.id.chat_send_text);
         } else {
             convertView = mInflater.inflate(R.layout.chat_receive, parent, false);
-
             viewHolder.portrait = convertView.findViewById(R.id.chat_receive_portrait);
             viewHolder.text = convertView.findViewById(R.id.chat_receive_text);
         }
@@ -87,6 +80,11 @@ public class ChatMessageAdapter extends BaseAdapter {
         viewHolder.text.setText(((EMTextMessageBody) message.getBody()).getMessage());
 
         return convertView;
+    }
+
+    private class ViewHolder {
+        private ImageView      portrait;
+        private BubbleTextView text;
     }
 
 }

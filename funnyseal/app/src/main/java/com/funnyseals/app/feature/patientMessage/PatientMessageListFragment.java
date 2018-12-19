@@ -16,7 +16,6 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
-import com.funnyseals.app.feature.doctorMessage.DoctorChatActivity;
 import com.funnyseals.app.feature.doctorMessage.MessageItemAdapter;
 import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
@@ -36,7 +35,7 @@ public class PatientMessageListFragment extends Fragment {
     private MessageItemAdapter   mAdapter;
     private String               mMyAccount;
     private List<EMConversation> mConversationList;
-    private List<User>           mAllMyDoctocr;
+    private User                 mMyDoctocr;
     private EMMessageListener    mMsgListener = new EMMessageListener() {
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
@@ -76,11 +75,12 @@ public class PatientMessageListFragment extends Fragment {
 
         MyApplication application = (MyApplication) getActivity().getApplication();
         mMyAccount = application.getAccount();
-
-        mAllMyDoctocr = ((PatientBottomActivity) getActivity()).getAllMyDoctor();
+        mMyDoctocr = ((PatientBottomActivity) getActivity()).getMyDoctor();
 
         EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
+
         initUIComponents();
+
         return mView;
     }
 
@@ -118,12 +118,12 @@ public class PatientMessageListFragment extends Fragment {
                 .getAllConversations();
         mConversationList = new ArrayList<>();
         mConversationList.addAll(conversations.values());
-        mAdapter = new MessageItemAdapter(getActivity(), mConversationList);
+        mAdapter = new MessageItemAdapter(getActivity(), mConversationList, mMyDoctocr);
         mChatList.setAdapter(mAdapter);
         mChatList.setOnItemClickListener((parent, view, position, id) -> {
-            EMConversation conversation = (EMConversation) mChatList.getItemAtPosition(position);
-            Intent intent = new Intent(getActivity(), DoctorChatActivity.class);
-            intent.putExtra("myfriend", conversation.conversationId());
+            Intent intent = new Intent(getActivity(), PatientChatActivity.class);
+            intent.putExtra("myAccount", mMyAccount);
+            intent.putExtra("myDoctor", mMyDoctocr);
             startActivity(intent);
         });
 

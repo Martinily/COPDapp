@@ -45,6 +45,7 @@ public class DoctorMessageListFragment extends Fragment {
     private EMMessageListener    mMsgListener = new EMMessageListener() {
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
+            System.err.println("-------------------");
             loadConversations();
         }
 

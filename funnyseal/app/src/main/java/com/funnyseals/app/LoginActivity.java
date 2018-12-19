@@ -111,7 +111,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             progressDialog.setMessage("正在登录。。。");
             progressDialog.show();
             progressDialog.setCanceledOnTouchOutside(false);
-            loginEM();
+            EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
+                @Override
+                public void onSuccess () {
+
+                }
+
+                @Override
+                public void onError (int code, String error) {
+                    return;
+                }
+
+                @Override
+                public void onProgress (int progress, String status) {
+                    return;
+                }
+            });
             new Thread(() -> {
                 String send;
                 Socket socket;
@@ -187,25 +202,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Thread.interrupted();
             }).start();
         }
-    }
-
-    public void loginEM () {
-        EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
-            @Override
-            public void onSuccess () {
-
-            }
-
-            @Override
-            public void onError (int code, String error) {
-
-            }
-
-            @Override
-            public void onProgress (int progress, String status) {
-
-            }
-        });
     }
 
     public void rememberPassword () {
