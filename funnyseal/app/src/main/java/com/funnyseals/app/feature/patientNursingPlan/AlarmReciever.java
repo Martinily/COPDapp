@@ -53,7 +53,8 @@ public class AlarmReciever extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             notice = builder.setContentIntent(contentIntent).setContentTitle("您有护理计划待完成！").setContentText(content).build();
             notice.flags=Notification.FLAG_AUTO_CANCEL;
-            barmanager.notify(10,notice);
+            int differid=(int)(Math.random()*100);
+            barmanager.notify(differid,notice);
         }
     }
 }
