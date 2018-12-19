@@ -48,7 +48,8 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     private List<Bean> mAllSportsItem;
     private String mPatientId;//患者id
     private String mJudgesubmmit;
-
+    private String mMyFriend;  //消息到护理计划的制定
+    private String mWhere; //标识从何处跳转过来的
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -63,6 +64,16 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+
+        Intent intent = getActivity().getIntent();
+        Bundle bundle = intent.getExtras();
+
+        mWhere=bundle.getString("where");
+        if(mWhere.equals("1"))
+        {
+            mMyFriend=bundle.getString("myFriend");
+        }
+
 
         // 设置菜单栏的点击事件
         mTv_doctor_one.setOnClickListener(this);
@@ -115,17 +126,134 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 break;
             case R.id.send:   //发送计划
                 if(mPlannum>0){
-                    Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);
-                    //传输医生编号
-                    Bundle bundle2= new Bundle();
-                    bundle2.putString("DoctorID", mDoctorID);//医生id
-                    intent2.putExtras(bundle2);
-                    startActivityForResult(intent2,1000);
+                    if(mWhere.equals("1"))
+                    {
+                        mPatientId=mMyFriend;
+                        SendPlan();
+                    }
+                    else{
+                        Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);
+                        //传输医生编号
+                        Bundle bundle2= new Bundle();
+                        bundle2.putString("DoctorID", mDoctorID);//医生id
+                        intent2.putExtras(bundle2);
+                        startActivityForResult(intent2,1000);
+                    }
                 }
                 else{
                     Toast.makeText(getActivity(),"当前计划为空！", Toast.LENGTH_SHORT).show();
                 }
                 break;
+        }
+    }
+
+
+    public void SendPlan(){
+        Thread thread=new Thread(() -> {
+            Socket socket;
+            JSONArray nursingplan=new JSONArray();
+            JSONObject jsonObject=new JSONObject();
+            MyApplication application=(MyApplication) getActivity().getApplication();
+            try {
+                jsonObject.put("request_type","3");
+                //jsonObject.put("docID",application.getAccount());
+                jsonObject.put("docID",mDoctorID);// mDoctorID
+                jsonObject.put("pID",mPatientId );  //mPatientId
+                socket=SocketUtil.getSendSocket();
+                DataOutputStream out =new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(jsonObject.toString());
+                out.close();
+
+                Thread.sleep(1000);
+
+                for (Bean Medicine : mAllMedicineItem) {
+                    JSONObject medicine=new JSONObject();
+                    medicine.put("item_type","med");
+                    medicine.put("mName",Medicine.getName());
+                    if(Medicine.getContent().isEmpty()){
+                        medicine.put("mDose","-");
+                    }else{
+                        medicine.put("mDose",Medicine.getContent());
+                    }
+                    if(Medicine.getAttention().isEmpty()){
+                        medicine.put("mAttention","-");
+                    }else{
+                        medicine.put("mAttention",Medicine.getAttention());
+                    }
+                    if(Medicine.gettime().equals("000000")){
+                        medicine.put("mTime","-");
+                        System.err.println("meiyou");
+                    }
+                    else{
+                        medicine.put("mTime",Medicine.gettime());
+                    }
+                    nursingplan.put(medicine);
+                }
+                for (Bean Instrument : mAllInstrumentItem) {
+                    JSONObject instrument=new JSONObject();
+                    instrument.put("item_type","app");
+                    instrument.put("appName",Instrument.getName());
+                    if(Instrument.getAttention().isEmpty()){
+                        instrument.put("appAttention","-");
+                    } else{
+                        instrument.put("appAttention",Instrument.getAttention());
+                    }
+                    if(Instrument.getContent().isEmpty()){
+                        instrument.put("appTime","-");
+                    }else{
+                        instrument.put("appTime",Instrument.getContent());
+                    }
+                    nursingplan.put(instrument);
+                }
+                for (Bean Sports : mAllSportsItem) {
+                    JSONObject sport=new JSONObject();
+                    sport.put("item_type","sports");
+                    sport.put("sType",Sports.getName());
+                    if(Sports.getAttention().isEmpty()){
+                        sport.put("sAttention","-");
+                    } else{
+                        sport.put("sAttention",Sports.getAttention());
+                    }
+                    if(Sports.getContent().isEmpty()){
+                        sport.put("sTime","-");
+                    }else{
+                        sport.put("sTime",Sports.getContent());
+                    }
+                    nursingplan.put(sport);
+                }
+
+                socket=SocketUtil.getArraySendSocket();
+                System.err.println(socket.isConnected());
+                out =new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(nursingplan.toString());
+                out.close();
+
+                Thread.sleep(1000);
+
+                socket=SocketUtil.getGetSocket();
+                DataInputStream dataInputStream=new DataInputStream(socket.getInputStream());
+                dataInputStream=new DataInputStream(socket.getInputStream());
+                String message=dataInputStream.readUTF();
+                System.err.println(message);
+
+                JSONObject jsonObject3=new JSONObject(message);
+                mJudgesubmmit=jsonObject3.getString("item_result");
+
+                socket.close();
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
+        thread.start();
+        while(thread.isAlive()){
+
+        }
+
+        if(mJudgesubmmit.equals("true")) {
+            Toast.makeText(getActivity(), "发送成功", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(getActivity(), "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -135,113 +263,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == 1001) {
             mPatientId = data.getStringExtra("patientid");
-
-            Thread thread=new Thread(() -> {
-                Socket socket;
-                JSONArray nursingplan=new JSONArray();
-                JSONObject jsonObject=new JSONObject();
-                MyApplication application=(MyApplication) getActivity().getApplication();
-                try {
-                    jsonObject.put("request_type","3");
-                    //jsonObject.put("docID",application.getAccount());
-                    jsonObject.put("docID",mDoctorID);// mDoctorID
-                    jsonObject.put("pID",mPatientId );  //mPatientId
-                    socket=SocketUtil.getSendSocket();
-                    DataOutputStream out =new DataOutputStream(socket.getOutputStream());
-                    out.writeUTF(jsonObject.toString());
-                    out.close();
-
-                    Thread.sleep(1000);
-
-                    for (Bean Medicine : mAllMedicineItem) {
-                        JSONObject medicine=new JSONObject();
-                        medicine.put("item_type","med");
-                        medicine.put("mName",Medicine.getName());
-                        if(Medicine.getContent().isEmpty()){
-                            medicine.put("mDose","-");
-                        }else{
-                            medicine.put("mDose",Medicine.getContent());
-                        }
-                        if(Medicine.getAttention().isEmpty()){
-                            medicine.put("mAttention","-");
-                        }else{
-                            medicine.put("mAttention",Medicine.getAttention());
-                        }
-                        if(Medicine.gettime().equals("000000")){
-                            medicine.put("mTime","-");
-                            System.err.println("meiyou");
-                        }
-                        else{
-                            medicine.put("mTime",Medicine.gettime());
-                        }
-                        nursingplan.put(medicine);
-                    }
-                    for (Bean Instrument : mAllInstrumentItem) {
-                        JSONObject instrument=new JSONObject();
-                        instrument.put("item_type","app");
-                        instrument.put("appName",Instrument.getName());
-                        if(Instrument.getAttention().isEmpty()){
-                            instrument.put("appAttention","-");
-                        } else{
-                            instrument.put("appAttention",Instrument.getAttention());
-                        }
-                        if(Instrument.getContent().isEmpty()){
-                            instrument.put("appTime","-");
-                        }else{
-                            instrument.put("appTime",Instrument.getContent());
-                        }
-                        nursingplan.put(instrument);
-                    }
-                    for (Bean Sports : mAllSportsItem) {
-                        JSONObject sport=new JSONObject();
-                        sport.put("item_type","sports");
-                        sport.put("sType",Sports.getName());
-                        if(Sports.getAttention().isEmpty()){
-                            sport.put("sAttention","-");
-                        } else{
-                            sport.put("sAttention",Sports.getAttention());
-                        }
-                        if(Sports.getContent().isEmpty()){
-                            sport.put("sTime","-");
-                        }else{
-                            sport.put("sTime",Sports.getContent());
-                        }
-                        nursingplan.put(sport);
-                    }
-
-                    socket=SocketUtil.getArraySendSocket();
-                    System.err.println(socket.isConnected());
-                    out =new DataOutputStream(socket.getOutputStream());
-                    out.writeUTF(nursingplan.toString());
-                    out.close();
-
-                    Thread.sleep(1000);
-
-                    socket=SocketUtil.getGetSocket();
-                    DataInputStream dataInputStream=new DataInputStream(socket.getInputStream());
-                    dataInputStream=new DataInputStream(socket.getInputStream());
-                    String message=dataInputStream.readUTF();
-                    System.err.println(message);
-
-                    JSONObject jsonObject3=new JSONObject(message);
-                   mJudgesubmmit=jsonObject3.getString("item_result");
-
-                    socket.close();
-                } catch (JSONException | IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Thread.interrupted();
-            });
-            thread.start();
-            while(thread.isAlive()){
-
-            }
-
-            if(mJudgesubmmit.equals("true")) {
-                Toast.makeText(getActivity(), "发送成功", Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(getActivity(), "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
-            }
+            SendPlan();
             System.err.println(mPatientId);
         }
     }
