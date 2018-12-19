@@ -40,7 +40,6 @@ public class PatientThreeFragment extends Fragment {
     private List<String>  mSports_Titles=new ArrayList<>();//名称
     private List<String>  mSports_Contents=new ArrayList<>();  //时长
     private List<String>  mSports_attentions=new ArrayList<>();//注意事项
-    private String[] sports_time={"10:00", "2:00", "3:00", "4:00", "3:00", "2:00", "1:00", "2:00", "3:00"}; //最近的时间
 
     @Override
     public void onResume() {
@@ -77,7 +76,7 @@ public class PatientThreeFragment extends Fragment {
             map.put("sportsimg",R.drawable.sports);
             map.put("sportscontent",sports_Content[i]);
             map.put("sportsattention",sports_attention[i]);
-            map.put("sportstime",sports_time[i]);
+            map.put("sportstime","-");
             mSports_list.add(map);
         }
         ListView listview = getActivity().findViewById(R.id.listViewsports);

@@ -39,7 +39,6 @@ public class PatientTwoFragment extends Fragment {
     private List<String> mInstrument_Titles=new ArrayList<>();
     private List<String> mInstrument_Contents=new ArrayList<>();
     private List<String> mInstrument_attentions=new ArrayList<>();
-    private String[] instrument_time={"2:00", "1:00", "2:00", "3:00"}; //最近的时间
 
     //将数据封装成数据源
     private        List<Map<String, Object>> mInstrument_list = new ArrayList<>();
@@ -88,7 +87,7 @@ public class PatientTwoFragment extends Fragment {
             map.put("instrumentimg",R.drawable.instrument);
             map.put("instrumentcontent",instrument_Content[i]);
             map.put("instrumentattention",instrument_attention[i]);
-            map.put("instrumenttime",instrument_time[i]);
+            map.put("instrumenttime","-");
 
             mInstrument_list.add(map);
         }
