@@ -36,13 +36,14 @@ public class DoctorSigningActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_signing);
+        myApplication=(MyApplication)getApplication();
         init();
 
     }
 
     public void init(){
         et_doctor_signing_phone=findViewById(R.id.et_doctor_signing_phone);
-        myApplication=(MyApplication)getApplication();
+
 
         bt_doctor_signing_complete=findViewById(R.id.bt_doctor_signing_complete);
         bt_doctor_signing_complete.setOnClickListener(new addListeners());

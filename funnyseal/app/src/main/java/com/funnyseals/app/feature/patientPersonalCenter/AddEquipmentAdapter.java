@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,12 +21,20 @@ public class AddEquipmentAdapter extends ArrayAdapter {
         super(context, textViewResourceId,objects);
         resourceId=textViewResourceId;
     }
+    /**
+     * Notifies the attached observers that the underlying data has been changed
+     * and any View reflecting the data set should refresh itself.
+     */
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         AddEquipment addEquipment = (AddEquipment) getItem(position); // 获取当前项的AddEquipment实例
-        @SuppressLint("ViewHolder") View view = LayoutInflater.from(getContext()).inflate(resourceId, null);//实例化一个对象
+        @SuppressLint("ViewHolder")
+        View view = LayoutInflater.from(getContext()).inflate(resourceId, null);//实例化一个对象
         TextView EquipmentName = view.findViewById(R.id.add_equipment_name);//获取该布局内的文本视图
         TextView EquipmentState = view.findViewById(R.id.add_equipment_state);//获取该布局内的文本视图
+     //   ImageButton
 
         EquipmentState.setText(addEquipment.getEquipment_state());
         EquipmentName.setText(addEquipment.getEquipment_name());

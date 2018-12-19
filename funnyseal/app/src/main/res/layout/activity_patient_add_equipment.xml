@@ -9,14 +9,15 @@
     android:id="@+id/relativeLayout4">
 
     <TextView
+        android:id="@+id/tv_patient_add_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="添加设备"
-        android:id="@+id/tv_patient_add_title"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_patient_add_name"
@@ -26,6 +27,7 @@
         android:layout_marginTop="70dp"
         android:text="设备名称"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,35 +41,12 @@
         android:layout_marginEnd="20dp"
         android:text="设备状态"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.884"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_patient_add_name"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/ev_patient_add_name"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:hint="设备名称"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_name" />
-
-    <EditText
-        android:id="@+id/ev_patient_add_state"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:hint="设备状态"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
-        app:layout_constraintStart_toEndOf="@+id/ev_patient_add_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_state" />
 
     <Button
         android:id="@+id/bt_patient_add_complete"
@@ -94,4 +73,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/sp_patient_add_name"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_patient_add_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_name"
+        android:entries="@array/select_name"
+        />
+
+    <Spinner
+        android:id="@+id/sp_patient_add_state"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_patient_add_state"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_state"
+        android:entries="@array/select_state"
+        />
+
 </android.support.constraint.ConstraintLayout>

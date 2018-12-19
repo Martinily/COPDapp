@@ -29,8 +29,8 @@ public class findAddEquipment {
     public static AddEquipment sectionData(JSONObject json){
         try {
             return new AddEquipment(
-                    json.getString("equipment_name"),
-                    json.getString("euipment_state"));
+                    json.getString("eName"),
+                    json.getString("eState"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

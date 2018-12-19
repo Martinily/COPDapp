@@ -7,7 +7,7 @@
     tools:context=".feature.doctorPersonalCenter.DoctorSigningActivity">
 
     <TextView
-        android:id="@+id/tv_doctor_signing_title"
+        android:id="@+id/tv_patient_advice_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -30,7 +30,7 @@
         android:textColor="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_doctor_signing_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_advice_title" />
 
     <Button
         android:id="@+id/bt_doctor_signing_complete"
@@ -52,7 +52,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@null"
-        app:layout_constraintEnd_toStartOf="@+id/tv_doctor_signing_title"
+        app:layout_constraintEnd_toStartOf="@+id/tv_patient_advice_title"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

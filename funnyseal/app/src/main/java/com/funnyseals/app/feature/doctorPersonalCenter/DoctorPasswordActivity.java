@@ -31,6 +31,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
     private Button bt_doctor_change_complete;
     private ImageButton ib_doctor_change_return;
     private MyApplication myApplication;
+    private boolean type=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -146,8 +147,8 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                                 jsonObject.put("request_type","8");
                                 jsonObject.put("modify_type","update");
                                 jsonObject.put("ID",myApplication.getAccount());
-                                jsonObject.put("oldpassword", getOldpassword());
-                                jsonObject.put("newpassword",getNewpassword());
+                                jsonObject.put("oldPassword", getOldpassword());
+                                jsonObject.put("newPassword",getNewpassword());
                                 send = jsonObject.toString();
                                 socket = SocketUtil.getSendSocket();
                                 DataOutputStream out=new DataOutputStream(socket.getOutputStream());
@@ -161,8 +162,9 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                                 jsonObject = new JSONObject(message);
                                 switch (jsonObject.getString("password_result")){
                                     case "0":
+                                        type=true;
                                         showToast("修改密码成功");
-                                        finish();
+
                                         break;
                                     case "1":
                                         showToast("用户名错误");
@@ -179,6 +181,9 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }).start();
+                    }
+                    if (type=true){
+                        finish();
                     }
                     break;
                 default:

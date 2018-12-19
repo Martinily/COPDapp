@@ -67,4 +67,6 @@
 
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="title_activity_patient_doctor_advice">PatientDoctorAdviceActivity</string>
+    <string name="title_activity_patient_setting">PatientSetting</string>
 </resources>

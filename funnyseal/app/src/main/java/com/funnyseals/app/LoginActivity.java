@@ -172,6 +172,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     finish();
                                     break;
                             }
+                            break;
                         case "用户不存在":
                             showToast("该用户不存在！");
                             break;

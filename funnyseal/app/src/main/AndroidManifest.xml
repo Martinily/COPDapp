@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.funnyseals.app">
+
     <!-- 硬件功能请求 -->
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -41,7 +42,6 @@
     <!-- 悬浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
     <uses-permission android:name="android.permission.READ_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -139,11 +139,17 @@
             android:name=".feature.patientPersonalCenter.PatientMyInfoModifyActivity"
             android:label="@string/title_activity_patient_per_info_modify"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-
         <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
         <activity android:name=".feature.doctorMessage.VideoCallActivity" />
         <activity android:name=".feature.doctorMessage.CallActivity" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientDoctorAdviceActivity"
+            android:label="@string/title_activity_patient_doctor_advice"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientSetting"
+            android:label="@string/title_activity_patient_setting"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

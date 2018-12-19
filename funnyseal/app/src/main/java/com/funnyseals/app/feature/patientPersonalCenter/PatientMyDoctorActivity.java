@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -34,20 +35,23 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
     private MyApplication myApplication;
     private String myDoctor="";
     private User myUser;
+    private String name,hosptial,post;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_my_doctor);
+        myApplication=(MyApplication)getApplication();
+        myUser=myApplication.getUser();
         init();
-
     }
     //更新，其余写死
     void   init()
     {
-        tv_patient_doctor_name=findViewById(R.id.tv_doctor_perinfo);
+        tv_patient_doctor_name=findViewById(R.id.tv_patient_doctor_name);
         tv_patient_doctor_hospital=findViewById(R.id.tv_patient_doctor_hospital);
         tv_patient_doctor_post=findViewById(R.id.tv_patient_doctor_post);
-        myApplication=(MyApplication)getApplication();
 
         ib_patient_doctor_return=findViewById(R.id.ib_patient_doctor_return);
         ib_patient_doctor_return.setOnClickListener(new addListeners());
@@ -56,12 +60,12 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         myDoctor();
     }
     public void myDoctor(){
-        new Thread(()->{
+        Thread thread=new Thread(()->{
             String send="";
             Socket socket;
             try{
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("docID",myUser.getMyDoctor());
+                jsonObject.put("ID",myUser.getMyDoctor());
                 jsonObject.put("request_type","6");
                 jsonObject.put("user_type","d");
                 send = jsonObject.toString();
@@ -75,18 +79,25 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                 String message = dataInputStream.readUTF();
 
                 jsonObject = new JSONObject(message);
-                myDoctor=jsonObject.get("docID").toString();
-                String name=jsonObject.get("docName").toString();
-                String hosptial=jsonObject.get("docCompany").toString();
-                String post=jsonObject.get("docTitle").toString();
-                tv_patient_doctor_name.setText(name);
-                tv_patient_doctor_hospital.setText(hosptial);
-                tv_patient_doctor_post.setText(post);
+                myDoctor=jsonObject.getString("docID");
+                name=jsonObject.get("docName").toString();
+                hosptial=jsonObject.get("docCompany").toString();
+                post=jsonObject.get("docTitle").toString();
+
                 socket.close();
+                Thread.interrupted();
             }catch (IOException | JSONException e){
                 e.printStackTrace();
             }
-        }).start();
+        });
+        thread.start();
+        while (thread.isAlive()){
+
+        }
+        tv_patient_doctor_name.setText(name);
+        tv_patient_doctor_post.setText(post);
+        tv_patient_doctor_hospital.setText(hosptial);
+
     }
 
     //监听

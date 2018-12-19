@@ -31,6 +31,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
     private ImageButton ib_patient_change_return;
     private EditText et_patient_change_oldpassword,et_patient_change_newpassword,et_patient_change_againpassword;
     private MyApplication myApplication;
+    private boolean type=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
             return false;
         }
         if(getNewpassword().length()<6 || getNewpassword().length()>16){
-            Toast.makeText(this,"密码长度应为6-16位",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"密码长度应为6-20位",Toast.LENGTH_SHORT).show();
             return false;
         }
         if(!isSame(getNewpassword(), getAgainpassword())){
@@ -87,7 +88,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
             if (Character.isLetterOrDigit(str.charAt(i))){
                 isLetterOrDigit=true;
             }
-        String regex=  "^([A-Z]|[a-z]|[0-9])$";
+        String regex= "^[a-zA-Z0-9]{6,20}$";
         return  (isLetterOrDigit && str.matches(regex));
     }
     //判断两次密码一致
@@ -140,8 +141,8 @@ public class PatientPasswordActivity extends AppCompatActivity {
                                 jsonObject.put("request_type","8");
                                 jsonObject.put("modify_type","update");
                                 jsonObject.put("ID",myApplication.getAccount());
-                                jsonObject.put("oldpassword", getOldpassword());
-                                jsonObject.put("newpassword",getNewpassword());
+                                jsonObject.put("oldPassword", getOldpassword());
+                                jsonObject.put("newPassword",getNewpassword());
                                 send = jsonObject.toString();
                                 socket = SocketUtil.getSendSocket();
                                 DataOutputStream out=new DataOutputStream(socket.getOutputStream());
@@ -155,8 +156,8 @@ public class PatientPasswordActivity extends AppCompatActivity {
                                 jsonObject = new JSONObject(message);
                                 switch (jsonObject.getString("password_result")){
                                     case "0":
+                                        type=true;
                                         showToast("修改密码成功");
-                                        finish();
                                         break;
                                     case "1":
                                         showToast("用户名错误");
@@ -173,6 +174,10 @@ public class PatientPasswordActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }).start();
+                        if (type=true){
+                            finish();
+                        }
+
                     }
                     break;
                 case R.id.ib_patient_change_return:

@@ -175,7 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ed_patient_modify_mysex" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tv_patient_info_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -196,7 +196,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_patient_modify_settlingtime"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_info_account" />
 
     <EditText
         android:id="@+id/ed_patient_modify_location"
@@ -235,6 +235,27 @@
         android:background="@null"
         app:layout_constraintBottom_toTopOf="@+id/tv_patient_modify_mysettlingtime"
         app:layout_constraintStart_toEndOf="@+id/tv_patient_modify_password"
+        app:srcCompat="@drawable/smssdk_arrow_right" />
+
+    <TextView
+        android:id="@+id/tv_patient_info_advice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="医嘱(内附病史)"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <ImageButton
+        android:id="@+id/ib_patient_modify_advice"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="12dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/tv_patient_info_advice"
+        app:layout_constraintTop_toBottomOf="@+id/ed_patient_modify_location"
         app:srcCompat="@drawable/smssdk_arrow_right" />
 
 
