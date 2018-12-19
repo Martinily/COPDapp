@@ -13,12 +13,8 @@ import com.funnyseals.app.R;
 import java.util.List;
 
 /**
- * <pre>
- *     author : marin
  *     time   : 2018/11/30
  *     desc   :详细内容添加的列表adapter
- *     version: 1.0
- * </pre>
  */
 public class ListViewAdapter extends BaseAdapter {
 
@@ -33,7 +29,6 @@ public class ListViewAdapter extends BaseAdapter {
 
     /**
      * How many items are in the data set represented by this Adapter.
-     *
      * @return Count of items.
      */
     @Override
@@ -44,7 +39,6 @@ public class ListViewAdapter extends BaseAdapter {
     /**
      * Get the data item associated with the specified position in the data set.
      * Position of the item whose data we want within the adapter'sdata set.
-     *
      * @return The data at the specified position.
      */
     @Override
@@ -55,7 +49,6 @@ public class ListViewAdapter extends BaseAdapter {
     /**
      * Get the row id associated with the specified position in the list.
      * The position of the item within the adapter's data set whose row id we want.
-     *
      * @return The id of the item at the specified position.
      */
     @Override

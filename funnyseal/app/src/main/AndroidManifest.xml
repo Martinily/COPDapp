@@ -100,8 +100,6 @@
         <activity android:name=".feature.doctorNursingPlan.MedicineDetailActivity" />
         <activity android:name=".feature.doctorNursingPlan.InstrumentDetailActivity" />
         <activity android:name=".feature.doctorNursingPlan.SportsDetailActivity" />
-        <activity android:name=".feature.doctorNursingPlan.DoctorNursingPlanActivity" />
-        <activity android:name=".feature.patientNursingPlan.PatientNursingPlanActivity" />
         <activity android:name=".feature.patientNursingPlan.MedicineRetimeActivity" />
         <activity android:name=".feature.patientNursingPlan.InstrumentRetimeActivity" />
         <activity android:name=".feature.patientNursingPlan.SportsRetimeActivity" />
@@ -113,6 +111,18 @@
         <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
         <activity android:name=".feature.doctorMessage.VideoCallActivity" />
         <activity android:name=".feature.doctorMessage.CallActivity" />
+        <activity android:name=".feature.patientNursingPlan.DialogActivity" />
+
+        <receiver
+            android:name=".feature.patientNursingPlan.AlarmReciever"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".feature.doctorNursingPlan.DoctorDetailHistoryActivity" />
+        <activity android:name=".feature.doctorNursingPlan.DoctorHistoryActivity" />
+        <activity android:name=".feature.patientNursingPlan.PatientDetailHistoryActivity" />
+        <activity android:name=".feature.patientNursingPlan.PatientHistoryActivity" />
+        <activity android:name=".feature.doctorNursingPlan.PickPatientActivity"></activity>
     </application>
 
 </manifest>

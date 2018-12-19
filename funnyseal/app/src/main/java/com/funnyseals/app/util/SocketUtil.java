@@ -17,6 +17,8 @@ public class SocketUtil {
     private static final int    PORT_GET       = 2019;//服务器端口号
     private static final int    PORT_GET_ARRAY = 2022;
     private static final int    PORT_GET_INFO=2023;
+    private static final int    PORT_ARRAY_SEND=2020;
+    private static final int    PORT_ARRAY_SEND2=2021;
 
     public static Socket getSendSocket () throws IOException {
         return new Socket(IP_ADDR, PORT_SEND);
@@ -32,5 +34,17 @@ public class SocketUtil {
 
     public static Socket getInfo() throws IOException{
         return new Socket(IP_ADDR,PORT_GET_INFO);
+    }
+
+    public static Socket getArraySendSocket() throws IOException{
+        return new Socket(IP_ADDR,PORT_ARRAY_SEND);
+    }
+
+    public static Socket getArraySendSocket2() throws IOException{
+        return new Socket(IP_ADDR,PORT_ARRAY_SEND2);
+    }
+
+    public static Socket getArraySendSocket3() throws IOException{
+        return new Socket(IP_ADDR,PORT_GET_ARRAY);
     }
 }

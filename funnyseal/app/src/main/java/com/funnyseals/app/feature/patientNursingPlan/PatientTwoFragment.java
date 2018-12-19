@@ -34,42 +34,20 @@ import java.util.Map;
  */
 public class PatientTwoFragment extends Fragment {
     private        View                      mView;
-    private static Connection                CONN;
     private        MyApplication             mApplication;
     private        List<InstrumentPlan>      mInstrumentPlans;
+    private List<String> mInstrument_Titles=new ArrayList<>();
+    private List<String> mInstrument_Contents=new ArrayList<>();
+    private List<String> mInstrument_attentions=new ArrayList<>();
+    private String[] instrument_time={"2:00", "1:00", "2:00", "3:00"}; //最近的时间
+
     //将数据封装成数据源
     private        List<Map<String, Object>> mInstrument_list = new ArrayList<>();
-    private        Thread                    mThread;
-    //用于执行数据库线程
-    @SuppressLint("HandlerLeak")
-    private        Handler                   mHandler         = new Handler() {
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                mInstrumentPlans = (List<InstrumentPlan>) msg.obj;
-
-                //将数据封装成数据源
-                for (InstrumentPlan p : mInstrumentPlans) {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("instrumenttitle", p.getInstrumentName());
-                    map.put("instrumentimg", R.drawable.instrument);
-                    map.put("instrumentcontent", p.getInstrumentTracks());
-                    map.put("instrumentattention", p.getInstrumentNote());
-                    map.put("instrumenttime", "10:00");
-                    mInstrument_list.add(map);
-                }
-                ListView listview = getActivity().findViewById(R.id.listViewinstrument);
-                listview.setAdapter(new MyAdapter());
-            }
-        }
-    };
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if (mThread == null) {
-            mThread = new Thread(runnable);
-            mThread.start();
-        }
+
         if (mView != null) {
             ViewGroup parent = (ViewGroup) mView.getParent();
             if (parent != null) {
@@ -81,40 +59,6 @@ public class PatientTwoFragment extends Fragment {
         return mView;
     }
 
-    private Runnable runnable = () -> {
-        try {
-            CONN = UserDao.getConnection();
-            mApplication = (MyApplication) getActivity().getApplication();
-            String id = mApplication.getAccount();
-            if (CONN != null) {
-                PreparedStatement statement = CONN.prepareStatement("SELECT HLJH_BH FROM HLJH WHERE HZ_ZH=? and HLJH_SYZT=1");
-                statement.setString(1, id);
-                ResultSet rs = statement.executeQuery();
-                if (rs.next()) {
-                    PreparedStatement instrumentS = CONN.prepareStatement("SELECT * FROM HLJHQX WHERE HLJH_BH=?");  //！！！！
-                    instrumentS.setString(1, rs.getString(1));
-                    rs = instrumentS.executeQuery();
-                    mInstrumentPlans = new ArrayList<>();
-                    while (rs.next()) {
-                        mInstrumentPlans.add(new InstrumentPlan(rs.getString("HLJHQX_QXMC"), rs.getString("HLJHQX_SYSC"), rs.getString("HLJHQX_ZYSX")));
-                    }
-                    Message message = Message.obtain();
-                    message.what = 0;
-                    message.obj = mInstrumentPlans;
-                    mHandler.sendMessage(message);
-                    CONN.close();
-                    instrumentS.close();
-                    rs.close();
-                    statement.close();
-                }
-            } else {
-                System.err.println("警告: DbConnectionManager.getConnection() 获得数据库链接失败.");
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    };
-
     @Override
     public void onResume() {
         super.onResume();
@@ -123,6 +67,33 @@ public class PatientTwoFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mInstrument_Titles=((PatientNursingPlanFragment)(PatientTwoFragment.this.getParentFragment())).getmInstrument_Titles();
+        mInstrument_Contents=((PatientNursingPlanFragment)(PatientTwoFragment.this.getParentFragment())).getmInstrument_Contents();
+        mInstrument_attentions=((PatientNursingPlanFragment)(PatientTwoFragment.this.getParentFragment())).getmInstrument_attentions();
+
+        int size = mInstrument_Titles.size();
+        int size2 = mInstrument_Contents.size();
+        int size3 = mInstrument_attentions.size();
+
+        String[] instrument_Title = (String[]) mInstrument_Titles.toArray(new String[size]);
+        String[] instrument_Content = (String[]) mInstrument_Contents.toArray(new String[size2]);
+        String[] instrument_attention = (String[]) mInstrument_attentions.toArray(new String[size3]);
+
+        //将数据封装成数据源
+        //将数据封装成数据源
+        for(int i=0;i<instrument_Title.length;i++){
+            Map<String,Object> map=new HashMap<String, Object>();
+            map.put("instrumenttitle",instrument_Title[i]);
+            map.put("instrumentimg",R.drawable.instrument);
+            map.put("instrumentcontent",instrument_Content[i]);
+            map.put("instrumentattention",instrument_attention[i]);
+            map.put("instrumenttime",instrument_time[i]);
+
+            mInstrument_list.add(map);
+        }
+        ListView listview = getActivity().findViewById(R.id.listViewinstrument);
+        listview.setAdapter(new MyAdapter());
     }
 
     //当前card adapter
@@ -169,11 +140,13 @@ public class PatientTwoFragment extends Fragment {
             Button moretime = view.findViewById(R.id.moreinstrumenttime);
             moretime.setOnClickListener(v -> {
                 Intent intent = new Intent(getActivity(), InstrumentRetimeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putCharSequence("instrumenttitle", mInstrument_list.get(position).get("instrumenttitle").toString());
+                intent.putExtras(bundle);
                 startActivity(intent);
             });
             return view;
         }
-
     }
 
     //变量声明
