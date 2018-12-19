@@ -1,12 +1,7 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
 /**
- * <pre>
- *     author : marin
- *     time   : 2018/11/30
  *     desc   :列表内容实体
- *     version: 1.0
- * </pre>
  */
 public class Bean {
     private int mId;

@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
+import com.funnyseals.app.feature.doctorNursingPlan.DoctorDetailHistoryActivity;
+import com.funnyseals.app.feature.doctorNursingPlan.PickPatientActivity;
+import com.funnyseals.app.feature.patientNursingPlan.PatientDetailHistoryActivity;
+import com.funnyseals.app.feature.patientNursingPlan.PatientHistoryActivity;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONException;
@@ -37,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        startActivity(new Intent(LoginActivity.this, DoctorBottomActivity.class));
+        startActivity(new Intent(LoginActivity.this,PatientBottomActivity.class));
         //initViews();
         //initEvents();
     }
