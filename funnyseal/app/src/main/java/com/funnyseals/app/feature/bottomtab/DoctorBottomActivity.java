@@ -57,7 +57,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
     }
 
     public void initData () {
-        new Thread(() -> {
+        Thread thread=new Thread(() -> {
             String send;
             Socket socket;
             try {
@@ -90,12 +90,15 @@ public class DoctorBottomActivity extends AppCompatActivity {
                             patient.getString("pAddress")));
                 }
                 socket.close();
-
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
             Thread.interrupted();
-        }).start();
+        });
+        thread.start();
+        while (thread.isAlive()){
+
+        }
     }
 
     public List<User> getAllMyPatient(){

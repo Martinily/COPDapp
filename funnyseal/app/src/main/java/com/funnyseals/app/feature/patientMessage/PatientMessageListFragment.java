@@ -39,7 +39,8 @@ public class PatientMessageListFragment extends Fragment {
     private EMMessageListener    mMsgListener = new EMMessageListener() {
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
-            loadConversations();
+            //loadConversations();
+            mAdapter.notifyDataSetChanged();
         }
 
         @Override

@@ -41,10 +41,8 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
-            // 循环遍历当前收到的消息
             for (EMMessage message : messages) {
                 if (message.getFrom().equals(mPatientAccount)) {
-                    // 设置消息为已读
                     mConversation.markMessageAsRead(message.getMsgId());
                     onAddMessage(message);
                     break;

@@ -45,8 +45,8 @@ public class DoctorMessageListFragment extends Fragment {
     private EMMessageListener    mMsgListener = new EMMessageListener() {
         @Override
         public void onMessageReceived (List<EMMessage> messages) {
-            System.err.println("-------------------");
-            loadConversations();
+            //loadConversations();
+            mAdapter.notifyDataSetChanged();
         }
 
         @Override
@@ -83,6 +83,7 @@ public class DoctorMessageListFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
         mAllMyPatient = ((DoctorBottomActivity) Objects.requireNonNull(getActivity()))
                 .getAllMyPatient();
+        System.err.println(mAllMyPatient.size());
         EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
         initUIComponents();
 

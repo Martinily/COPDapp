@@ -49,6 +49,7 @@ public class PatientChatActivity extends AppCompatActivity {
                     // 设置消息为已读
                     mConversation.markMessageAsRead(message.getMsgId());
                     onAddMessage(message);
+                    break;
                 }
             }
         }
@@ -100,21 +101,23 @@ public class PatientChatActivity extends AppCompatActivity {
         mDoctorAccount = mMyDoctor.getAccount();
 
         initView();
-        initUIComponents();
         addListener();
         loadAllMessage();
     }
 
-    private void initView(){
+    private void initView () {
         mLv_message = findViewById(R.id.lv_patient_chat_message_container);
         mEt_input = findViewById(R.id.et_patient_chat_input);
         mBtn_send = findViewById(R.id.btn_patient_chat_send);
-        mVideo=findViewById(R.id.ibtn_patient_video);
-        mVioce=findViewById(R.id.ibtn_patient_vioce);
-    }
+        mVideo = findViewById(R.id.ibtn_patient_video);
+        mVioce = findViewById(R.id.ibtn_patient_vioce);
 
-    private void initUIComponents () {
-        initToolbar();
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_patient_chat_toolbar);
+        String doctorName = mMyDoctor.getName();
+        toolbar.setTitle(doctorName);
+
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
         sendEnabled(false);
     }
 
@@ -139,7 +142,9 @@ public class PatientChatActivity extends AppCompatActivity {
                 }
             }
         });
+
         mBtn_send.setOnClickListener(v -> onSend());
+
         mVideo.setOnClickListener(v -> {
             Intent intent = new Intent(PatientChatActivity.this, PatientVideoCallActivity.class);
             CallManager.getInstance().setChatId(mDoctorAccount);
@@ -155,21 +160,6 @@ public class PatientChatActivity extends AppCompatActivity {
             CallManager.getInstance().setCallType(CallManager.CallType.VOICE);
             startActivity(intent);
         });
-
-        EMClient.getInstance().chatManager().addMessageListener(msgListener);
-    }
-
-    private void initToolbar () {
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_patient_chat_toolbar);
-        String doctorName=mMyDoctor.getName();
-        if (doctorName.equals("无")) {
-            toolbar.setTitle(mDoctorAccount);
-        } else {
-            toolbar.setTitle(doctorName);
-        }
-
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     /**
