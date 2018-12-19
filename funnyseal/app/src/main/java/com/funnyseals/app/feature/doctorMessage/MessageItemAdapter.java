@@ -79,7 +79,6 @@ public class MessageItemAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-
         viewHolder.mPortrait.setImageResource(R.drawable.portrait);
         EMConversation conversation = getItem(position);
         viewHolder.mAccount = conversation.conversationId();
@@ -90,6 +89,7 @@ public class MessageItemAdapter extends BaseAdapter {
                 break;
             }
         }
+
         viewHolder.mContent.setText(((EMTextMessageBody) conversation.getLastMessage().getBody())
                 .getMessage());
 

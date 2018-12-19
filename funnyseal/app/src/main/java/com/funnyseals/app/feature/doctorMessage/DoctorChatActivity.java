@@ -11,8 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.funnyseals.app.R;
-import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.doctorNursingPlan.DoctorNursingPlanFragment;
+import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -34,6 +34,7 @@ public class DoctorChatActivity extends AppCompatActivity {
     private ChatMessageAdapter CurrentChatadapter;
     private String             mMyfriend;
     private List<EMMessage>    mMessageList;
+    private User mMyPatient;
     private EMConversation     mConversation;
     private EMMessageListener  msgListener = new EMMessageListener() {
 
@@ -85,7 +86,9 @@ public class DoctorChatActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_chat);
-        MyApplication myApplication = (MyApplication) getApplication();
+        Intent intent=this.getIntent();
+        mMyPatient=(User) intent.getSerializableExtra("myPatient");
+
         init();
     }
 
@@ -156,6 +159,9 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         mVioce.setOnClickListener(v -> {
             Intent intent = new Intent(DoctorChatActivity.this, VoiceCallActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("myPatient", mMyPatient);
+            intent.putExtras(bundle);
             CallManager.getInstance().setChatId(mMyfriend);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VOICE);
@@ -194,9 +200,6 @@ public class DoctorChatActivity extends AppCompatActivity {
     private void loadAllMessage () {
         mConversation = EMClient.getInstance().chatManager().getConversation(mMyfriend,
                 EMConversation.EMConversationType.Chat, false);
-        System.err.println("----------------------");
-        System.err.println(mMyfriend);
-        System.err.println(mConversation);
         // 设置当前会话未读数为 0
         mConversation.markAllMessagesAsRead();
 

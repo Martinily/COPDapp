@@ -1,6 +1,7 @@
 package com.funnyseals.app.feature.doctorMessage;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.model.User;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMVideoCallHelper;
@@ -78,11 +80,15 @@ public class DoctorVideoCallActivity extends CallActivity {
     private EMCallSurfaceView           oppositeSurface = null;
     private RelativeLayout.LayoutParams localParams     = null;
     private RelativeLayout.LayoutParams oppositeParams  = null;
+    private User                        mMyPatient;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_video_call);
+
+        Intent intent = this.getIntent();
+        mMyPatient = (User) intent.getSerializableExtra("myPatient");
 
         ButterKnife.bind(this);
 
@@ -152,9 +158,12 @@ public class DoctorVideoCallActivity extends CallActivity {
      * 界面控件点击监听器
      */
     @OnClick({
-            R.id.layout_doctor_call_control, R.id.btn_doctor_exit_full_screen, R.id.btn_doctor_call_info,
-            R.id.btn_doctor_mic_switch, R.id.btn_doctor_camera_switch, R.id.btn_doctor_speaker_switch,
-            R.id.btn_doctor_change_camera_switch, R.id.fab_doctor_reject_call, R.id.fab_doctor_end_call,
+            R.id.layout_doctor_call_control, R.id.btn_doctor_exit_full_screen, R.id
+            .btn_doctor_call_info,
+            R.id.btn_doctor_mic_switch, R.id.btn_doctor_camera_switch, R.id
+            .btn_doctor_speaker_switch,
+            R.id.btn_doctor_change_camera_switch, R.id.fab_doctor_reject_call, R.id
+            .fab_doctor_end_call,
             R.id.fab_doctor_answer_call
     })
     void onClick (View v) {
@@ -232,7 +241,7 @@ public class DoctorVideoCallActivity extends CallActivity {
             isMonitor = true;
             callInfoView.setVisibility(View.VISIBLE);
             callInfoBtn.setActivated(isMonitor);
-            new Thread(() -> {
+            /*new Thread(() -> {
                 while (isMonitor) {
                     @SuppressLint("DefaultLocale") final String info = String.format("分辨率: %d*%d," +
                                     " \n延迟: %d, \n帧率: %d, \n丢失: " +
@@ -252,7 +261,8 @@ public class DoctorVideoCallActivity extends CallActivity {
                     } catch (InterruptedException ignored) {
                     }
                 }
-            }).start();
+            }).start();*/
+            callInfoView.setText(mMyPatient.getMedicalHistory());
         }
     }
 

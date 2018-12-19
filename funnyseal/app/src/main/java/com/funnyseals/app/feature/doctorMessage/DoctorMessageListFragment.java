@@ -14,7 +14,6 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
-import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
@@ -25,6 +24,7 @@ import com.hyphenate.chat.EMMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <pre>
@@ -40,7 +40,6 @@ public class DoctorMessageListFragment extends Fragment {
     private SwipeMenuListView    mChatList;
     private MessageItemAdapter   mAdapter;
     private List<EMConversation> mConversationList;
-    private String               mMyAccount;
     private List<User>           mAllMyPatient;
     //消息监听，如果有新的消息就更新消息列表
     private EMMessageListener    mMsgListener = new EMMessageListener() {
@@ -81,12 +80,8 @@ public class DoctorMessageListFragment extends Fragment {
             savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
-
-        MyApplication application = (MyApplication) getActivity().getApplication();
-        mMyAccount = application.getAccount();
-
-        mAllMyPatient = ((DoctorBottomActivity) getActivity()).getAllMyPatient();
-
+        mAllMyPatient = ((DoctorBottomActivity) Objects.requireNonNull(getActivity()))
+                .getAllMyPatient();
         EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
         initUIComponents();
 
@@ -100,8 +95,8 @@ public class DoctorMessageListFragment extends Fragment {
     }
 
     /*
-    * 创建自定义菜单，设置左划删除
-    * */
+     * 创建自定义菜单，设置左划删除
+     * */
     private void initUIComponents () {
         mChatList = mView.findViewById(R.id.chat_list);
 
@@ -137,7 +132,16 @@ public class DoctorMessageListFragment extends Fragment {
         mChatList.setOnItemClickListener((parent, view, position, id) -> {
             EMConversation conversation = (EMConversation) mChatList.getItemAtPosition(position);
             Intent intent = new Intent(getActivity(), DoctorChatActivity.class);
-            intent.putExtra("myfriend", conversation.conversationId());
+            String account=conversation.conversationId();
+            intent.putExtra("myfriend", account);
+            Bundle bundle=new Bundle();
+            for(User p:mAllMyPatient){
+                if(p.getAccount().equals(account)){
+                    bundle.putSerializable("myPatient", p);
+                    return;
+                }
+            }
+            intent.putExtras(bundle);
             startActivity(intent);
         });
 
