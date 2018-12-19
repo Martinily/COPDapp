@@ -15,7 +15,9 @@ import org.greenrobot.eventbus.EventBus;
  */
 public class CallStateListener implements EMCallStateChangeListener {
 
-    @Override public void onCallStateChanged(EMCallStateChangeListener.CallState callState, CallError callError) {
+    @Override
+    public void onCallStateChanged (EMCallStateChangeListener.CallState callState, CallError
+            callError) {
         CallEvent event = new CallEvent();
         event.setState(true);
         event.setCallError(callError);
@@ -87,7 +89,7 @@ public class CallStateListener implements EMCallStateChangeListener {
                 }
                 break;
             case VIDEO_PAUSE:
-                VMLog.i("视频传输已暂停");
+                VMLog.i("视频传输已暂停!");
                 break;
             case VIDEO_RESUME:
                 VMLog.i("视频传输已恢复");

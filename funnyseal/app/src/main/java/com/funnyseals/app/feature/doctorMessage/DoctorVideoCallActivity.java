@@ -135,7 +135,7 @@ public class DoctorVideoCallActivity extends CallActivity {
 
         // 初始化显示通话画面
         initCallSurface();
-        // 判断当前通话时刚开始，还是从后台恢复已经存在的通话
+        // 判断当前通话是刚开始，还是从后台恢复已经存在的通话
         if (CallManager.getInstance().getCallState() == CallManager.CallState.ACCEPTED) {
             endCallFab.setVisibility(View.VISIBLE);
             answerCallFab.setVisibility(View.GONE);
@@ -148,9 +148,7 @@ public class DoctorVideoCallActivity extends CallActivity {
 
         try {
             // 设置默认摄像头为前置
-            EMClient.getInstance()
-                    .callManager()
-                    .setCameraFacing(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            EMClient.getInstance().callManager().setCameraFacing(Camera.CameraInfo.CAMERA_FACING_FRONT);
         } catch (HyphenateException e) {
             e.printStackTrace();
         }
@@ -188,13 +186,11 @@ public class DoctorVideoCallActivity extends CallActivity {
      * 界面控件点击监听器
      */
     @OnClick({
-            R.id.layout_doctor_call_control, R.id.btn_doctor_exit_full_screen, R.id
-            .btn_doctor_call_info,
-            R.id.btn_doctor_mic_switch, R.id.btn_doctor_camera_switch, R.id
-            .btn_doctor_speaker_switch,
-            R.id.btn_doctor_change_camera_switch, R.id.fab_doctor_reject_call, R.id
-            .fab_doctor_end_call,
-            R.id.fab_doctor_answer_call
+            R.id.layout_doctor_call_control, R.id.btn_doctor_exit_full_screen,
+            R.id.btn_doctor_call_info, R.id.btn_doctor_mic_switch,
+            R.id.btn_doctor_camera_switch, R.id.btn_doctor_speaker_switch,
+            R.id.btn_doctor_change_camera_switch, R.id.fab_doctor_reject_call,
+            R.id.fab_doctor_end_call, R.id.fab_doctor_answer_call
     })
     void onClick (View v) {
         switch (v.getId()) {
@@ -206,7 +202,7 @@ public class DoctorVideoCallActivity extends CallActivity {
                 exitFullScreen();
                 break;
             case R.id.btn_doctor_call_info:
-                callInfoMonitor();
+                medicalHistory();
                 break;
             case R.id.btn_doctor_mic_switch:
                 // 麦克风开关
@@ -269,7 +265,7 @@ public class DoctorVideoCallActivity extends CallActivity {
     /**
      * 通话信息监听器
      */
-    private void callInfoMonitor () {
+    private void medicalHistory () {
         if (isMonitor) {
             isMonitor = false;
             callInfoView.setVisibility(View.GONE);

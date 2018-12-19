@@ -89,8 +89,7 @@ public class PreviewManager implements PreviewCallback {
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        EMClient.getInstance()
-                .callManager()
+        EMClient.getInstance().callManager()
                 .inputExternalVideoData(data, videoWidth, videoHeight, 0);
     }
 }
