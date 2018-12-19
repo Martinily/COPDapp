@@ -11,8 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.funnyseals.app.R;
-import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.doctorNursingPlan.DoctorNursingPlanFragment;
+import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -22,27 +22,19 @@ import com.hyphenate.chat.EMTextMessageBody;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
 public class DoctorChatActivity extends AppCompatActivity {
 
-    @BindView(R.id.lv_doctor_chat_message_container)
-    ListView    mLv_message;
-    @BindView(R.id.et_doctor_chat_input)
-    EditText    mEt_input;
-    @BindView(R.id.btn_doctor_chat_send)
-    Button      mBtn_send;
-    @BindView(R.id.ibtn_vioce)
-    ImageButton mVioce;
-    @BindView(R.id.ibtn_nursingplan)
-    ImageButton mNursingPlan;
-    @BindView(R.id.ibtn_video)
-    ImageButton mVideo;
+    private ListView    mLv_message;
+    private EditText    mEt_input;
+    private Button      mBtn_send;
+    private ImageButton mVioce;
+    private ImageButton mNursingPlan;
+    private ImageButton mVideo;
 
-    private MyApplication      myApplication;
     private ChatMessageAdapter CurrentChatadapter;
     private String             mMyfriend;
     private List<EMMessage>    mMessageList;
+    private User mMyPatient;
     private EMConversation     mConversation;
     private EMMessageListener  msgListener = new EMMessageListener() {
 
@@ -94,7 +86,9 @@ public class DoctorChatActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_chat);
-        myApplication = (MyApplication) getApplication();
+        Intent intent=this.getIntent();
+        mMyPatient=(User) intent.getSerializableExtra("myPatient");
+
         init();
     }
 
@@ -118,14 +112,24 @@ public class DoctorChatActivity extends AppCompatActivity {
     private void init () {
         mMyfriend = (String) getIntent().getSerializableExtra("myfriend");
 
+
+        initView();
         initUIComponents();
         addListener();
         loadAllMessage();
     }
 
+    private void initView(){
+        mLv_message=findViewById(R.id.lv_doctor_chat_message_container);
+        mEt_input=findViewById(R.id.et_doctor_chat_input);
+        mBtn_send=findViewById(R.id.btn_doctor_chat_send);
+        mVioce=findViewById(R.id.ibtn_vioce);
+        mNursingPlan=findViewById(R.id.ibtn_nursingplan);
+        mVideo=findViewById(R.id.ibtn_video);
+    }
+
     private void initUIComponents () {
         initToolbar();
-
         sendEnabled(false);
     }
 
@@ -155,6 +159,9 @@ public class DoctorChatActivity extends AppCompatActivity {
 
         mVioce.setOnClickListener(v -> {
             Intent intent = new Intent(DoctorChatActivity.this, VoiceCallActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("myPatient", mMyPatient);
+            intent.putExtras(bundle);
             CallManager.getInstance().setChatId(mMyfriend);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VOICE);
@@ -162,7 +169,7 @@ public class DoctorChatActivity extends AppCompatActivity {
         });
 
         mVideo.setOnClickListener(v -> {
-            Intent intent = new Intent(DoctorChatActivity.this, VideoCallActivity.class);
+            Intent intent = new Intent(DoctorChatActivity.this, DoctorVideoCallActivity.class);
             CallManager.getInstance().setChatId(mMyfriend);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);
@@ -192,8 +199,7 @@ public class DoctorChatActivity extends AppCompatActivity {
      */
     private void loadAllMessage () {
         mConversation = EMClient.getInstance().chatManager().getConversation(mMyfriend,
-                EMConversation.EMConversationType.Chat, true);
-
+                EMConversation.EMConversationType.Chat, false);
         // 设置当前会话未读数为 0
         mConversation.markAllMessagesAsRead();
 

@@ -1,10 +1,12 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
 import android.app.AlertDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,6 +24,8 @@ import com.funnyseals.app.R;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import static com.funnyseals.app.R.id.edit_sports;
 
 /**
@@ -34,17 +38,17 @@ public class DoctorThreeFragment extends Fragment {
     private List<Bean> mSportsBeanList = new ArrayList<Bean>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_doctor_three, null);
-        return view;
+        return inflater.inflate(R.layout.fragment_doctor_three, null);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mEditText = getActivity().findViewById(edit_sports);
+        mEditText = Objects.requireNonNull(getActivity()).findViewById(edit_sports);
         mEditText.setOnTouchListener((view, event) -> {
             final int DRAWABLE_LEFT = 0;
             final int DRAWABLE_TOP = 1;

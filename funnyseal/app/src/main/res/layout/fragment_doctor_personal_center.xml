@@ -22,7 +22,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@null"
-        android:src="@drawable/user" />
+        android:src="@drawable/user"
+        android:contentDescription="头像" />
 
     <TextView
         android:id="@+id/tv_doctor_username"

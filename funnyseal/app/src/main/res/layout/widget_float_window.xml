@@ -38,5 +38,5 @@
         android:elevation="@dimen/vm_elevation_normal"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone"></RelativeLayout>
+        android:visibility="gone" />
 </RelativeLayout>

@@ -58,9 +58,8 @@ public class PatientListFragment extends Fragment {
      * 获取所有用户，数据库获取，index为账号
      */
     public List<User> getAllUser(String account) {
-        List<User> users = new ArrayList<>();
         //users.add(用户)；
-        return users;
+        return new ArrayList<>();
     }
 
     /*

@@ -12,7 +12,7 @@ import java.net.Socket;
  * </pre>
  */
 public class SocketUtil {
-    private static final String IP_ADDR        = "192.168.43.61";//服务器地址  这里要改成服务器的ip
+    private static final String IP_ADDR        = "192.168.43.144";//服务器地址  这里要改成服务器的ip
     private static final int    PORT_SEND      = 2018;//服务器端口号
     private static final int    PORT_GET       = 2019;//服务器端口号
     private static final int    PORT_GET_ARRAY = 2022;
@@ -29,11 +29,11 @@ public class SocketUtil {
     }
 
     public static Socket getGetArraySocket () throws IOException {
-        return new Socket(IP_ADDR,PORT_GET_ARRAY);
+        return new Socket(IP_ADDR, PORT_GET_ARRAY);
     }
 
-    public static Socket getInfo() throws IOException{
-        return new Socket(IP_ADDR,PORT_GET_INFO);
+    public static Socket getInfo () throws IOException {
+        return new Socket(IP_ADDR, PORT_GET_INFO);
     }
 
     public static Socket getArraySendSocket() throws IOException{

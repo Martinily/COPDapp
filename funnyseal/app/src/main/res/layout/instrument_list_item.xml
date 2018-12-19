@@ -118,7 +118,8 @@
             android:layout_gravity="right"
             android:background="@drawable/ic_arrow_forward_black_24dp"
             android:clickable="true"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:focusable="true" />
     </LinearLayout>
 
 </LinearLayout>

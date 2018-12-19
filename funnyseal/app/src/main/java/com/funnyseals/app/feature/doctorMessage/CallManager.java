@@ -38,8 +38,6 @@ public class CallManager {
     // 上下文菜单
     private Context context;
 
-    // 蓝牙相关对象
-    private BluetoothAdapter bluetoothAdapter;
     private BluetoothHeadset bluetoothHeadset;
 
     // 单例类实例
@@ -109,15 +107,15 @@ public class CallManager {
         // 音频管理器
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        /**
-         * SDK 3.2.x 版本后通话相关设置，一定要在初始化后，开始音视频功能前设置，否则设置无效
+        /*
+          SDK 3.2.x 版本后通话相关设置，一定要在初始化后，开始音视频功能前设置，否则设置无效
          */
         // 设置通话过程中对方如果离线是否发送离线推送通知，默认 false，这里需要和推送配合使用
         EMClient.getInstance().callManager().getCallOptions().setIsSendPushIfOffline(false);
-        /**
-         * 设置是否启用外部输入视频数据，默认 false，如果设置为 true，需要自己调用
-         * {@link EMCallManager#inputExternalVideoData(byte[], int, int, int)}输入视频数据
-         * 视频数据的格式是摄像头采集的格式即：NV21 420sp 自己手动传入时需要将 rgb 格式的数据转为 yuv
+        /*
+          设置是否启用外部输入视频数据，默认 false，如果设置为 true，需要自己调用
+          {@link EMCallManager#inputExternalVideoData(byte[], int, int, int)}输入视频数据
+          视频数据的格式是摄像头采集的格式即：NV21 420sp 自己手动传入时需要将 rgb 格式的数据转为 yuv
          */
         EMClient.getInstance().callManager().getCallOptions().setEnableExternalVideoData
                 (isExternalInputData);
@@ -125,13 +123,13 @@ public class CallManager {
         //EMClient.getInstance().callManager().getCallOptions().setRotation(90);
         // 设置自动调节分辨率，默认为 true
         EMClient.getInstance().callManager().getCallOptions().enableFixedVideoResolution(true);
-        /**
-         * 设置视频通话最大和最小比特率，可以不用设置，比特率会根据分辨率进行计算，默认最大(800)， 默认最小(80)
-         * 这里的带宽是指理想带宽，指单人单线情况下的最低要求
-         * >240p: 100k ~ 400kbps
-         * >480p: 300k ~ 1Mbps
-         * >720p: 900k ~ 2.5Mbps
-         * >1080p: 2M  ~ 5Mbps
+        /*
+          设置视频通话最大和最小比特率，可以不用设置，比特率会根据分辨率进行计算，默认最大(800)， 默认最小(80)
+          这里的带宽是指理想带宽，指单人单线情况下的最低要求
+          >240p: 100k ~ 400kbps
+          >480p: 300k ~ 1Mbps
+          >720p: 900k ~ 2.5Mbps
+          >1080p: 2M  ~ 5Mbps
          */
         EMClient.getInstance().callManager().getCallOptions().setMaxVideoKbps(800);
         EMClient.getInstance().callManager().getCallOptions().setMinVideoKbps(80);
@@ -156,9 +154,9 @@ public class CallManager {
      */
     public void saveCallMessage () {
         VMLog.d("The call ends and the call log message is saved! " + endType);
-        EMMessage message = null;
-        EMTextMessageBody body = null;
-        String content = null;
+        EMMessage message;
+        EMTextMessageBody body;
+        String content;
         if (isInComingCall) {
             message = EMMessage.createReceiveMessage(EMMessage.Type.TXT);
             message.setFrom(chatId);
@@ -341,7 +339,8 @@ public class CallManager {
      * 初始化蓝牙监听
      */
     private void initBluetoothListener () {
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        // 蓝牙相关对象
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter != null) {
             bluetoothAdapter.getProfileProxy(context, new BluetoothProfile.ServiceListener() {
                 @Override
@@ -526,7 +525,7 @@ public class CallManager {
         builder.setContentTitle(context.getString(R.string.app_name));
         Intent intent = new Intent();
         if (callType == CallType.VIDEO) {
-            intent.setClass(context, VideoCallActivity.class);
+            intent.setClass(context, DoctorVideoCallActivity.class);
         } else {
             intent.setClass(context, VoiceCallActivity.class);
         }

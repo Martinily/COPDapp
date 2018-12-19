@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.funnyseals.app">
+
     <!-- 硬件功能请求 -->
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -41,7 +42,6 @@
     <!-- 悬浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
     <uses-permission android:name="android.permission.READ_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -52,9 +52,9 @@
     <application
         android:name=".feature.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/appLogo"
+        android:icon="@mipmap/applogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/appLogo"
+        android:roundIcon="@mipmap/applogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
@@ -109,7 +109,7 @@
         <activity android:name=".feature.patientMessage.PatientChatActivity" />
         <activity android:name=".feature.list.UserInfoActivity" />
         <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
-        <activity android:name=".feature.doctorMessage.VideoCallActivity" />
+        <activity android:name=".feature.doctorMessage.DoctorVideoCallActivity" />
         <activity android:name=".feature.doctorMessage.CallActivity" />
         <activity android:name=".feature.patientNursingPlan.DialogActivity" />
 
@@ -123,6 +123,7 @@
         <activity android:name=".feature.patientNursingPlan.PatientDetailHistoryActivity" />
         <activity android:name=".feature.patientNursingPlan.PatientHistoryActivity" />
         <activity android:name=".feature.doctorNursingPlan.PickPatientActivity"></activity>
+        <activity android:name=".feature.patientMessage.PatientVideoCallActivity" />
     </application>
 
 </manifest>
