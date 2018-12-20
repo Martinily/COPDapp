@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
 /**
  *
  */
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
 

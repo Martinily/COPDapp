@@ -7,9 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.funnyseals.app.R;
-
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ import java.util.List;
  */
 public class ListViewAdapter extends BaseAdapter {
 
-    private Context    mContext;
+    private Context mContext;
     private String     mName;
     private List<Bean> mBeanList;
 
@@ -57,7 +55,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     /**
-     * detail list_view
+     * detail listview
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -65,7 +63,7 @@ public class ListViewAdapter extends BaseAdapter {
         if (convertView != null) {
             view = convertView;
         } else {
-            view = View.inflate(mContext, R.layout.list_view, null);
+            view = View.inflate(mContext, R.layout.listview, null);
         }
 
         Bean bean = mBeanList.get(position);
@@ -87,7 +85,6 @@ public class ListViewAdapter extends BaseAdapter {
         });
         return view;
     }
-
     //删除按钮操作
     private void deleteButtonAction(int position) {
         mBeanList.remove(position);

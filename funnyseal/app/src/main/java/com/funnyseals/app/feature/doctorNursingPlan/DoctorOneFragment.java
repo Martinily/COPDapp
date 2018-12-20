@@ -190,7 +190,7 @@ public class DoctorOneFragment extends Fragment {
         });
         listPopupWindow.show();//把ListPopWindow展示出来
 
-        listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
+        listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_na), null));
     }
 
     //删除已添加药物

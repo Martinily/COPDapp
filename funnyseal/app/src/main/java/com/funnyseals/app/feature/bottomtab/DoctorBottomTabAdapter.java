@@ -42,12 +42,12 @@ public abstract class DoctorBottomTabAdapter implements RadioGroup.OnCheckedChan
     private void init() {
         // 初始状态装载 doctor_nursingPlan_tab
         FragmentTransaction ft = mFragmentActivity.getSupportFragmentManager().beginTransaction();
-        ft.add(mFragmentContentId, mFragmentMap.get(R.id.doctor_nursingPlan_tab));
+        ft.add(mFragmentContentId, mFragmentMap.get(R.id.doctor_personalCenter_tab));
         ft.commit();
 
         mRadioGroup.setOnCheckedChangeListener(this);
 
-        mCurrentTabId = R.id.doctor_nursingPlan_tab;
+        mCurrentTabId = R.id.doctor_personalCenter_tab;
     }
 
     @Override

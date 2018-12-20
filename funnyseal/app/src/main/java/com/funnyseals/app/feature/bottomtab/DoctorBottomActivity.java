@@ -112,9 +112,9 @@ public class DoctorBottomActivity extends AppCompatActivity {
         showPrevious();
     }
 
-    private void initBottomTabs () {
-        mIndexTab = findViewById(R.id.doctor_nursingPlan_tab);
-        mPreviousTabId = R.id.doctor_nursingPlan_tab;
+    private void initBottomTabs() {
+        mIndexTab = findViewById(R.id.doctor_personalCenter_tab);
+        mPreviousTabId = R.id.doctor_personalCenter_tab;
 
         RadioGroup bottomTabs = findViewById(R.id.doctor_bottom_tabs);
 

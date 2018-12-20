@@ -103,13 +103,42 @@
         <activity android:name=".feature.patientNursingPlan.MedicineRetimeActivity" />
         <activity android:name=".feature.patientNursingPlan.InstrumentRetimeActivity" />
         <activity android:name=".feature.patientNursingPlan.SportsRetimeActivity" />
-        <activity android:name=".feature.patientPersonalCenter.PatientMyInfoActivity" />
-        <activity android:name=".feature.doctorPersonalCenter.DoctorSignActivity" />
-        <activity android:name=".feature.doctorPersonalCenter.DoctorSettingActivity" />
         <activity android:name=".feature.patientMessage.PatientChatActivity" />
         <activity android:name=".feature.list.UserInfoActivity" />
         <activity android:name=".feature.health.HealthCenterUpdateActivity" />
         <activity android:name=".feature.health.HealthCenterHistoryActivity"></activity>
+        <activity
+            android:name=".feature.doctorPersonalCenter.DoctorMyInfoModifyActivity"
+            android:label="@string/title_activity_doctor_my_info_modify"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.doctorPersonalCenter.DoctorPasswordActivity"
+            android:label="@string/title_activity_doctor_password"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.doctorPersonalCenter.DoctorSigningActivity"
+            android:label="@string/title_activity_doctor_signing"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientAddEquipmentActivity"
+            android:label="@string/title_activity_patient_add_equipment"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientMyDoctorActivity"
+            android:label="@string/title_activity_patient_my_doctor"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientMyEquipmentActivity"
+            android:label="@string/title_activity_patient_my_equipment"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientPasswordActivity"
+            android:label="@string/title_activity_patient_password"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientMyInfoModifyActivity"
+            android:label="@string/title_activity_patient_per_info_modify"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
         <activity android:name=".feature.doctorMessage.DoctorVideoCallActivity" />
         <activity android:name=".feature.doctorMessage.CallActivity" />
@@ -126,6 +155,14 @@
         <activity android:name=".feature.patientNursingPlan.PatientHistoryActivity" />
         <activity android:name=".feature.doctorNursingPlan.PickPatientActivity"></activity>
         <activity android:name=".feature.patientMessage.PatientVideoCallActivity" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientDoctorAdviceActivity"
+            android:label="@string/title_activity_patient_doctor_advice"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".feature.patientPersonalCenter.PatientSetting"
+            android:label="@string/title_activity_patient_setting"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

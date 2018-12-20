@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="data1">
+    <string-array name="select_name">
+        <item>呼吸机</item>
+        <item>肺功能仪</item>
+        <item>血气分析仪</item>
+        <item>气体检测仪器</item>
     </string-array>
-    <string-array name="data2">
+    <string-array name="select_state">
+        <item>使用</item>
+        <item>未使用</item>
     </string-array>
-    <string-array name="data3">
-    </string-array>
-    <string-array name="datatime">
-    </string-array>
+
 </resources>

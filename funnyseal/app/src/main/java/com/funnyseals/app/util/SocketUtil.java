@@ -47,4 +47,8 @@ public class SocketUtil {
     public static Socket getArraySendSocket3() throws IOException{
         return new Socket(IP_ADDR,PORT_GET_ARRAY);
     }
+
+    public static Socket setPort(int port) throws IOException {
+        return new Socket(IP_ADDR,port);
+    }
 }
