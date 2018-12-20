@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
@@ -58,7 +59,7 @@ public class PatientListItemAdapter extends BaseAdapter {
 
             viewHolder = new ViewHolder();
 
-            viewHolder.mPortrait = convertView.findViewById(R.id.patient_item_portrait);
+            viewHolder.mimageView = convertView.findViewById(R.id.patient_item_image);
             viewHolder.mName = convertView.findViewById(R.id.patient_item_name);
 
             convertView.setTag(viewHolder);
@@ -73,12 +74,12 @@ public class PatientListItemAdapter extends BaseAdapter {
 
     private class ViewHolder {
 
-        private Portrait mPortrait;
+        private ImageView mimageView;
 
         private TextView mName;
 
         private void init(User user) {
-            mPortrait.setUserAccount(user.getAccount()).setUrl(null).show();
+            mimageView.setImageResource(R.drawable.user);
             mName.setText(user.getName());
         }
     }

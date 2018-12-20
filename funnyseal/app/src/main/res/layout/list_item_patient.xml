@@ -15,8 +15,8 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp">
 
-        <com.funnyseals.myapplication.presentation.view.Portrait
-            android:id="@+id/patient_item_portrait"
+        <ImageView
+            android:id="@+id/patient_item_image"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
