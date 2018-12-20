@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".feature.patientNursingPlan.PatientNursingPlanFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/teal"
@@ -66,6 +67,6 @@
         android:id="@+id/vp_patient_myViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="护理计划"/>
+        android:text="护理计划" />
 
-</FrameLayout>
+</LinearLayout>

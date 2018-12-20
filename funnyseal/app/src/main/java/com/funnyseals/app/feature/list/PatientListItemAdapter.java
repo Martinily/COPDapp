@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.custom_view.Portrait;
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.model.UserTemp;
 
@@ -73,7 +73,7 @@ public class PatientListItemAdapter extends BaseAdapter {
 
     private class ViewHolder {
 
-        private ImageView mPortrait;
+        private Portrait mPortrait;
 
         private TextView mName;
 

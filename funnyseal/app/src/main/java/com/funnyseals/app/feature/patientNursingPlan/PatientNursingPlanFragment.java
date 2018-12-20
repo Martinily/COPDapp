@@ -3,7 +3,9 @@ package com.funnyseals.app.feature.patientNursingPlan;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
-import com.funnyseals.app.feature.doctorNursingPlan.Bean;
-import com.funnyseals.app.feature.doctorNursingPlan.DoctorHistoryActivity;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-护理计划to fragment
+ 护理计划to fragment
  */
 public class PatientNursingPlanFragment extends Fragment implements View.OnClickListener{
     private View                      mView;

@@ -1,40 +1,16 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.funnyseals.app.R;
-import com.funnyseals.app.feature.MyApplication;
-import com.funnyseals.app.feature.doctorNursingPlan.DoctorNursingPlanActivity;
-import com.funnyseals.app.feature.patientNursingPlan.MedicineRetimeActivity;
-import com.funnyseals.app.model.User;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import static android.app.Activity.RESULT_OK;
-import static com.mob.tools.utils.DeviceHelper.getApplication;
 
 /**
  * 患者端个人中心to fragment(undo)
