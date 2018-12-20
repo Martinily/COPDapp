@@ -2,41 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PatientData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PatientData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobIMUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobIMUsers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConditionHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConditionHistory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConfigureDevice.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConfigureDevice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetJsonArray.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetJsonArray.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetPort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetPort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/JsonPackage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/JsonPackage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ListenSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ListenSocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ModifyInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ModifyInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PasswordModify.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PasswordModify.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PersonalInfor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PersonalInfor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlanItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlanItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Register.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReleasePlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReleasePlan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReturnMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReturnMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/UpdatePlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/UpdatePlan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/PropertiesUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/PropertiesUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatGroups.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatGroups.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobFiles.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobFiles.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobIMUsers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobIMUsers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobMessages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/ClientSecretCredential.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/ClientSecretCredential.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential$GrantType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential$GrantType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/EndPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/EndPoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Token.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Token.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,7 +69,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="550">
               <caret line="67" selection-start-line="67" selection-end-line="67" />
             </state>
           </provider>
@@ -136,7 +152,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -222,7 +238,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,6 +272,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,16 +410,17 @@
       <workItem from="1545190188207" duration="1831000" />
       <workItem from="1545198827061" duration="3031000" />
       <workItem from="1545310995470" duration="355000" />
+      <workItem from="1545311542927" duration="932000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134330000" />
+    <option name="totallyTimeSpent" value="135262000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.1977612" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.19989339" />
       <window_info id="Structure" order="1" weight="0.18869936" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -412,7 +429,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.95671" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.9559956" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -420,7 +437,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32900432" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32756132" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32673267" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
@@ -661,7 +678,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="550">
           <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
@@ -726,7 +743,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>

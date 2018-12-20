@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else {
+            EMClient.getInstance().logout(true);
             EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
                 @Override
                 public void onSuccess () {
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 err = "未知的服务器异常 code: " + code + ", message:" + error;
                                 break;
                             default:
-                                err = "ml_sign_in_failed code: " + code + ", message:";
+                                err = "ml_sign_in_failed code: " + code + ", message:" + error;
                                 break;
                         }
                         showToast(err);
