@@ -84,10 +84,10 @@ public class DoctorVideoCallActivity extends CallActivity {
     private int     topMargin;
     private User    mMyPatient;
 
-    private EMCallSurfaceView localSurface    = null;
-    private EMCallSurfaceView oppositeSurface = null;
     // 视频通话帮助类
     private EMVideoCallHelper videoCallHelper;
+    private EMCallSurfaceView localSurface    = null;
+    private EMCallSurfaceView oppositeSurface = null;
 
     private AlertDialog alertDialog = null;
     private TextView    alertDialogTitle;
@@ -177,10 +177,10 @@ public class DoctorVideoCallActivity extends CallActivity {
         LayoutInflater inflater = LayoutInflater.from(context);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         mView = inflater.inflate(R.layout.view_dialog_medical_history, null);
-        alertDialogTitle=mView.findViewById(R.id.dialog_title);
-        alertDialogDetail=mView.findViewById(R.id.dialog_detail);
-        alertDialogCancel=mView.findViewById(R.id.btn_dialog_cancel);
-        alertDialogOk=mView.findViewById(R.id.btn_dialog_ok);
+        alertDialogTitle = mView.findViewById(R.id.dialog_title);
+        alertDialogDetail = mView.findViewById(R.id.dialog_detail);
+        alertDialogCancel = mView.findViewById(R.id.btn_dialog_cancel);
+        alertDialogOk = mView.findViewById(R.id.btn_dialog_ok);
 
         alertDialogTitle.setText("修改病情：");
         alertDialogDetail.setText(mMyPatient.getMedicalHistory());
@@ -194,21 +194,21 @@ public class DoctorVideoCallActivity extends CallActivity {
         builder.setCancelable(false);
         builder.show();
 
-        while(alertDialog.isShowing()){
+        while (alertDialog.isShowing()) {
 
         }
         showAlertDialogOrder(context);
 
     }
 
-    private void showAlertDialogOrder(Context context){
+    private void showAlertDialogOrder (Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         mView = inflater.inflate(R.layout.view_dialog_medical_history, null);
-        alertDialogTitle=mView.findViewById(R.id.dialog_title);
-        alertDialogDetail=mView.findViewById(R.id.dialog_detail);
-        alertDialogCancel=mView.findViewById(R.id.btn_dialog_cancel);
-        alertDialogOk=mView.findViewById(R.id.btn_dialog_ok);
+        alertDialogTitle = mView.findViewById(R.id.dialog_title);
+        alertDialogDetail = mView.findViewById(R.id.dialog_detail);
+        alertDialogCancel = mView.findViewById(R.id.btn_dialog_cancel);
+        alertDialogOk = mView.findViewById(R.id.btn_dialog_ok);
 
         alertDialogTitle.setText("修改医嘱：");
         alertDialogDetail.setText(mMyPatient.getMedicalOrder());
