@@ -172,7 +172,7 @@ public class DoctorVideoCallActivity extends CallActivity {
     }
 
     @SuppressLint("InflateParams")
-    private void showAlertDialog (Context context) {
+    private void showAlertDialogHistory (Context context) {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -184,18 +184,38 @@ public class DoctorVideoCallActivity extends CallActivity {
 
         alertDialogTitle.setText("修改病情：");
         alertDialogDetail.setText(mMyPatient.getMedicalHistory());
-        alertDialogCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                alertDialog.dismiss();
-            }
+        alertDialogCancel.setOnClickListener(v -> alertDialog.dismiss());
+        alertDialogOk.setOnClickListener(v -> {
+            mMyPatient.setMedicalHistory(alertDialogDetail.getText().toString());
+            alertDialog.dismiss();
         });
-        alertDialogOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                mMyPatient.setMedicalHistory(alertDialogDetail.getText().toString());
-                alertDialog.dismiss();
-            }
+
+        builder.setView(mView);
+        builder.setCancelable(false);
+        builder.show();
+
+        while(alertDialog.isShowing()){
+
+        }
+        showAlertDialogOrder(context);
+
+    }
+
+    private void showAlertDialogOrder(Context context){
+        LayoutInflater inflater = LayoutInflater.from(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        mView = inflater.inflate(R.layout.view_dialog_medical_history, null);
+        alertDialogTitle=mView.findViewById(R.id.dialog_title);
+        alertDialogDetail=mView.findViewById(R.id.dialog_detail);
+        alertDialogCancel=mView.findViewById(R.id.btn_dialog_cancel);
+        alertDialogOk=mView.findViewById(R.id.btn_dialog_ok);
+
+        alertDialogTitle.setText("修改医嘱：");
+        alertDialogDetail.setText(mMyPatient.getMedicalOrder());
+        alertDialogCancel.setOnClickListener(v -> alertDialog.dismiss());
+        alertDialogOk.setOnClickListener(v -> {
+            mMyPatient.setMedicalOrder(alertDialogDetail.getText().toString());
+            alertDialog.dismiss();
         });
 
         builder.setView(mView);
@@ -258,7 +278,7 @@ public class DoctorVideoCallActivity extends CallActivity {
     }
 
     protected void endCall () {
-        showAlertDialog(DoctorVideoCallActivity.this);
+        showAlertDialogHistory(DoctorVideoCallActivity.this);
         CallManager.getInstance().endCall();
         onFinish();
     }
