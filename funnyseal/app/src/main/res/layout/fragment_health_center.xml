@@ -10,87 +10,87 @@
         android:id="@+id/text1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/healthcenter_project1"
         android:textSize="25sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/data1"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textSize="25sp"
-        android:gravity="center"
         android:ems="4"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text1" />
 
     <TextView
         android:id="@+id/unit1"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/healthcenter_unit"
         android:textSize="25sp"
-        android:gravity="center"
         app:layout_constraintStart_toEndOf="@id/data1"
-        app:layout_constraintTop_toBottomOf="@id/text1"/>
+        app:layout_constraintTop_toBottomOf="@id/text1" />
 
     <TextView
         android:id="@+id/text2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/healthcenter_project2"
         android:textSize="25sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/data1" />
 
     <TextView
         android:id="@+id/data2"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textSize="25sp"
-        android:gravity="center"
         android:ems="4"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text2" />
 
     <TextView
         android:id="@+id/unit2"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/healthcenter_unit"
         android:textSize="25sp"
-        android:gravity="center"
         app:layout_constraintStart_toEndOf="@id/data2"
-        app:layout_constraintTop_toBottomOf="@id/text2"/>
+        app:layout_constraintTop_toBottomOf="@id/text2" />
 
     <TextView
         android:id="@+id/text_caculate"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/healthcenter_projectcaculate"
         android:textSize="25sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data2"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data2" />
 
     <TextView
         android:id="@+id/data_caculate"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textSize="25sp"
-        android:textColor="#00FF00"
-        android:gravity="center"
         android:ems="3"
+        android:gravity="center"
+        android:textColor="#00FF00"
+        android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/text_caculate"
-        app:layout_constraintTop_toBottomOf="@id/data2"/>
+        app:layout_constraintTop_toBottomOf="@id/data2" />
 
     <TextView
         android:id="@+id/notice"
@@ -98,49 +98,49 @@
         android:layout_height="wrap_content"
         android:text="@string/notice"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data_caculate"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/data_caculate" />
 
     <TextView
         android:id="@+id/text3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/healthcenter_project3"
         android:textSize="25sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/notice" />
 
     <TextView
         android:id="@+id/data3"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textSize="25sp"
-        android:gravity="center"
         android:ems="4"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text3"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text3" />
 
     <TextView
         android:id="@+id/unit3"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/healthcenter_unit"
         android:textSize="25sp"
-        android:gravity="center"
         app:layout_constraintStart_toEndOf="@id/data3"
-        app:layout_constraintTop_toBottomOf="@id/text3"/>
+        app:layout_constraintTop_toBottomOf="@id/text3" />
 
     <Button
         android:id="@+id/gotocentre2"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="@string/healthcenter_center2"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gotocentre3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/data3" />
 
     <Button
@@ -148,16 +148,16 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="@string/healthcenter_center3"
-        app:layout_constraintStart_toEndOf="@id/gotocentre2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data3"/>
+        app:layout_constraintStart_toEndOf="@id/gotocentre2"
+        app:layout_constraintTop_toBottomOf="@id/data3" />
 
     <com.funnyseals.app.feature.health.SimpleChartView
         android:id="@+id/datachart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gotocentre2"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gotocentre2" />
 
 </android.support.constraint.ConstraintLayout>

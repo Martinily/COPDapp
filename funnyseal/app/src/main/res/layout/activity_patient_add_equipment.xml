@@ -1,12 +1,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".feature.patientPersonalCenter.PatientAddEquipmentActivity"
-    android:id="@+id/relativeLayout4">
+    tools:context=".feature.patientPersonalCenter.PatientAddEquipmentActivity">
 
     <TextView
         android:id="@+id/tv_patient_add_title"
@@ -79,10 +81,9 @@
         android:layout_width="110dp"
         android:layout_height="30dp"
         android:layout_marginTop="48dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_patient_add_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_name"
         android:entries="@array/select_name"
-        />
+        app:layout_constraintStart_toStartOf="@+id/tv_patient_add_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_name" />
 
     <Spinner
         android:id="@+id/sp_patient_add_state"
@@ -90,11 +91,10 @@
         android:layout_height="30dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
+        android:entries="@array/select_state"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_patient_add_state"
-        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_state"
-        android:entries="@array/select_state"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_add_state" />
 
 </android.support.constraint.ConstraintLayout>

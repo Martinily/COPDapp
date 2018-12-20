@@ -10,8 +10,8 @@
         android:id="@+id/chat_receive_portrait"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@mipmap/avatar"
-        android:contentDescription="头像" />
+        android:contentDescription="头像"
+        android:src="@mipmap/avatar" />
 
     <com.cpiz.android.bubbleview.BubbleTextView
         android:id="@+id/chat_receive_text"

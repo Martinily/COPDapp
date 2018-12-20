@@ -36,13 +36,13 @@ import java.util.TimerTask;
  */
 public class CallManager {
     // 单例类实例
-    private static CallManager instance;
+    private static CallManager         instance;
     // 上下文菜单
-    private Context context;
-    private BluetoothHeadset bluetoothHeadset;
+    private        Context             context;
+    private        BluetoothHeadset    bluetoothHeadset;
     // 通知栏提醒管理类
-    private NotificationManager notificationManager;
-    private int                 callNotificationId = 0526;
+    private        NotificationManager notificationManager;
+    private        int                 callNotificationId = 0526;
 
     // 音频管理器
     private AudioManager audioManager;

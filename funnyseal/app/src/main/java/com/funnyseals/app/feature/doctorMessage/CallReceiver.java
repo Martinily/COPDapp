@@ -17,10 +17,11 @@ import com.vmloft.develop.library.tools.utils.VMLog;
  */
 public class CallReceiver extends BroadcastReceiver {
 
-    public CallReceiver() {
+    public CallReceiver () {
     }
 
-    @Override public void onReceive(Context context, Intent intent) {
+    @Override
+    public void onReceive (Context context, Intent intent) {
         // 判断环信是否登录成功
         if (!EMClient.getInstance().isLoggedInBefore()) {
             return;

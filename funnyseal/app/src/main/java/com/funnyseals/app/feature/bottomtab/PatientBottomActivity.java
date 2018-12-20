@@ -53,7 +53,7 @@ public class PatientBottomActivity extends AppCompatActivity {
     }
 
     public void initData () {
-        Thread thread=new Thread(() -> {
+        Thread thread = new Thread(() -> {
             String send;
             Socket socket;
             try {
@@ -87,7 +87,7 @@ public class PatientBottomActivity extends AppCompatActivity {
             Thread.interrupted();
         });
         thread.start();
-        while (thread.isAlive()){
+        while (thread.isAlive()) {
 
         }
     }

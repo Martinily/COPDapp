@@ -13,33 +13,33 @@ public class SportsPlan {
     private String mSportsTracks;
     private String mSportsNote;
 
-    public SportsPlan(String sportsName, String sportsTracks, String sportsNote) {
+    public SportsPlan (String sportsName, String sportsTracks, String sportsNote) {
         this.mSportsName = sportsName;
         this.mSportsTracks = sportsTracks;
         this.mSportsNote = sportsNote;
     }
 
-    public String getSportsName() {
+    public String getSportsName () {
         return mSportsName;
     }
 
-    public void setSportsName(String sportsName) {
+    public void setSportsName (String sportsName) {
         this.mSportsName = sportsName;
     }
 
-    public String getSportsTracks() {
+    public String getSportsTracks () {
         return mSportsTracks;
     }
 
-    public void setSportsTracks(String sportsTracks) {
+    public void setSportsTracks (String sportsTracks) {
         this.mSportsTracks = sportsTracks;
     }
 
-    public String getSportsNote() {
+    public String getSportsNote () {
         return mSportsNote;
     }
 
-    public void setSportsNote(String sportsNote) {
+    public void setSportsNote (String sportsNote) {
         this.mSportsNote = sportsNote;
     }
 }

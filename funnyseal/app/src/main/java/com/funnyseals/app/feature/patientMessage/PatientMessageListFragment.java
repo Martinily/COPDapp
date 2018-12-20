@@ -30,7 +30,7 @@ import java.util.Objects;
 
 /**
  */
-public class PatientMessageListFragment extends Fragment implements EMMessageListener{
+public class PatientMessageListFragment extends Fragment implements EMMessageListener {
     private View                 mView;
     private SwipeMenuListView    mChatList;
     private MessageItemAdapter   mAdapter;
@@ -48,7 +48,7 @@ public class PatientMessageListFragment extends Fragment implements EMMessageLis
         MyApplication application = (MyApplication) getActivity().getApplication();
         mMyAccount = application.getAccount();
         mMyDoctocr = ((PatientBottomActivity) getActivity()).getMyDoctor();
-        mMsgListener=this;
+        mMsgListener = this;
         initUIComponents();
 
         return mView;

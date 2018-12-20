@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout9"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.doctorPersonalCenter.DoctorPersonalCenterFragment"
-    android:id="@+id/relativeLayout9">
+    tools:context=".feature.doctorPersonalCenter.DoctorPersonalCenterFragment">
 
     <TextView
         android:id="@+id/tv_patient_equipment_title"
@@ -25,9 +25,9 @@
         android:layout_marginTop="30dp"
         android:background="@null"
         android:src="@drawable/user"
-        app:layout_constraintTop_toBottomOf="@id/tv_patient_equipment_title"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_patient_equipment_title" />
 
     <TextView
         android:id="@+id/tv_doctor_username"
@@ -36,9 +36,9 @@
         android:layout_marginTop="20dp"
         android:text="用户名"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintTop_toBottomOf="@id/iv_doctor_portrait"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_doctor_portrait" />
 
     <TextView
         android:id="@+id/tv_doctor_perinfo"

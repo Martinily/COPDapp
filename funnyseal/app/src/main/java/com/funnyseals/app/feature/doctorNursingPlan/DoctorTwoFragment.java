@@ -41,16 +41,16 @@ import static com.funnyseals.app.R.id.edit_instrument;
  * 护理计划two fragment, about instrument
  */
 public class DoctorTwoFragment extends Fragment {
-    private        EditText          mEditText;
-    private        ListView          mListView;
-    private        MyListViewAdapter mListViewAdapter;
-    private        List<Bean>        mInstrumentBeanList = new ArrayList<Bean>();
-    private List<String> mInstrumentNames=new ArrayList<>();
-    private List<String> mInstrumentAttentions=new ArrayList<>();
+    private EditText          mEditText;
+    private ListView          mListView;
+    private MyListViewAdapter mListViewAdapter;
+    private List<Bean>        mInstrumentBeanList   = new ArrayList<Bean>();
+    private List<String>      mInstrumentNames      = new ArrayList<>();
+    private List<String>      mInstrumentAttentions = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater,
+                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_two, null);
         LoadMenu();
         return view;
@@ -58,7 +58,7 @@ public class DoctorTwoFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         mEditText = getActivity().findViewById(edit_instrument);
@@ -71,7 +71,8 @@ public class DoctorTwoFragment extends Fragment {
                 if (event.getX() >= (mEditText.getWidth() - mEditText
                         .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                     // your action here
-                    mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_less_black_24dp), null);
+                    mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources()
+                            .getDrawable(R.drawable.ic_expand_less_black_24dp), null);
                     ShowListPopulWindow();
                     return true;
                 }
@@ -93,31 +94,31 @@ public class DoctorTwoFragment extends Fragment {
         Button saveButton = getActivity().findViewById(R.id.addinstrument);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                    SaveinstrumentMessage();
+            public void onClick (View v) {
+                SaveinstrumentMessage();
             }
         });
 
         mListView.setOnItemClickListener((adapterView, view, position, id) -> {
-                Bean instrumentBean = mInstrumentBeanList.get(position);
-                String instrumentname = instrumentBean.getName();
-                String instrumentcontent = instrumentBean.getContent();
-                String instrumentattention = instrumentBean.getAttention();
-                Intent intent = new Intent(getActivity(), InstrumentDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putCharSequence("position", position + "");
-                bundle.putCharSequence("instrumentname", instrumentname);
-                bundle.putCharSequence("instrumentcontent", instrumentcontent);
-                bundle.putCharSequence("instrumentattention", instrumentattention);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, 1000);
+            Bean instrumentBean = mInstrumentBeanList.get(position);
+            String instrumentname = instrumentBean.getName();
+            String instrumentcontent = instrumentBean.getContent();
+            String instrumentattention = instrumentBean.getAttention();
+            Intent intent = new Intent(getActivity(), InstrumentDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putCharSequence("position", position + "");
+            bundle.putCharSequence("instrumentname", instrumentname);
+            bundle.putCharSequence("instrumentcontent", instrumentcontent);
+            bundle.putCharSequence("instrumentattention", instrumentattention);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 1000);
         });
 
     }
 
     //接收返回数据
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == 1001) {
             int nowposition = Integer.valueOf(data.getStringExtra("reposition")).intValue();
@@ -128,35 +129,36 @@ public class DoctorTwoFragment extends Fragment {
     }
 
     //下拉列表内容的获取
-    public void LoadMenu(){
+    public void LoadMenu () {
         new Thread(() -> {
             Socket socket;
-            JSONObject jsonObject=new JSONObject();
+            JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("request_type", "13");
-                jsonObject.put("base_type","app");
-                socket=SocketUtil.getSendSocket();
-                DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                jsonObject.put("base_type", "app");
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 out.writeUTF(jsonObject.toString());
                 out.close();
 
                 Thread.sleep(4000);
 
-                socket=SocketUtil.getArraySendSocket2();
-                DataInputStream dataInputStream=new DataInputStream(socket.getInputStream());
-                String message=dataInputStream.readUTF();
+                socket = SocketUtil.getArraySendSocket2();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String message = dataInputStream.readUTF();
                 socket.close();
                 System.err.println(message);
-                if(message.equals("empty")){
+                if (message.equals("empty")) {
                     return;
                 }
 
-                JSONArray jsonArray=new JSONArray(message);
+                JSONArray jsonArray = new JSONArray(message);
                 int i;
 
-                for( i=0;i<jsonArray.length();i++){
+                for (i = 0; i < jsonArray.length(); i++) {
                     mInstrumentNames.add(jsonArray.getJSONObject(i).getString("apparatusName"));
-                    mInstrumentAttentions.add(jsonArray.getJSONObject(i).getString("apparatusRemarks"));
+                    mInstrumentAttentions.add(jsonArray.getJSONObject(i).getString
+                            ("apparatusRemarks"));
                 }
                 socket.close();
             } catch (JSONException | IOException | InterruptedException e) {
@@ -165,13 +167,14 @@ public class DoctorTwoFragment extends Fragment {
         }).start();
     }
 
-     //展示下拉列表
-    private void ShowListPopulWindow() {
-        int size=mInstrumentNames.size();
-        String[] instrumentss = (String[])mInstrumentNames.toArray(new String[size]);
+    //展示下拉列表
+    private void ShowListPopulWindow () {
+        int size = mInstrumentNames.size();
+        String[] instrumentss = (String[]) mInstrumentNames.toArray(new String[size]);
         final ListPopupWindow listPopupWindow;
         listPopupWindow = new ListPopupWindow(getActivity());
-        listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, instrumentss));
+        listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout
+                .simple_list_item_1, instrumentss));
         listPopupWindow.setAnchorView(mEditText);
         listPopupWindow.setModal(true);
 
@@ -180,49 +183,52 @@ public class DoctorTwoFragment extends Fragment {
             mEditText.setText(instrumentss[i]);
             listPopupWindow.dismiss();
         });
-              listPopupWindow.show();
-          listPopupWindow.setOnDismissListener(() -> mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_expand_more_black_24dp), null));
+        listPopupWindow.show();
+        listPopupWindow.setOnDismissListener(() -> mEditText
+                .setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R
+                        .drawable.ic_expand_more_black_24dp), null));
     }
 
     //删除已添加药物
-    public void ShowInfo(final int position) {
+    public void ShowInfo (final int position) {
         new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要删除吗？")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick (DialogInterface dialog, int which) {
                         mInstrumentBeanList.remove(position);
-                        ((DoctorNursingPlanFragment)(DoctorTwoFragment.this.getParentFragment())).ChangemPlannum(-1);
+                        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment())
+                        ).ChangemPlannum(-1);
                         mListViewAdapter.notifyDataSetChanged();
-                        ((DoctorNursingPlanFragment)(DoctorTwoFragment.this.getParentFragment())).deletemAllInstrumentItem(position);
+                        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment())
+                        ).deletemAllInstrumentItem(position);
                     }
                 }).show();
     }
 
-     //添加器械名称加到列表
-    private void SaveinstrumentMessage() {
+    //添加器械名称加到列表
+    private void SaveinstrumentMessage () {
         EditText nameEditText = getActivity().findViewById(edit_instrument);
 
         if (StringUtils.isEmpty(nameEditText.getText().toString())) {
             Toast.makeText(getActivity(), "器械名不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        int size=mInstrumentNames.size();
-        String[] instrumentss = (String[])mInstrumentNames.toArray(new String[size]);
-        int size2=mInstrumentAttentions.size();
-        String[] instrumentattention = (String[])mInstrumentAttentions.toArray(new String[size2]);
-        String attention="";
-        for(int j=0;j<size;j++)
-        {
-            if(nameEditText.getText().toString().equals(instrumentss[j]))
-            {
-                attention=instrumentattention[j];
+        int size = mInstrumentNames.size();
+        String[] instrumentss = (String[]) mInstrumentNames.toArray(new String[size]);
+        int size2 = mInstrumentAttentions.size();
+        String[] instrumentattention = (String[]) mInstrumentAttentions.toArray(new String[size2]);
+        String attention = "";
+        for (int j = 0; j < size; j++) {
+            if (nameEditText.getText().toString().equals(instrumentss[j])) {
+                attention = instrumentattention[j];
             }
         }
 
         //判断该器械是否存在
         for (Bean instrumentBean : mInstrumentBeanList) {
             if (StringUtils.equals(instrumentBean.getName(), nameEditText.getText().toString())) {
-                Toast.makeText(getActivity(), nameEditText.getText().toString() + "已经存在", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), nameEditText.getText().toString() + "已经存在", Toast
+                        .LENGTH_SHORT).show();
                 return;
             }
         }
@@ -230,8 +236,10 @@ public class DoctorTwoFragment extends Fragment {
         instrumentBean.setcontent("");
         instrumentBean.setattention(attention);
         mInstrumentBeanList.add(instrumentBean);
-        ((DoctorNursingPlanFragment)(DoctorTwoFragment.this.getParentFragment())).ChangemPlannum(1);
-        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment())).setmAllInstrumentItem(instrumentBean);
+        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment())).ChangemPlannum
+                (1);
+        ((DoctorNursingPlanFragment) (DoctorTwoFragment.this.getParentFragment()))
+                .setmAllInstrumentItem(instrumentBean);
         mListViewAdapter.notifyDataSetChanged();
         //((MainActivity)getActivity()).setmtestinstrument("0");
     }
@@ -250,28 +258,28 @@ public class DoctorTwoFragment extends Fragment {
         /**
          * 构造函数
          */
-        public MyListViewAdapter(Context context, List<Bean> BeanList) {
+        public MyListViewAdapter (Context context, List<Bean> BeanList) {
             this.mContext = context;
             this.BeanList = BeanList;
         }
 
         @Override
-        public int getCount() {
+        public int getCount () {
             return BeanList.size();
         }
 
         @Override
-        public Object getItem(int position) {
+        public Object getItem (int position) {
             return null;
         }
 
         @Override
-        public long getItemId(int position) {
+        public long getItemId (int position) {
             return 0;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView (int position, View convertView, ViewGroup parent) {
             View view = null;
             if (convertView != null) {
                 view = convertView;
@@ -294,7 +302,7 @@ public class DoctorTwoFragment extends Fragment {
             final Button deleteButton = (Button) view.findViewById(R.id.showDeleteButton);
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick (View v) {
                     deleteButtonAction(removePosition);
                     mListViewAdapter.notifyDataSetChanged();
                 }
@@ -302,12 +310,12 @@ public class DoctorTwoFragment extends Fragment {
             return view;
         }
 
-        public void deleteButtonAction(int position) {
+        public void deleteButtonAction (int position) {
             ShowInfo(position);
             notifyDataSetChanged();
         }
 
-        public String getName() {
+        public String getName () {
             return name;
         }
     }

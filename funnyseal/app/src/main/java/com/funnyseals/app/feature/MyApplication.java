@@ -35,16 +35,16 @@ public class MyApplication extends Application {
         return mAccount;
     }
 
+    public void setAccount (String account) {
+        this.mAccount = account;
+    }
+
     public User getUser () {
         return mUser;
     }
 
     public void setUser (User user) {
         this.mUser = user;
-    }
-
-    public void setAccount (String account) {
-        this.mAccount = account;
     }
 
     @Override

@@ -13,33 +13,33 @@ public class InstrumentPlan {
     private String mInstrumentTracks;
     private String mInstrumentNote;
 
-    public InstrumentPlan(String instrumentName, String instrumentNote, String instrumentTracks) {
+    public InstrumentPlan (String instrumentName, String instrumentNote, String instrumentTracks) {
         this.mInstrumentName = instrumentName;
         this.mInstrumentNote = instrumentNote;
         this.mInstrumentTracks = instrumentTracks;
     }
 
-    public String getInstrumentName() {
+    public String getInstrumentName () {
         return mInstrumentName;
     }
 
-    public void setInstrumentName(String instrumentName) {
+    public void setInstrumentName (String instrumentName) {
         this.mInstrumentName = instrumentName;
     }
 
-    public String getInstrumentTracks() {
+    public String getInstrumentTracks () {
         return mInstrumentTracks;
     }
 
-    public void setInstrumentTracks(String instrumentTracks) {
+    public void setInstrumentTracks (String instrumentTracks) {
         this.mInstrumentTracks = instrumentTracks;
     }
 
-    public String getInstrumentNote() {
+    public String getInstrumentNote () {
         return mInstrumentNote;
     }
 
-    public void setInstrumentNote(String instrumentNote) {
+    public void setInstrumentNote (String instrumentNote) {
         this.mInstrumentNote = instrumentNote;
     }
 }

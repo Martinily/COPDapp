@@ -25,24 +25,24 @@ public class PreviewManager implements PreviewCallback {
     private PreviewCallback previewCallback;
     private SurfaceView     surfaceView;
 
-    private int videoWidth = 320;
+    private int videoWidth  = 320;
     private int videoHeight = 240;
 
-    public PreviewManager(SurfaceView surfaceView) {
+    public PreviewManager (SurfaceView surfaceView) {
         this.surfaceView = surfaceView;
         init();
     }
 
-    private void init() {
+    private void init () {
         previewCallback = this;
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
-            public void surfaceCreated(SurfaceHolder holder) {
+            public void surfaceCreated (SurfaceHolder holder) {
 
             }
 
             @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            public void surfaceChanged (SurfaceHolder holder, int format, int width, int height) {
                 // SurfaceView 构建完毕并且获取有效宽高时候打开摄像头
                 if (camera != null) {
                     return;
@@ -73,7 +73,7 @@ public class PreviewManager implements PreviewCallback {
             }
 
             @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
+            public void surfaceDestroyed (SurfaceHolder holder) {
                 // 结束预览时关闭摄像头
                 if (camera == null) {
                     return;
@@ -88,7 +88,7 @@ public class PreviewManager implements PreviewCallback {
     }
 
     @Override
-    public void onPreviewFrame(byte[] data, Camera camera) {
+    public void onPreviewFrame (byte[] data, Camera camera) {
         EMClient.getInstance().callManager()
                 .inputExternalVideoData(data, videoWidth, videoHeight, 0);
     }

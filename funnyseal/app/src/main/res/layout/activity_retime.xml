@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
-        android:background="@color/teal"
         android:layout_width="match_parent"
         android:layout_height="52dp"
+        android:background="@color/teal"
         android:clickable="true"
         android:focusable="true">
 
@@ -18,39 +15,38 @@
             android:id="@+id/quitalarm"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
             android:background="@color/teal"
             android:text="返回"
-            android:textSize="18dp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
         <TextView
+            android:id="@+id/medicineretime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/medicineretime"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
             android:text="添加提醒"
             android:textColor="@color/white"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
         <Button
+            android:id="@+id/addalarm"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/addalarm"
             android:layout_marginRight="20dp"
-            android:id="@+id/addalarm"
-            android:clickable="true"/>
+            android:background="@drawable/addalarm"
+            android:clickable="true" />
 
     </LinearLayout>
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/alarmlist_view"
-        >
-    </ListView>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
 </LinearLayout>

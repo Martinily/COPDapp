@@ -105,15 +105,15 @@
                 <TextView
                     android:id="@+id/text_medical_history"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textColor="@color/vm_white_87" />
 
                 <TextView
                     android:id="@+id/text_medical_order"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textColor="@color/vm_white_87" />
 
             </LinearLayout>

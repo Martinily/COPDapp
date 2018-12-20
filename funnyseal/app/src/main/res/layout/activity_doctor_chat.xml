@@ -42,29 +42,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/ll_doctor_chat_bottom_bar">
+
         <ImageButton
             android:id="@+id/ibtn_doctor_vioce"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
-            android:src="@drawable/ic_perm_phone_msg_black_24dp"
-            android:contentDescription="随访" />
+            android:contentDescription="随访"
+            android:src="@drawable/ic_perm_phone_msg_black_24dp" />
 
         <ImageButton
             android:id="@+id/ibtn_doctor_nursingplan"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
-            android:src="@drawable/ic_assignment_black_24dp"
-            android:contentDescription="问卷" />
+            android:contentDescription="问卷"
+            android:src="@drawable/ic_assignment_black_24dp" />
 
         <ImageButton
             android:id="@+id/ibtn_doctor_video"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/white"
-            android:src="@drawable/ic_videocam_black_24dp"
-            android:contentDescription="问诊" />
+            android:contentDescription="问诊"
+            android:src="@drawable/ic_videocam_black_24dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,11 +82,11 @@
             android:layout_height="32dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:autofillHints="请输入"
             android:background="@drawable/bordered_edit_text"
             android:gravity="center_vertical"
             android:inputType="text"
             android:minLines="1"
-            android:autofillHints="请输入"
             tools:ignore="LabelFor" />
 
         <Button

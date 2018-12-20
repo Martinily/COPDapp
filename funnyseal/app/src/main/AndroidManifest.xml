@@ -45,7 +45,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
     <uses-permission android:name="android.permission.READ_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -76,6 +75,8 @@
             android:name="com.hyphenate.chat.EMJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
@@ -84,6 +85,10 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".feature.patientNursingPlan.AlarmReciever"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -92,6 +97,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SignupActivity" />
         <activity android:name=".ForgetPwdActivity" />
         <activity android:name=".feature.bottomtab.DoctorBottomActivity" />
@@ -106,7 +112,17 @@
         <activity android:name=".feature.patientMessage.PatientChatActivity" />
         <activity android:name=".feature.list.UserInfoActivity" />
         <activity android:name=".feature.health.HealthCenterUpdateActivity" />
-        <activity android:name=".feature.health.HealthCenterHistoryActivity"></activity>
+        <activity android:name=".feature.health.HealthCenterHistoryActivity" />
+        <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
+        <activity android:name=".feature.doctorMessage.DoctorVideoCallActivity" />
+        <activity android:name=".feature.doctorMessage.CallActivity" />
+        <activity android:name=".feature.patientNursingPlan.DialogActivity" />
+        <activity android:name=".feature.doctorNursingPlan.DoctorDetailHistoryActivity" />
+        <activity android:name=".feature.doctorNursingPlan.DoctorHistoryActivity" />
+        <activity android:name=".feature.patientNursingPlan.PatientDetailHistoryActivity" />
+        <activity android:name=".feature.patientNursingPlan.PatientHistoryActivity" />
+        <activity android:name=".feature.doctorNursingPlan.PickPatientActivity" />
+        <activity android:name=".feature.patientMessage.PatientVideoCallActivity" />
         <activity
             android:name=".feature.doctorPersonalCenter.DoctorMyInfoModifyActivity"
             android:label="@string/title_activity_doctor_my_info_modify"
@@ -139,22 +155,6 @@
             android:name=".feature.patientPersonalCenter.PatientMyInfoModifyActivity"
             android:label="@string/title_activity_patient_per_info_modify"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
-        <activity android:name=".feature.doctorMessage.DoctorVideoCallActivity" />
-        <activity android:name=".feature.doctorMessage.CallActivity" />
-        <activity android:name=".feature.patientNursingPlan.DialogActivity" />
-
-        <receiver
-            android:name=".feature.patientNursingPlan.AlarmReciever"
-            android:enabled="true"
-            android:exported="true" />
-
-        <activity android:name=".feature.doctorNursingPlan.DoctorDetailHistoryActivity" />
-        <activity android:name=".feature.doctorNursingPlan.DoctorHistoryActivity" />
-        <activity android:name=".feature.patientNursingPlan.PatientDetailHistoryActivity" />
-        <activity android:name=".feature.patientNursingPlan.PatientHistoryActivity" />
-        <activity android:name=".feature.doctorNursingPlan.PickPatientActivity"></activity>
-        <activity android:name=".feature.patientMessage.PatientVideoCallActivity" />
         <activity
             android:name=".feature.patientPersonalCenter.PatientDoctorAdviceActivity"
             android:label="@string/title_activity_patient_doctor_advice"
@@ -162,7 +162,7 @@
         <activity
             android:name=".feature.patientPersonalCenter.PatientSetting"
             android:label="@string/title_activity_patient_setting"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

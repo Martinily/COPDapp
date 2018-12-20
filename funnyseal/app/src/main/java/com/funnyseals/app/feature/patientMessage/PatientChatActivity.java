@@ -46,7 +46,7 @@ public class PatientChatActivity extends AppCompatActivity implements EMMessageL
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_chat);
-        msgListener=this;
+        msgListener = this;
         init();
     }
 

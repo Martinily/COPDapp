@@ -57,7 +57,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
     }
 
     public void initData () {
-        Thread thread=new Thread(() -> {
+        Thread thread = new Thread(() -> {
             String send;
             Socket socket;
             try {
@@ -70,18 +70,18 @@ public class DoctorBottomActivity extends AppCompatActivity {
                 out.writeUTF(send);
                 out.close();
 
-                socket=SocketUtil.getGetArraySocket();
-                DataInputStream in=new DataInputStream(socket.getInputStream());
-                String message=in.readUTF();
-                if(message.contains("empty")&&message.length()<10){
-                    mAllMyPatient=null;
+                socket = SocketUtil.getGetArraySocket();
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                String message = in.readUTF();
+                if (message.contains("empty") && message.length() < 10) {
+                    mAllMyPatient = null;
                     Thread.interrupted();
                 }
-                mAllMyPatient=new ArrayList<>();
-                JSONArray allMyPatient=new JSONArray(message);
+                mAllMyPatient = new ArrayList<>();
+                JSONArray allMyPatient = new JSONArray(message);
                 int i;
-                for (i=0;i<allMyPatient.length();i++){
-                    JSONObject patient=allMyPatient.getJSONObject(i);
+                for (i = 0; i < allMyPatient.length(); i++) {
+                    JSONObject patient = allMyPatient.getJSONObject(i);
                     mAllMyPatient.add(new User(patient.getString("pID"),
                             patient.getString("pName"),
                             patient.getString("pSex"),
@@ -96,12 +96,12 @@ public class DoctorBottomActivity extends AppCompatActivity {
             Thread.interrupted();
         });
         thread.start();
-        while (thread.isAlive()){
+        while (thread.isAlive()) {
 
         }
     }
 
-    public List<User> getAllMyPatient(){
+    public List<User> getAllMyPatient () {
         return mAllMyPatient;
     }
 
@@ -112,7 +112,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
         showPrevious();
     }
 
-    private void initBottomTabs() {
+    private void initBottomTabs () {
         mIndexTab = findViewById(R.id.doctor_personalCenter_tab);
         mPreviousTabId = R.id.doctor_personalCenter_tab;
 

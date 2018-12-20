@@ -18,19 +18,19 @@ import com.funnyseals.app.model.User;
 public class UserInfoActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-        Button button1=findViewById(R.id.gotomainlist);
-        Button button2=findViewById(R.id.sendmessage);
-        Intent intent=getIntent();
-        User m_user=(User)intent.getSerializableExtra("user");
-        ImageView m_imageView=findViewById(R.id.headphoto);
-        TextView m_name=findViewById(R.id.patientname);
-        TextView m_sex=findViewById(R.id.patientsex);
-        TextView m_age=findViewById(R.id.patientage);
-        TextView m_account=findViewById(R.id.patientaccount);
-        TextView m_location=findViewById(R.id.patientlocation);
+        Button button1 = findViewById(R.id.gotomainlist);
+        Button button2 = findViewById(R.id.sendmessage);
+        Intent intent = getIntent();
+        User m_user = (User) intent.getSerializableExtra("user");
+        ImageView m_imageView = findViewById(R.id.headphoto);
+        TextView m_name = findViewById(R.id.patientname);
+        TextView m_sex = findViewById(R.id.patientsex);
+        TextView m_age = findViewById(R.id.patientage);
+        TextView m_account = findViewById(R.id.patientaccount);
+        TextView m_location = findViewById(R.id.patientlocation);
         m_name.setText(m_user.getName());
         m_sex.setText(m_user.getSex());
         m_age.setText(m_user.getAge());
@@ -38,16 +38,16 @@ public class UserInfoActivity extends AppCompatActivity {
         m_location.setText(m_user.getAddress());
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 finish();
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(UserInfoActivity.this,DoctorChatActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("myPatient",m_user);
+            public void onClick (View v) {
+                Intent intent = new Intent(UserInfoActivity.this, DoctorChatActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("myPatient", m_user);
                 intent.putExtras(bundle);
             }
         });

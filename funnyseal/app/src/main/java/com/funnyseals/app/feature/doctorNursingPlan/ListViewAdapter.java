@@ -7,50 +7,55 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.funnyseals.app.R;
+
 import java.util.List;
 
 /**
- *     time   : 2018/11/30
- *     desc   :详细内容添加的列表adapter
+ * time   : 2018/11/30
+ * desc   :详细内容添加的列表adapter
  */
 public class ListViewAdapter extends BaseAdapter {
 
-    private Context mContext;
+    private Context    mContext;
     private String     mName;
     private List<Bean> mBeanList;
 
-    public ListViewAdapter(Context context, List<Bean> BeanList) {
+    public ListViewAdapter (Context context, List<Bean> BeanList) {
         this.mContext = context;
         this.mBeanList = BeanList;
     }
 
     /**
      * How many items are in the data set represented by this Adapter.
+     *
      * @return Count of items.
      */
     @Override
-    public int getCount() {
+    public int getCount () {
         return mBeanList.size();
     }
 
     /**
      * Get the data item associated with the specified position in the data set.
      * Position of the item whose data we want within the adapter'sdata set.
+     *
      * @return The data at the specified position.
      */
     @Override
-    public Object getItem(int position) {
+    public Object getItem (int position) {
         return null;
     }
 
     /**
      * Get the row id associated with the specified position in the list.
      * The position of the item within the adapter's data set whose row id we want.
+     *
      * @return The id of the item at the specified position.
      */
     @Override
-    public long getItemId(int position) {
+    public long getItemId (int position) {
         return 0;
     }
 
@@ -58,7 +63,7 @@ public class ListViewAdapter extends BaseAdapter {
      * detail listview
      */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView (int position, View convertView, ViewGroup parent) {
         View view;
         if (convertView != null) {
             view = convertView;
@@ -85,13 +90,14 @@ public class ListViewAdapter extends BaseAdapter {
         });
         return view;
     }
+
     //删除按钮操作
-    private void deleteButtonAction(int position) {
+    private void deleteButtonAction (int position) {
         mBeanList.remove(position);
         notifyDataSetChanged();
     }
 
-    public String getName() {
+    public String getName () {
         return mName;
     }
 }

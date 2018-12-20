@@ -104,9 +104,9 @@
 
         <TextView
             android:id="@+id/sportstime"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="时间"
             android:textColor="#000000"
             android:textSize="18sp" />
@@ -118,8 +118,8 @@
             android:layout_gravity="right"
             android:background="@drawable/ic_arrow_forward_black_24dp"
             android:clickable="true"
-            android:visibility="visible"
-            android:focusable="true" />
+            android:focusable="true"
+            android:visibility="visible" />
     </LinearLayout>
 
 </LinearLayout>

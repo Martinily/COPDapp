@@ -26,23 +26,23 @@ public class PatientListItemAdapter extends BaseAdapter {
 
     private List<User> mUsers;
 
-    public PatientListItemAdapter(Context context, List<User> users) {
+    public PatientListItemAdapter (Context context, List<User> users) {
         this.mInflater = LayoutInflater.from(context);
         this.mUsers = users;
     }
 
     @Override
-    public int getCount() {
+    public int getCount () {
         return mUsers.size();
     }
 
     @Override
-    public User getItem(int position) {
+    public User getItem (int position) {
         return mUsers.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId (int position) {
         return position;
     }
 
@@ -50,7 +50,7 @@ public class PatientListItemAdapter extends BaseAdapter {
     列表内容
      */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView (int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.list_item_patient, parent, false);
@@ -76,7 +76,7 @@ public class PatientListItemAdapter extends BaseAdapter {
 
         private TextView mName;
 
-        private void init(User user) {
+        private void init (User user) {
             mPortrait.setUserAccount(user.getAccount()).setUrl(null).show();
             mName.setText(user.getName());
         }

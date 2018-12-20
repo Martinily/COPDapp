@@ -20,7 +20,7 @@
         android:id="@+id/chat_send_portrait"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@mipmap/avatar"
-        android:contentDescription="头像" />
+        android:contentDescription="头像"
+        android:src="@mipmap/avatar" />
 
 </LinearLayout>

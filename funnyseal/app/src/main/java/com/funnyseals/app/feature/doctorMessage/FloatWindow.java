@@ -34,14 +34,12 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 public class FloatWindow {
 
-    // 上下文菜单
-    private Context context;
-
     // 当前单例类实例
-    private static FloatWindow instance;
-
-    private WindowManager windowManager;
-    private WindowManager.LayoutParams layoutParams = null;
+    private static FloatWindow                instance;
+    // 上下文菜单
+    private        Context                    context;
+    private        WindowManager              windowManager;
+    private        WindowManager.LayoutParams layoutParams = null;
 
     // 悬浮窗需要显示的布局
     private View     floatView;
@@ -50,12 +48,12 @@ public class FloatWindow {
     private EMCallSurfaceView localView;
     private EMCallSurfaceView oppositeView;
 
-    public FloatWindow(Context context) {
+    public FloatWindow (Context context) {
         this.context = context;
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     }
 
-    public static FloatWindow getInstance(Context context) {
+    public static FloatWindow getInstance (Context context) {
         if (instance == null) {
             instance = new FloatWindow(context);
         }
@@ -65,7 +63,7 @@ public class FloatWindow {
     /**
      * 开始展示悬浮窗
      */
-    public void addFloatWindow() {
+    public void addFloatWindow () {
         if (floatView != null) {
             return;
         }
@@ -85,7 +83,8 @@ public class FloatWindow {
         layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
 
         // 设置窗口标志类型，其中 FLAG_NOT_FOCUSABLE 是放置当前悬浮窗拦截点击事件，造成桌面控件不可操作
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM;
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager
+                .LayoutParams.FLAG_ALT_FOCUSABLE_IM;
 
         // 获取要现实的布局
         floatView = LayoutInflater.from(context)
@@ -107,7 +106,7 @@ public class FloatWindow {
         // 当点击悬浮窗时，返回到通话界面
         floatView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 Intent intent = new Intent();
                 if (CallManager.getInstance()
                         .getCallType() == CallManager.CallType.VOICE) {
@@ -131,7 +130,7 @@ public class FloatWindow {
 
             @SuppressLint("ClickableViewAccessibility")
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch (View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         result = false;
@@ -144,7 +143,8 @@ public class FloatWindow {
                     case MotionEvent.ACTION_MOVE:
                         VMLog.d("move x: %f, y: %f", event.getRawX(), event.getRawY());
                         // 当移动距离大于特定值时，表示是拖动悬浮窗，则不触发后边的点击监听
-                        if (Math.abs(event.getRawX() - startX) > 20 || Math.abs(event.getRawY() - startY) > 20) {
+                        if (Math.abs(event.getRawX() - startX) > 20 || Math.abs(event.getRawY() -
+                                startY) > 20) {
                             result = true;
                         }
                         // getRawX 获取触摸点相对于屏幕的坐标，getX 相对于当前悬浮窗坐标
@@ -166,7 +166,7 @@ public class FloatWindow {
     /**
      * 设置本地与远程画面显示控件
      */
-    private void setupSurfaceView() {
+    private void setupSurfaceView () {
         floatView.findViewById(R.id.layout_call_voice)
                 .setVisibility(View.GONE);
         floatView.findViewById(R.id.layout_call_video)
@@ -208,7 +208,7 @@ public class FloatWindow {
     /**
      * 停止悬浮窗
      */
-    public void removeFloatWindow() {
+    public void removeFloatWindow () {
         EventBus.getDefault()
                 .unregister(this);
         if (localView != null) {
@@ -234,7 +234,7 @@ public class FloatWindow {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(CallEvent event) {
+    public void onEventBus (CallEvent event) {
         if (event.isState()) {
             refreshCallView(event);
         }
@@ -247,7 +247,7 @@ public class FloatWindow {
     /**
      * 刷新通话界面
      */
-    private void refreshCallView(CallEvent event) {
+    private void refreshCallView (CallEvent event) {
         EMCallStateChangeListener.CallError callError = event.getCallError();
         EMCallStateChangeListener.CallState callState = event.getCallState();
         switch (callState) {
@@ -293,7 +293,7 @@ public class FloatWindow {
         }
     }
 
-    private void refreshCallTime() {
+    private void refreshCallTime () {
         int t = CallManager.getInstance()
                 .getCallTime();
         int h = t / 60 / 60;

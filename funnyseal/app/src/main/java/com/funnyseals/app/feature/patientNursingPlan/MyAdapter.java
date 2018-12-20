@@ -23,28 +23,28 @@ public class MyAdapter extends BaseAdapter {
     private Context      mContext;
     private List<String> mList;
 
-    public MyAdapter(Context context, List<String> list) {
+    public MyAdapter (Context context, List<String> list) {
         mContext = context;
         mList = list;
     }
 
     @Override
-    public int getCount() {
+    public int getCount () {
         return mList.size();
     }
 
     @Override
-    public Object getItem(int i) {
+    public Object getItem (int i) {
         return mList.get(i);
     }
 
     @Override
-    public long getItemId(int i) {
+    public long getItemId (int i) {
         return i;
     }
 
     @Override
-    public View getView(final int i, View view, ViewGroup viewGroup) {
+    public View getView (final int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
         if (view == null) {
             viewHolder = new ViewHolder();

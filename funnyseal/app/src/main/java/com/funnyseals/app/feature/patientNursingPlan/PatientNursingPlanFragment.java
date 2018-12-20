@@ -27,93 +27,91 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- 护理计划to fragment
+ * 护理计划to fragment
  */
-public class PatientNursingPlanFragment extends Fragment implements View.OnClickListener{
+public class PatientNursingPlanFragment extends Fragment implements View.OnClickListener {
     private View                      mView;
     private TextView                  mTv_patient_one;
     private TextView                  mTv_patient_two;
     private TextView                  mTv_patient_three;
-    private Button mPatientHistory;
+    private Button                    mPatientHistory;
     private ViewPager                 mVp_patient_myViewPager;
     private List<Fragment>            mList;
     private PatientTabFragmentAdapter mAdapter;
-    private String mPatientID="12345";//传入的患者编号
-    private List<String> mMedicine_Titles=new ArrayList<>();
-    private List<String> mMedicine_Contents=new ArrayList<>();
-    private List<String> mMedicine_attentions=new ArrayList<>();
-    private List<String> mMedicine_needtimes=new ArrayList<>();
+    private String                    mPatientID           = "12345";//传入的患者编号
+    private List<String>              mMedicine_Titles     = new ArrayList<>();
+    private List<String>              mMedicine_Contents   = new ArrayList<>();
+    private List<String>              mMedicine_attentions = new ArrayList<>();
+    private List<String>              mMedicine_needtimes  = new ArrayList<>();
 
-    private List<String> mInstrument_Titles=new ArrayList<>();
-    private List<String> mInstrument_Contents=new ArrayList<>();
-    private List<String> mInstrument_attentions=new ArrayList<>();
+    private List<String> mInstrument_Titles     = new ArrayList<>();
+    private List<String> mInstrument_Contents   = new ArrayList<>();
+    private List<String> mInstrument_attentions = new ArrayList<>();
 
-    private List<String>  mSports_Titles=new ArrayList<>();//名称
-    private List<String>  mSports_Contents=new ArrayList<>();  //时长
-    private List<String>  mSports_attentions=new ArrayList<>();//注意事项
+    private List<String> mSports_Titles     = new ArrayList<>();//名称
+    private List<String> mSports_Contents   = new ArrayList<>();  //时长
+    private List<String> mSports_attentions = new ArrayList<>();//注意事项
 
 
-
-    public void onResume() {
+    public void onResume () {
         super.onResume();
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_patient_nursing_plan, container, false);
         return mView;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated (@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        Thread thread=new Thread(() -> {
+        Thread thread = new Thread(() -> {
             Socket socket;
-            JSONObject jsonObject=new JSONObject();
+            JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("ID", mPatientID);
                 jsonObject.put("request_type", "4");
-                jsonObject.put("user_type","p");
-                jsonObject.put("query_state","now");
-                socket=SocketUtil.getSendSocket();
-                DataOutputStream out=new DataOutputStream(socket.getOutputStream());
+                jsonObject.put("user_type", "p");
+                jsonObject.put("query_state", "now");
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 out.writeUTF(jsonObject.toString());
                 out.close();
 
                 Thread.sleep(1000);
 
-                socket=SocketUtil.getGetSocket();
-                DataInputStream dataInputStream=new DataInputStream(socket.getInputStream());
-                String message=dataInputStream.readUTF();
+                socket = SocketUtil.getGetSocket();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String message = dataInputStream.readUTF();
                 socket.close();
                 System.err.println(message);
-                if(message.equals("empty")){
+                if (message.equals("empty")) {
                     return;
                 }
 
-                JSONArray jsonArray=new JSONArray(message);
+                JSONArray jsonArray = new JSONArray(message);
                 int i;
 
-                for( i=0;i<jsonArray.length();i++){
-                    if(jsonArray.getJSONObject(i).getString("item_type").equals("med"))
-                    {
-                        System.err.println("-------------------------------------------------------------");
+                for (i = 0; i < jsonArray.length(); i++) {
+                    if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
+                        System.err.println
+                                ("-------------------------------------------------------------");
                         mMedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
                         mMedicine_Contents.add(jsonArray.getJSONObject(i).getString("mDose"));
-                        mMedicine_attentions.add(jsonArray.getJSONObject(i).getString("mAttention"));
+                        mMedicine_attentions.add(jsonArray.getJSONObject(i).getString
+                                ("mAttention"));
                         mMedicine_needtimes.add(jsonArray.getJSONObject(i).getString("mTime"));
-                    }
-                    else if(jsonArray.getJSONObject(i).getString("item_type").equals("app"))
-                    {
+                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
                         mInstrument_Titles.add(jsonArray.getJSONObject(i).getString("appName"));
                         mInstrument_Contents.add(jsonArray.getJSONObject(i).getString("appTime"));
-                        mInstrument_attentions.add(jsonArray.getJSONObject(i).getString("appAttention"));
-                    }
-                    else if(jsonArray.getJSONObject(i).getString("item_type").equals("sports"))
-                    {
+                        mInstrument_attentions.add(jsonArray.getJSONObject(i).getString
+                                ("appAttention"));
+                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
                         mSports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
                         mSports_Contents.add(jsonArray.getJSONObject(i).getString("sTime"));
                         mSports_attentions.add(jsonArray.getJSONObject(i).getString("sAttention"));
@@ -131,7 +129,7 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
             Thread.interrupted();
         });
         thread.start();
-        while(thread.isAlive()){
+        while (thread.isAlive()) {
 
         }
 
@@ -154,7 +152,7 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick (View v) {
 
         switch (v.getId()) {
             case R.id.tv_patient_one:
@@ -187,7 +185,7 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
     }
 
 
-    private void initView() {
+    private void initView () {
         mTv_patient_one = getActivity().findViewById(R.id.tv_patient_one);
         mTv_patient_two = getActivity().findViewById(R.id.tv_patient_two);
         mTv_patient_three = getActivity().findViewById(R.id.tv_patient_three);
@@ -195,18 +193,42 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
         mPatientHistory = getActivity().findViewById(R.id.patienthistory);
     }
 
+    public List<String> getmMedicine_Titles () { return mMedicine_Titles; }
+
+    public List<String> getmMedicine_Contents () {
+        return mMedicine_Contents;
+    }
+
+    public List<String> getmMedicine_attentions () { return mMedicine_attentions; }
+
+    public List<String> getmMedicine_needtimes () {
+        return mMedicine_needtimes;
+    }
+
+    public List<String> getmInstrument_Titles () { return mInstrument_Titles; }
+
+    public List<String> getmInstrument_Contents () { return mInstrument_Contents; }
+
+    public List<String> getmInstrument_attentions () { return mInstrument_attentions; }
+
+    public List<String> getmSports_Titles () { return mSports_Titles; }
+
+    public List<String> getmSports_Contents () { return mSports_Contents; }
+
+    public List<String> getmSports_attentions () { return mSports_attentions; }
+
     public class MyPagerChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
-        public void onPageScrollStateChanged(int arg0) {
+        public void onPageScrollStateChanged (int arg0) {
         }
 
         @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        public void onPageScrolled (int arg0, float arg1, int arg2) {
         }
 
         @Override
-        public void onPageSelected(int arg0) {
+        public void onPageSelected (int arg0) {
             switch (arg0) {
                 case 0:
                     mTv_patient_one.setBackgroundColor(Color.LTGRAY);
@@ -226,22 +248,5 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
             }
         }
     }
-
-    public  List<String> getmMedicine_Titles() { return  mMedicine_Titles; }
-    public  List<String> getmMedicine_Contents() {
-        return mMedicine_Contents;
-    }
-    public  List<String> getmMedicine_attentions() { return mMedicine_attentions; }
-    public  List<String> getmMedicine_needtimes() {
-        return mMedicine_needtimes;
-    }
-
-    public List<String> getmInstrument_Titles(){ return  mInstrument_Titles; }
-    public List<String> getmInstrument_Contents(){ return  mInstrument_Contents; }
-    public List<String> getmInstrument_attentions(){ return  mInstrument_attentions; }
-
-    public List<String> getmSports_Titles(){ return  mSports_Titles; }
-    public List<String> getmSports_Contents(){ return  mSports_Contents; }
-    public List<String> getmSports_attentions(){ return  mSports_attentions; }
 
 }

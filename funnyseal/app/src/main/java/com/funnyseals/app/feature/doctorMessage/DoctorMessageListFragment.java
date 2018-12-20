@@ -34,7 +34,7 @@ import java.util.Objects;
  *     version: 1.0
  * </pre>
  */
-public class DoctorMessageListFragment extends Fragment implements EMMessageListener{
+public class DoctorMessageListFragment extends Fragment implements EMMessageListener {
 
     private View                 mView;
     private SwipeMenuListView    mChatList;
@@ -53,7 +53,7 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
         mAllMyPatient = ((DoctorBottomActivity) Objects.requireNonNull(getActivity()))
                 .getAllMyPatient();
 
-        mMsgListener=this;
+        mMsgListener = this;
         initUIComponents();
 
         return mView;
@@ -105,9 +105,9 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
         mChatList.setOnItemClickListener((parent, view, position, id) -> {
             EMConversation conversation = (EMConversation) mChatList.getItemAtPosition(position);
             Intent intent = new Intent(getActivity(), DoctorChatActivity.class);
-            String account=conversation.conversationId();
-            for(User p:mAllMyPatient){
-                if(p.getAccount().equals(account)){
+            String account = conversation.conversationId();
+            for (User p : mAllMyPatient) {
+                if (p.getAccount().equals(account)) {
                     intent.putExtra("myPatient", p);
                     break;
                 }

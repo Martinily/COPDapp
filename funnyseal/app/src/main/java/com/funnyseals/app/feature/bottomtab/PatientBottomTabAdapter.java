@@ -29,7 +29,8 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
     //当前tab对应的RadioButton id
     private int              mCurrentTabId;
 
-    protected PatientBottomTabAdapter(FragmentActivity fragmentActivity, SparseArray<Fragment> fragmentMap, int fragmentContentId, RadioGroup radioGroup) {
+    protected PatientBottomTabAdapter (FragmentActivity fragmentActivity, SparseArray<Fragment>
+            fragmentMap, int fragmentContentId, RadioGroup radioGroup) {
         this.mFragmentMap = fragmentMap;
         this.mRadioGroup = radioGroup;
         this.mFragmentActivity = fragmentActivity;
@@ -38,7 +39,7 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
         this.init();
     }
 
-    private void init() {
+    private void init () {
 
         FragmentTransaction ft = mFragmentActivity.getSupportFragmentManager().beginTransaction();
         ft.add(mFragmentContentId, mFragmentMap.get(R.id.patient_personalcenter_tab));
@@ -50,7 +51,7 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+    public void onCheckedChanged (RadioGroup radioGroup, int checkedId) {
 
         changeTab(checkedId);
     }
@@ -63,7 +64,7 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
      *
      * @param tabId 目标 tab 对应的 RadioButton id
      */
-    private void changeTab(int tabId) {
+    private void changeTab (int tabId) {
         if (tabId == mCurrentTabId) {
             return;
         }
@@ -81,7 +82,7 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
      *
      * @param tabId 目标tab 对应的 RadioButton id
      */
-    private void showTab(int tabId) {
+    private void showTab (int tabId) {
 
         Fragment temp = getCurrentFragment();
 
@@ -109,7 +110,7 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
     /**
      * 获取当前tab
      */
-    private Fragment getCurrentFragment() {
+    private Fragment getCurrentFragment () {
         return mFragmentMap.get(mCurrentTabId);
     }
 
@@ -118,7 +119,7 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
      *
      * @param tabId 目标 tab RadioButton id
      */
-    public void setFragmentTab(int tabId) {
+    public void setFragmentTab (int tabId) {
         changeTab(tabId);
 
         if (mFragmentActivity.findViewById(tabId) instanceof RadioButton) {
@@ -132,12 +133,12 @@ public abstract class PatientBottomTabAdapter implements RadioGroup.OnCheckedCha
      * @param tabId 目标tab 对应的 RadioButton id
      * @return 确定切换返回true，否则返回false
      */
-    public abstract boolean onTabWillChange(int tabId);
+    public abstract boolean onTabWillChange (int tabId);
 
     /**
      * fragment tab切换后的回调函数
      *
      * @param tabId 目标tab 对应的 RadioButton id
      */
-    public abstract void onTabChanged(int tabId);
+    public abstract void onTabChanged (int tabId);
 }

@@ -5,11 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".feature.patientNursingPlan.PatientHistoryActivity">
+
     <LinearLayout
-        android:background="@color/teal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/teal"
         android:clickable="true">
+
         <Button
             android:id="@+id/quitsickerhistorydate"
             android:layout_width="wrap_content"
@@ -18,7 +20,8 @@
             android:layout_margin="5dp"
             android:background="@color/teal"
             android:text="返回"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,23 +30,24 @@
             android:gravity="center"
             android:text="历史计划"
             android:textColor="@color/white"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:paddingTop="5dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp">
+
         <ListView
             android:id="@+id/listViewsikerhistorydate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
-            android:dividerHeight="15dp"/>
+            android:dividerHeight="15dp" />
 
     </LinearLayout>
 

@@ -14,7 +14,8 @@ public class MedicinePlan {
     private String mMedicineNote;
     private String mMedicineTime;
 
-    public MedicinePlan(String medicineName, String medicineDose, String medicineNote, String medicineTime) {
+    public MedicinePlan (String medicineName, String medicineDose, String medicineNote, String
+            medicineTime) {
 
         this.mMedicineName = medicineName;
         this.mMedicineDose = medicineDose;
@@ -22,35 +23,35 @@ public class MedicinePlan {
         this.mMedicineTime = medicineTime;
     }
 
-    public String getMedicineName() {
+    public String getMedicineName () {
         return mMedicineName;
     }
 
-    public void setMedicineName(String medicineName) {
+    public void setMedicineName (String medicineName) {
         this.mMedicineNote = medicineName;
     }
 
-    public String getMedicineDose() {
+    public String getMedicineDose () {
         return mMedicineDose;
     }
 
-    public void setMedicineDose(String medicineDose) {
+    public void setMedicineDose (String medicineDose) {
         this.mMedicineDose = medicineDose;
     }
 
-    public String getMedicineNote() {
+    public String getMedicineNote () {
         return mMedicineNote;
     }
 
-    public void setMedicineNote(String medicineNote) {
+    public void setMedicineNote (String medicineNote) {
         this.mMedicineNote = medicineNote;
     }
 
-    public String getMedicineTime() {
+    public String getMedicineTime () {
         return mMedicineTime;
     }
 
-    public void setMedicineTime(String medicineTime) {
+    public void setMedicineTime (String medicineTime) {
         this.mMedicineTime = medicineTime;
     }
 }

@@ -50,7 +50,7 @@ public class PatientVideoCallActivity extends CallActivity {
     @BindView(R.id.text_patient_call_state)
     TextView             callStateView;
     @BindView(R.id.text_patient_call_time)
-    TextView       callTimeView;
+    TextView             callTimeView;
     @BindView(R.id.btn_patient_mic_switch)
     ImageButton          micSwitch;
     @BindView(R.id.btn_patient_camera_switch)
@@ -152,8 +152,10 @@ public class PatientVideoCallActivity extends CallActivity {
      */
     @OnClick({
             R.id.layout_patient_call_control, R.id.btn_patient_exit_full_screen,
-            R.id.btn_patient_mic_switch, R.id.btn_patient_camera_switch, R.id.btn_patient_speaker_switch,
-            R.id.btn_patient_change_camera_switch, R.id.fab_patient_reject_call, R.id.fab_patient_end_call,
+            R.id.btn_patient_mic_switch, R.id.btn_patient_camera_switch, R.id
+            .btn_patient_speaker_switch,
+            R.id.btn_patient_change_camera_switch, R.id.fab_patient_reject_call, R.id
+            .fab_patient_end_call,
             R.id.fab_patient_answer_call
     })
     void onClick (View v) {

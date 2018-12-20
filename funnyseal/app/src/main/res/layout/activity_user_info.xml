@@ -1,130 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.list.UserInfoActivity">
 
     <TextView
         android:id="@+id/phototext"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@drawable/frame"
+        android:gravity="center_vertical"
         android:text="@string/patientlist_photo"
         android:textSize="30sp"
-        android:gravity="center_vertical"
-        android:background="@drawable/frame"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/headphoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/user"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user" />
 
     <TextView
         android:id="@+id/nametext"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/frame"
+        android:gravity="center_vertical"
         android:text="@string/patientlist_name"
         android:textSize="30sp"
-        android:gravity="center_vertical"
-        android:background="@drawable/frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phototext"/>
+        app:layout_constraintTop_toBottomOf="@id/phototext" />
 
     <TextView
         android:id="@+id/patientname"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headphoto"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headphoto" />
 
     <TextView
         android:id="@+id/sextext"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/frame"
+        android:gravity="center_vertical"
         android:text="@string/patientlist_sex"
         android:textSize="30sp"
-        android:gravity="center_vertical"
-        android:background="@drawable/frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nametext"/>
+        app:layout_constraintTop_toBottomOf="@id/nametext" />
 
     <TextView
         android:id="@+id/patientsex"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/patientname"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/patientname" />
 
     <TextView
         android:id="@+id/agetext"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/frame"
+        android:gravity="center_vertical"
         android:text="@string/patientlist_age"
         android:textSize="30sp"
-        android:gravity="center_vertical"
-        android:background="@drawable/frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sextext"/>
+        app:layout_constraintTop_toBottomOf="@id/sextext" />
 
     <TextView
         android:id="@+id/patientage"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/patientsex"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/patientsex" />
 
     <TextView
         android:id="@+id/accounttext"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/frame"
+        android:gravity="center_vertical"
         android:text="@string/patientlist_account"
         android:textSize="30sp"
-        android:gravity="center_vertical"
-        android:background="@drawable/frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/agetext"/>
+        app:layout_constraintTop_toBottomOf="@id/agetext" />
 
     <TextView
         android:id="@+id/patientaccount"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/patientage"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/patientage" />
 
     <TextView
         android:id="@+id/locationtext"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/frame"
+        android:gravity="center_vertical"
         android:text="@string/patientlist_location"
         android:textSize="30sp"
-        android:gravity="center_vertical"
-        android:background="@drawable/frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/accounttext"/>
+        app:layout_constraintTop_toBottomOf="@id/accounttext" />
 
     <TextView
         android:id="@+id/patientlocation"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/patientaccount"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/patientaccount" />
 
     <Button
         android:id="@+id/gotomainlist"
@@ -132,10 +132,10 @@
         android:layout_height="wrap_content"
         android:text="@string/patientlist_returnback"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/patientlocation"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/sendmessage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sendmessage"/>
+        app:layout_constraintTop_toBottomOf="@id/patientlocation" />
 
     <Button
         android:id="@+id/sendmessage"
@@ -143,10 +143,9 @@
         android:layout_height="wrap_content"
         android:text="@string/patientlist_sendmessage"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/patientlocation"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/gotomainlist"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toEndOf="@id/gotomainlist"
+        app:layout_constraintTop_toBottomOf="@id/patientlocation" />
 
 </android.support.constraint.ConstraintLayout>

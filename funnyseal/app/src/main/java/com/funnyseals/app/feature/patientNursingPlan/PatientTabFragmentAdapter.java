@@ -20,24 +20,24 @@ public class PatientTabFragmentAdapter extends FragmentPagerAdapter {
     private FragmentManager mFragmentManager;
     private List<Fragment>  mList;
 
-    public PatientTabFragmentAdapter(FragmentManager fm, List<Fragment> list) {
+    public PatientTabFragmentAdapter (FragmentManager fm, List<Fragment> list) {
         super(fm);
         this.mList = list;
         this.mFragmentManager = fm;
     }
 
     @Override
-    public Fragment getItem(int arg0) {
+    public Fragment getItem (int arg0) {
         return mList.get(arg0);
     }
 
     @Override
-    public int getCount() {
+    public int getCount () {
         return mList.size();
     }
 
     @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+    public void destroyItem (@NonNull ViewGroup container, int position, @NonNull Object object) {
 
     }
 }

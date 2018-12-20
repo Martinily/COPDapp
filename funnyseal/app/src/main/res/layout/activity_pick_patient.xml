@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,10 +7,11 @@
     tools:context=".feature.doctorNursingPlan.PickPatientActivity">
 
     <LinearLayout
-        android:background="@color/teal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/teal"
         android:clickable="true">
+
         <Button
             android:id="@+id/quitpickpitient"
             android:layout_width="wrap_content"
@@ -20,22 +20,22 @@
             android:layout_margin="5dp"
             android:background="@color/teal"
             android:text="返回"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:paddingLeft="50dp"
             android:text="选择患者"
             android:textColor="@color/white"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/pickpatientlistView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 
 </LinearLayout>

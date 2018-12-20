@@ -21,7 +21,7 @@ import com.hyphenate.chat.EMMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorChatActivity extends AppCompatActivity implements EMMessageListener{
+public class DoctorChatActivity extends AppCompatActivity implements EMMessageListener {
 
     private ListView    mLv_message;
     private EditText    mEt_input;
@@ -45,8 +45,8 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
         setContentView(R.layout.activity_doctor_chat);
         Intent intent = this.getIntent();
         mMyPatient = (User) intent.getSerializableExtra("myPatient");
-        mPatientAccount=mMyPatient.getAccount();
-        msgListener=this;
+        mPatientAccount = mMyPatient.getAccount();
+        msgListener = this;
         init();
     }
 
