@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.custom_view.Portrait;
 import com.funnyseals.app.model.User;
-import com.funnyseals.app.model.UserTemp;
 
 import java.util.List;
 

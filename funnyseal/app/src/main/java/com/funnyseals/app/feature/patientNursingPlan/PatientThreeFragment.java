@@ -1,10 +1,7 @@
 package com.funnyseals.app.feature.patientNursingPlan;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +15,7 @@ import android.widget.TextView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.model.SportsPlan;
-import com.funnyseals.app.model.UserDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,33 +25,36 @@ import java.util.Map;
  * 患者端three fragment about sports
  */
 public class PatientThreeFragment extends Fragment {
-    private        MyApplication             mApplication;
-    private        List<SportsPlan>          mSportsPlans;
+    private MyApplication             mApplication;
+    private List<SportsPlan>          mSportsPlans;
     //将数据封装成数据源
-    private        List<Map<String, Object>> mSports_list = new ArrayList<>();
-    private List<String>  mSports_Titles=new ArrayList<>();//名称
-    private List<String>  mSports_Contents=new ArrayList<>();  //时长
-    private List<String>  mSports_attentions=new ArrayList<>();//注意事项
+    private List<Map<String, Object>> mSports_list       = new ArrayList<>();
+    private List<String>              mSports_Titles     = new ArrayList<>();//名称
+    private List<String>              mSports_Contents   = new ArrayList<>();  //时长
+    private List<String>              mSports_attentions = new ArrayList<>();//注意事项
 
     @Override
-    public void onResume() {
+    public void onResume () {
         super.onResume();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater,
+                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_patient_three, null);
         return view;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mSports_Titles=((PatientNursingPlanFragment)(PatientThreeFragment.this.getParentFragment())).getmSports_Titles();
-        mSports_Contents=((PatientNursingPlanFragment)(PatientThreeFragment.this.getParentFragment())).getmSports_Contents();
-        mSports_attentions=((PatientNursingPlanFragment)(PatientThreeFragment.this.getParentFragment())).getmSports_attentions();
+        mSports_Titles = ((PatientNursingPlanFragment) (PatientThreeFragment.this
+                .getParentFragment())).getmSports_Titles();
+        mSports_Contents = ((PatientNursingPlanFragment) (PatientThreeFragment.this
+                .getParentFragment())).getmSports_Contents();
+        mSports_attentions = ((PatientNursingPlanFragment) (PatientThreeFragment.this
+                .getParentFragment())).getmSports_attentions();
 
         int size = mSports_Titles.size();
         int size2 = mSports_Contents.size();
@@ -70,13 +65,13 @@ public class PatientThreeFragment extends Fragment {
         String[] sports_attention = (String[]) mSports_attentions.toArray(new String[size3]);
 
 
-        for(int i=0;i<sports_Title.length;i++){
-            Map<String,Object> map=new HashMap<String, Object>();
-            map.put("sportstitle",sports_Title[i]);
-            map.put("sportsimg",R.drawable.sports);
-            map.put("sportscontent",sports_Content[i]);
-            map.put("sportsattention",sports_attention[i]);
-            map.put("sportstime","-");
+        for (int i = 0; i < sports_Title.length; i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("sportstitle", sports_Title[i]);
+            map.put("sportsimg", R.drawable.sports);
+            map.put("sportscontent", sports_Content[i]);
+            map.put("sportsattention", sports_attention[i]);
+            map.put("sportstime", "-");
             mSports_list.add(map);
         }
         ListView listview = getActivity().findViewById(R.id.listViewsports);
@@ -87,22 +82,22 @@ public class PatientThreeFragment extends Fragment {
     class MyAdapter extends BaseAdapter {
 
         @Override
-        public int getCount() {
+        public int getCount () {
             return mSports_list.size();
         }
 
         @Override
-        public Object getItem(int position) {
+        public Object getItem (int position) {
             return mSports_list.get(position);
         }
 
         @Override
-        public long getItemId(int position) {
+        public long getItemId (int position) {
             return position;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView (int position, View convertView, ViewGroup parent) {
             View view;
             PatientThreeFragment.ViewHolder mHolder;
             if (convertView == null) {
@@ -118,17 +113,23 @@ public class PatientThreeFragment extends Fragment {
                 view = convertView;
                 mHolder = (PatientThreeFragment.ViewHolder) view.getTag();
             }
-            mHolder.mCardsports_title.setText(mSports_list.get(position).get("sportstitle").toString());
-            mHolder.mCardsports_image.setImageResource((int) mSports_list.get(position).get("sportsimg"));
-            mHolder.mCardsports_content.setText(mSports_list.get(position).get("sportscontent").toString());
-            mHolder.mCardsports_attention.setText(mSports_list.get(position).get("sportsattention").toString());
-            mHolder.mCardsports_time.setText(mSports_list.get(position).get("sportstime").toString());
+            mHolder.mCardsports_title.setText(mSports_list.get(position).get("sportstitle")
+                    .toString());
+            mHolder.mCardsports_image.setImageResource((int) mSports_list.get(position).get
+                    ("sportsimg"));
+            mHolder.mCardsports_content.setText(mSports_list.get(position).get("sportscontent")
+                    .toString());
+            mHolder.mCardsports_attention.setText(mSports_list.get(position).get
+                    ("sportsattention").toString());
+            mHolder.mCardsports_time.setText(mSports_list.get(position).get("sportstime")
+                    .toString());
 
             Button moretime = view.findViewById(R.id.moresportstime);
             moretime.setOnClickListener(v -> {
                 Intent intent = new Intent(getActivity(), SportsRetimeActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putCharSequence("sportstitle", mSports_list.get(position).get("sportstitle").toString());
+                bundle.putCharSequence("sportstitle", mSports_list.get(position).get
+                        ("sportstitle").toString());
                 intent.putExtras(bundle);
                 startActivity(intent);
             });

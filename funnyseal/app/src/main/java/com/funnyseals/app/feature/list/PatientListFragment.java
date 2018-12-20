@@ -10,17 +10,14 @@ import android.view.ViewGroup;
 
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
-import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.model.User;
-import com.funnyseals.app.model.UserTemp;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
-患者列表
+ * 患者列表
  */
 public class PatientListFragment extends Fragment {
     private View                   mView;
@@ -29,8 +26,8 @@ public class PatientListFragment extends Fragment {
     private List<User>             mUsers;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_patient_list, container, false);
 
         init();
@@ -39,14 +36,13 @@ public class PatientListFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
+    public void onResume () {
         super.onResume();
     }
 
 
-
-    private void init() {
-        mUsers=((DoctorBottomActivity)Objects.requireNonNull(getActivity())).getAllMyPatient();
+    private void init () {
+        mUsers = ((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getAllMyPatient();
         mPatientlist = mView.findViewById(R.id.patient_list);
         mPatientlist.setAdapter(new PatientListItemAdapter(getActivity(), mUsers));
         addListeners();
@@ -56,7 +52,7 @@ public class PatientListFragment extends Fragment {
     /*
     列表点击事件
      */
-    private void addListeners() {
+    private void addListeners () {
         mPatientlist.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getContext(), UserInfoActivity.class);
             for (User p : mUsers) {

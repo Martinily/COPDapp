@@ -1,10 +1,7 @@
 package com.funnyseals.app.feature.patientNursingPlan;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,34 +15,29 @@ import android.widget.TextView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.model.InstrumentPlan;
-import com.funnyseals.app.model.UserDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
-患者端护理计划two fragment about instrument
+ * 患者端护理计划two fragment about instrument
  */
 public class PatientTwoFragment extends Fragment {
-    private        View                      mView;
-    private        MyApplication             mApplication;
-    private        List<InstrumentPlan>      mInstrumentPlans;
-    private List<String> mInstrument_Titles=new ArrayList<>();
-    private List<String> mInstrument_Contents=new ArrayList<>();
-    private List<String> mInstrument_attentions=new ArrayList<>();
+    private View                 mView;
+    private MyApplication        mApplication;
+    private List<InstrumentPlan> mInstrumentPlans;
+    private List<String>         mInstrument_Titles     = new ArrayList<>();
+    private List<String>         mInstrument_Contents   = new ArrayList<>();
+    private List<String>         mInstrument_attentions = new ArrayList<>();
 
     //将数据封装成数据源
-    private        List<Map<String, Object>> mInstrument_list = new ArrayList<>();
+    private List<Map<String, Object>> mInstrument_list = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater,
+                              ViewGroup container, Bundle savedInstanceState) {
 
         if (mView != null) {
             ViewGroup parent = (ViewGroup) mView.getParent();
@@ -59,17 +51,20 @@ public class PatientTwoFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
+    public void onResume () {
         super.onResume();
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mInstrument_Titles=((PatientNursingPlanFragment)(PatientTwoFragment.this.getParentFragment())).getmInstrument_Titles();
-        mInstrument_Contents=((PatientNursingPlanFragment)(PatientTwoFragment.this.getParentFragment())).getmInstrument_Contents();
-        mInstrument_attentions=((PatientNursingPlanFragment)(PatientTwoFragment.this.getParentFragment())).getmInstrument_attentions();
+        mInstrument_Titles = ((PatientNursingPlanFragment) (PatientTwoFragment.this
+                .getParentFragment())).getmInstrument_Titles();
+        mInstrument_Contents = ((PatientNursingPlanFragment) (PatientTwoFragment.this
+                .getParentFragment())).getmInstrument_Contents();
+        mInstrument_attentions = ((PatientNursingPlanFragment) (PatientTwoFragment.this
+                .getParentFragment())).getmInstrument_attentions();
 
         int size = mInstrument_Titles.size();
         int size2 = mInstrument_Contents.size();
@@ -77,17 +72,18 @@ public class PatientTwoFragment extends Fragment {
 
         String[] instrument_Title = (String[]) mInstrument_Titles.toArray(new String[size]);
         String[] instrument_Content = (String[]) mInstrument_Contents.toArray(new String[size2]);
-        String[] instrument_attention = (String[]) mInstrument_attentions.toArray(new String[size3]);
+        String[] instrument_attention = (String[]) mInstrument_attentions.toArray(new
+                String[size3]);
 
         //将数据封装成数据源
         //将数据封装成数据源
-        for(int i=0;i<instrument_Title.length;i++){
-            Map<String,Object> map=new HashMap<String, Object>();
-            map.put("instrumenttitle",instrument_Title[i]);
-            map.put("instrumentimg",R.drawable.instrument);
-            map.put("instrumentcontent",instrument_Content[i]);
-            map.put("instrumentattention",instrument_attention[i]);
-            map.put("instrumenttime","-");
+        for (int i = 0; i < instrument_Title.length; i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("instrumenttitle", instrument_Title[i]);
+            map.put("instrumentimg", R.drawable.instrument);
+            map.put("instrumentcontent", instrument_Content[i]);
+            map.put("instrumentattention", instrument_attention[i]);
+            map.put("instrumenttime", "-");
 
             mInstrument_list.add(map);
         }
@@ -99,26 +95,27 @@ public class PatientTwoFragment extends Fragment {
     class MyAdapter extends BaseAdapter {
 
         @Override
-        public int getCount() {
+        public int getCount () {
             return mInstrument_list.size();
         }
 
         @Override
-        public Object getItem(int position) {
+        public Object getItem (int position) {
             return mInstrument_list.get(position);
         }
 
         @Override
-        public long getItemId(int position) {
+        public long getItemId (int position) {
             return position;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView (int position, View convertView, ViewGroup parent) {
             View view;
             PatientTwoFragment.ViewHolder mHolder;
             if (convertView == null) {
-                view = LayoutInflater.from(getActivity()).inflate(R.layout.instrument_list_item, null);
+                view = LayoutInflater.from(getActivity()).inflate(R.layout.instrument_list_item,
+                        null);
                 mHolder = new ViewHolder();
                 mHolder.mCardinstrument_title = view.findViewById(R.id.instrument);
                 mHolder.mCardinstrument_image = view.findViewById(R.id.instrumentImg);
@@ -130,17 +127,23 @@ public class PatientTwoFragment extends Fragment {
                 view = convertView;
                 mHolder = (PatientTwoFragment.ViewHolder) view.getTag();  //重新获得ViewHolder
             }
-            mHolder.mCardinstrument_title.setText(mInstrument_list.get(position).get("instrumenttitle").toString());
-            mHolder.mCardinstrument_image.setImageResource((int) mInstrument_list.get(position).get("instrumentimg"));
-            mHolder.mCardinstrument_content.setText(mInstrument_list.get(position).get("instrumentcontent").toString());
-            mHolder.mCardinstrument_attention.setText(mInstrument_list.get(position).get("instrumentattention").toString());
-            mHolder.mCardinstrument_time.setText(mInstrument_list.get(position).get("instrumenttime").toString());
+            mHolder.mCardinstrument_title.setText(mInstrument_list.get(position).get
+                    ("instrumenttitle").toString());
+            mHolder.mCardinstrument_image.setImageResource((int) mInstrument_list.get(position)
+                    .get("instrumentimg"));
+            mHolder.mCardinstrument_content.setText(mInstrument_list.get(position).get
+                    ("instrumentcontent").toString());
+            mHolder.mCardinstrument_attention.setText(mInstrument_list.get(position).get
+                    ("instrumentattention").toString());
+            mHolder.mCardinstrument_time.setText(mInstrument_list.get(position).get
+                    ("instrumenttime").toString());
 
             Button moretime = view.findViewById(R.id.moreinstrumenttime);
             moretime.setOnClickListener(v -> {
                 Intent intent = new Intent(getActivity(), InstrumentRetimeActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putCharSequence("instrumenttitle", mInstrument_list.get(position).get("instrumenttitle").toString());
+                bundle.putCharSequence("instrumenttitle", mInstrument_list.get(position).get
+                        ("instrumenttitle").toString());
                 intent.putExtras(bundle);
                 startActivity(intent);
             });
