@@ -6,27 +6,26 @@ import java.util.Properties;
 
 /**
  * PropertiesUtils
- * 
- * @author Lynch 2014-09-15
  *
+ * @author Lynch 2014-09-15
  */
 public class PropertiesUtils {
 
-	public static Properties getProperties() {
+    public static Properties getProperties() {
 
-		Properties p = new Properties();
+        Properties p = new Properties();
 
-		try {
-			InputStream inputStream = PropertiesUtils.class.getClassLoader().getResourceAsStream(
-					"resources/RestAPIConfig.properties");
+        try {
+            InputStream inputStream = PropertiesUtils.class.getClassLoader().getResourceAsStream(
+                    "resources/RestAPIConfig.properties");
 
-			p.load(inputStream);
+            p.load(inputStream);
 
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
-		return p;
-	}
+        return p;
+    }
 
 }

@@ -1,24 +1,20 @@
 package com.funnyseals.server;
 
-public interface GetPort
-{
+public interface GetPort {
 
-    static int getMonitorPort()
-    {
-        int MonitorPort=2018;
+    static int getMonitorPort() {
+        int MonitorPort = 2018;
         return MonitorPort;
     }
 
 
-    static int getSendPort()
-    {
-        int SendPort=2019;
+    static int getSendPort() {
+        int SendPort = 2019;
         return SendPort;
     }
 
-    static int getArrayPort()
-    {
-        int ArrayPort=2020;
+    static int getArrayPort() {
+        int ArrayPort = 2020;
         return ArrayPort;
     }
 }

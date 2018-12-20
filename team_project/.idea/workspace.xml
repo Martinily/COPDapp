@@ -2,9 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorChatActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorChatActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorMessageListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorMessageListFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/patientMessage/PatientMessageListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/patientMessage/PatientMessageListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PatientData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PatientData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobIMUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobIMUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,22 +51,92 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="374">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="39" column="86" selection-start-line="39" selection-start-column="86" selection-end-line="39" selection-end-column="86" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/as.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="484">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="616">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state relative-caret-position="286">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -54,17 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/project/InpitDeal.java" />
-        <option value="$PROJECT_DIR$/src/project/JsonPackage.java" />
-        <option value="$PROJECT_DIR$/src/project/ModifyInfo.java" />
-        <option value="$PROJECT_DIR$/src/project/Register.java" />
-        <option value="$PROJECT_DIR$/src/project/ReturnMessage.java" />
-        <option value="$PROJECT_DIR$/src/project/QueryInformationBase.java" />
-        <option value="$PROJECT_DIR$/src/project/GetPort.java" />
-        <option value="$PROJECT_DIR$/src/project/DatabaseConnect.java" />
-        <option value="$PROJECT_DIR$/src/project/ConfigureDevice.java" />
-        <option value="$PROJECT_DIR$/src/project/PatientData.java" />
-        <option value="$PROJECT_DIR$/src/project/ListenSocket.java" />
         <option value="$PROJECT_DIR$/src/project/QueryBase.java" />
         <option value="$PROJECT_DIR$/src/project/PatientList.java" />
         <option value="$PROJECT_DIR$/src/project/QueryPlanItem.java" />
@@ -81,10 +172,41 @@
         <option value="$PROJECT_DIR$/src/server/httpclient/demo/EasemobChatMessage.java" />
         <option value="$PROJECT_DIR$/src/com/server/httpclient/demo/EasemobChatMessage.java" />
         <option value="$PROJECT_DIR$/src/funnyseals/server/httpclient/demo/EasemobChatMessage.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/PatientData.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobIMUsers.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobMessages.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java" />
       </list>
     </option>
   </component>
@@ -99,6 +221,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -122,18 +246,23 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="team_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="team_project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="comm" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545038566830" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545311353859" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -264,17 +393,17 @@
       <workItem from="1545131626488" duration="614000" />
       <workItem from="1545190188207" duration="1831000" />
       <workItem from="1545198827061" duration="3031000" />
+      <workItem from="1545310995470" duration="355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133975000" />
+    <option name="totallyTimeSpent" value="134330000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.19571045" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.1977612" />
       <window_info id="Structure" order="1" weight="0.18869936" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -317,175 +446,93 @@
     <entry file="jar://E:/大三上/软件工程导论/团队项目/json相关jar包/json-20180813.jar!/org/json/JSONTokener.class" />
     <entry file="jar://E:/大三上/软件工程导论/团队项目/json相关jar包/json-20180813.jar!/org/json/JSONObject.class" />
     <entry file="file://$PROJECT_DIR$/src/project/QueryInformationBase.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.idea/libraries/team_project.xml" />
+    <entry file="file://$PROJECT_DIR$/team_project.iml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java">
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+        <state relative-caret-position="286">
+          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="499">
+          <caret line="82" column="43" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PatientData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="429">
-          <caret line="37" column="13" lean-forward="true" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="144" column="22" lean-forward="true" selection-start-line="144" selection-start-column="22" selection-end-line="144" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="12" column="51" lean-forward="true" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/libraries/team_project.xml" />
-    <entry file="file://$PROJECT_DIR$/team_project.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobIMUsers.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <caret line="31" column="54" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -494,32 +541,156 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="75" column="73" lean-forward="true" selection-start-line="75" selection-start-column="73" selection-end-line="75" selection-end-column="73" />
+        <state relative-caret-position="418">
+          <caret line="69" column="24" selection-start-line="69" selection-start-column="24" selection-end-line="69" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Register.java">
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        <state relative-caret-position="377">
+          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
           <folding>
-            <element signature="e#2755#2815#1" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java">
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="3" lean-forward="true" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+        <state relative-caret-position="286">
+          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+        <state relative-caret-position="220">
+          <caret line="19" column="75" selection-start-line="19" selection-start-column="75" selection-end-line="19" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="39" column="56" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="30" column="73" selection-start-line="30" selection-start-column="73" selection-end-line="30" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobIMUsers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobMessages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="39" column="86" selection-start-line="39" selection-start-column="86" selection-end-line="39" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -531,20 +702,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="484">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+        <state relative-caret-position="616">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
