@@ -108,6 +108,8 @@
         <activity android:name=".feature.doctorPersonalCenter.DoctorSettingActivity" />
         <activity android:name=".feature.patientMessage.PatientChatActivity" />
         <activity android:name=".feature.list.UserInfoActivity" />
+        <activity android:name=".feature.health.HealthCenterUpdateActivity" />
+        <activity android:name=".feature.health.HealthCenterHistoryActivity"></activity>
         <activity android:name=".feature.doctorMessage.VoiceCallActivity" />
         <activity android:name=".feature.doctorMessage.DoctorVideoCallActivity" />
         <activity android:name=".feature.doctorMessage.CallActivity" />

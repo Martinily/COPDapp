@@ -106,15 +106,12 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
             EMConversation conversation = (EMConversation) mChatList.getItemAtPosition(position);
             Intent intent = new Intent(getActivity(), DoctorChatActivity.class);
             String account=conversation.conversationId();
-            intent.putExtra("myfriend", account);
-            Bundle bundle=new Bundle();
             for(User p:mAllMyPatient){
                 if(p.getAccount().equals(account)){
-                    bundle.putSerializable("myPatient", p);
+                    intent.putExtra("myPatient", p);
                     break;
                 }
             }
-            intent.putExtras(bundle);
             EMClient.getInstance().chatManager().removeMessageListener(mMsgListener);
             startActivity(intent);
         });

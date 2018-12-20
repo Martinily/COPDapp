@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.model.UserTemp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
 患者列表
@@ -25,7 +27,6 @@ public class PatientListFragment extends Fragment {
     private SwipeMenuListView      mPatientlist;
     private PatientListItemAdapter mAdapter;
     private List<User>             mUsers;
-    private List<UserTemp>         mUserTemps;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -42,25 +43,15 @@ public class PatientListFragment extends Fragment {
         super.onResume();
     }
 
+
+
     private void init() {
+        mUsers=((DoctorBottomActivity)Objects.requireNonNull(getActivity())).getAllMyPatient();
         mPatientlist = mView.findViewById(R.id.patient_list);
-        mUsers = getAllUser(((MyApplication) getContext().getApplicationContext()).getUser().getAccount());
-        mUserTemps = new ArrayList<>();
-        for (User p : mUsers) {
-            mUserTemps.add(new UserTemp(R.mipmap.portrait0, p.getName(), p.getAccount(), p));
-        }
-        mPatientlist.setAdapter(new PatientListItemAdapterTemp(getActivity(), mUserTemps));
+        mPatientlist.setAdapter(new PatientListItemAdapter(getActivity(), mUsers));
         addListeners();
     }
 
-
-    /**
-     * 获取所有用户，数据库获取，index为账号
-     */
-    public List<User> getAllUser(String account) {
-        //users.add(用户)；
-        return new ArrayList<>();
-    }
 
     /*
     列表点击事件
@@ -69,7 +60,7 @@ public class PatientListFragment extends Fragment {
         mPatientlist.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getContext(), UserInfoActivity.class);
             for (User p : mUsers) {
-                if (p.getAccount().equals(mUserTemps.get(position).getAccount())) {
+                if (p.getAccount().equals(mUsers.get(position).getAccount())) {
                     intent.putExtra("user", p);
                     break;
                 }

@@ -2,6 +2,7 @@ package com.funnyseals.app.feature.doctorMessage;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Camera;
@@ -10,6 +11,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -53,8 +56,10 @@ public class DoctorVideoCallActivity extends CallActivity {
     TextView             callTimeView;
     @BindView(R.id.btn_doctor_call_info)
     ImageButton          callInfoBtn;
-    @BindView(R.id.text_doctor_call_info)
-    TextView             callInfoView;
+    @BindView(R.id.text_medical_history)
+    TextView             medicalHistory;
+    @BindView(R.id.text_medical_order)
+    TextView             medicalOrder;
     @BindView(R.id.btn_doctor_mic_switch)
     ImageButton          micSwitch;
     @BindView(R.id.btn_doctor_camera_switch)
@@ -69,23 +74,31 @@ public class DoctorVideoCallActivity extends CallActivity {
     FloatingActionButton endCallFab;
     @BindView(R.id.fab_doctor_answer_call)
     FloatingActionButton answerCallFab;
-    // 视频通话帮助类
-    private EMVideoCallHelper           videoCallHelper;
+
     // SurfaceView 控件状态，-1 表示通话未接通，0 表示本小远大，1 表示远小本大
-    private int                         surfaceState    = -1;
-    private boolean                     isMonitor       = false;
-    private int                         littleWidth;
-    private int                         littleHeight;
-    private int                         rightMargin;
-    private int                         topMargin;
-    private EMCallSurfaceView           localSurface    = null;
-    private EMCallSurfaceView           oppositeSurface = null;
-    private RelativeLayout.LayoutParams localParams     = null;
-    private RelativeLayout.LayoutParams oppositeParams  = null;
-    private User                        mMyPatient;
-    private AlertDialog                 alertDialog     = null;
-    private AlertDialog.Builder         builder         = null;
+    private int     surfaceState = -1;
+    private boolean isMonitor    = false;
+    private int     littleWidth;
+    private int     littleHeight;
+    private int     rightMargin;
+    private int     topMargin;
+    private User    mMyPatient;
+
+    private EMCallSurfaceView localSurface    = null;
+    private EMCallSurfaceView oppositeSurface = null;
+    // 视频通话帮助类
+    private EMVideoCallHelper videoCallHelper;
+
+    private AlertDialog alertDialog = null;
+    private TextView    alertDialogTitle;
+    private EditText    alertDialogDetail;
+    private Button      alertDialogCancel;
+    private Button      alertDialogOk;
+
     private View                        mView;
+    private RelativeLayout.LayoutParams localParams    = null;
+    private RelativeLayout.LayoutParams oppositeParams = null;
+
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -148,39 +161,48 @@ public class DoctorVideoCallActivity extends CallActivity {
 
         try {
             // 设置默认摄像头为前置
-            EMClient.getInstance().callManager().setCameraFacing(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            EMClient.getInstance().callManager().setCameraFacing(Camera.CameraInfo
+                    .CAMERA_FACING_FRONT);
         } catch (HyphenateException e) {
             e.printStackTrace();
         }
         if (CallManager.getInstance().isExternalInputData()) {
             new PreviewManager(surfaceView);
         }
+    }
 
-        builder = new AlertDialog.Builder(this);
-        final LayoutInflater inflater = this.getLayoutInflater();
-        mView = inflater.inflate(R.layout.view_dialog_medical_history, null, false);
+    @SuppressLint("InflateParams")
+    private void showAlertDialog (Context context) {
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        mView = inflater.inflate(R.layout.view_dialog_medical_history, null);
+        alertDialogTitle=mView.findViewById(R.id.dialog_title);
+        alertDialogDetail=mView.findViewById(R.id.dialog_detail);
+        alertDialogCancel=mView.findViewById(R.id.btn_dialog_cancel);
+        alertDialogOk=mView.findViewById(R.id.btn_dialog_ok);
+
+        alertDialogTitle.setText("修改病情：");
+        alertDialogDetail.setText(mMyPatient.getMedicalHistory());
+        alertDialogCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialogOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                mMyPatient.setMedicalHistory(alertDialogDetail.getText().toString());
+                alertDialog.dismiss();
+            }
+        });
+
         builder.setView(mView);
         builder.setCancelable(false);
-
-
-        setDialogOnClick();
+        builder.show();
     }
 
-    private void setDialogOnClick () {
-        mView.findViewById(R.id.btn_dialog_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        mView.findViewById(R.id.btn_dialog_ok).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                alertDialog.dismiss();
-            }
-        });
-    }
 
     /**
      * 界面控件点击监听器
@@ -202,7 +224,7 @@ public class DoctorVideoCallActivity extends CallActivity {
                 exitFullScreen();
                 break;
             case R.id.btn_doctor_call_info:
-                medicalHistory();
+                medicalInfo();
                 break;
             case R.id.btn_doctor_mic_switch:
                 // 麦克风开关
@@ -236,8 +258,7 @@ public class DoctorVideoCallActivity extends CallActivity {
     }
 
     protected void endCall () {
-        alertDialog = builder.create();
-
+        showAlertDialog(DoctorVideoCallActivity.this);
         CallManager.getInstance().endCall();
         onFinish();
     }
@@ -265,14 +286,16 @@ public class DoctorVideoCallActivity extends CallActivity {
     /**
      * 通话信息监听器
      */
-    private void medicalHistory () {
+    private void medicalInfo () {
         if (isMonitor) {
             isMonitor = false;
-            callInfoView.setVisibility(View.GONE);
+            medicalHistory.setVisibility(View.GONE);
+            medicalOrder.setVisibility(View.GONE);
             callInfoBtn.setActivated(isMonitor);
         } else {
             isMonitor = true;
-            callInfoView.setVisibility(View.VISIBLE);
+            medicalHistory.setVisibility(View.VISIBLE);
+            medicalOrder.setVisibility(View.VISIBLE);
             callInfoBtn.setActivated(isMonitor);
             /*new Thread(() -> {
                 while (isMonitor) {
@@ -295,7 +318,8 @@ public class DoctorVideoCallActivity extends CallActivity {
                     }
                 }
             }).start();*/
-            callInfoView.setText(mMyPatient.getMedicalHistory());
+            medicalHistory.setText(mMyPatient.getMedicalHistory());
+            medicalOrder.setText(mMyPatient.getMedicalOrder());
         }
     }
 

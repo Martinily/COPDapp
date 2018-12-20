@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="data1">
+    </string-array>
+    <string-array name="data2">
+    </string-array>
+    <string-array name="data3">
+    </string-array>
+    <string-array name="datatime">
+    </string-array>
+</resources>

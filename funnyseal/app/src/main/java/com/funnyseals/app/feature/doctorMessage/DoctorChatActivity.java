@@ -45,6 +45,7 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
         setContentView(R.layout.activity_doctor_chat);
         Intent intent = this.getIntent();
         mMyPatient = (User) intent.getSerializableExtra("myPatient");
+        mPatientAccount=mMyPatient.getAccount();
         msgListener=this;
         init();
     }
@@ -67,8 +68,6 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
     }
 
     private void init () {
-        mPatientAccount = (String) getIntent().getSerializableExtra("myfriend");
-
         initView();
         addListener();
         loadAllMessage();
@@ -129,9 +128,7 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
 
         mVideo.setOnClickListener(v -> {
             Intent intent = new Intent(DoctorChatActivity.this, DoctorVideoCallActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("myPatient", mMyPatient);
-            intent.putExtras(bundle);
+            intent.putExtra("myPatient", mMyPatient);
             CallManager.getInstance().setChatId(mPatientAccount);
             CallManager.getInstance().setInComingCall(false);
             CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);
