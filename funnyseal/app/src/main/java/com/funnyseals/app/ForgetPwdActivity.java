@@ -182,12 +182,13 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
                         showToast("密码修改失败！");
                         break;
                 }
+                socket.shutdownInput();
+                socket.shutdownOutput();
                 socket.close();
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             progressDialog.dismiss();
-            Thread.interrupted();
         }).start();
     }
 

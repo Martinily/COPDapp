@@ -10,33 +10,31 @@ import java.util.concurrent.Executors;
 public class ListenSocket {
     public static void main(String[] args) throws IOException {
         int port = 2018;
-        int send_port = 2019;
-        ServerSocket server = new ServerSocket(port);
+        ServerSocket server = new ServerSocket(port,100);
         System.out.println("<--------------------On hold-------------------->");
-        ExecutorService threadPool = Executors.newFixedThreadPool(100);
+        ExecutorService threadPool = Executors.newCachedThreadPool();
 
         while (true) {
             Socket socket = server.accept();
-            send_port++;
+            if(socket!=null){
+                Runnable runnable = () ->
+                {
+                    try {
+                        String message;
+                        DataInputStream datainputstream = new DataInputStream(socket.getInputStream());
+                        message = datainputstream.readUTF();
+                        System.out.println(message);
 
-            Runnable runnable = () ->
-            {
-                try {
-                    String message;//the message received
-                    DataInputStream datainputstream = new DataInputStream(socket.getInputStream());
-                    System.out.println("!");
-                    message = datainputstream.readUTF();
-                    System.out.println("!!");
-                    System.out.println(message);
+                        InputDeal.BasicDeal(message);
 
-                    InputDeal.BasicDeal(message);//entry InputDeal
-
-                    socket.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            };
-            threadPool.submit(runnable);
+                        socket.shutdownInput();
+                        socket.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                };
+                threadPool.submit(runnable);
+            }
         }
     }
 }

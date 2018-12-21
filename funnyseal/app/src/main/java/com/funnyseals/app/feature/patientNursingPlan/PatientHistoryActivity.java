@@ -111,9 +111,9 @@ public class PatientHistoryActivity extends AppCompatActivity {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("sickerhistorydate", sicker_historydate[i]);
             if (sicker_judgeuse[i].equals("1"))
-                map.put("sickerhistoryuse", R.drawable.used);
+                map.put("sickerhistoryuse", R.drawable.vector_drawable_used);
             else
-                map.put("sickerhistoryuse", R.drawable.unused);
+                map.put("sickerhistoryuse", R.drawable.vector_drawable_unused);
             map.put("sickerplanid", sicker_planID[i]);
             sickerhistory_list.add(map);
         }

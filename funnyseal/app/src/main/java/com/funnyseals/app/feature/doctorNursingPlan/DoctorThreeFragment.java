@@ -134,7 +134,7 @@ public class DoctorThreeFragment extends Fragment {
         listPopupWindow.show();
         listPopupWindow.setOnDismissListener(() -> mEditText
                 .setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R
-                        .drawable.ic_na), null));
+                        .drawable.vector_drawable_na), null));
     }
 
     //删除已添加药物

@@ -24,7 +24,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/sports" />
+            android:src="@drawable/vector_drawable_sports" />
     </RelativeLayout>
 
     <View

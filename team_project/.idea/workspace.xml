@@ -2,57 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/vector_drawable_applogo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/ForgetPwdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/ForgetPwdActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/SignupActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/dx.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/ic_nadown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/more.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_doctor_bottom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_doctor_bottom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_bottom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_bottom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_voice_call.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_voice_call.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-anydpi-v26/applogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-hdpi/applogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-mdpi/applogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-xhdpi/applogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-xxhdpi/applogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-xxxhdpi/applogo.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConditionHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConditionHistory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConfigureDevice.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConfigureDevice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetJsonArray.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetJsonArray.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetPort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/GetPort.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$12.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$13.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$14.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$9.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/JsonPackage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/JsonPackage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ListenSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ListenSocket.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ModifyInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ModifyInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PasswordModify.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PasswordModify.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PatientList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PersonalInfor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PersonalInfor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlanItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/QueryPlanItem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Register.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReleasePlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReleasePlan.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReturnMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReturnMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/UpdatePlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/UpdatePlan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/Constants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/PropertiesUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/comm/PropertiesUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatGroups.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatGroups.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobChatMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobFiles.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobFiles.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobIMUsers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobIMUsers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/demo/EasemobMessages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/utils/HTTPClientUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/ClientSecretCredential.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/ClientSecretCredential.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential$GrantType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential$GrantType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Credential.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/EndPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/EndPoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Token.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/httpclient/vo/Token.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,98 +60,23 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="team_project" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="39" column="86" selection-start-line="39" selection-start-column="86" selection-end-line="39" selection-end-column="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/as.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="522">
+              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#login#0;class#Login#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -188,27 +112,19 @@
         <option value="$PROJECT_DIR$/src/server/httpclient/demo/EasemobChatMessage.java" />
         <option value="$PROJECT_DIR$/src/com/server/httpclient/demo/EasemobChatMessage.java" />
         <option value="$PROJECT_DIR$/src/funnyseals/server/httpclient/demo/EasemobChatMessage.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlanItem.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/QueryPlan.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/QueryBase.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/PersonalInfor.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/PatientList.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/PatientData.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/GetPort.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/GetJsonArray.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatGroups.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobChatMessage.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/httpclient/demo/EasemobFiles.java" />
@@ -223,6 +139,14 @@
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" />
       </list>
     </option>
   </component>
@@ -237,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -248,11 +173,6 @@
             <path>
               <item name="team_project" type="b2602c69:ProjectViewProjectNode" />
               <item name="team_project" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="team_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="team_project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -260,31 +180,24 @@
               <item name="team_project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="team_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="team_project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="comm" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545311353859" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545363602632" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
+    <property name="typescript.add.unambiguous.imports.on.the.fly" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -410,17 +323,19 @@
       <workItem from="1545190188207" duration="1831000" />
       <workItem from="1545198827061" duration="3031000" />
       <workItem from="1545310995470" duration="355000" />
-      <workItem from="1545311542927" duration="932000" />
+      <workItem from="1545311542927" duration="1601000" />
+      <workItem from="1545356739710" duration="6339000" />
+      <workItem from="1545368524398" duration="3566000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135262000" />
+    <option name="totallyTimeSpent" value="145836000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.19989339" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.20509383" />
       <window_info id="Structure" order="1" weight="0.18869936" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -429,7 +344,42 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.9559956" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.95526695" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32900432" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32611832" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.32756132" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
+      <window_info anchor="right" id="Bean Validation" order="10" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.20241287" />
+      <window_info id="Structure" order="1" weight="0.18869936" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" sideWeight="0.50378376" side_tool="true" weight="0.14978679" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.9559956" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -452,7 +402,7 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Maven" order="9" />
       <window_info anchor="right" id="Bean Validation" order="10" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -467,13 +417,6 @@
     <entry file="file://$PROJECT_DIR$/team_project.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="27" column="37" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/UpdatePlan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="499">
@@ -484,13 +427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ReleasePlan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -498,13 +434,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -556,44 +485,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="69" column="24" selection-start-line="69" selection-start-column="24" selection-end-line="69" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/JsonPackage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -611,27 +506,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="19" column="75" selection-start-line="19" selection-start-column="75" selection-end-line="19" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ConfigureDevice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -678,72 +556,330 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/utils/HTTPClientUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
+        <state relative-caret-position="450">
           <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/ClientSecretCredential.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="324">
           <caret line="39" column="86" selection-start-line="39" selection-start-column="86" selection-end-line="39" selection-end-column="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Credential.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="324">
           <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/EndPoints.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
+        <state relative-caret-position="360">
           <caret line="23" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/vo/Token.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="324">
           <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/httpclient/as.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
+        <state relative-caret-position="144">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="126">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/PropertiesUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="504">
+          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="47" lean-forward="true" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#274#423#0" expanded="true" />
+            <element signature="e#278#307#0" expanded="true" />
+            <element signature="e#278#307#0" expanded="true" />
+            <element signature="e#274#423#0" expanded="true" />
+            <element signature="e#432#631#0" expanded="true" />
+            <element signature="e#436#465#0" expanded="true" />
+            <element signature="e#436#465#0" expanded="true" />
+            <element signature="e#432#631#0" expanded="true" />
+            <element signature="e#587#631#0" expanded="true" />
+            <element signature="e#591#617#0" expanded="true" />
+            <element signature="e#591#617#0" expanded="true" />
+            <element signature="e#587#631#0" expanded="true" />
+            <element signature="method#GetAllHistory#0;class#ConditionHistory#0" expanded="true" />
+            <element signature="e#667#756#1" expanded="true" />
+            <element signature="e#765#818#1" expanded="true" />
+            <element signature="method#GetNowHistory#0;class#ConditionHistory#0" expanded="true" />
+            <element signature="e#903#992#1" expanded="true" />
+            <element signature="e#1001#1054#1" expanded="true" />
+            <element signature="e#1089#1319#0" expanded="true" />
+            <element signature="e#1093#1124#0" expanded="true" />
+            <element signature="e#1093#1124#0" expanded="true" />
+            <element signature="e#1093#1124#0" expanded="true" />
+            <element signature="e#1089#1319#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/Roles.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="162">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="89" lean-forward="true" selection-start-line="14" selection-start-column="89" selection-end-line="14" selection-end-column="89" />
+          <folding>
+            <element signature="method#SqlExecuteQuery#0;class#DatabaseConnect#0" expanded="true" />
+            <element signature="e#2162#2229#0" expanded="true" />
+            <element signature="e#2162#2229#0" expanded="true" />
+            <element signature="method#SqlExecuteUpdate#0;class#DatabaseConnect#0" expanded="true" />
+            <element signature="method#SqlExecuteBatch#0;class#DatabaseConnect#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="16" column="19" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#331#347#1" expanded="true" />
+            <element signature="e#386#431#1" expanded="true" />
+            <element signature="e#521#584#1" expanded="true" />
+            <element signature="e#566#1342#0" expanded="true" />
+            <element signature="e#566#1342#0" expanded="true" />
+            <element signature="e#619#651#1" expanded="true" />
+            <element signature="e#728#1407#1" expanded="true" />
+            <element signature="e#748#1406#0" expanded="true" />
+            <element signature="e#868#947#1" expanded="true" />
+            <element signature="e#922#945#0" expanded="true" />
+            <element signature="e#1166#1254#0" expanded="true" />
+            <element signature="e#1166#1254#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/comm/HTTPMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="84" column="22" lean-forward="true" selection-start-line="84" selection-start-column="22" selection-end-line="84" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#192#235#1" expanded="true" />
+            <element signature="e#292#5738#0" expanded="true" />
+            <element signature="e#292#5738#0" expanded="true" />
+            <element signature="e#448#494#1" expanded="true" />
+            <element signature="e#519#563#1" expanded="true" />
+            <element signature="e#614#704#0" expanded="true" />
+            <element signature="e#614#704#0" expanded="true" />
+            <element signature="e#1192#1247#1" expanded="true" />
+            <element signature="e#1012#1100#0" expanded="true" />
+            <element signature="e#1012#1100#0" expanded="true" />
+            <element signature="e#1323#1411#0" expanded="true" />
+            <element signature="e#1323#1411#0" expanded="true" />
+            <element signature="e#1827#1874#1" expanded="true" />
+            <element signature="e#1713#1801#0" expanded="true" />
+            <element signature="e#1713#1801#0" expanded="true" />
+            <element signature="e#2298#2339#1" expanded="true" />
+            <element signature="e#2097#2185#0" expanded="true" />
+            <element signature="e#2097#2185#0" expanded="true" />
+            <element signature="e#2754#2801#1" expanded="true" />
+            <element signature="e#2826#2859#1" expanded="true" />
+            <element signature="e#2548#2636#0" expanded="true" />
+            <element signature="e#2548#2636#0" expanded="true" />
+            <element signature="e#3281#3328#1" expanded="true" />
+            <element signature="e#2940#3028#0" expanded="true" />
+            <element signature="e#2940#3028#0" expanded="true" />
+            <element signature="e#3690#4067#0" expanded="true" />
+            <element signature="e#3748#3800#1" expanded="true" />
+            <element signature="e#3344#3432#0" expanded="true" />
+            <element signature="e#3344#3432#0" expanded="true" />
+            <element signature="e#4182#4470#0" expanded="true" />
+            <element signature="e#3670#3758#0" expanded="true" />
+            <element signature="e#3670#3758#0" expanded="true" />
+            <element signature="e#4583#4863#0" expanded="true" />
+            <element signature="e#3986#4074#0" expanded="true" />
+            <element signature="e#3986#4074#0" expanded="true" />
+            <element signature="e#4972#5313#0" expanded="true" />
+            <element signature="e#5030#5069#1" expanded="true" />
+            <element signature="e#4360#4448#0" expanded="true" />
+            <element signature="e#4360#4448#0" expanded="true" />
+            <element signature="e#5424#5773#0" expanded="true" />
+            <element signature="e#5482#5529#1" expanded="true" />
+            <element signature="e#4744#4832#0" expanded="true" />
+            <element signature="e#4744#4832#0" expanded="true" />
+            <element signature="e#5883#6161#0" expanded="true" />
+            <element signature="e#5111#5199#0" expanded="true" />
+            <element signature="e#5111#5199#0" expanded="true" />
+            <element signature="e#6278#6715#0" expanded="true" />
+            <element signature="e#6336#6371#1" expanded="true" />
+            <element signature="e#6396#6449#1" expanded="true" />
+            <element signature="e#5589#5677#0" expanded="true" />
+            <element signature="e#5589#5677#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <folding>
+            <element signature="method#passwordModify#0;class#PasswordModify#0" expanded="true" />
+            <element signature="e#449#619#0" expanded="true" />
+            <element signature="e#453#481#0" expanded="true" />
+            <element signature="e#453#481#0" expanded="true" />
+            <element signature="e#449#619#0" expanded="true" />
+            <element signature="e#537#619#0" expanded="true" />
+            <element signature="e#541#569#0" expanded="true" />
+            <element signature="e#541#569#0" expanded="true" />
+            <element signature="e#537#619#0" expanded="true" />
+            <element signature="e#677#693#1" expanded="true" />
+            <element signature="e#702#741#1" expanded="true" />
+            <element signature="e#750#783#1" expanded="true" />
+            <element signature="e#792#837#1" expanded="true" />
+            <element signature="e#887#916#1" expanded="true" />
+            <element signature="e#1381#2812#0" expanded="true" />
+            <element signature="e#1385#1416#0" expanded="true" />
+            <element signature="e#1385#1416#0" expanded="true" />
+            <element signature="e#1385#1416#0" expanded="true" />
+            <element signature="e#1381#2812#0" expanded="true" />
+            <element signature="e#1494#2166#0" expanded="true" />
+            <element signature="e#1498#1529#0" expanded="true" />
+            <element signature="e#1498#1529#0" expanded="true" />
+            <element signature="e#1498#1529#0" expanded="true" />
+            <element signature="e#1494#2166#0" expanded="true" />
+            <element signature="e#1790#2152#0" expanded="true" />
+            <element signature="e#1790#2152#0" expanded="true" />
+            <element signature="e#2241#2298#1" expanded="true" />
+            <element signature="method#UpdatePassword#0;class#PasswordModify#0" expanded="true" />
+            <element signature="e#2719#2735#1" expanded="true" />
+            <element signature="e#2744#2783#1" expanded="true" />
+            <element signature="e#2792#2825#1" expanded="true" />
+            <element signature="e#2834#2885#1" expanded="true" />
+            <element signature="e#2894#2945#1" expanded="true" />
+            <element signature="e#2995#3024#1" expanded="true" />
+            <element signature="e#3481#3517#1" expanded="true" />
+            <element signature="e#3778#5690#0" expanded="true" />
+            <element signature="e#3782#3813#0" expanded="true" />
+            <element signature="e#3782#3813#0" expanded="true" />
+            <element signature="e#3782#3813#0" expanded="true" />
+            <element signature="e#3778#5690#0" expanded="true" />
+            <element signature="e#3891#4918#0" expanded="true" />
+            <element signature="e#3895#3926#0" expanded="true" />
+            <element signature="e#3895#3926#0" expanded="true" />
+            <element signature="e#3895#3926#0" expanded="true" />
+            <element signature="e#3891#4918#0" expanded="true" />
+            <element signature="e#4199#4904#0" expanded="true" />
+            <element signature="e#4199#4904#0" expanded="true" />
+            <element signature="e#4063#4114#1" expanded="true" />
+            <element signature="e#4500#4886#0" expanded="true" />
+            <element signature="e#4500#4886#0" expanded="true" />
+            <element signature="e#4492#4554#1" expanded="true" />
+            <element signature="e#5023#5680#0" expanded="true" />
+            <element signature="e#5023#5680#0" expanded="true" />
+            <element signature="e#4730#4781#1" expanded="true" />
+            <element signature="e#5304#5666#0" expanded="true" />
+            <element signature="e#5304#5666#0" expanded="true" />
+            <element signature="method#CheckPatientPassword#0;class#PasswordModify#0" expanded="true" />
+            <element signature="e#5314#5358#1" expanded="true" />
+            <element signature="e#5367#5418#1" expanded="true" />
+            <element signature="e#5427#5479#1" expanded="true" />
+            <element signature="e#6085#6152#0" expanded="true" />
+            <element signature="e#6085#6152#0" expanded="true" />
+            <element signature="method#CheckDoctorPassword#0;class#PasswordModify#0" expanded="true" />
+            <element signature="e#6434#6501#0" expanded="true" />
+            <element signature="e#6434#6501#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ModifyInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="73" column="67" lean-forward="true" selection-start-line="73" selection-start-column="67" selection-end-line="73" selection-end-column="67" />
+          <folding>
+            <element signature="method#register#0;class#Register#0" expanded="true" />
+            <element signature="e#423#588#0" expanded="true" />
+            <element signature="e#427#452#0" expanded="true" />
+            <element signature="e#427#452#0" expanded="true" />
+            <element signature="e#423#588#0" expanded="true" />
+            <element signature="e#508#588#0" expanded="true" />
+            <element signature="e#512#537#0" expanded="true" />
+            <element signature="e#512#537#0" expanded="true" />
+            <element signature="e#508#588#0" expanded="true" />
+            <element signature="method#DoctorRegister#0;class#Register#0" expanded="true" />
+            <element signature="method#PatientRegister#0;class#Register#0" expanded="true" />
+            <element signature="e#2616#3579#0" expanded="true" />
+            <element signature="e#2620#2651#0" expanded="true" />
+            <element signature="e#2620#2651#0" expanded="true" />
+            <element signature="e#2620#2651#0" expanded="true" />
+            <element signature="e#2616#3579#0" expanded="true" />
+            <element signature="e#2999#3059#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+          <folding>
+            <element signature="e#319#364#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#login#0;class#Login#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

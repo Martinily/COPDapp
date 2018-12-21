@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public interface ConditionHistory {
     static void conditionHistory(String pID, String history_type) throws IOException {
@@ -28,7 +29,7 @@ public interface ConditionHistory {
     static String GetNowHistory(String pID) {
         String sql = "select * from patienthistory where pID='" + pID + "' and HistoryState = 1";
         String result = DatabaseConnect.SqlExecuteQuery(sql);
-        if (result.equals("empty")) {
+        if (Objects.equals(result, "empty")) {
         } else {
             JSONArray jsonArray = new JSONArray(result);
             JSONObject jsonObject = jsonArray.getJSONObject(0);

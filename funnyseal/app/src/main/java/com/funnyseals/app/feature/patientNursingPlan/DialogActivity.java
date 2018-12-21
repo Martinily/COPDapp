@@ -39,7 +39,7 @@ public class DialogActivity extends Activity {
         Notification notice;
         Notification.Builder builder = new Notification.Builder(DialogActivity.this).setTicker
                 ("789")
-                .setSmallIcon(R.drawable.alarm).setWhen(System.currentTimeMillis());
+                .setSmallIcon(R.drawable.vector_drawable_alarm).setWhen(System.currentTimeMillis());
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
         Intent appIntent = null;
         appIntent = new Intent(DialogActivity.this, PatientNursingPlanFragment.class);

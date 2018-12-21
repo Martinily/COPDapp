@@ -10,13 +10,11 @@ public interface ReturnMessage {
     {
         System.out.println(port);
         ServerSocket server = new ServerSocket(port);
-        System.out.println(port + "!");
         Socket socket = server.accept();
-        System.out.println(port + "!!");
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
         out.writeUTF(string);
-        System.out.println(port + "!!!");
         server.close();
+        socket.shutdownOutput();
         socket.close();
     }
 }

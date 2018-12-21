@@ -72,9 +72,9 @@ public class ChatMessageAdapter extends BaseAdapter {
         convertView.setTag(viewHolder);
 
         if (mApplication.getAccount().equals(message.getFrom())) {
-            viewHolder.portrait.setImageResource(R.drawable.user);
+            viewHolder.portrait.setImageResource(R.drawable.vector_drawable_user);
         } else {
-            viewHolder.portrait.setImageResource(R.drawable.user);
+            viewHolder.portrait.setImageResource(R.drawable.vector_drawable_user);
         }
 
         viewHolder.text.setText(((EMTextMessageBody) message.getBody()).getMessage());

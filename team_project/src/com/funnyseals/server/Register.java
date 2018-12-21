@@ -1,12 +1,13 @@
 package com.funnyseals.server;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.funnyseals.server.httpclient.demo.EasemobIMUsers;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
 public interface Register {
     static void register(String getJson, String register_type) {
@@ -29,7 +30,6 @@ public interface Register {
         String address = "请填写地址信息";
         String company = "请填写公司信息";
         String title = "请填写职称";
-        System.out.println(ID + "!!!");
         String[] Sql = new String[2];
         Sql[0] = "select * from doctor where DocID='" + ID + "'";
         Sql[1] = "insert into doctor(docID,docPassword,docName,docSex,docAge,docTime,docAddress,docCompany,docTitle) ";
@@ -48,8 +48,6 @@ public interface Register {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String date = df.format(new Date());
         String address = "请填写地址";
-        //String portrait=json.getString("pPortrait");
-        System.out.println(ID + "!!!");
         String[] Sql = new String[2];
         Sql[0] = "select * from patient where pID='" + ID + "'";
         Sql[1] = "insert into patient(docID,pID,pPassword,pName,pSex,pAge,pTime,pAddress) ";
@@ -64,21 +62,22 @@ public interface Register {
             String result = null;
             result = DatabaseConnect.SqlExecuteQuery(Sql1);
             JSONObject returnjson = new JSONObject();
-            if (result.equals("empty")) {
-                System.out.println("2!!!!");
+            if (Objects.equals(result, "empty")) {
                 int ret = DatabaseConnect.SqlExecuteUpdate(Sql2);
                 if (ret == 0) {
                     returnjson.put("reg_result", "失败");
+                    System.out.println("-----------------register_failed-------------------");
                 } else {
                     ObjectNode datanode = JsonNodeFactory.instance.objectNode();
                     datanode.put("username", json.getString("ID"));
                     datanode.put("password", json.getString("Password"));
                     EasemobIMUsers.createNewIMUserSingle(datanode);
                     returnjson.put("reg_result", "成功");
+                    System.out.println("-----------------register_success-------------------");
                 }
             } else {
-                System.out.println("3!!!!");
                 returnjson.put("reg_result", "用户已存在");
+                System.out.println("-----------------user_has_been_registered-------------------");
             }
             ReturnMessage.ReturnMessage(returnjson.toString(), port);
         } catch (Exception e) {

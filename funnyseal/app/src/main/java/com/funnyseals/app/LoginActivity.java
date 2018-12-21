@@ -106,11 +106,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (!Pattern.matches(REGEX_PASSWORD, mEtPassword.getText().toString())) {
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else {
+            final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("正在登录。。。");
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
             EMClient.getInstance().logout(true);
             EMClient.getInstance().login(getAccount(), getPassword(), new EMCallBack() {
                 @Override
                 public void onSuccess () {
-                    runOnUiThread(() -> Login());
+                    runOnUiThread(() -> Login(progressDialog));
                 }
 
                 @Override
@@ -170,14 +177,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void Login () {
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
+    public void Login (ProgressDialog progressDialog) {
 
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("正在登录。。。");
-        progressDialog.show();
-        progressDialog.setCanceledOnTouchOutside(false);
         new Thread(() -> {
             String send;
             Socket socket;
@@ -245,12 +246,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         showToast("密码错误！");
                         break;
                 }
+                socket.shutdownInput();
+                socket.shutdownOutput();
                 socket.close();
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             progressDialog.dismiss();
-            Thread.interrupted();
         }).start();
     }
 
