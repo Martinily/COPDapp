@@ -33,7 +33,7 @@ public class UserInfoActivity extends AppCompatActivity {
         TextView m_location = findViewById(R.id.patientlocation);
         m_name.setText(m_user.getName());
         m_sex.setText(m_user.getSex());
-        m_age.setText(m_user.getAge());
+        m_age.setText(String.valueOf(m_user.getAge()));
         m_account.setText(m_user.getAccount());
         m_location.setText(m_user.getAddress());
         button1.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +49,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("myPatient", m_user);
                 intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
