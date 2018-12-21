@@ -15,8 +15,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
-import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
 import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 import com.funnyseals.app.util.TimeDownUtil;
@@ -179,27 +177,20 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 switch (jsonObject.getString("reg_result")) {
                     case "成功":
                         showToast("注册成功！");
-                        //destorySendSMSHandler();
-                        if (mRbAccountTypeDoctor.isChecked()) {
-                            startActivity(new Intent(SignupActivity.this, DoctorBottomActivity
-                                    .class));
-                            finish();
-                        } else if (mRbAccountTypePatient.isChecked()) {
-                            startActivity(new Intent(SignupActivity.this, PatientBottomActivity
-                                    .class));
-                            finish();
-                        }
+                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                        finish();
                         break;
                     case "用户已存在":
                         showToast("该账号已被注册！");
                         break;
                 }
+                socket.shutdownOutput();
+                socket.shutdownInput();
                 socket.close();
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             progressDialog.dismiss();
-            Thread.interrupted();
         }).start();
     }
 

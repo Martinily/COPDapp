@@ -44,7 +44,7 @@ public class AlarmReciever extends BroadcastReceiver {
                 .NOTIFICATION_SERVICE);
         Notification notice;
         Notification.Builder builder = new Notification.Builder(context).setTicker("789")
-                .setSmallIcon(R.drawable.alarm).setWhen(System.currentTimeMillis());
+                .setSmallIcon(R.drawable.vector_drawable_alarm).setWhen(System.currentTimeMillis());
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
         Intent appIntent = null;
         appIntent = new Intent(context, PatientBottomActivity.class);

@@ -80,7 +80,7 @@ public class PatientTwoFragment extends Fragment {
         for (int i = 0; i < instrument_Title.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("instrumenttitle", instrument_Title[i]);
-            map.put("instrumentimg", R.drawable.instrument);
+            map.put("instrumentimg", R.drawable.vector_drawable_instrument);
             map.put("instrumentcontent", instrument_Content[i]);
             map.put("instrumentattention", instrument_attention[i]);
             map.put("instrumenttime", "-");

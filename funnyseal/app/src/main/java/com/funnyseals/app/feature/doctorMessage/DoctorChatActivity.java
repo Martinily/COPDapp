@@ -11,7 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.funnyseals.app.R;
-import com.funnyseals.app.feature.doctorNursingPlan.DoctorNursingPlanFragment;
+import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -36,8 +37,9 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
     private ChatMessageAdapter CurrentChatadapter;
     private List<EMMessage>    mMessageList;
 
-    private EMConversation    mConversation;
-    private EMMessageListener msgListener;
+    private EMConversation       mConversation;
+    private EMMessageListener    msgListener;
+    private DoctorBottomActivity bottomActivity;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
         setContentView(R.layout.activity_doctor_chat);
         Intent intent = this.getIntent();
         mMyPatient = (User) intent.getSerializableExtra("myPatient");
+        bottomActivity = (DoctorBottomActivity) ((MyApplication)getApplication()).getBottom();
         mPatientAccount = mMyPatient.getAccount();
         msgListener = this;
         init();
@@ -136,9 +139,9 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
         });
 
         mNursingPlan.setOnClickListener(v -> {
-            Intent intent = new Intent(DoctorChatActivity.this, DoctorNursingPlanFragment.class);
-            intent.putExtra("myFriend", mPatientAccount);
-            startActivity(intent);
+            bottomActivity.setMyFriend(mPatientAccount);
+            finish();
+            bottomActivity.toNursingPlan();
         });
 
         EMClient.getInstance().chatManager().addMessageListener(msgListener);

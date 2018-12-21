@@ -62,7 +62,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="52dp"
         android:background="@null"
-        android:src="@drawable/tx"
+        android:src="@drawable/vector_drawable_tx"
         app:layout_constraintBottom_toTopOf="@+id/tv_patient_setting_finish"
         app:layout_constraintEnd_toStartOf="@+id/tv_patient_setting_title"
         app:layout_constraintHorizontal_bias="0.0"

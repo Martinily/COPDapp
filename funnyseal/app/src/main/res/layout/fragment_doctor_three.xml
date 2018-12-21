@@ -26,7 +26,7 @@
             android:layout_height="58dp"
             android:layout_marginLeft="20dp"
             android:backgroundTint="@color/teal"
-            android:drawableRight="@drawable/ic_na"
+            android:drawableRight="@drawable/vector_drawable_na"
             android:hint="请输入运动种类"
             android:textSize="20dp" />
 

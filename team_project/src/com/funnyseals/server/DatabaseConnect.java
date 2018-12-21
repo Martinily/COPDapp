@@ -1,15 +1,10 @@
 package com.funnyseals.server;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.sql.*;
 
 public interface DatabaseConnect {
 
@@ -17,7 +12,7 @@ public interface DatabaseConnect {
     static Connection GetConnection() {
         Connection connection = null;
         String dbClassName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://140.143.70.205:3306/team?rewriteBatchedStatements=true";
+        String url = "jdbc:mysql://140.143.70.205:3306/team?rewriteBatchedStatements=true&useSSL=true";
         String user = "root";
         String password = "WEIxin20131242";
         try {
@@ -33,7 +28,6 @@ public interface DatabaseConnect {
         return connection;
     }
 
-
     static String SqlExecuteQuery(String Sql) {
         Connection connector;
 
@@ -42,30 +36,23 @@ public interface DatabaseConnect {
 
             Statement statement = connector.createStatement();
 
-            ResultSet rs = null;
+            ResultSet rs;
             rs = statement.executeQuery(Sql);//get data from database
             ResultSetMetaData rsmd = rs.getMetaData();
             int column = rsmd.getColumnCount();
-            String val = null;
-            String colName = null;
+            String val;
+            String colName;
             JSONArray jsonarray = new JSONArray();
-            System.out.println("TT");
-            System.out.println(column);
             if (!rs.next()) {
-                System.out.println("EE");
                 return "empty";
             } else {
-                System.out.println("11!!");
                 rs.previous();
-                System.out.println("11!!!!");
                 int temp = 0;
                 while (rs.next()) {
                     JSONObject json = new JSONObject();
                     for (int i = 1; i <= column; i++) {
                         colName = rsmd.getColumnLabel(i);
-                        System.out.println("XX");
                         val = rs.getString(colName);
-                        System.out.println("val" + val);
                         try {
                             json.put(colName, val);
                         } catch (JSONException e) {
@@ -87,41 +74,30 @@ public interface DatabaseConnect {
         Connection connector;
         try {
             connector = GetConnection();
-
-            if (!connector.isClosed())
-                System.out.println("Connect succeeded!");
+            System.out.println("-----------------connect_succeed-------------------");
             Statement statement = connector.createStatement();
-
-            System.out.println("Connect!");
-            int returnMessage = statement.executeUpdate(Sql);//execute database
-            System.out.println("Connect!!!!");
-            return returnMessage;
+            return statement.executeUpdate(Sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
     }
 
-    static int SqlExecuteBatch(String Sql[]) {
+    static int SqlExecuteBatch(String[] Sql) {
         Connection connector;
         try {
             connector = GetConnection();
-
-            if (!connector.isClosed())
-                System.out.println("Connect succeeded!");
+            System.out.println("-----------------connect_succeed-------------------");
             Statement statement = connector.createStatement();
-
-            System.out.println("Connect!");
-            for (int i = 0; i < Sql.length; i++) {
-                statement.addBatch(Sql[i]);
+            for (String s : Sql) {
+                statement.addBatch(s);
             }
             int[] ReturnMessage = statement.executeBatch();//execute database
             int returnMessage = 0;
-            for (int i = 0; i < ReturnMessage.length; i++) {
-                if (ReturnMessage[i] != 0)
+            for (int i1 : ReturnMessage) {
+                if (i1 != 0)
                     returnMessage++;
             }
-            System.out.println("Connect!!!!");
             return returnMessage;
         } catch (SQLException e) {
             e.printStackTrace();

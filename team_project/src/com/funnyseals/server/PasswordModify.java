@@ -7,12 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public interface PasswordModify {
-    static void passwordModify(String getJson, String Pmodify_type) throws IOException {
-        if (Pmodify_type.equals("forget")) {
+    static void passwordModify(String getJson, String modify_type) throws IOException {
+        if (modify_type.equals("forget")) {
             ForgetPassword(getJson);
-        } else if (Pmodify_type.equals("update")) {
+        } else if (modify_type.equals("update")) {
             UpdatePassword(getJson);
         }
     }
@@ -22,43 +23,44 @@ public interface PasswordModify {
         JSONObject json = new JSONObject(Json);
         String ID = json.getString("ID");
         String password = json.getString("Password");
-        System.out.println(ID + "!!!");
 
         String[] Sql = new String[4];
-        String result = null;
+        String result;
 
         Sql[0] = "select * from doctor where docID='" + ID + "';";
         Sql[1] = "select * from patient where pID='" + ID + "';";
         Sql[2] = "UPDATE doctor SET docPassword='" + password + "' WHERE docID='" + ID + "'";
         Sql[3] = "UPDATE patient SET pPassword='" + password + "' WHERE pID='" + ID + "'";
 
-        String returnJson = null;
+        String returnJson;
         result = DatabaseConnect.SqlExecuteQuery(Sql[0]);
         JSONObject json1 = new JSONObject();
-        if (result.equals("empty")) {
+        if (Objects.equals(result, "empty")) {
             result = DatabaseConnect.SqlExecuteQuery(Sql[1]);
-            if (result.equals("empty")) {
+            if (Objects.equals(result, "empty")) {
                 json1.put("password_result", "false");//false
-                System.out.println("用户不存在");
+                System.out.println("-----------------user_not_exist-------------------");
             } else {
                 int res = DatabaseConnect.SqlExecuteUpdate(Sql[3]);
                 if (res == 0) {
                     json1.put("password_result", "false");
-                    System.out.println("修改失败");
+                    System.out.println("-----------------modify_failed-------------------");
                 } else {
                     json1.put("password_result", "true");
+                    System.out.println("-----------------modify_succeed-------------------");
                 }
             }
         } else {
             int res = DatabaseConnect.SqlExecuteUpdate(Sql[2]);
             if (res == 0) {
                 json1.put("password_result", "false");
-                System.out.println("修改失败");
+                System.out.println("-----------------modify_failed-------------------");
             } else {
                 ObjectNode json2 = JsonNodeFactory.instance.objectNode();
                 json2.put("newpassword", password);
                 EasemobIMUsers.modifyIMUserPasswordWithAdminToken(ID, json2);
                 json1.put("password_result", "true");
+                System.out.println("-----------------modify_succeed-------------------");
             }
         }
         returnJson = json1.toString();
@@ -72,37 +74,36 @@ public interface PasswordModify {
         String ID = json.getString("ID");
         String oldPassword = json.getString("oldPassword");
         String newPassword = json.getString("newPassword");
-        System.out.println(ID + "!!!");
 
         String[] Sql = new String[4];
-        String result = null;
+        String result;
 
         Sql[0] = "select * from doctor where docID='" + ID + "';";
         Sql[1] = "select * from patient where pID='" + ID + "';";
         Sql[2] = "UPDATE doctor SET docPassword='" + newPassword + "' WHERE docID='" + ID + "'";
         Sql[3] = "UPDATE patient SET pPassword='" + newPassword + "' WHERE pID='" + ID + "'";
 
-        String returnJson = null;
+        String returnJson;
         result = DatabaseConnect.SqlExecuteQuery(Sql[0]);
         JSONObject json1 = new JSONObject();
-        if (result.equals("empty")) {
+        if (Objects.equals(result, "empty")) {
             result = DatabaseConnect.SqlExecuteQuery(Sql[1]);
-            if (result.equals("empty")) {
+            if (Objects.equals(result, "empty")) {
                 json1.put("password_result", "false");//false
-                System.out.println("用户不存在");
+                System.out.println("-----------------user_not_exist-------------------");
             } else {
                 int passwordResult = CheckPatientPassword(result, oldPassword);
                 if (passwordResult == 0) {
                     json1.put("password_result", "false");
-                    System.out.println("密码错误");
+                    System.out.println("-----------------password_not_right-------------------");
                 } else {
                     int res = DatabaseConnect.SqlExecuteUpdate(Sql[3]);
                     if (res == 0) {
                         json1.put("password_result", "false");
-                        System.out.println("修改失败");
+                        System.out.println("-----------------modify_failed-------------------");
                     } else {
                         json1.put("password_result", "true");
-                        System.out.println("修改成功");
+                        System.out.println("-----------------modify_succeed-------------------");
                     }
                 }
             }
@@ -110,15 +111,15 @@ public interface PasswordModify {
             int passwordResult = CheckDoctorPassword(result, oldPassword);
             if (passwordResult == 0) {
                 json1.put("password_result", "false");
-                System.out.println("密码错误");
+                System.out.println("-----------------password_not_right-------------------");
             } else {
                 int res = DatabaseConnect.SqlExecuteUpdate(Sql[3]);
                 if (res == 0) {
                     json1.put("password_result", "false");
-                    System.out.println("修改失败");
+                    System.out.println("-----------------modify_failed-------------------");
                 } else {
                     json1.put("password_result", "true");
-                    System.out.println("修改成功");
+                    System.out.println("-----------------modify_succeed-------------------");
                 }
             }
         }

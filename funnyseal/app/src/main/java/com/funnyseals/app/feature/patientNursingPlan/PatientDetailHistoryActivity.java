@@ -172,7 +172,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
             time = "";
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("historytitle", historymedicine_Title[i]);
-            map.put("historyimg", R.drawable.pillow);
+            map.put("historyimg", R.drawable.vector_drawable_pillow);
             map.put("historynum", "剂量：");
             map.put("historynumdetail", historymedicine_num[i]);
             map.put("historyattention", historymedicine_attention[i]);
@@ -199,7 +199,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         for (int i = 0; i < historyinstrument_Title.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("historytitle", historyinstrument_Title[i]);
-            map.put("historyimg", R.drawable.instrument);
+            map.put("historyimg", R.drawable.vector_drawable_instrument);
             map.put("historynum", "建议时长：");
             map.put("historynumdetail", historyinstrument_num[i]);
             map.put("historyattention", historyinstrument_attention[i]);
@@ -209,7 +209,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         for (int i = 0; i < historysports_Title.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("historytitle", historysports_Title[i]);
-            map.put("historyimg", R.drawable.sports);
+            map.put("historyimg", R.drawable.vector_drawable_sports);
             map.put("historynum", "建议时长：");
             map.put("historynumdetail", historysports_num[i]);
             map.put("historyattention", historysports_attention[i]);

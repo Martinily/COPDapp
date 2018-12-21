@@ -37,12 +37,14 @@ public class DoctorBottomActivity extends AppCompatActivity {
     private DoctorBottomTabAdapter mFragmentTabAdapter;
     private List<User>             mAllMyPatient;
     private MyApplication          myApplication;
+    private String                 myFriend;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_bottom);
         myApplication = (MyApplication) getApplication();
+        myFriend = "0";
         initData();
         initBottomTabs();
     }
@@ -70,33 +72,35 @@ public class DoctorBottomActivity extends AppCompatActivity {
                 out.writeUTF(send);
                 out.close();
 
+                Thread.sleep(1000);
                 socket = SocketUtil.getGetArraySocket();
                 DataInputStream in = new DataInputStream(socket.getInputStream());
                 String message = in.readUTF();
                 if (message.contains("empty") && message.length() < 10) {
                     mAllMyPatient = null;
-                    Thread.interrupted();
+                } else {
+                    mAllMyPatient = new ArrayList<>();
+                    JSONArray allMyPatient = new JSONArray(message);
+                    int i;
+                    for (i = 0; i < allMyPatient.length(); i++) {
+                        JSONObject patient = allMyPatient.getJSONObject(i);
+                        mAllMyPatient.add(new User(patient.getString("pID"),
+                                patient.getString("pName"),
+                                patient.getString("pSex"),
+                                Integer.valueOf(patient.getString("pAge")),
+                                patient.getString("pTime"),
+                                patient.getString("pAddress")));
+                    }
                 }
-                mAllMyPatient = new ArrayList<>();
-                JSONArray allMyPatient = new JSONArray(message);
-                int i;
-                for (i = 0; i < allMyPatient.length(); i++) {
-                    JSONObject patient = allMyPatient.getJSONObject(i);
-                    mAllMyPatient.add(new User(patient.getString("pID"),
-                            patient.getString("pName"),
-                            patient.getString("pSex"),
-                            Integer.valueOf(patient.getString("pAge")),
-                            patient.getString("pTime"),
-                            patient.getString("pAddress")));
-                }
+                socket.shutdownOutput();
+                socket.shutdownInput();
                 socket.close();
-            } catch (JSONException | IOException e) {
+            } catch (JSONException | IOException | InterruptedException e) {
                 e.printStackTrace();
             }
-            Thread.interrupted();
         });
         thread.start();
-        while (thread.isAlive()) {
+        while (thread.isAlive()){
 
         }
     }
@@ -133,8 +137,20 @@ public class DoctorBottomActivity extends AppCompatActivity {
         mFragmentTabAdapter.setFragmentTab(tabID);
     }
 
+    public String getMyFriend () {
+        return myFriend;
+    }
+
+    public void setMyFriend (String myFriend) {
+        this.myFriend = myFriend;
+    }
+
     public void showPrevious () {
         showFragmentTab(mPreviousTabId);
+    }
+
+    public void toNursingPlan(){
+        ((RadioButton)findViewById(R.id.doctor_nursingPlan_tab)).setChecked(true);
     }
 
     private class BottomTabBar extends DoctorBottomTabAdapter {

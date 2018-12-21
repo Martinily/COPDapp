@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 医生端护理计划fragment
@@ -65,14 +67,6 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         super.onActivityCreated(savedInstanceState);
         initView();
 
-        Intent intent = getActivity().getIntent();
-        Bundle bundle = intent.getExtras();
-
-        mWhere = bundle.getString("where");
-        if (mWhere.equals("1")) {
-            mMyFriend = bundle.getString("myFriend");
-        }
-
         // 设置菜单栏的点击事件
         mTv_doctor_one.setOnClickListener(this);
         mTv_doctor_two.setOnClickListener(this);
@@ -90,6 +84,15 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         mVp_doctor_myviewpage.setAdapter(mAdapter);
         mVp_doctor_myviewpage.setCurrentItem(0);  //初始化显示第一个页面
         mTv_doctor_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
+    }
+
+    @Override
+    public void onResume () {
+        super.onResume();
+
+        mMyFriend=((DoctorBottomActivity)Objects.requireNonNull(getActivity())).getMyFriend();
+        ((DoctorBottomActivity)getActivity()).setMyFriend("0");
+        mWhere="1";
     }
 
     //点击事件的集合
@@ -127,6 +130,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 if (mPlannum > 0) {
                     if (mWhere.equals("1")) {
                         mPatientId = mMyFriend;
+                        mWhere="0";
                         SendPlan();
                     } else {
                         Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);

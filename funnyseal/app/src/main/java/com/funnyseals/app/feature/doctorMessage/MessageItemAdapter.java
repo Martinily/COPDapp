@@ -79,7 +79,7 @@ public class MessageItemAdapter extends BaseAdapter {
         viewHolder.mContent = convertView.findViewById(R.id.chat_item_content);
         viewHolder.mMessageNum = convertView.findViewById(R.id.chat_item_message_num);
 
-        viewHolder.mPortrait.setImageResource(R.drawable.portrait);
+        viewHolder.mPortrait.setImageResource(R.drawable.vector_drawable_portrait);
         EMConversation conversation = getItem(position);
         viewHolder.mAccount = conversation.conversationId();
         String account = viewHolder.mAccount;

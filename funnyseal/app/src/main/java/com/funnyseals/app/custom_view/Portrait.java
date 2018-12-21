@@ -46,6 +46,6 @@ public class Portrait extends CircleImageView {
     }
 
     public void show() {
-        Glide.with(getContext()).load(/*Uri.parse(url)*/R.drawable.user).into(this);
+        Glide.with(getContext()).load(/*Uri.parse(url)*/R.drawable.vector_drawable_user).into(this);
     }
 }
