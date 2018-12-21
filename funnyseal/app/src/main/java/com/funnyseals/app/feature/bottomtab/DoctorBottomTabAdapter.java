@@ -103,7 +103,7 @@ public abstract class DoctorBottomTabAdapter implements RadioGroup.OnCheckedChan
 
         ft.hide(temp);
 
-        ft.commit();
+        ft.commitAllowingStateLoss();
 
 
         mCurrentTabId = tabId;

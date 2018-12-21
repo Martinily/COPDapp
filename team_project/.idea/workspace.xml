@@ -2,56 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/vector_drawable_applogo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/ForgetPwdActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/ForgetPwdActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/SignupActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/add.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/dx.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/ic_nadown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/drawable/more.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_doctor_bottom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_doctor_bottom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_bottom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_bottom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_voice_call.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_voice_call.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-anydpi-v26/applogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-hdpi/applogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-mdpi/applogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-xhdpi/applogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-xxhdpi/applogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/mipmap-xxxhdpi/applogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/bottomtab/DoctorBottomActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/bottomtab/DoctorBottomActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorChatActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorChatActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorMessageListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorMessageListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorNursingPlan/DoctorNursingPlanFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorNursingPlan/DoctorNursingPlanFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConditionHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ConditionHistory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$14.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/InputDeal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ListenSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ListenSocket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PasswordModify.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/PasswordModify.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/Register.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReturnMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/ReturnMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ConditionHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -325,15 +280,16 @@
       <workItem from="1545310995470" duration="355000" />
       <workItem from="1545311542927" duration="1601000" />
       <workItem from="1545356739710" duration="6339000" />
-      <workItem from="1545368524398" duration="3566000" />
+      <workItem from="1545368524398" duration="4757000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145836000" />
+    <option name="totallyTimeSpent" value="147027000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.20509383" />
       <window_info id="Structure" order="1" weight="0.18869936" />
@@ -344,7 +300,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.95526695" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.95526695" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />

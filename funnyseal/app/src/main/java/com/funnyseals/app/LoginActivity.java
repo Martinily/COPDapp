@@ -193,7 +193,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 out.writeUTF(send);
                 out.close();
 
+                Thread.sleep(1000);
                 socket = SocketUtil.getGetSocket();
+
                 DataInputStream datainputstream = new DataInputStream(socket.getInputStream());
                 String message = datainputstream.readUTF();
 
@@ -249,7 +251,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 socket.shutdownInput();
                 socket.shutdownOutput();
                 socket.close();
-            } catch (IOException | JSONException e) {
+            } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
             progressDialog.dismiss();
