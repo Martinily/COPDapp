@@ -30,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tx" />
+        app:srcCompat="@drawable/vector_drawable_tx" />
 
     <TextView
         android:id="@+id/tv_patient_advice_record"

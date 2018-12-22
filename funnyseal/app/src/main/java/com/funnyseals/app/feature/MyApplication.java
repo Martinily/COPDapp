@@ -30,6 +30,15 @@ public class MyApplication extends Application {
     private String       mAccount;
     private User         mUser;
     private Context      context;
+    private Context bottom;
+
+    public void setBottom(Context bottomActivity){
+        bottom=bottomActivity;
+    }
+
+    public Context getBottom(){
+        return bottom;
+    }
 
     public String getAccount () {
         return mAccount;

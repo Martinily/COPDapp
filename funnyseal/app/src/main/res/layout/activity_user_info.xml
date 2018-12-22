@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user" />
+        app:srcCompat="@drawable/vector_drawable_user" />
 
     <TextView
         android:id="@+id/nametext"
@@ -39,11 +39,11 @@
 
     <TextView
         android:id="@+id/patientname"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:textSize="30sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headphoto" />
 
     <TextView
@@ -59,11 +59,11 @@
 
     <TextView
         android:id="@+id/patientsex"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:textSize="30sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/patientname" />
 
     <TextView
@@ -79,11 +79,11 @@
 
     <TextView
         android:id="@+id/patientage"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:textSize="30sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/patientsex" />
 
     <TextView
@@ -99,11 +99,11 @@
 
     <TextView
         android:id="@+id/patientaccount"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:textSize="30sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/patientage" />
 
     <TextView
@@ -119,11 +119,11 @@
 
     <TextView
         android:id="@+id/patientlocation"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:textSize="30sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/patientaccount" />
 
     <Button

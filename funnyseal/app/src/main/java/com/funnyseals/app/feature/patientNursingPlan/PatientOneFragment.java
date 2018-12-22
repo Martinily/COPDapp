@@ -74,7 +74,7 @@ public class PatientOneFragment extends Fragment {
         for (int i = 0; i < medicine_Title.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("medicinetitle", medicine_Title[i]);
-            map.put("medicineimg", R.drawable.pillow);
+            map.put("medicineimg", R.drawable.vector_drawable_pillow);
             map.put("medicinecontent", medicine_Content[i]);
             map.put("medicineattention", medicine_attention[i]);
             String needtime = "";

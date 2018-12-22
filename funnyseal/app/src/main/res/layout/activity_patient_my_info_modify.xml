@@ -218,7 +218,7 @@
         android:layout_marginRight="95dp"
         android:layout_marginBottom="8dp"
         android:background="@null"
-        android:src="@drawable/tx"
+        android:src="@drawable/vector_drawable_tx"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_patient_modify_title"
         app:layout_constraintStart_toStartOf="parent"

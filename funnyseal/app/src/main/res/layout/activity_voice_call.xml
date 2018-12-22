@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:contentDescription="背景"
         android:scaleType="centerCrop"
-        android:src="@mipmap/applogo" />
+        android:src="@drawable/vector_drawable_applogo" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:contentDescription="头像"
-                android:src="@mipmap/applogo" />
+                android:src="@drawable/vector_drawable_applogo" />
             <!--当前通话的账户名-->
             <TextView
                 android:id="@+id/text_call_username"

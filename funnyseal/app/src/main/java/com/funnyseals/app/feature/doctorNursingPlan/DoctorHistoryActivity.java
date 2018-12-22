@@ -122,9 +122,9 @@ public class DoctorHistoryActivity extends AppCompatActivity {
             map.put("doctorhistorydate", doctor_historydate[i]);
             System.err.println(doctor_historydate[i]);
             if (mDoctor_historyUse[i].equals("1")) {
-                map.put("doctorhistoryuse", R.drawable.used);
+                map.put("doctorhistoryuse", R.drawable.vector_drawable_used);
             } else
-                map.put("doctorhistoryuse", R.drawable.unused);
+                map.put("doctorhistoryuse", R.drawable.vector_drawable_unused);
             map.put("doctorhistoryid", mDoctor_historyId[i]);
             doctorhistory_list.add(map);
         }

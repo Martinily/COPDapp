@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorMessage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.model.User;
 import com.hyphenate.EMMessageListener;
@@ -43,6 +45,7 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
     private List<User>           mAllMyPatient;
     //消息监听，如果有新的消息就更新消息列表
     private EMMessageListener    mMsgListener;
+    private Context              bottomActivty;
 
 
     @Override
@@ -52,6 +55,8 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
         mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
         mAllMyPatient = ((DoctorBottomActivity) Objects.requireNonNull(getActivity()))
                 .getAllMyPatient();
+
+        bottomActivty = getActivity();
 
         mMsgListener = this;
         initUIComponents();
@@ -112,6 +117,8 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
                     break;
                 }
             }
+            MyApplication application = (MyApplication) getActivity().getApplication();
+            application.setBottom(bottomActivty);
             EMClient.getInstance().chatManager().removeMessageListener(mMsgListener);
             startActivity(intent);
         });

@@ -20,7 +20,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
             android:contentDescription="logo"
-            android:src="@drawable/logo" />
+            android:src="@drawable/vector_drawable_logo" />
 
 
         <android.support.design.widget.TextInputLayout

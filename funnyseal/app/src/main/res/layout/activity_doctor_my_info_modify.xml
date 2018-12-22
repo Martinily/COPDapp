@@ -265,7 +265,7 @@
         android:layout_marginRight="200px"
         android:layout_marginBottom="8dp"
         android:background="@null"
-        android:src="@drawable/tx"
+        android:src="@drawable/vector_drawable_tx"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_doctor_modify_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -282,6 +282,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_doctor_modify_password"
-        app:srcCompat="@drawable/tm2" />
+        app:srcCompat="@drawable/vector_drawable_tm" />
 
 </android.support.constraint.ConstraintLayout>

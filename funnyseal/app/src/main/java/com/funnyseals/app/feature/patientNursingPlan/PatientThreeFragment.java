@@ -68,7 +68,7 @@ public class PatientThreeFragment extends Fragment {
         for (int i = 0; i < sports_Title.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("sportstitle", sports_Title[i]);
-            map.put("sportsimg", R.drawable.sports);
+            map.put("sportsimg", R.drawable.vector_drawable_sports);
             map.put("sportscontent", sports_Content[i]);
             map.put("sportsattention", sports_attention[i]);
             map.put("sportstime", "-");

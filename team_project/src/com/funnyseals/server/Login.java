@@ -1,39 +1,34 @@
 package com.funnyseals.server;
 
-import java.io.IOException;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public interface Login {
     static void login(String username, String password) throws IOException {
         int port = 2019;
         String[] Sql = new String[2];
-        String result = null;
-        System.out.println("start_login");
-
-        String passwordFromDatabase = null;
-        String usertypeFromDatabase = null;
+        String result;
+        String passwordFromDatabase;
         Sql[0] = "select * from doctor where docID='" + username + "';";
-        System.out.println(Sql[0]);
         Sql[1] = "select * from patient where pID='" + username + "';";
-        System.out.println(Sql[1]);
-        System.out.println("4");
 
-        String returnJson = null;
+        String returnJson;
         result = DatabaseConnect.SqlExecuteQuery(Sql[0]);
         JSONObject json = new JSONObject();
-        if (result.equals("empty")) {
+        System.out.println("------------------start_login---------------------");
+        if (Objects.equals(result, "empty")) {
             result = DatabaseConnect.SqlExecuteQuery(Sql[1]);
-            if (result.equals("empty")) {
+            if (Objects.equals(result, "empty")) {
                 json.put("login_state", "用户不存在");//false
                 System.out.println("用户不存在");
             } else {
                 JSONArray jsonarray = new JSONArray(result);
                 json = jsonarray.getJSONObject(0);
                 passwordFromDatabase = json.getString("pPassword");
-                usertypeFromDatabase = "p";
-                json.put("user_type", usertypeFromDatabase);
+                json.put("user_type", "p");
 
                 if (passwordFromDatabase.equals(password)) {
                     json.put("login_state", "成功");//true
@@ -49,7 +44,7 @@ public interface Login {
                         json.put("HistoryCondition", condition);
                         json.put("HistoryAdvice", advice);
                     }
-                    System.out.println("send_message");
+                    System.out.println("-----------------send_login_message-------------------");
                 } else {
                     json.put("login_state", "密码错误");//false
                     System.out.println("密码错误");
@@ -59,12 +54,11 @@ public interface Login {
             JSONArray jsonarray = new JSONArray(result);
             json = jsonarray.getJSONObject(0);
             passwordFromDatabase = json.getString("docPassword");
-            usertypeFromDatabase = "d";
-            json.put("user_type", usertypeFromDatabase);
+            json.put("user_type", "d");
 
             if (passwordFromDatabase.equals(password)) {
                 json.put("login_state", "成功");//true
-                System.out.println("send_message");
+                System.out.println("-----------------send_login_message-------------------");
             } else {
                 json.put("login_state", "密码错误");//false
                 System.out.println("密码错误");
@@ -73,6 +67,7 @@ public interface Login {
         returnJson = json.toString();
         System.out.print(returnJson);
         ReturnMessage.ReturnMessage(returnJson, port);
+        System.out.println("-----------------login_succeed-------------------");
     }
 
 }

@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/alarm" />
+        android:src="@drawable/vector_drawable_alarm" />
 
     <TextView
         android:id="@+id/item_tv"
