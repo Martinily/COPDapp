@@ -57,7 +57,7 @@ public class DoctorPersonalCenterFragment extends Fragment {
                     startActivity(new Intent(getActivity(), DoctorSigningActivity.class));
                     break;
                 case R.id.ib_patient_setting:
-                    //   startActivity(new Intent(getActivity(),Pa));
+                       startActivity(new Intent(getActivity(),DoctorSettingActivity.class));
                     break;
                 default:
                     break;
