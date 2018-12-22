@@ -2,8 +2,10 @@ package com.funnyseals.app.feature.patientPersonalCenter;
 
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,8 +37,6 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
     private ImageButton   ib_patient_add_return;
     private MyApplication myApplication;
     private String        item_name, item_state;
-    private boolean type = false;
-
     /**
      * 适配器完成下拉控件
      * 两个下拉控件
@@ -125,13 +125,16 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                 jsonObject = new JSONObject(message);
                 switch (jsonObject.getString("device_result")) {
                     case "true":
-                        type = true;
+                        Looper.prepare();
                         Toast.makeText(PatientAddEquipmentActivity.this, "添加成功", Toast
                                 .LENGTH_LONG).show();
+                        Looper.loop();
                         break;
                     case "false":
+                        Looper.prepare();
                         Toast.makeText(PatientAddEquipmentActivity.this, "添加失败", Toast
                                 .LENGTH_LONG).show();
+                        Looper.loop();
                         break;
                 }
                 socket.close();
@@ -139,9 +142,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
-        if (type) {
             finish();
-        }
     }
 
     /**
@@ -196,7 +197,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     break;
                 case R.id.bt_patient_add_complete:
                     addEquipment();
-
+                    finish();
                     break;
                 default:
                     break;

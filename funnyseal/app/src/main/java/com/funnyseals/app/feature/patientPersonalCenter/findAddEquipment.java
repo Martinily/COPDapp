@@ -37,7 +37,15 @@ public class findAddEquipment {
     }
 
     public String getEquipment_state () {
-        return equipment_state;
+        String eState="";
+        if (equipment_state.equals("0"))
+        {
+            eState="未使用";
+        }
+        if (equipment_state.equals("1")){
+            eState="使用";
+        }
+        return eState;
     }
 
     public void setEquipment_state (String equipment_state) {

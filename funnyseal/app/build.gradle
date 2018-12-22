@@ -52,4 +52,5 @@ dependencies {
     implementation 'com.vmloft.library:vmtools:0.0.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'liji.library.dev:citypickerview:1.1.0'
 }

@@ -43,6 +43,7 @@ public class PatientSetting extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.ib_patient_setting_return:
                     finish();
+                    break;
                 case R.id.tv_patient_setting_finish:
                     startActivity(new Intent(PatientSetting.this, LoginActivity.class));
                     break;
