@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.bottomtab;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -38,6 +39,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
     private List<User>             mAllMyPatient;
     private MyApplication          myApplication;
     private String                 myFriend;
+    private Context                bottomActivty;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class DoctorBottomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_bottom);
         myApplication = (MyApplication) getApplication();
         myFriend = "0";
+        bottomActivty=this;
+        myApplication.setBottom(bottomActivty);
         initData();
         initBottomTabs();
     }

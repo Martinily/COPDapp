@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorMessage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,7 @@ public class MessageItemAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("ViewHolder")
     @Override
     public View getView (int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
-import com.funnyseals.app.custom_view.Portrait;
 import com.funnyseals.app.model.User;
 
 import java.util.List;
@@ -78,7 +77,7 @@ public class PatientListItemAdapter extends BaseAdapter {
         private TextView mName;
 
         private void init (User user) {
-            mimageView.setImageResource(R.drawable.user);
+            mimageView.setImageResource(R.drawable.vector_drawable_user);
             mName.setText(user.getName());
         }
     }

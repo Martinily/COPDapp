@@ -94,7 +94,7 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
 
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        sendEnabled(false);
+        setSendEnabled(false);
     }
 
     private void addListener () {
@@ -112,9 +112,9 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
             @Override
             public void afterTextChanged (Editable s) {
                 if ("".equals(mEt_input.getText().toString())) {
-                    sendEnabled(false);
+                    setSendEnabled(false);
                 } else {
-                    sendEnabled(true);
+                    setSendEnabled(true);
                 }
             }
         });
@@ -196,7 +196,7 @@ public class DoctorChatActivity extends AppCompatActivity implements EMMessageLi
         CurrentChatadapter.notifyDataSetChanged();
     }
 
-    private void sendEnabled (boolean enabled) {
+    private void setSendEnabled (boolean enabled) {
         mBtn_send.setEnabled(enabled);
 
         if (enabled) {
