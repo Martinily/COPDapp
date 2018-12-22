@@ -198,14 +198,14 @@
         app:layout_constraintStart_toEndOf="@+id/tv_patient_modify_settlingtime"
         app:layout_constraintTop_toBottomOf="@+id/tv_patient_info_account" />
 
-    <EditText
+    <TextView
         android:id="@+id/ed_patient_modify_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="15dp"
         android:background="@null"
-        android:hint="湖南长沙 "
+        android:text="湖南长沙 "
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView9"
