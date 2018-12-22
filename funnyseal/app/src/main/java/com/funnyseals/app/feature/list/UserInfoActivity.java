@@ -3,7 +3,6 @@ package com.funnyseals.app.feature.list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,26 +30,20 @@ public class UserInfoActivity extends AppCompatActivity {
         TextView m_age = findViewById(R.id.patientage);
         TextView m_account = findViewById(R.id.patientaccount);
         TextView m_location = findViewById(R.id.patientlocation);
+
         m_name.setText(m_user.getName());
         m_sex.setText(m_user.getSex());
         m_age.setText(String.valueOf(m_user.getAge()));
         m_account.setText(m_user.getAccount());
         m_location.setText(m_user.getAddress());
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                finish();
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Intent intent = new Intent(UserInfoActivity.this, DoctorChatActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("myPatient", m_user);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
+
+        button1.setOnClickListener(v -> finish());
+        button2.setOnClickListener(v -> {
+            Intent intent1 = new Intent(UserInfoActivity.this, DoctorChatActivity.class);
+            System.err.println(m_user.getAccount());
+            intent1.putExtra("myPatient", m_user);
+            startActivity(intent1);
+            finish();
         });
     }
 }
