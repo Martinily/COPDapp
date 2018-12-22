@@ -119,8 +119,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.bt_patient_equipment_add:
-                    startActivity(new Intent(PatientMyEquipmentActivity.this,
-                            PatientAddEquipmentActivity.class));
+                    startActivity(new Intent(PatientMyEquipmentActivity.this, PatientAddEquipmentActivity.class));
                     break;
                 default:
                     break;

@@ -2,7 +2,10 @@ package com.funnyseals.app.feature.doctorPersonalCenter;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +35,8 @@ public class DoctorSigningActivity extends AppCompatActivity {
     private Button      bt_doctor_signing_complete, bt_doctor_signing_delete;
     private String        str1 = "";
     private MyApplication myApplication;
+    private int     type=0;
+    private boolean     isType=true;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
 
     }
 
-    /*
+    /**
     初始化控件
      */
     public void init () {
@@ -57,26 +62,26 @@ public class DoctorSigningActivity extends AppCompatActivity {
         ib_doctor_signing_return.setOnClickListener(new addListeners());
     }
 
-    /*
+    /**
     号码判定
     不能为空
     11位
      */
     @SuppressLint("ShowToast")
-    public boolean correctPhone () {
+    public void correctPhone () {
         if (str1.trim().equals("")) {
             Toast.makeText(DoctorSigningActivity.this, "输入不能为空", Toast.LENGTH_SHORT);
-            return false;
+
         } else if (str1.length() != 11) {
             Toast.makeText(DoctorSigningActivity.this, "手机号码错误", Toast.LENGTH_SHORT);
-            return false;
+
         } else {
             Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast.LENGTH_SHORT);
-            return true;
+            isType=true;
         }
     }
 
-    /*
+    /**
      *监听
      *连接服务器，完成签约，跳转个人中心
      *跳转个人中心
@@ -88,7 +93,8 @@ public class DoctorSigningActivity extends AppCompatActivity {
         public void onClick (View v) {
             switch (v.getId()) {
                 case R.id.bt_doctor_signing_complete:
-                    if (correctPhone()) {
+                 //   correctPhone();
+                    if (isType) {
                         new Thread(() -> {
                             String send = "";
                             Socket socket;
@@ -98,6 +104,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                         ().trim());
                                 jsonObject.put("docID", myApplication.getAccount());
                                 jsonObject.put("request_type", "10");
+                                jsonObject.put("sign_type","0");
                                 send = jsonObject.toString();
                                 socket = SocketUtil.getSendSocket();
                                 DataOutputStream out = new DataOutputStream(socket
@@ -113,17 +120,22 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                 jsonObject = new JSONObject(message);
                                 switch (jsonObject.getString("sign_result")) {
                                     case "0":
+                                        Looper.prepare();
                                         Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast
                                                 .LENGTH_LONG).show();
-                                        finish();
+                                        Looper.loop();
                                         break;
                                     case "2":
+                                        Looper.prepare();
                                         Toast.makeText(DoctorSigningActivity.this, "用户不存在", Toast
                                                 .LENGTH_LONG).show();
+                                        Looper.loop();
                                         break;
                                     case "1":
+                                        Looper.prepare();
                                         Toast.makeText(DoctorSigningActivity.this, "签约失败", Toast
                                                 .LENGTH_LONG).show();
+                                        Looper.loop();
                                         break;
                                 }
                                 socket.close();
@@ -132,6 +144,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                             }
                         }).start();
                     }
+                    finish();
                     break;
                 case R.id.ib_doctor_signing_return:
                     finish();
@@ -161,17 +174,22 @@ public class DoctorSigningActivity extends AppCompatActivity {
                             jsonObject = new JSONObject(message);
                             switch (jsonObject.getString("sign_result")) {
                                 case "0":
+                                    Looper.prepare();
                                     Toast.makeText(DoctorSigningActivity.this, "解约成功", Toast
                                             .LENGTH_LONG).show();
-                                    finish();
+                                    Looper.loop();
                                     break;
                                 case "2":
+                                    Looper.prepare();
                                     Toast.makeText(DoctorSigningActivity.this, "没有该患者", Toast
                                             .LENGTH_LONG).show();
+                                    Looper.loop();
                                     break;
                                 case "1":
+                                    Looper.prepare();
                                     Toast.makeText(DoctorSigningActivity.this, "解约失败", Toast
                                             .LENGTH_LONG).show();
+                                    Looper.loop();
                                     break;
                             }
                             socket.close();
@@ -179,10 +197,12 @@ public class DoctorSigningActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }).start();
+                    finish();
+                    break;
                 default:
                     break;
             }
-
         }
     }
+
 }

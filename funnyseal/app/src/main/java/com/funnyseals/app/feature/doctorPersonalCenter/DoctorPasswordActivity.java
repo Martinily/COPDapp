@@ -2,6 +2,7 @@ package com.funnyseals.app.feature.doctorPersonalCenter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -191,20 +192,28 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                                 switch (jsonObject.getString("password_result")) {
                                     case "0":
                                         type = true;
+                                        Looper.prepare();
                                         Toast.makeText(DoctorPasswordActivity.this, "修改密码成功",
                                                 Toast.LENGTH_LONG).show();
+                                        Looper.loop();
                                         break;
                                     case "1":
+                                        Looper.prepare();
                                         Toast.makeText(DoctorPasswordActivity.this, "用户名错误",
                                                 Toast.LENGTH_LONG).show();
+                                        Looper.loop();
                                         break;
                                     case "2":
+                                        Looper.prepare();
                                         Toast.makeText(DoctorPasswordActivity.this, "密码错误", Toast
                                                 .LENGTH_LONG).show();
+                                        Looper.loop();
                                         break;
                                     case "3":
+                                        Looper.prepare();
                                         Toast.makeText(DoctorPasswordActivity.this, "修改失败", Toast
                                                 .LENGTH_LONG).show();
+                                        Looper.loop();
                                         break;
                                 }
                                 socket.close();
