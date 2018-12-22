@@ -78,7 +78,7 @@ public class PatientListItemAdapter extends BaseAdapter {
         private TextView mName;
 
         private void init (User user) {
-            mimageView.setImageResource(R.drawable.user);
+            mimageView.setImageResource(R.mipmap.portrait0);
             mName.setText(user.getName());
         }
     }
