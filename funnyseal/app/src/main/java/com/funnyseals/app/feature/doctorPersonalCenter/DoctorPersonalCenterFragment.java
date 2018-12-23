@@ -68,14 +68,7 @@ public class DoctorPersonalCenterFragment extends Fragment {
                     startActivity(new Intent(getActivity(), DoctorSigningActivity.class));
                     break;
                 case R.id.ib_patient_setting:
-                        if (myApplication.getAccount().equals("6"))
-                        {
-                            Toast.makeText(getActivity(),"当前未绑定医生",Toast.LENGTH_LONG);
-                        }
-                        else {
-                            startActivity(new Intent(getActivity(),DoctorSettingActivity.class));
-                        }
-
+                    startActivity(new Intent(getActivity(),DoctorSettingActivity.class));
                     break;
                 default:
                     break;

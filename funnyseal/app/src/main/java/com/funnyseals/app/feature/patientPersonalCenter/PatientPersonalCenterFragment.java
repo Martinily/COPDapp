@@ -68,17 +68,17 @@ public class PatientPersonalCenterFragment extends Fragment {
                     startActivity(new Intent(getActivity(), PatientMyInfoModifyActivity.class));
                     break;
                 case R.id.ib_patient_doctor:
-                    startActivity(new Intent(getActivity(), PatientMyDoctorActivity.class));
-                    break;
-                case R.id.ib_patient_setting:
                     if (myApplication.getAccount().equals("6"))
                     {
                         Toast.makeText(getActivity(),"当前未绑定医生",Toast.LENGTH_LONG);
                     }
                     else {
-                        startActivity(new Intent(getActivity(), PatientSetting.class));
+                        startActivity(new Intent(getActivity(), PatientMyDoctorActivity.class));
                     }
 
+                    break;
+                case R.id.ib_patient_setting:
+                        startActivity(new Intent(getActivity(), PatientSetting.class));
                     break;
                 case R.id.ib_patient_equipment:
                     startActivity(new Intent(getActivity(), PatientMyEquipmentActivity.class));
