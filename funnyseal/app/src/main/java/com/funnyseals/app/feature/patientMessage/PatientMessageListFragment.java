@@ -94,8 +94,8 @@ public class PatientMessageListFragment extends Fragment implements EMMessageLis
         mChatList.setAdapter(mAdapter);
         mChatList.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getActivity(), PatientChatActivity.class);
-            intent.putExtra("myAccount", mMyAccount);
-            intent.putExtra("myDoctor", mMyDoctocr);
+            intent.putExtra("myDoctorAccount", mMyDoctocr.getAccount());
+            intent.putExtra("myDoctorName", mMyDoctocr.getName());
             EMClient.getInstance().chatManager().removeMessageListener(mMsgListener);
             startActivity(intent);
         });
