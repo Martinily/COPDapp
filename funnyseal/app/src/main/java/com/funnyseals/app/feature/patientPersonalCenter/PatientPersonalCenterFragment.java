@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.model.User;
 
 import static com.mob.tools.utils.DeviceHelper.getApplication;
 
@@ -25,6 +26,7 @@ public class PatientPersonalCenterFragment extends Fragment {
     private View        mView;
     private TextView    tv_patient_username;
     private MyApplication myApplication;
+    private User          myUser;
     private ImageButton getIb_patient_perinfo, getIb_patient_doctor, getIb_patient_equipment,
             getIb_patient_setting;
 
@@ -33,6 +35,7 @@ public class PatientPersonalCenterFragment extends Fragment {
                               Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_patient_personal_center, container, false);
         myApplication = (MyApplication) getApplication();
+        myUser = myApplication.getUser();
         initUIComponents();
         return mView;
     }
@@ -42,7 +45,7 @@ public class PatientPersonalCenterFragment extends Fragment {
      */
     private void initUIComponents () {
         tv_patient_username=mView.findViewById(R.id.tv_patient_username);
-        tv_patient_username.setText(myApplication.getAccount());
+        tv_patient_username.setText(myUser.getName());
         getIb_patient_perinfo = mView.findViewById(R.id.ib_patient_perinfo);
         getIb_patient_perinfo.setOnClickListener(new addListeners());
         getIb_patient_setting = mView.findViewById(R.id.ib_patient_setting);
@@ -68,7 +71,7 @@ public class PatientPersonalCenterFragment extends Fragment {
                     startActivity(new Intent(getActivity(), PatientMyInfoModifyActivity.class));
                     break;
                 case R.id.ib_patient_doctor:
-                    if (myApplication.getAccount().equals("6"))
+                    if (myUser.getMyDoctor().equals("6"))
                     {
                         Toast.makeText(getActivity(),"当前未绑定医生",Toast.LENGTH_LONG);
                     }

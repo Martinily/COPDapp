@@ -11,10 +11,12 @@ import org.json.JSONObject;
  */
 public class findAddEquipment {
     public String equipment_name, equipment_state;
+    public int imageId;
 
-    public findAddEquipment (String equipment_name, String equipment_state) {
+    public findAddEquipment (String equipment_name, String equipment_state,int imageId) {
         this.equipment_name = equipment_name;
         this.equipment_state = equipment_state;
+        this.imageId=imageId;
     }
 
     public static AddEquipment sectionData (JSONObject json) {
@@ -30,6 +32,13 @@ public class findAddEquipment {
 
     public String getEquipment_name () {
         return equipment_name;
+    }
+
+    public int getImageId(){
+        return imageId;
+    }
+    public void setImageId(int imageId){
+        this.imageId=imageId;
     }
 
     public void setEquipment_name (String equipment_name) {

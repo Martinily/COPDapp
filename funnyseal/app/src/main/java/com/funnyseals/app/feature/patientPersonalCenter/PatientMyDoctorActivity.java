@@ -52,7 +52,7 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         tv_patient_doctor_hospital = findViewById(R.id.tv_patient_doctor_myhospital);
         tv_patient_doctor_post = findViewById(R.id.tv_patient_doctor_mypost);
         tv_patient_doctor_age=findViewById(R.id.tv_patient_doctor_myage);
-        tv_patient_doctor_post=findViewById(R.id.tv_patient_doctor_mypost);
+        tv_patient_doctor_sex=findViewById(R.id.tv_patient_doctor_mysex);
 
         ib_patient_doctor_return = findViewById(R.id.ib_patient_doctor_return);
         ib_patient_doctor_return.setOnClickListener(new addListeners());
@@ -89,7 +89,7 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                 hosptial = jsonObject.get("docCompany").toString();
                 post = jsonObject.get("docTitle").toString();
                 age=jsonObject.get("docAge").toString();
-                sex=jsonObject.getString("sex");
+                sex=jsonObject.getString("docSex");
 
 
                 socket.close();

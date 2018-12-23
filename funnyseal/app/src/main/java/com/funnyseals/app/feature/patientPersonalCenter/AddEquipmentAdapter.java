@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.model.AddEquipment;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 public class AddEquipmentAdapter extends ArrayAdapter {
     private final int resourceId;
+    private List<AddEquipment> myEquipment;
 
     public AddEquipmentAdapter (Context context, int textViewResourceId, List<AddEquipment>
             objects) {
@@ -46,7 +49,9 @@ public class AddEquipmentAdapter extends ArrayAdapter {
         TextView EquipmentName = view.findViewById(R.id.add_equipment_name);
         TextView EquipmentState = view.findViewById(R.id.add_equipment_state);
         ImageButton EquipmentDelete=view.findViewById(R.id.add_equipment_delete);
-      //  EquipmentDelete.setOnClickListener(new view.setOnClickListener(this));
+        //删除按钮点击事件
+
+
 
         EquipmentState.setText(addEquipment.getEquipment_state());
         EquipmentName.setText(addEquipment.getEquipment_name());
