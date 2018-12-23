@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/MessageItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/MessageItemAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/PatientListItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/PatientListItemAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_bottom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_patient_bottom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,7 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1564" />
     <option name="y" value="113" />
     <option name="width" value="1225" />
@@ -280,15 +279,15 @@
       <workItem from="1545311542927" duration="1601000" />
       <workItem from="1545356739710" duration="6339000" />
       <workItem from="1545368524398" duration="4757000" />
-      <workItem from="1545455983456" duration="1021000" />
+      <workItem from="1545455983456" duration="1023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148048000" />
+    <option name="totallyTimeSpent" value="148050000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1927" y="-7" width="1550" height="878" extended-state="7" />
+    <frame x="-1927" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.26072386" />
@@ -300,7 +299,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.95526695" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.95526695" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
-import com.funnyseals.app.feature.doctorMessage.DoctorChatActivity;
+import com.funnyseals.app.feature.patientMessage.PatientChatActivity;
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.SocketUtil;
 
@@ -124,9 +124,10 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.bt_patient_mydoctor_chat:
-                    Intent intent = new Intent(PatientMyDoctorActivity.this, DoctorChatActivity
+                    Intent intent = new Intent(PatientMyDoctorActivity.this, PatientChatActivity
                             .class);
-                    intent.putExtra("myfriend", myDoctor);
+                    intent.putExtra("myDoctorAccount", myDoctor);
+                    intent.putExtra("myDoctorName", name);
                     startActivity(intent);
                     break;
                 default:
