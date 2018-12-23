@@ -25,32 +25,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_patient_doctor_hospital"
+        android:id="@+id/tv_patient_doctor_myhospital"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginRight="184dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="88dp"
         android:text="医院"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="24sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_patient_doctor_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_patient_doctor_title" />
+        app:layout_constraintStart_toEndOf="@+id/tv_patient_doctor_hosptial"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_mysex" />
 
     <TextView
-        android:id="@+id/tv_patient_doctor_post"
+        android:id="@+id/tv_patient_doctor_mypost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="184dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="84dp"
         android:text="职务"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_patient_doctor_hospital"
-        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_hospital" />
+        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintStart_toEndOf="@+id/tv_patient_doctor_post"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_myhospital" />
 
     <TextView
         android:id="@+id/tv_patient_doctor_name"
@@ -80,17 +81,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ib_patient_doctor_return" />
 
-    <View
-        android:id="@+id/vi_patient_doctor_dx"
-        android:layout_width="300px"
-        android:layout_height="10dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="#050505"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_patient_doctor_post"
-        app:layout_constraintTop_toBottomOf="@id/tv_patient_doctor_post" />
 
     <View
         android:id="@+id/vi_patient_doctor_dxx"
@@ -128,4 +118,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_patient_doctor_mysex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="88dp"
+        android:text="性别"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_patient_doctor_sex"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_myage" />
+
+    <TextView
+        android:id="@+id/tv_patient_doctor_myage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:text="年龄"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/tv_patient_doctor_age"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_title" />
+
+    <TextView
+        android:id="@+id/tv_patient_doctor_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="年龄"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_title"
+        tools:layout_editor_absoluteX="136dp" />
+
+    <TextView
+        android:id="@+id/tv_patient_doctor_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="性别"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_age"
+        tools:layout_editor_absoluteX="136dp" />
+
+    <TextView
+        android:id="@+id/tv_patient_doctor_hosptial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="单位"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_sex"
+        tools:layout_editor_absoluteX="136dp" />
+
+    <TextView
+        android:id="@+id/tv_patient_doctor_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="职务"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_doctor_hosptial"
+        tools:layout_editor_absoluteX="136dp" />
 </android.support.constraint.ConstraintLayout>

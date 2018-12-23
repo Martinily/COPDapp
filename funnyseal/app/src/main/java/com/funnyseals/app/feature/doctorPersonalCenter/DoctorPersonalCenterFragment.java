@@ -8,8 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
+import com.koushikdutta.ion.builder.Builders;
+
+import static com.mob.tools.utils.DeviceHelper.getApplication;
 
 /**
  * 医生端
@@ -19,11 +25,14 @@ import com.funnyseals.app.R;
 public class DoctorPersonalCenterFragment extends Fragment {
     private View        mView;
     private ImageButton ib_doctor_perinfo, ib_doctor_sign, ib_doctor_setting;
+    private MyApplication myApplication;
+    private TextView tv_doctor_username;
 
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_doctor_personal_center, container, false);
+        myApplication = (MyApplication) getApplication();
         initUIComponents();
         return mView;
     }
@@ -32,6 +41,8 @@ public class DoctorPersonalCenterFragment extends Fragment {
      *初始化控件
      */
     private void initUIComponents () {
+        tv_doctor_username=mView.findViewById(R.id.tv_doctor_username);
+        tv_doctor_username.setText(myApplication.getAccount());
         ib_doctor_perinfo = mView.findViewById(R.id.ib_doctor_perinfo);
         ib_doctor_perinfo.setOnClickListener(new addListeners());
         ib_doctor_setting = mView.findViewById(R.id.ib_doctor_setting);
@@ -57,7 +68,14 @@ public class DoctorPersonalCenterFragment extends Fragment {
                     startActivity(new Intent(getActivity(), DoctorSigningActivity.class));
                     break;
                 case R.id.ib_patient_setting:
-                       startActivity(new Intent(getActivity(),DoctorSettingActivity.class));
+                        if (myApplication.getAccount().equals("6"))
+                        {
+                            Toast.makeText(getActivity(),"当前未绑定医生",Toast.LENGTH_LONG);
+                        }
+                        else {
+                            startActivity(new Intent(getActivity(),DoctorSettingActivity.class));
+                        }
+
                     break;
                 default:
                     break;
