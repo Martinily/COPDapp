@@ -4,6 +4,7 @@
     android:id="@+id/view_dialog_medical_history"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout

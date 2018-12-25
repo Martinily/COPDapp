@@ -166,12 +166,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 break;
                         }
                         showToast(err);
+                        progressDialog.dismiss();
                     });
                 }
 
                 @Override
                 public void onProgress (int progress, String status) {
                     runOnUiThread(() -> showToast("网络连接失败！"));
+                    progressDialog.dismiss();
                 }
             });
         }
@@ -220,6 +222,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 jsonObject.getString("docAddress"),
                                                 jsonObject.getString("docCompany"),
                                                 jsonObject.getString("docTitle")));
+                                myApplication.setUserType("d");
+                                myApplication.setCallReceiver("d");
                                 startActivity(new Intent(LoginActivity.this,
                                         DoctorBottomActivity.class));
                                 finish();
@@ -235,6 +239,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 jsonObject.getString("HistoryCondition"),
                                                 jsonObject.getString("HistoryAdvice"),
                                                 jsonObject.getString("docID")));
+                                myApplication.setUserType("p");
+                                myApplication.setCallReceiver("p");
                                 startActivity(new Intent(LoginActivity.this,
                                         PatientBottomActivity.class));
                                 finish();
@@ -256,6 +262,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             progressDialog.dismiss();
         }).start();
+
     }
 
     public void rememberPassword () {

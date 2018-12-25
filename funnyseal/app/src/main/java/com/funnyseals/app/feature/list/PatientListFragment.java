@@ -22,7 +22,6 @@ import java.util.Objects;
 public class PatientListFragment extends Fragment {
     private View                   mView;
     private SwipeMenuListView      mPatientlist;
-    private PatientListItemAdapter mAdapter;
     private List<User>             mUsers;
 
     @Override
