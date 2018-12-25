@@ -14,14 +14,13 @@ import com.funnyseals.app.model.User;
 
 import java.util.List;
 
-/**
- * <pre>
- *     author : marin
- *     time   : 2018/11/30
- *     desc   :
- *     version: 1.0
- * </pre>
+/*author:marin
+ *time:2018/11/30
+ *desc:
+ *version:1.0
+ *</pre>
  */
+
 public class PatientListItemAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 

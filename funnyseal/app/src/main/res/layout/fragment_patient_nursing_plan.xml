@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".feature.patientNursingPlan.PatientNursingPlanFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/teal"
-        android:clickable="true"
-        android:focusable="true">
+        android:clickable="true">
 
         <Button
             android:id="@+id/patienthistory"
@@ -67,6 +67,6 @@
         android:id="@+id/vp_patient_myViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="护理计划" />
+        android:layout_weight="1" />
 
 </LinearLayout>

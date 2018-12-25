@@ -70,7 +70,7 @@ public class DoctorOneFragment extends Fragment {
                         .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                     // your action here
                     mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources()
-                            .getDrawable(R.drawable.ic_expand_less_black_24dp), null);
+                            .getDrawable(R.drawable.ic_nadown), null);
                     ShowListPopulWindow();
                     return true;
                 }

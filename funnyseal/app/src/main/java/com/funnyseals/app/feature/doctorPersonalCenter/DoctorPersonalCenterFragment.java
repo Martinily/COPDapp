@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorPersonalCenter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,8 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.patientPersonalCenter.PatientSetting;
+import com.funnyseals.app.model.User;
+import com.koushikdutta.ion.builder.Builders;
+
+import static com.mob.tools.utils.DeviceHelper.getApplication;
 
 /**
  * 医生端
@@ -19,19 +28,26 @@ import com.funnyseals.app.R;
 public class DoctorPersonalCenterFragment extends Fragment {
     private View        mView;
     private ImageButton ib_doctor_perinfo, ib_doctor_sign, ib_doctor_setting;
+    private MyApplication myApplication;
+    private TextView tv_doctor_username;
+    private User myUser;
 
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_doctor_personal_center, container, false);
+        myApplication = (MyApplication) getApplication();
+        myUser=myApplication.getUser();
         initUIComponents();
         return mView;
     }
 
-    /*
+    /**
      *初始化控件
      */
     private void initUIComponents () {
+        tv_doctor_username=mView.findViewById(R.id.tv_doctor_username);
+        tv_doctor_username.setText(myUser.getName());
         ib_doctor_perinfo = mView.findViewById(R.id.ib_doctor_perinfo);
         ib_doctor_perinfo.setOnClickListener(new addListeners());
         ib_doctor_setting = mView.findViewById(R.id.ib_doctor_setting);
@@ -40,7 +56,7 @@ public class DoctorPersonalCenterFragment extends Fragment {
         ib_doctor_sign.setOnClickListener(new addListeners());
     }
 
-    /*
+    /**
      * 监听按钮
      * 跳转 个人信息
      *      签约
@@ -56,8 +72,8 @@ public class DoctorPersonalCenterFragment extends Fragment {
                 case R.id.ib_doctor_sign:
                     startActivity(new Intent(getActivity(), DoctorSigningActivity.class));
                     break;
-                case R.id.ib_patient_setting:
-                    //   startActivity(new Intent(getActivity(),Pa));
+                case R.id.ib_doctor_setting:
+                    startActivity(new Intent(getActivity(),PatientSetting.class));
                     break;
                 default:
                     break;

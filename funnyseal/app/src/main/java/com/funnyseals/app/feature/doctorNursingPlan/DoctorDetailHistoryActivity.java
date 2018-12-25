@@ -42,6 +42,7 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
     private String       mDoctorId;
     private Button       mPickPatient;//发送给患者的按钮
     private String       mPatientId;//患者id
+    private String       mSuccessSend;
     private List<String> mHistorymedicine_Titles       = new ArrayList<>();
     private List<String> mHistorymedicine_nums         = new ArrayList<>();
     private List<String> mHistorymedicine_attentions   = new ArrayList<>();
@@ -66,10 +67,6 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         mDoctorId = bundle.getString("doctorid");
         mPlanId = bundle.getString("planid");
-        Toast.makeText(DoctorDetailHistoryActivity.this, mPlanId,
-                Toast.LENGTH_SHORT).show();
-        Toast.makeText(DoctorDetailHistoryActivity.this, mDoctorId,
-                Toast.LENGTH_SHORT).show();
 
         //发送护理计划，跳转到患者列表
         mPickPatient = (Button) findViewById(R.id.sendhistory);
@@ -256,7 +253,7 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
         if (requestCode == 1000 && resultCode == 1001) {
             mPatientId = data.getStringExtra("patientid");
 
-            new Thread(() -> {
+            Thread thread =new Thread(() -> {
                 Socket socket;
                 JSONObject jsonObject = new JSONObject();
                 MyApplication application = (MyApplication) DoctorDetailHistoryActivity.this
@@ -277,25 +274,26 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
 
                     socket = SocketUtil.getGetSocket();
                     DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                    dataInputStream = new DataInputStream(socket.getInputStream());
                     String message = dataInputStream.readUTF();
-                    message = dataInputStream.readUTF();
-
                     JSONObject jsonObject3 = new JSONObject(message);
-                    switch (jsonObject3.getString("item_result")) {
-                        case "true":
-                            System.out.println("添加成功!");
-                        case "false":
-                            System.out.println("添加失败!");
-                    }
+                    mSuccessSend=jsonObject3.getString("item_result");
+
                     socket.close();
                 } catch (JSONException | IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
                 Thread.interrupted();
-            }).start();
+            });
+            thread.start();
+            while (thread.isAlive()) {
 
-            System.err.println(mPatientId);
+            }
+
+            if(mSuccessSend.equals("true")) {
+                Toast.makeText(DoctorDetailHistoryActivity.this, "发送成功！", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(DoctorDetailHistoryActivity.this, "发送失败，换个姿势试试~", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

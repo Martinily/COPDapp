@@ -67,6 +67,7 @@ public class PatientBottomActivity extends AppCompatActivity {
                 out.writeUTF(send);
                 out.close();
 
+                Thread.sleep(500);
                 socket = SocketUtil.getInfo();
                 DataInputStream in = new DataInputStream(socket.getInputStream());
                 String message = in.readUTF();
@@ -81,7 +82,7 @@ public class PatientBottomActivity extends AppCompatActivity {
                         myDoctor.getString("docTitle"));
                 socket.close();
 
-            } catch (JSONException | IOException e) {
+            } catch (JSONException | IOException | InterruptedException e) {
                 e.printStackTrace();
             }
             Thread.interrupted();

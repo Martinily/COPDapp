@@ -30,14 +30,23 @@ public class MyApplication extends Application {
     private String       mAccount;
     private User         mUser;
     private Context      context;
-    private Context bottom;
+    private Context      bottom;
+    private String       mUserType;
 
-    public void setBottom(Context bottomActivity){
-        bottom=bottomActivity;
+    public String getUserType () {
+        return mUserType;
     }
 
-    public Context getBottom(){
+    public void setUserType (String type) {
+        mUserType = type;
+    }
+
+    public Context getBottom () {
         return bottom;
+    }
+
+    public void setBottom (Context bottomActivity) {
+        bottom = bottomActivity;
     }
 
     public String getAccount () {
@@ -134,6 +143,10 @@ public class MyApplication extends Application {
             }
         }
         return null;
+    }
+
+    public void setCallReceiver(String type){
+        CallReceiver.setUserType(type);
     }
 }
 

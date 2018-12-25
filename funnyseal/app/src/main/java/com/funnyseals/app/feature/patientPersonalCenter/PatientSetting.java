@@ -22,6 +22,7 @@ public class PatientSetting extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_setting);
+        init();
     }
 
     /**

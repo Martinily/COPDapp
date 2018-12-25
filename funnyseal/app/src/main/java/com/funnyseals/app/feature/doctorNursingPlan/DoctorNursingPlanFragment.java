@@ -1,5 +1,7 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -129,9 +131,15 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
             case R.id.send:   //发送计划
                 if (mPlannum > 0) {
                     if (mWhere.equals("1")) {
-                        mPatientId = mMyFriend;
-                        mWhere="0";
-                        SendPlan();
+                        new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要发送吗？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick (DialogInterface dialog, int which) {
+                                        mPatientId = mMyFriend;
+                                        mWhere="0";
+                                        SendPlan();
+                                    }
+                                }).show();
                     } else {
                         Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);
                         //传输医生编号
@@ -303,7 +311,6 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     //当前添加的总条目数，用于以后判断是否为空计划
     public void ChangemPlannum (int i) {
         mPlannum += i;
-        Toast.makeText(getActivity(), mPlannum + "", Toast.LENGTH_SHORT).show();
     }
 
     //设置一个ViewPager的侦听事件，当左右滑动ViewPager时菜单栏被选中状态跟着改变

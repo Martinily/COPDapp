@@ -20,6 +20,7 @@ import java.util.List;
  */
 public class AddEquipmentAdapter extends ArrayAdapter {
     private final int resourceId;
+    private List<AddEquipment> myEquipment;
 
     public AddEquipmentAdapter (Context context, int textViewResourceId, List<AddEquipment>
             objects) {
@@ -46,12 +47,16 @@ public class AddEquipmentAdapter extends ArrayAdapter {
         TextView EquipmentName = view.findViewById(R.id.add_equipment_name);
         TextView EquipmentState = view.findViewById(R.id.add_equipment_state);
         ImageButton EquipmentDelete=view.findViewById(R.id.add_equipment_delete);
-      //  EquipmentDelete.setOnClickListener(new view.setOnClickListener(this));
+
 
         EquipmentState.setText(addEquipment.getEquipment_state());
         EquipmentName.setText(addEquipment.getEquipment_name());
         return view;
     }
-
+    //删除按钮操作
+    private void deleteButtonAction (int position) {
+        myEquipment.remove(position);
+        notifyDataSetChanged();
+    }
 
 }

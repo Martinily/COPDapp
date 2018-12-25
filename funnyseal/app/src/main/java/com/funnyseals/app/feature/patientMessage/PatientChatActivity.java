@@ -33,7 +33,6 @@ public class PatientChatActivity extends AppCompatActivity implements EMMessageL
 
     private User   mMyDoctor;
     private String mDoctorAccount;
-    private String mMyAccount;
 
     private ChatMessageAdapter mCurrentChatadapter;
     private List<EMMessage>    mMessageList;
@@ -68,9 +67,7 @@ public class PatientChatActivity extends AppCompatActivity implements EMMessageL
     }
 
     private void init () {
-        mMyDoctor = (User) getIntent().getSerializableExtra("myDoctor");
-        mMyAccount = getIntent().getStringExtra("myAccount");
-        mDoctorAccount = mMyDoctor.getAccount();
+        mDoctorAccount = getIntent().getStringExtra("myDoctorAccount");
 
         initView();
         addListener();
@@ -85,7 +82,11 @@ public class PatientChatActivity extends AppCompatActivity implements EMMessageL
         mVioce = findViewById(R.id.ibtn_patient_vioce);
 
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.tb_patient_chat_toolbar);
-        String doctorName = mMyDoctor.getName();
+        String doctorName = getIntent().getStringExtra("myDoctorName");
+        if(doctorName.equals("医生")){
+            doctorName=mDoctorAccount;
+        }
+
         toolbar.setTitle(doctorName);
 
         setSupportActionBar(toolbar);

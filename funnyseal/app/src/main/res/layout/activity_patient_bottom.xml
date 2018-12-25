@@ -23,7 +23,7 @@
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
-            android:background="@color/ivory"
+            android:background="@color/lightsteelblue"
             android:orientation="horizontal">
 
             <RadioGroup

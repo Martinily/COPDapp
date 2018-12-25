@@ -2,9 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2200ce6-5f46-4666-b068-479e74f272c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/MessageItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/MessageItemAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/PatientListItemAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/PatientListItemAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/SignupActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/custom_view/Portrait.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/MyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/bottomtab/DoctorBottomActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/bottomtab/DoctorBottomActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/bottomtab/PatientBottomActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/bottomtab/PatientBottomActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/CallReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/CallReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorChatActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorChatActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorVideoCallActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/doctorMessage/DoctorVideoCallActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/PatientListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/PatientListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/UserInfoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/feature/list/UserInfoActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/java/com/funnyseals/app/util/SocketUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_doctor_video_call.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/activity_doctor_video_call.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/view_dialog_medical_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../funnyseal/app/src/main/res/layout/view_dialog_medical_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/team_project/com/funnyseals/server/DatabaseConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,13 +37,14 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/Login.java">
+        <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
+            <state relative-caret-position="509">
+              <caret line="34" column="40" lean-forward="true" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#login#0;class#Login#0" expanded="true" />
+                <element signature="method#GetConnection#0;class#DatabaseConnect#0" expanded="true" />
+                <element signature="method#SqlExecuteUpdate#0;class#DatabaseConnect#0" expanded="true" />
+                <element signature="method#SqlExecuteBatch#0;class#DatabaseConnect#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,17 +113,17 @@
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/InputDeal.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/PasswordModify.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java" />
-        <option value="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/ReturnMessage.java" />
         <option value="$PROJECT_DIR$/src/com/funnyseals/server/Login.java" />
+        <option value="$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-1564" />
-    <option name="y" value="113" />
-    <option name="width" value="1225" />
-    <option name="height" value="1100" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1098" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -131,20 +147,20 @@
               <item name="team_project" type="b2602c69:ProjectViewProjectNode" />
               <item name="team_project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545363602632" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545569440635" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -280,18 +296,19 @@
       <workItem from="1545311542927" duration="1601000" />
       <workItem from="1545356739710" duration="6339000" />
       <workItem from="1545368524398" duration="4757000" />
-      <workItem from="1545455983456" duration="1021000" />
+      <workItem from="1545455983456" duration="1023000" />
+      <workItem from="1545567887683" duration="1591000" />
+      <workItem from="1545629629062" duration="116000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148048000" />
+    <option name="totallyTimeSpent" value="149757000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1927" y="-7" width="1550" height="878" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.26072386" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4962162" visible="true" weight="0.26705757" />
       <window_info id="Structure" order="1" weight="0.18869936" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -300,7 +317,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.95526695" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.95526695" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -607,20 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="89" lean-forward="true" selection-start-line="14" selection-start-column="89" selection-end-line="14" selection-end-column="89" />
-          <folding>
-            <element signature="method#SqlExecuteQuery#0;class#DatabaseConnect#0" expanded="true" />
-            <element signature="e#2162#2229#0" expanded="true" />
-            <element signature="e#2162#2229#0" expanded="true" />
-            <element signature="method#SqlExecuteUpdate#0;class#DatabaseConnect#0" expanded="true" />
-            <element signature="method#SqlExecuteBatch#0;class#DatabaseConnect#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/ListenSocket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -835,6 +838,18 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#login#0;class#Login#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/funnyseals/server/DatabaseConnect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="34" column="40" lean-forward="true" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
+          <folding>
+            <element signature="method#GetConnection#0;class#DatabaseConnect#0" expanded="true" />
+            <element signature="method#SqlExecuteUpdate#0;class#DatabaseConnect#0" expanded="true" />
+            <element signature="method#SqlExecuteBatch#0;class#DatabaseConnect#0" expanded="true" />
           </folding>
         </state>
       </provider>

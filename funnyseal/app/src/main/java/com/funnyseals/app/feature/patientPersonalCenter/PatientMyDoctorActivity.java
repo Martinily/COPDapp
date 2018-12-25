@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
-import com.funnyseals.app.feature.doctorMessage.DoctorChatActivity;
+import com.funnyseals.app.feature.patientMessage.PatientChatActivity;
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.SocketUtil;
 
@@ -27,13 +27,13 @@ import java.net.Socket;
  */
 public class PatientMyDoctorActivity extends AppCompatActivity {
 
-    private TextView tv_patient_doctor_name, tv_patient_doctor_hospital, tv_patient_doctor_post;
+    private TextView tv_patient_doctor_name, tv_patient_doctor_hospital, tv_patient_doctor_post,tv_patient_doctor_age,tv_patient_doctor_sex;
     private ImageButton   ib_patient_doctor_return;
     private Button        bt_patient_mydoctor_chat;
     private MyApplication myApplication;
     private String        myDoctor = "";
     private User          myUser;
-    private String        name, hosptial, post;
+    private String        name, hosptial, post,age,sex;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -49,8 +49,10 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
      */
     void init () {
         tv_patient_doctor_name = findViewById(R.id.tv_patient_doctor_name);
-        tv_patient_doctor_hospital = findViewById(R.id.tv_patient_doctor_hospital);
-        tv_patient_doctor_post = findViewById(R.id.tv_patient_doctor_post);
+        tv_patient_doctor_hospital = findViewById(R.id.tv_patient_doctor_myhospital);
+        tv_patient_doctor_post = findViewById(R.id.tv_patient_doctor_mypost);
+        tv_patient_doctor_age=findViewById(R.id.tv_patient_doctor_myage);
+        tv_patient_doctor_sex=findViewById(R.id.tv_patient_doctor_mysex);
 
         ib_patient_doctor_return = findViewById(R.id.ib_patient_doctor_return);
         ib_patient_doctor_return.setOnClickListener(new addListeners());
@@ -86,6 +88,9 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                 name = jsonObject.get("docName").toString();
                 hosptial = jsonObject.get("docCompany").toString();
                 post = jsonObject.get("docTitle").toString();
+                age=jsonObject.get("docAge").toString();
+                sex=jsonObject.getString("docSex");
+
 
                 socket.close();
                 Thread.interrupted();
@@ -100,6 +105,8 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         tv_patient_doctor_name.setText(name);
         tv_patient_doctor_post.setText(post);
         tv_patient_doctor_hospital.setText(hosptial);
+        tv_patient_doctor_age.setText(age);
+        tv_patient_doctor_sex.setText(sex);
 
     }
 
@@ -117,9 +124,10 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.bt_patient_mydoctor_chat:
-                    Intent intent = new Intent(PatientMyDoctorActivity.this, DoctorChatActivity
+                    Intent intent = new Intent(PatientMyDoctorActivity.this, PatientChatActivity
                             .class);
-                    intent.putExtra("myfriend", myDoctor);
+                    intent.putExtra("myDoctorAccount", myDoctor);
+                    intent.putExtra("myDoctorName", name);
                     startActivity(intent);
                     break;
                 default:
