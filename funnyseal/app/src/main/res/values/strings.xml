@@ -48,12 +48,13 @@
     <string name="healthcenter_projectcaculate">FEV1/FVC:</string>
     <string name="notice">正常范围：FEV1/FVC>70%</string>
     <string name="healthcenter_unit">ml</string>
+    <string name="healthcenter_center1">健康中心</string>
     <string name="healthcenter_center2">更新数据</string>
     <string name="healthcenter_center3">历史数据</string>
     <string name="healthcenter_cancel">取消</string>
     <string name="healthcenter_submit">提交</string>
     <string name="healthcenter_returnback">返回</string>
-    <string name="healthcenter_defaultdata">0ml</string>
+    <string name="healthcenter_choosedate">选择日期:</string>
     
     <!--***************************患者列表*********************** -->
     <string name="patientlist_title">患者列表</string>

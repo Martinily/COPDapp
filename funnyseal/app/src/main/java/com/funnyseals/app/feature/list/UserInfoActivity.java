@@ -25,6 +25,8 @@ public class UserInfoActivity extends AppCompatActivity {
     private TextView mTvSex;
     private TextView mTvAge;
     private TextView mTvAddress;
+    private TextView mTvHistory;
+    private TextView mTvOrder;
 
     private User mMyPatient;
 
@@ -46,6 +48,8 @@ public class UserInfoActivity extends AppCompatActivity {
         mTvSex = findViewById(R.id.patientsex);
         mTvAge = findViewById(R.id.patientage);
         mTvAddress = findViewById(R.id.patientlocation);
+        mTvHistory = findViewById(R.id.patientmedicalhistory);
+        mTvOrder = findViewById(R.id.patientmedicalorder);
     }
 
     private void initData () {
@@ -53,6 +57,8 @@ public class UserInfoActivity extends AppCompatActivity {
         mTvSex.setText(mMyPatient.getSex());
         mTvAge.setText(String.valueOf(mMyPatient.getAge()));
         mTvAddress.setText(mMyPatient.getAddress());
+        mTvHistory.setText(mMyPatient.getMedicalHistory());
+        mTvOrder.setText(mMyPatient.getMedicalOrder());
     }
 
     private void addListener () {
