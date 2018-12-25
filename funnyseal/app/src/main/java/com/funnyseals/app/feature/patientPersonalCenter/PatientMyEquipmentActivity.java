@@ -62,6 +62,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         bt_patient_equipment_add = findViewById(R.id.bt_patient_equipment_add);
         bt_patient_equipment_add.setOnClickListener(new addListeners());
         bt_patient_equipment_return.setOnClickListener(new addListeners());
+
     }
 
     /**
