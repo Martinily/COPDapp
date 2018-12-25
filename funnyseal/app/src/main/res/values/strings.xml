@@ -65,6 +65,8 @@
     <string name="patientlist_age">年龄</string>
     <string name="patientlist_account">账号</string>
     <string name="patientlist_location">所在地</string>
+    <string name="patientlist_medicalhistory">病情</string>
+    <string name="patientlist_medicalorder">医嘱</string>
     <string name="patientlist_returnback">返回</string>
     <string name="patientlist_sendmessage">消息</string>
 

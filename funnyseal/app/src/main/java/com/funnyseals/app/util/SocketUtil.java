@@ -12,7 +12,7 @@ import java.net.Socket;
  * </pre>
  */
 public class SocketUtil {
-    private static final String IP_ADDR          = "192.168.1.247";//服务器地址  这里要改成服务器的ip
+    private static final String IP_ADDR          = "140.143.70.205";//服务器地址  这里要改成服务器的ip
     private static final int    PORT_SEND        = 2018;//服务器端口号
     private static final int    PORT_GET         = 2019;//服务器端口号
     private static final int    PORT_ARRAY_SEND  = 2020;
