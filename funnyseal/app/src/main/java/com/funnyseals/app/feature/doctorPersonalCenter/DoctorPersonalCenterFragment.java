@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorPersonalCenter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.patientPersonalCenter.PatientSetting;
 import com.funnyseals.app.model.User;
 import com.koushikdutta.ion.builder.Builders;
 
@@ -40,7 +42,7 @@ public class DoctorPersonalCenterFragment extends Fragment {
         return mView;
     }
 
-    /*
+    /**
      *初始化控件
      */
     private void initUIComponents () {
@@ -54,7 +56,7 @@ public class DoctorPersonalCenterFragment extends Fragment {
         ib_doctor_sign.setOnClickListener(new addListeners());
     }
 
-    /*
+    /**
      * 监听按钮
      * 跳转 个人信息
      *      签约
@@ -70,8 +72,8 @@ public class DoctorPersonalCenterFragment extends Fragment {
                 case R.id.ib_doctor_sign:
                     startActivity(new Intent(getActivity(), DoctorSigningActivity.class));
                     break;
-                case R.id.ib_patient_setting:
-                    startActivity(new Intent(getActivity(),DoctorSettingActivity.class));
+                case R.id.ib_doctor_setting:
+                    startActivity(new Intent(getActivity(),PatientSetting.class));
                     break;
                 default:
                     break;
