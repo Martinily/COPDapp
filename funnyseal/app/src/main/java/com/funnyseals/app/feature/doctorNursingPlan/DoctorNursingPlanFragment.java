@@ -311,7 +311,6 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     //当前添加的总条目数，用于以后判断是否为空计划
     public void ChangemPlannum (int i) {
         mPlannum += i;
-        Toast.makeText(getActivity(), mPlannum + "", Toast.LENGTH_SHORT).show();
     }
 
     //设置一个ViewPager的侦听事件，当左右滑动ViewPager时菜单栏被选中状态跟着改变
