@@ -1,134 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".feature.health.HealthCenterHistoryActivity">
 
-    <TextView
-        android:id="@+id/titleofcentre3"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:gravity="center"
-        android:text="@string/healthcenter_center3"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/history"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleofcentre3"></Spinner>
+        android:background="@color/teal"
+        android:clickable="true"
+        android:focusable="true">
 
-    <TextView
-        android:id="@+id/text1"
+        <Button
+            android:id="@+id/gotocentre1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/teal"
+            android:text="返回"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:gravity="center"
+            android:text="历史数据"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/healthcenter_project1"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/history" />
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="选择日期:"
+            android:textSize="20sp" />
+        <Spinner
+            android:id="@+id/history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </Spinner>
 
-    <TextView
-        android:id="@+id/data1"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text=""
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text1" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/unit1"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/healthcenter_unit"
-        android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/data1"
-        app:layout_constraintTop_toBottomOf="@id/text1" />
 
-    <TextView
-        android:id="@+id/text2"
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/lungv" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/healthcenter_project2"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data1" />
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/data2"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text=""
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text2" />
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/healthcenter_project1"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/unit2"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/healthcenter_unit"
-        android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/data2"
-        app:layout_constraintTop_toBottomOf="@id/text2" />
+        <TextView
+            android:id="@+id/data1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="     "
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/text3"
+        <TextView
+            android:id="@+id/unit1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/healthcenter_unit"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/healthcenter_project3"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data2" />
+        android:layout_height="1dp"
+        android:background="#d7d7d7" />
 
-    <TextView
-        android:id="@+id/data3"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text=""
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text3" />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/lungair" />
 
-    <TextView
-        android:id="@+id/unit3"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/healthcenter_unit"
-        android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/data3"
-        app:layout_constraintTop_toBottomOf="@id/text3" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/gotocentre1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/healthcenter_returnback"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data3" />
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/healthcenter_project2"
+            android:textSize="20sp" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/data2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/unit2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/healthcenter_unit"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d7d7d7" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/lung" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/healthcenter_project3"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/data3"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/unit3"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/healthcenter_unit"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,6 +1,5 @@
 package com.funnyseals.app.feature.bottomtab;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toolbar;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
@@ -32,23 +30,25 @@ import java.util.List;
 
 public class DoctorBottomActivity extends AppCompatActivity {
 
-    private Toolbar                mToolbar;
-    private RadioButton            mIndexTab;
-    private int                    mPreviousTabId;
+    private RadioButton mIndexTab;
+
+    private int        mPreviousTabId;
+    private String     mMyPatient;
+    private List<User> mAllMyPatient;
+
     private DoctorBottomTabAdapter mFragmentTabAdapter;
-    private List<User>             mAllMyPatient;
     private MyApplication          myApplication;
-    private String                 myFriend;
-    private Context                bottomActivty;
+
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_bottom);
+
         myApplication = (MyApplication) getApplication();
-        myFriend = "0";
-        bottomActivty=this;
-        myApplication.setBottom(bottomActivty);
+        myApplication.setBottom(this);
+        mMyPatient = "0";
+
         initData();
         initBottomTabs();
     }
@@ -104,7 +104,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
             }
         });
         thread.start();
-        while (thread.isAlive()){
+        while (thread.isAlive()) {
 
         }
     }
@@ -142,19 +142,19 @@ public class DoctorBottomActivity extends AppCompatActivity {
     }
 
     public String getMyFriend () {
-        return myFriend;
+        return mMyPatient;
     }
 
-    public void setMyFriend (String myFriend) {
-        this.myFriend = myFriend;
+    public void setMyFriend (String myPatient) {
+        this.mMyPatient = myPatient;
     }
 
     public void showPrevious () {
         showFragmentTab(mPreviousTabId);
     }
 
-    public void toNursingPlan(){
-        ((RadioButton)findViewById(R.id.doctor_nursingPlan_tab)).setChecked(true);
+    public void toNursingPlan () {
+        ((RadioButton) findViewById(R.id.doctor_nursingPlan_tab)).setChecked(true);
     }
 
     private class BottomTabBar extends DoctorBottomTabAdapter {

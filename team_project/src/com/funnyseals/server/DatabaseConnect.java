@@ -12,7 +12,7 @@ public interface DatabaseConnect {
     static Connection GetConnection() {
         Connection connection = null;
         String dbClassName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://140.143.70.205:3306/team?rewriteBatchedStatements=true&useSSL=true";
+        String url = "jdbc:mysql://10.65.22.198:3306/team?rewriteBatchedStatements=true&useSSL=true";
         String user = "root";
         String password = "WEIxin20131242";
         try {
