@@ -71,7 +71,7 @@ public class PatientPersonalCenterFragment extends Fragment {
                     startActivity(new Intent(getActivity(), PatientMyInfoModifyActivity.class));
                     break;
                 case R.id.ib_patient_doctor:
-                    if (myUser.getMyDoctor().equals("6"))
+                    if (myUser.getMyDoctor().equals(6))
                     {
                         Toast.makeText(getActivity(),"当前未绑定医生",Toast.LENGTH_LONG);
                     }
