@@ -33,7 +33,7 @@ import java.net.Socket;
  */
 public class DoctorMyInfoModifyActivity extends AppCompatActivity {
 
-    private String et1 = "", et2 = "", et3 = "", et4 = "", et5 = "", et6 = "",et7="";
+    private String et1 = "", et2 = "", et3 = "", et4 = "", et5 = "", et6 = "";
     private EditText et_doctor_modify_myname, et_doctor_modify_mysex, et_doctor_modify_myage,
            et_doctor_modify_myhospital, et_doctor_modify_mypost;
     private Button      bt_doctor_modify_complete;
@@ -41,7 +41,7 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
     private Intent        intent1;
     private User          myUser;
     private MyApplication myApplication;
-    private TextView  et_doctor_modify_mylocation,tv_doctor_modify_myaccount;
+    private TextView  et_doctor_modify_mylocation,tv_doctor_modify_myaccount,tv_doctor_modify_mytime;
     private CityPicker cityPicker;
 
 
@@ -66,6 +66,7 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
         et_doctor_modify_mysex = findViewById(R.id.et_doctor_modify_mysex);
         et_doctor_modify_mylocation = findViewById(R.id.et_doctor_modify_mylocation);
         et_doctor_modify_mypost = findViewById(R.id.et_doctor_modify_mypost);
+        tv_doctor_modify_mytime =findViewById(R.id.tv_doctor_modify_mytime);
         tv_doctor_modify_myaccount=findViewById(R.id.tv_doctor_modify_myaccount);
 
         et_doctor_modify_myage.setText(String.valueOf(myUser.getAge()));
@@ -75,6 +76,8 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
         et_doctor_modify_mylocation.setText(myUser.getAddress());
         et_doctor_modify_mypost.setText(myUser.getPosition());
         tv_doctor_modify_myaccount.setText(myUser.getAccount());
+        tv_doctor_modify_mytime.setText(myUser.getRegisterTime());
+
         et_doctor_modify_mylocation.setOnClickListener(new addListeners());
         ib_doctor_modify_return = findViewById(R.id.ib_doctor_modify_return);
         ib_doctor_modify_return.setOnClickListener(new addListeners());
@@ -189,7 +192,6 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                     et4 = et_doctor_modify_mypost.getText().toString().trim();
                     et5 = et_doctor_modify_mysex.getText().toString().trim();
                     et6 = et_doctor_modify_mylocation.getText().toString().trim();
-                    et7=tv_doctor_modify_myaccount.getText().toString().trim();
 
                     //连接服务器操作
                     Thread thread = new Thread(() -> {
@@ -197,6 +199,15 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                         Socket socket;
                         try {
                             JSONObject jsonObject = new JSONObject();
+<<<<<<< HEAD
+                            jsonObject.put("dID", myApplication.getAccount());
+                            jsonObject.put("dName", et1);
+                            jsonObject.put("dAge", et2);
+                            jsonObject.put("dCompany", et3);
+                            jsonObject.put("dPosition", et4);
+                            jsonObject.put("dSex", et5);
+                            jsonObject.put("dAddress", et6);
+=======
                             jsonObject.put("docID", myApplication.getAccount());
                             jsonObject.put("docName", et1);
                             jsonObject.put("docAge", et2);
@@ -205,6 +216,7 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             jsonObject.put("docSex", et5);
                             jsonObject.put("docAddress", et6);
                             jsonObject.put("docAccount",et7);
+>>>>>>> caa79169ccfdacac92034216a9cd9f45d61fd579
                             jsonObject.put("request_type", "7");
                             jsonObject.put("user_type", "d");
                             send = jsonObject.toString();
@@ -228,12 +240,13 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                                     myUser.setPosition(et4);
                                     myUser.setAge(Integer.parseInt(et2));
                                     myUser.setAddress(et6);
-                                    myUser.setAccount(et7);
+                                    Looper.prepare();
+                                    Toast.makeText(DoctorMyInfoModifyActivity.this, "修改成功", Toast
+                                            .LENGTH_LONG).show();
+                                    Looper.loop();
                                     break;
                                 case "失败":
-                                    Looper.prepare();
-                                  Toast.makeText(DoctorMyInfoModifyActivity.this,"数据更新失败",Toast.LENGTH_LONG);
-                                  Looper.loop();
+                                   showToast("数据更新失败");
                                     break;
 
                             }

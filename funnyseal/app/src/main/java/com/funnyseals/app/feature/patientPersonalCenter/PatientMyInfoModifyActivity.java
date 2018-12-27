@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.doctorPersonalCenter.DoctorPasswordActivity;
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.SocketUtil;
 import com.lljjcoder.citypickerview.widget.CityPicker;
@@ -33,8 +34,7 @@ import java.net.Socket;
  */
 public class PatientMyInfoModifyActivity extends AppCompatActivity {
 
-    private EditText ed_patient_modify_myname, ed_patient_modify_mysex, ed_patient_modify_myage
-          ;
+    private EditText ed_patient_modify_myname, ed_patient_modify_mysex, ed_patient_modify_myage;
     private TextView tv_patient_info_account, tv_patient_modify_mysettlingtime,  ed_patient_modify_location;
     private Button bt_patient_modify_complete;
     private String et1, et2, et3, et4;
@@ -123,13 +123,9 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
             @Override
             public void onSelected(String... citySelected) {
                 String province = citySelected[0];
-
                 String city = citySelected[1];
-
                 String district = citySelected[2];
-
                 ed_patient_modify_location.setText(province+city+district);
-
             }
 
             @Override
@@ -210,11 +206,14 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                                     myUser.setSex(et3);
                                     myUser.setAge(Integer.parseInt(et2));
                                     myUser.setAddress(et4);
+                                    Looper.prepare();
+                                    Toast.makeText(PatientMyInfoModifyActivity.this, "修改成功", Toast
+                                            .LENGTH_LONG).show();
+                                    Looper.loop();
                                     break;
                                 case "失败":
                                     Looper.prepare();
                                     Toast.makeText(PatientMyInfoModifyActivity.this,"数据更新失败",Toast.LENGTH_LONG);
-                                    Looper.loop();
                                     Looper.loop();
                                     break;
 

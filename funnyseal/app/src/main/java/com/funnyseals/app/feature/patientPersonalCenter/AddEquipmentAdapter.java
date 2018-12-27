@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.model.AddEquipment;
@@ -48,6 +49,10 @@ public class AddEquipmentAdapter extends ArrayAdapter {
         TextView EquipmentState = view.findViewById(R.id.add_equipment_state);
         ImageButton EquipmentDelete=view.findViewById(R.id.add_equipment_delete);
 
+        final int removePosition = position;
+        EquipmentDelete.setOnClickListener(v -> {
+            deleteButtonAction(removePosition);
+        });
 
         EquipmentState.setText(addEquipment.getEquipment_state());
         EquipmentName.setText(addEquipment.getEquipment_name());
@@ -58,5 +63,6 @@ public class AddEquipmentAdapter extends ArrayAdapter {
         myEquipment.remove(position);
         notifyDataSetChanged();
     }
+
 
 }
