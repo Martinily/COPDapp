@@ -52,11 +52,9 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
     private List<String> mSports_Contents   = new ArrayList<>();  //时长
     private List<String> mSports_attentions = new ArrayList<>();//注意事项
 
-
     public void onResume () {
         super.onResume();
     }
-
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle
@@ -183,7 +181,6 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
                 break;
         }
     }
-
 
     private void initView () {
         mTv_patient_one = getActivity().findViewById(R.id.tv_patient_one);

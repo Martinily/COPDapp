@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -73,13 +74,15 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
         mPickPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Intent intent = new Intent(DoctorDetailHistoryActivity.this, PickPatientActivity
-                        .class);
-                //传输医生编号
-                Bundle bundle = new Bundle();
-                bundle.putString("DoctorID", mDoctorId);//医生id
-                intent.putExtras(bundle);
-                startActivityForResult(intent, 1000);
+                if(BtnClickLimitUtil.isFastClick()){
+                    Intent intent = new Intent(DoctorDetailHistoryActivity.this, PickPatientActivity
+                            .class);
+                    //传输医生编号
+                    Bundle bundle = new Bundle();
+                    bundle.putString("DoctorID", mDoctorId);//医生id
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, 1000);
+                }
             }
         });
 

@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
@@ -185,10 +184,6 @@ public class PatientHistoryActivity extends AppCompatActivity {
                     bundle.putCharSequence("patientid", mPatientID);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    Toast.makeText(PatientHistoryActivity.this, sickerhistory_list.get(position)
-                                    .get("sickerplanid").toString(),
-                            Toast.LENGTH_SHORT).show();
-
                 }
             });
             return view;
