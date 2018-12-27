@@ -10,15 +10,55 @@
         android:layout_height="wrap_content"
         tools:context=".feature.list.UserInfoActivity">
 
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/top"
+            android:background="@color/teal">
+
+            <Button
+                android:id="@+id/gotomainlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:text="@string/patientlist_returnback"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="28sp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:text="@string/patientlist_info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                android:id="@+id/sendmessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:text="@string/patientlist_sendmessage"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
         <TextView
             android:id="@+id/phototext"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:gravity="center_vertical"
             android:text="@string/patientlist_photo"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/top" />
 
         <ImageView
             android:id="@+id/headphoto"
@@ -26,13 +66,13 @@
             android:layout_height="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top"
             app:srcCompat="@drawable/vector_drawable_user" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
+            android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/headphoto"/>
 
         <TextView
@@ -41,7 +81,7 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:text="@string/patientlist_name"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/phototext" />
 
@@ -49,7 +89,7 @@
             android:id="@+id/patientname"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/headphoto" />
@@ -57,8 +97,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
-            app:layout_constraintTop_toBottomOf="@id/patientname"/>
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/patientname" />
 
         <TextView
             android:id="@+id/sextext"
@@ -66,7 +106,7 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:text="@string/patientlist_sex"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nametext" />
 
@@ -74,7 +114,7 @@
             android:id="@+id/patientsex"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/patientname" />
@@ -82,7 +122,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
+            android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/patientsex"/>
 
         <TextView
@@ -91,7 +131,7 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:text="@string/patientlist_age"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sextext" />
 
@@ -99,7 +139,7 @@
             android:id="@+id/patientage"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/patientsex" />
@@ -107,7 +147,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
+            android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/patientage"/>
 
         <TextView
@@ -116,7 +156,7 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:text="@string/patientlist_account"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/agetext" />
 
@@ -124,7 +164,7 @@
             android:id="@+id/patientaccount"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/patientage" />
@@ -132,7 +172,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
+            android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/patientaccount"/>
 
         <TextView
@@ -141,7 +181,7 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:text="@string/patientlist_location"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/accounttext" />
 
@@ -149,39 +189,52 @@
             android:id="@+id/patientlocation"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/patientaccount" />
 
         <View
+            android:id="@+id/divide"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/lightgray"
+            app:layout_constraintTop_toBottomOf="@id/patientlocation"/>
+
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
+            android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/patientlocation"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toTopOf="@id/patientmedicalhistory"/>
 
         <TextView
             android:id="@+id/medicalhistorytext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/patientlist_medicalhistory"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/locationtext" />
+            app:layout_constraintTop_toBottomOf="@id/divide" />
 
         <TextView
             android:id="@+id/patientmedicalhistory"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            app:layout_constraintTop_toBottomOf="@id/patientlocation"
+            android:textSize="25sp"
+            app:layout_constraintTop_toBottomOf="@id/divide"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
+            android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/patientmedicalhistory"/>
 
         <TextView
@@ -189,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/patientlist_medicalorder"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@id/patientmedicalhistory"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -198,37 +251,16 @@
             android:id="@+id/patientmedicalorder"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintTop_toBottomOf="@id/patientmedicalhistory"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"
+            android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/patientmedicalorder"/>
 
-        <Button
-            android:id="@+id/gotomainlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/patientlist_returnback"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toStartOf="@id/sendmessage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/patientmedicalorder"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <Button
-            android:id="@+id/sendmessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/patientlist_sendmessage"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gotomainlist"
-            app:layout_constraintTop_toBottomOf="@id/patientmedicalorder"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 

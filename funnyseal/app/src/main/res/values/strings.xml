@@ -58,6 +58,7 @@
     
     <!--***************************患者列表*********************** -->
     <string name="patientlist_title">患者列表</string>
+    <string name="patientlist_info">患者信息</string>
     <string name="patientlist_photo">头像</string>
     <string name="patientlist_name">姓名</string>
     <string name="patientlist_sex">性别</string>
