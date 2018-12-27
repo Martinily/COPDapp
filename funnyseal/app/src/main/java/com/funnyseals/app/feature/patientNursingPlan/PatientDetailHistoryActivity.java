@@ -258,13 +258,10 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
                                             Thread.sleep(1000);
 
                                             socket = SocketUtil.getGetSocket();
-                                            DataInputStream dataInputStream = new DataInputStream
-                                                    (socket.getInputStream());
-                                            dataInputStream = new DataInputStream(socket.getInputStream());
+                                            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                                             String message = dataInputStream.readUTF();
-
                                             JSONObject jsonObject3 = new JSONObject(message);
-                                            mJudgesubmmit=jsonObject3.getString("item_result");
+                                            mJudgesubmmit=jsonObject3.getString("update_result");
                                             System.err.println(mJudgesubmmit);
                                             socket.close();
                                         } catch (JSONException | IOException | InterruptedException e) {
