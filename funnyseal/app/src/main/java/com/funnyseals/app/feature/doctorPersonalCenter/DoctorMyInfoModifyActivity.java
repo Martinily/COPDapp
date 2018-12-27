@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
-import com.funnyseals.app.feature.patientPersonalCenter.PatientMyInfoModifyActivity;
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.SocketUtil;
 import com.lljjcoder.citypickerview.widget.CityPicker;
@@ -198,14 +197,14 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                         Socket socket;
                         try {
                             JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("dID", myApplication.getAccount());
-                            jsonObject.put("dName", et1);
-                            jsonObject.put("dAge", et2);
-                            jsonObject.put("dCompany", et3);
-                            jsonObject.put("dPosition", et4);
-                            jsonObject.put("dSex", et5);
-                            jsonObject.put("dAddress", et6);
-                            jsonObject.put("dAccount",et7);
+                            jsonObject.put("docID", myApplication.getAccount());
+                            jsonObject.put("docName", et1);
+                            jsonObject.put("docAge", et2);
+                            jsonObject.put("docCompany", et3);
+                            jsonObject.put("docTitle", et4);
+                            jsonObject.put("docSex", et5);
+                            jsonObject.put("docAddress", et6);
+                            jsonObject.put("docAccount",et7);
                             jsonObject.put("request_type", "7");
                             jsonObject.put("user_type", "d");
                             send = jsonObject.toString();
@@ -214,6 +213,7 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             out.writeUTF(send);
                             out.close();
 
+                            Thread.sleep(1000);
                             socket = SocketUtil.setPort(2019);
                             DataInputStream dataInputStream = new DataInputStream(socket
                                     .getInputStream());
@@ -240,6 +240,8 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             socket.close();
                             Thread.interrupted();
                         } catch (IOException | JSONException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     });
