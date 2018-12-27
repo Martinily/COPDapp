@@ -26,7 +26,7 @@ public class HealthCenterHistoryActivity extends AppCompatActivity {
         TextView m_data3 = findViewById(R.id.data3);
         Button button = findViewById(R.id.gotocentre1);
         //设置选择框
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
                 .simple_spinner_dropdown_item, m_time);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -43,12 +43,7 @@ public class HealthCenterHistoryActivity extends AppCompatActivity {
             }
         });
         //设置返回按钮
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                finish();
-            }
-        });
+        button.setOnClickListener(v -> finish());
     }
 }
 

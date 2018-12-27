@@ -1,6 +1,5 @@
 package com.funnyseals.app.feature.doctorPersonalCenter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,13 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.patientPersonalCenter.PatientSetting;
 import com.funnyseals.app.model.User;
-import com.koushikdutta.ion.builder.Builders;
 
 import static com.mob.tools.utils.DeviceHelper.getApplication;
 
@@ -38,22 +35,25 @@ public class DoctorPersonalCenterFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_doctor_personal_center, container, false);
         myApplication = (MyApplication) getApplication();
         myUser=myApplication.getUser();
-        initUIComponents();
+
+        tv_doctor_username=mView.findViewById(R.id.tv_doctor_username);
+        ib_doctor_perinfo = mView.findViewById(R.id.ib_doctor_perinfo);
+        ib_doctor_setting = mView.findViewById(R.id.ib_doctor_setting);
+        ib_doctor_sign = mView.findViewById(R.id.ib_doctor_sign);
+
+        ib_doctor_perinfo.setOnClickListener(new addListeners());
+        ib_doctor_setting.setOnClickListener(new addListeners());
+        ib_doctor_sign.setOnClickListener(new addListeners());
+
+        tv_doctor_username.setText(myUser.getName());
         return mView;
     }
 
-    /**
-     *初始化控件
-     */
-    private void initUIComponents () {
-        tv_doctor_username=mView.findViewById(R.id.tv_doctor_username);
+    @Override
+    public void onResume () {
+        super.onResume();
+        myUser=myApplication.getUser();
         tv_doctor_username.setText(myUser.getName());
-        ib_doctor_perinfo = mView.findViewById(R.id.ib_doctor_perinfo);
-        ib_doctor_perinfo.setOnClickListener(new addListeners());
-        ib_doctor_setting = mView.findViewById(R.id.ib_doctor_setting);
-        ib_doctor_setting.setOnClickListener(new addListeners());
-        ib_doctor_sign = mView.findViewById(R.id.ib_doctor_sign);
-        ib_doctor_sign.setOnClickListener(new addListeners());
     }
 
     /**
