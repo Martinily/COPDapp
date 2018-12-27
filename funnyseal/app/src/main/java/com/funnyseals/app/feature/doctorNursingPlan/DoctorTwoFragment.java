@@ -99,6 +99,7 @@ public class DoctorTwoFragment extends Fragment {
             }
         });
 
+        //点击某一个器械跳转到详情页面
         mListView.setOnItemClickListener((adapterView, view, position, id) -> {
             Bean instrumentBean = mInstrumentBeanList.get(position);
             String instrumentname = instrumentBean.getName();
@@ -116,7 +117,7 @@ public class DoctorTwoFragment extends Fragment {
 
     }
 
-    //接收返回数据
+    //接收制定计划界面的返回数据
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -189,7 +190,7 @@ public class DoctorTwoFragment extends Fragment {
                         .drawable.vector_drawable_na), null));
     }
 
-    //删除已添加药物
+    //删除已添加器械
     public void ShowInfo (final int position) {
         new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要删除吗？")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {

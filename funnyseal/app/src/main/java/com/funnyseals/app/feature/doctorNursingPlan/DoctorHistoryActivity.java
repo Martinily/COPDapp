@@ -175,7 +175,7 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                 mHolder = (ViewHolder) view.getTag();  //重新获得ViewHolder
             }
             mHolder.cardhistory_date.setText(doctorhistory_list.get(position).get
-                    ("doctorhistor0ydate").toString());
+                    ("doctorhistorydate").toString());
             mHolder.cardhistory_judgeuse.setImageResource((int) doctorhistory_list.get(position)
                     .get("doctorhistoryuse"));
 

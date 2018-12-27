@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -129,27 +130,30 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.send:   //发送计划
-                if (mPlannum > 0) {
-                    if (mWhere.equals("1")) {
-                        new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要发送吗？")
-                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick (DialogInterface dialog, int which) {
-                                        mPatientId = mMyFriend;
-                                        mWhere="0";
-                                        SendPlan();
-                                    }
-                                }).show();
+                if(BtnClickLimitUtil.isFastClick())
+                {
+                    if (mPlannum > 0) {
+                        if (mWhere.equals("1")) {
+                            new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要发送吗？")
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick (DialogInterface dialog, int which) {
+                                            mPatientId = mMyFriend;
+                                            mWhere="0";
+                                            SendPlan();
+                                        }
+                                    }).show();
+                        } else {
+                            Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);
+                            //传输医生编号
+                            Bundle bundle2 = new Bundle();
+                            bundle2.putString("DoctorID", mDoctorID);//医生id
+                            intent2.putExtras(bundle2);
+                            startActivityForResult(intent2, 1000);
+                        }
                     } else {
-                        Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);
-                        //传输医生编号
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putString("DoctorID", mDoctorID);//医生id
-                        intent2.putExtras(bundle2);
-                        startActivityForResult(intent2, 1000);
+                        Toast.makeText(getActivity(), "当前计划为空！", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(getActivity(), "当前计划为空！", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
