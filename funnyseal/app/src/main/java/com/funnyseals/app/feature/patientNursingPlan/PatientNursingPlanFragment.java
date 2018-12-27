@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -38,7 +39,8 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
     private ViewPager                 mVp_patient_myViewPager;
     private List<Fragment>            mList;
     private PatientTabFragmentAdapter mAdapter;
-    private String                    mPatientID           = "12345";//传入的患者编号
+    private MyApplication             myApplication;
+    private String                    mPatientID           = "";//传入的患者编号
     private List<String>              mMedicine_Titles     = new ArrayList<>();
     private List<String>              mMedicine_Contents   = new ArrayList<>();
     private List<String>              mMedicine_attentions = new ArrayList<>();
@@ -67,7 +69,8 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
     public void onActivityCreated (@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-
+        myApplication = (MyApplication) getActivity().getApplication();
+        mPatientID=myApplication.getAccount();
         Thread thread = new Thread(() -> {
             Socket socket;
             JSONObject jsonObject = new JSONObject();
@@ -245,5 +248,4 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
             }
         }
     }
-
 }
