@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.feature.patientNursingPlan.PatientNursingPlanFragment;
 import com.funnyseals.app.feature.patientNursingPlan.PatientOneFragment;
 import com.funnyseals.app.util.SocketUtil;
@@ -36,6 +37,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.funnyseals.app.R.id.edit_medicine;
 
@@ -61,7 +63,9 @@ public class DoctorOneFragment extends Fragment {
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LoadMenu();
+        //LoadMenu();
+         mMedicineNames =((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getmMedicineNames();
+         mMedicineAttentions = ((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getmMedicineAttentions();
         mEditText = getActivity().findViewById(edit_medicine);      //edit下拉列表
         mEditText.setOnTouchListener((view, event) -> {
             final int DRAWABLE_LEFT = 0;

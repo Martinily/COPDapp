@@ -39,6 +39,11 @@ public class DoctorBottomActivity extends AppCompatActivity {
     private DoctorBottomTabAdapter mFragmentTabAdapter;
     private MyApplication          myApplication;
 
+    private List<String>      mMedicineNames      = new ArrayList<>();
+    private List<String>      mMedicineAttentions = new ArrayList<>();
+    private List<String>      mInstrumentNames      = new ArrayList<>();
+    private List<String>      mInstrumentAttentions = new ArrayList<>();
+
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -107,7 +112,94 @@ public class DoctorBottomActivity extends AppCompatActivity {
         while (thread.isAlive()) {
 
         }
+
+        Thread thread2=new Thread(() -> {
+            Socket socket;
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("request_type", "13");
+                jsonObject.put("base_type", "med");
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(jsonObject.toString());
+                out.close();
+
+                Thread.sleep(4000);
+
+                socket = SocketUtil.getArraySendSocket();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String message = dataInputStream.readUTF();
+                socket.close();
+                System.err.println(message);
+                if (message.equals("empty")) {
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(message);
+                int i;
+
+                for (i = 0; i < jsonArray.length(); i++) {
+                    mMedicineNames.add(jsonArray.getJSONObject(i).getString("medicineName"));
+                    mMedicineAttentions.add(jsonArray.getJSONObject(i).getString
+                            ("medicineRemarks"));
+                    //添加一个获取注意事项
+                }
+                socket.close();
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
+        thread2.start();
+        while (thread2.isAlive()) {
+
+        }
+
+        Thread thread3=new Thread(() -> {
+            Socket socket;
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("request_type", "13");
+                jsonObject.put("base_type", "app");
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(jsonObject.toString());
+                out.close();
+
+                Thread.sleep(4000);
+
+                socket = SocketUtil.getArraySendSocket2();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String message = dataInputStream.readUTF();
+                socket.close();
+                System.err.println(message);
+                if (message.equals("empty")) {
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(message);
+                int i;
+
+                for (i = 0; i < jsonArray.length(); i++) {
+                    mInstrumentNames.add(jsonArray.getJSONObject(i).getString("apparatusName"));
+                    mInstrumentAttentions.add(jsonArray.getJSONObject(i).getString
+                            ("apparatusRemarks"));
+                }
+                socket.close();
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
+        thread3.start();
+        while (thread3.isAlive()) {
+
+        }
     }
+    public List<String> getmMedicineNames() { return mMedicineNames; }
+    public List<String> getmMedicineAttentions() { return mMedicineAttentions; }
+    public List<String> getmInstrumentNames() { return mInstrumentNames; }
+    public List<String> getmInstrumentAttentions() { return mInstrumentAttentions; }
 
     public List<User> getAllMyPatient () {
         return mAllMyPatient;

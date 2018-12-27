@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.funnyseals.app.R.id.edit_instrument;
 
@@ -52,7 +54,7 @@ public class DoctorTwoFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater,
                               ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_two, null);
-        LoadMenu();
+       // LoadMenu();
         return view;
     }
 
@@ -60,6 +62,9 @@ public class DoctorTwoFragment extends Fragment {
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mInstrumentNames  = ((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getmInstrumentNames();
+        mInstrumentAttentions = ((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getmInstrumentAttentions();
 
         mEditText = getActivity().findViewById(edit_instrument);
         mEditText.setOnTouchListener((view, event) -> {
