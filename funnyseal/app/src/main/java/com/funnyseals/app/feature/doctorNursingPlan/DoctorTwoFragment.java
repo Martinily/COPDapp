@@ -72,7 +72,7 @@ public class DoctorTwoFragment extends Fragment {
                         .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                     // your action here
                     mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources()
-                            .getDrawable(R.drawable.ic_expand_less_black_24dp), null);
+                            .getDrawable(R.drawable.ic_nadown), null);
                     ShowListPopulWindow();
                     return true;
                 }
@@ -99,6 +99,7 @@ public class DoctorTwoFragment extends Fragment {
             }
         });
 
+        //点击某一个器械跳转到详情页面
         mListView.setOnItemClickListener((adapterView, view, position, id) -> {
             Bean instrumentBean = mInstrumentBeanList.get(position);
             String instrumentname = instrumentBean.getName();
@@ -116,7 +117,7 @@ public class DoctorTwoFragment extends Fragment {
 
     }
 
-    //接收返回数据
+    //接收制定计划界面的返回数据
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -186,10 +187,10 @@ public class DoctorTwoFragment extends Fragment {
         listPopupWindow.show();
         listPopupWindow.setOnDismissListener(() -> mEditText
                 .setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R
-                        .drawable.ic_expand_more_black_24dp), null));
+                        .drawable.vector_drawable_na), null));
     }
 
-    //删除已添加药物
+    //删除已添加器械
     public void ShowInfo (final int position) {
         new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要删除吗？")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {

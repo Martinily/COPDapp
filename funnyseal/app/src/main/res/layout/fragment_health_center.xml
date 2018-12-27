@@ -1,207 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    tools:context=".feature.health.HealthCenterFragment">
+    android:layout_height="wrap_content">
 
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/teal"
-        android:clickable="true"
-        android:focusable="true">
-
-        <Button
-            android:id="@+id/gotocentre2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/teal"
-            android:textColor="@color/white"
-            android:text="@string/healthcenter_center2" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="健康中心"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/gotocentre3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/teal"
-            android:textColor="@color/white"
-            android:text="@string/healthcenter_center3" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/lungv" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="@string/healthcenter_project1"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/data1"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="     "
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/unit1"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="@string/healthcenter_unit"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#d7d7d7"/>
-
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="25dp"
-        android:layout_gravity="center"
-        android:src="@drawable/lungair" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:text="@string/healthcenter_project2"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/data2"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text=""
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/unit2"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="@string/healthcenter_unit"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#d7d7d7"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/text_caculate"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="@string/healthcenter_projectcaculate"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/data_caculate"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:ems="3"
-            android:gravity="center"
-            android:textColor="#00FF00" />
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/notice"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/notice"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/data_caculate" />
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        tools:context=".feature.health.HealthCenterFragment">
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#d7d7d7"/>
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="25dp"
-        android:layout_gravity="center"
-        android:src="@drawable/lung" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text3"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_height="50dp"
-            android:text="@string/healthcenter_project3"
-            android:textSize="20sp" />
+            android:layout_height="60dp"
+            android:background="@color/teal"
+            android:clickable="true"
+            android:focusable="true">
+
+            <Button
+                android:id="@+id/gotocentre2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:text="@string/healthcenter_center2" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/healthcenter_center1"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/gotocentre3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/teal"
+                android:textColor="@color/white"
+                android:text="@string/healthcenter_center3" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/lungv" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/healthcenter_project1"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/data1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="25sp"
+                android:textColor="#0000FF"/>
+
+            <TextView
+                android:id="@+id/unit1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/healthcenter_unit"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d7d7d7"/>
+
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lungair" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/healthcenter_project2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/data2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="25sp"
+                android:textColor="#0000FF"/>
+
+            <TextView
+                android:id="@+id/unit2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/healthcenter_unit"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d7d7d7"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_caculate"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:text="@string/healthcenter_projectcaculate"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/data_caculate"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:textColor="#00FF00" />
+
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/data3"
+            android:id="@+id/notice"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text=""
-            android:textSize="20sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/notice"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/data_caculate" />
 
-        <TextView
-            android:id="@+id/unit3"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="@string/healthcenter_unit"
-            android:textSize="20sp" />
-    </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d7d7d7"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lung" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_height="50dp"
+                android:text="@string/healthcenter_project3"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/data3"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="25sp"
+                android:textColor="#0000FF"/>
+
+            <TextView
+                android:id="@+id/unit3"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/healthcenter_unit"
+                android:textSize="20sp" />
+        </LinearLayout>
 
 
 
@@ -213,5 +220,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/gotocentre2" />
 
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

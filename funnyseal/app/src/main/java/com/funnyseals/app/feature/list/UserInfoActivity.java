@@ -1,9 +1,14 @@
 package com.funnyseals.app.feature.list;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
@@ -19,7 +24,10 @@ public class UserInfoActivity extends AppCompatActivity {
     private TextView mTvName;
     private TextView mTvSex;
     private TextView mTvAge;
+    private TextView mTvAccount;
     private TextView mTvAddress;
+    private TextView mTvHistory;
+    private TextView mTvOrder;
 
     private User mMyPatient;
 
@@ -27,7 +35,6 @@ public class UserInfoActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-
         Intent intent = getIntent();
         mMyPatient = (User) intent.getSerializableExtra("user");
         initView();
@@ -41,14 +48,20 @@ public class UserInfoActivity extends AppCompatActivity {
         mTvName = findViewById(R.id.patientname);
         mTvSex = findViewById(R.id.patientsex);
         mTvAge = findViewById(R.id.patientage);
+        mTvAccount=findViewById(R.id.patientaccount);
         mTvAddress = findViewById(R.id.patientlocation);
+        mTvHistory = findViewById(R.id.patientmedicalhistory);
+        mTvOrder = findViewById(R.id.patientmedicalorder);
     }
 
     private void initData () {
         mTvName.setText(mMyPatient.getName());
         mTvSex.setText(mMyPatient.getSex());
         mTvAge.setText(String.valueOf(mMyPatient.getAge()));
+        mTvAccount.setText(mMyPatient.getAccount());
         mTvAddress.setText(mMyPatient.getAddress());
+        mTvHistory.setText(mMyPatient.getMedicalHistory());
+        mTvOrder.setText(mMyPatient.getMedicalOrder());
     }
 
     private void addListener () {
