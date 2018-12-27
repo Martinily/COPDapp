@@ -61,7 +61,6 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-
         mView = inflater.inflate(R.layout.fragment_patient_nursing_plan, container, false);
         return mView;
     }
@@ -70,6 +69,7 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
     public void onActivityCreated (@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+
         Thread thread = new Thread(() -> {
             Socket socket;
             JSONObject jsonObject = new JSONObject();

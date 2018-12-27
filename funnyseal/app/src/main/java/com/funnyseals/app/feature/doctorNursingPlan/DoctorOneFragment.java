@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorNursingPlan;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -55,6 +56,7 @@ public class DoctorOneFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -79,7 +81,7 @@ public class DoctorOneFragment extends Fragment {
         });
         mEditText.setOnFocusChangeListener((view, b) -> {
             if (b) {
-                //                showListPopulWindow();
+              ShowListPopulWindow();
             }
         });
 
@@ -186,7 +188,6 @@ public class DoctorOneFragment extends Fragment {
             listPopupWindow.dismiss();//如果已经选择了，隐藏起来
         });
         listPopupWindow.show();//把ListPopWindow展示出来
-
         listPopupWindow.setOnDismissListener(() -> mEditText
                 .setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R
                         .drawable.vector_drawable_na), null));
