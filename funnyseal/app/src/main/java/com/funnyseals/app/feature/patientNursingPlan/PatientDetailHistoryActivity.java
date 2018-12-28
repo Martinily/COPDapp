@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
@@ -38,6 +39,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
     //接受护理计划编号和患者编号
     private String       mPlanId;
     private String       mPatientId;
+    private String       mJudgesubmmit;
     private List<String> mHistorymedicine_Titles       = new ArrayList<>();
     private List<String> mHistorymedicine_nums         = new ArrayList<>();
     private List<String> mHistorymedicine_attentions   = new ArrayList<>();
@@ -161,7 +163,6 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         String[] historysports_attention = (String[]) mHistorysports_attentions.toArray(new
                 String[size3]);//运动注意事项
 
-
         String time;
         //分类存放
         for (int i = 0; i < historymedicine_Title.length; i++) {
@@ -236,7 +237,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick (DialogInterface dialog, int which) {
                                     //发送数据，使用该编号的护理计划
-                                    new Thread(() -> {
+                                    Thread thread=new Thread(() -> {
                                         Socket socket;
                                         JSONObject jsonObject = new JSONObject();
                                         MyApplication application = (MyApplication)
@@ -257,27 +258,26 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
                                             Thread.sleep(1000);
 
                                             socket = SocketUtil.getGetSocket();
-                                            DataInputStream dataInputStream = new DataInputStream
-                                                    (socket.getInputStream());
-                                            dataInputStream = new DataInputStream(socket
-                                                    .getInputStream());
+                                            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                                             String message = dataInputStream.readUTF();
-                                            message = dataInputStream.readUTF();
-
                                             JSONObject jsonObject3 = new JSONObject(message);
-                                            switch (jsonObject3.getString("item_result")) {
-                                                case "true":
-                                                    System.out.println("添加成功!");
-                                                case "false":
-                                                    System.out.println("添加失败!");
-                                            }
+                                            mJudgesubmmit=jsonObject3.getString("update_result");
+                                            System.err.println(mJudgesubmmit);
                                             socket.close();
                                         } catch (JSONException | IOException | InterruptedException e) {
                                             e.printStackTrace();
                                         }
                                         Thread.interrupted();
-                                    }).start();
+                                    });
+                                    thread.start();
+                                    while (thread.isAlive()) {
 
+                                    }
+                                    if (mJudgesubmmit.equals("true")) {
+                                        Toast.makeText(PatientDetailHistoryActivity.this, "切换成功!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(PatientDetailHistoryActivity.this, "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }).show();
                 }
@@ -335,11 +335,8 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
             mHolder.cardhistory_time.setText(medicine_list.get(position).get("historytime")
                     .toString());
 
-            //
             final String medicinenametime = medicine_list.get(position).get("historytitle")
                     .toString();
-            //
-
             return view;
         }
     }

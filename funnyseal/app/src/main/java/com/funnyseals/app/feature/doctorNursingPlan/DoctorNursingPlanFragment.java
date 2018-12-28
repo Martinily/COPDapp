@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.mob.tools.utils.DeviceHelper.getApplication;
+
 /**
  * 医生端护理计划fragment
  */
@@ -45,9 +47,10 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     private Button     mBtnSend;
     private Button     mBtnHistory;
     private int        mPlannum  = 0;
-    private String     mDoctorID = "11111";//传入的医生编号
+    private String     mDoctorID = "";//传入的医生编号
     private List<Bean> mAllMedicineItem;
     private List<Bean> mAllInstrumentItem;
+    private MyApplication myApplication;
     private List<Bean> mAllSportsItem;
     private String     mPatientId;//患者id
     private String     mJudgesubmmit;
@@ -69,7 +72,8 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
     public void onActivityCreated (@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-
+        myApplication = (MyApplication) getApplication();
+        mDoctorID=myApplication.getAccount();
         // 设置菜单栏的点击事件
         mTv_doctor_one.setOnClickListener(this);
         mTv_doctor_two.setOnClickListener(this);
@@ -286,6 +290,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         mBtnSend = getActivity().findViewById(R.id.send);
         mBtnHistory = getActivity().findViewById(R.id.doctorhistory);
     }
+
 
     //添加和删除药物器械运动对象
     public void setmAllMedicineItem (Bean item) {

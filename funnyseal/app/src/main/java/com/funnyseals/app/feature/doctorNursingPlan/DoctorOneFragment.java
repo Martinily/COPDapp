@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
+import com.funnyseals.app.feature.patientNursingPlan.PatientNursingPlanFragment;
+import com.funnyseals.app.feature.patientNursingPlan.PatientOneFragment;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +37,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.funnyseals.app.R.id.edit_medicine;
 
@@ -52,7 +56,6 @@ public class DoctorOneFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater,
                               ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_one, null);
-        LoadMenu();
         return view;
     }
 
@@ -60,7 +63,9 @@ public class DoctorOneFragment extends Fragment {
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        //LoadMenu();
+         mMedicineNames =((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getmMedicineNames();
+         mMedicineAttentions = ((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getmMedicineAttentions();
         mEditText = getActivity().findViewById(edit_medicine);      //edit下拉列表
         mEditText.setOnTouchListener((view, event) -> {
             final int DRAWABLE_LEFT = 0;
@@ -81,7 +86,7 @@ public class DoctorOneFragment extends Fragment {
         });
         mEditText.setOnFocusChangeListener((view, b) -> {
             if (b) {
-              ShowListPopulWindow();
+            //  ShowListPopulWindow();
             }
         });
 
@@ -133,7 +138,7 @@ public class DoctorOneFragment extends Fragment {
 
     //下拉列表内容的获取
     public void LoadMenu () {
-        new Thread(() -> {
+        Thread thread=new Thread(() -> {
             Socket socket;
             JSONObject jsonObject = new JSONObject();
             try {
@@ -168,7 +173,9 @@ public class DoctorOneFragment extends Fragment {
             } catch (JSONException | IOException | InterruptedException e) {
                 e.printStackTrace();
             }
-        }).start();
+            Thread.interrupted();
+        });
+        thread.start();
     }
 
     //edit下拉列表

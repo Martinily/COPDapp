@@ -208,7 +208,6 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             jsonObject.put("docTitle", et4);
                             jsonObject.put("docSex", et5);
                             jsonObject.put("docAddress", et6);
-
                             jsonObject.put("request_type", "7");
                             jsonObject.put("user_type", "d");
                             send = jsonObject.toString();
@@ -253,7 +252,6 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                         }
                     });
                     thread.start();
-                    finish();
                     break;
                 case R.id.ib_doctor_modify_changepassword:
                     intent1 = new Intent(DoctorMyInfoModifyActivity.this, DoctorPasswordActivity

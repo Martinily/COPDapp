@@ -71,7 +71,7 @@ public class DoctorThreeFragment extends Fragment {
         });
         mEditText.setOnFocusChangeListener((view, b) -> {
             if (b) {
-                ShowListPopulWindow();
+              //  ShowListPopulWindow();
             }
         });
 
