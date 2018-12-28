@@ -73,7 +73,6 @@ public class PatientHistoryActivity extends AppCompatActivity {
                 String message = dataInputStream.readUTF();
                 socket.close();
 
-                System.err.println(message);
                 if (message.equals("empty")) {
                     return;
                 }
@@ -84,7 +83,6 @@ public class PatientHistoryActivity extends AppCompatActivity {
                     mSicker_historydates.add(jsonArray.getJSONObject(i).getString("planTime"));
                     mSicker_judgeuses.add(jsonArray.getJSONObject(i).getString("planAcceptS"));
                     mSicker_planIDs.add(jsonArray.getJSONObject(i).getString("planID"));
-                    System.err.println(mSicker_historydates);
                 }
                 socket.close();
             } catch (JSONException | IOException | InterruptedException e) {

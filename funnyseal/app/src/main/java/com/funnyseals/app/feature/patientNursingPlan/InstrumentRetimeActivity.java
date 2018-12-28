@@ -48,7 +48,6 @@ public class InstrumentRetimeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         final String aa = bundle.getString("instrumenttitle");
-        System.err.println(aa);
         mNames = aa;
         mAlarmManager = (AlarmManager) InstrumentRetimeActivity.this.getSystemService(Context
                 .ALARM_SERVICE);

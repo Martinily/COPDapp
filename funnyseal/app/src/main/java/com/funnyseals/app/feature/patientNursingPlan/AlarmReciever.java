@@ -23,7 +23,6 @@ public class AlarmReciever extends BroadcastReceiver {
         // an Intent broadcast.
         int id = intent.getIntExtra("ID", -1);
 
-        System.err.println("reciever" + (id + ""));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Intent i = new Intent(context, AlarmReciever.class);
@@ -33,7 +32,6 @@ public class AlarmReciever extends BroadcastReceiver {
                     .FLAG_CANCEL_CURRENT);
             am.setWindow(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 24 * 60 * 60 *
                     1000, 0, sender);
-            System.err.println("闹钟定制！" + (System.currentTimeMillis() + 24 * 60 * 60 * 1000 + ""));
         }
 
 

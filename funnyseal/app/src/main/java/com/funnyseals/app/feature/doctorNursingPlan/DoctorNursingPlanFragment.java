@@ -197,7 +197,6 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                     }
                     if (Medicine.gettime().equals("000000")) {
                         medicine.put("mTime", "-");
-                        System.err.println("meiyou");
                     } else {
                         medicine.put("mTime", Medicine.gettime());
                     }
@@ -237,7 +236,6 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 }
 
                 socket = SocketUtil.getArraySendSocket();
-                System.err.println(socket.isConnected());
                 out = new DataOutputStream(socket.getOutputStream());
                 out.writeUTF(nursingplan.toString());
                 out.close();
@@ -248,7 +246,6 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 String message = dataInputStream.readUTF();
-                System.err.println(message);
 
                 JSONObject jsonObject3 = new JSONObject(message);
                 mJudgesubmmit = jsonObject3.getString("item_result");
@@ -278,7 +275,6 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         if (requestCode == 1000 && resultCode == 1001) {
             mPatientId = data.getStringExtra("patientid");
             SendPlan();
-            System.err.println(mPatientId);
         }
     }
 

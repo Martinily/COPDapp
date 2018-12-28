@@ -28,11 +28,9 @@ public class DialogActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
         Intent i = getIntent();
-        //System.err.println(i.getStringExtra("doctory"));
         SharedPreferences sp = DialogActivity.this.getSharedPreferences("HAHA", Context
                 .MODE_PRIVATE);
         final String content = sp.getString(i.getStringExtra("doctory"), null);
-        System.err.println(content);
 
         NotificationManager barmanager = (NotificationManager) DialogActivity.this
                 .getSystemService(Context.NOTIFICATION_SERVICE);

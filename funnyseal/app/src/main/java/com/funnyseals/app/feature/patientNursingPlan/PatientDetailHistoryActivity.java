@@ -83,7 +83,6 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
                 String message = dataInputStream.readUTF();
                 socket.close();
 
-                System.err.println(message);
                 if (message.equals("empty")) {
                     return;
                 }
@@ -93,36 +92,25 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
 
                 for (i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
-                        System.err.println("111");
                         mHistorysports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
                         mHistorysports_nums.add(jsonArray.getJSONObject(i).getString("sTime"));
                         mHistorysports_attentions.add(jsonArray.getJSONObject(i).getString
                                 ("sAttention"));
-                        System.err.println(mHistorysports_Titles);
-                        System.err.println(mHistorysports_nums);
-                        System.err.println(mHistorysports_attentions);
                     } else if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
-                        System.err.println("222");
                         mHistorymedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
                         mHistorymedicine_nums.add(jsonArray.getJSONObject(i).getString("mDose"));
                         mHistorymedicine_attentions.add(jsonArray.getJSONObject(i).getString
                                 ("mAttention"));
                         mHistorymedicine_times.add(jsonArray.getJSONObject(i).getString("mTime"));
-                        System.err.println(mHistorymedicine_Titles);
-                        System.err.println(mHistorymedicine_nums);
-                        System.err.println(mHistorymedicine_attentions);
-                        System.err.println(mHistorymedicine_times);
+
                     } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
-                        System.err.println("333");
+
                         mHistoryinstrument_Titles.add(jsonArray.getJSONObject(i).getString
                                 ("appName"));
                         mHistoryinstrument_nums.add(jsonArray.getJSONObject(i).getString
                                 ("appTime"));
                         mHistoryinstrument_attentions.add(jsonArray.getJSONObject(i).getString
                                 ("appAttention"));
-                        System.err.println(mHistoryinstrument_Titles);
-                        System.err.println(mHistoryinstrument_nums);
-                        System.err.println(mHistoryinstrument_attentions);
                     }
                 }
                 socket.close();
@@ -262,7 +250,6 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
                                             String message = dataInputStream.readUTF();
                                             JSONObject jsonObject3 = new JSONObject(message);
                                             mJudgesubmmit=jsonObject3.getString("update_result");
-                                            System.err.println(mJudgesubmmit);
                                             socket.close();
                                         } catch (JSONException | IOException | InterruptedException e) {
                                             e.printStackTrace();

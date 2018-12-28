@@ -48,7 +48,6 @@ public class SportsRetimeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         final String aa = bundle.getString("sportstitle");
-        System.err.println(aa);
         mNames = aa;
         mAlarmManager = (AlarmManager) SportsRetimeActivity.this.getSystemService(Context
                 .ALARM_SERVICE);

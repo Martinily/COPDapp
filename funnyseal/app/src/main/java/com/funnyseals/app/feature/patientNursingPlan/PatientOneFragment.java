@@ -60,7 +60,6 @@ public class PatientOneFragment extends Fragment {
                 .getParentFragment())).getmMedicine_attentions();
         mMedicine_needtimes = ((PatientNursingPlanFragment) (PatientOneFragment.this
                 .getParentFragment())).getmMedicine_needtimes();
-        System.err.println(mMedicine_Titles);
         int size = mMedicine_Titles.size();
         int size2 = mMedicine_Contents.size();
         int size3 = mMedicine_attentions.size();
@@ -95,7 +94,6 @@ public class PatientOneFragment extends Fragment {
                     needtime += "晚饭后 ";
             }
             map.put("realMedicineTime", needtime);
-            System.err.println(needtime);
             mMedicine_list.add(map);
 
         }
@@ -149,7 +147,6 @@ public class PatientOneFragment extends Fragment {
                     ("medicineattention").toString());
             mHolder.mCardmedicine_time.setText(mMedicine_list.get(position).get
                     ("realMedicineTime").toString());
-            System.err.println(mMedicine_list.get(position).get("realMedicineTime").toString());
 
             Button moretime = view.findViewById(R.id.moremedicinetime);
             moretime.setOnClickListener(v -> {

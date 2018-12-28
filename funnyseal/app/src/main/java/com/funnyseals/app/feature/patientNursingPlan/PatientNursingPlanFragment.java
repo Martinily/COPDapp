@@ -90,7 +90,6 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String message = dataInputStream.readUTF();
                 socket.close();
-                System.err.println(message);
                 if (message.equals("empty")) {
                     return;
                 }
@@ -100,8 +99,6 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
 
                 for (i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
-                        System.err.println
-                                ("-------------------------------------------------------------");
                         mMedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
                         mMedicine_Contents.add(jsonArray.getJSONObject(i).getString("mDose"));
                         mMedicine_attentions.add(jsonArray.getJSONObject(i).getString
@@ -119,9 +116,6 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
                     }
                 }
 
-                System.err.println(mMedicine_Titles);
-                System.err.println(mInstrument_Titles);
-                System.err.println(mSports_Titles);
 
                 socket.close();
             } catch (JSONException | IOException | InterruptedException e) {
