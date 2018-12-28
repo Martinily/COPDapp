@@ -26,9 +26,7 @@ import java.util.Map;
  * 患者端护理计划 onfragment about medicine
  */
 public class PatientOneFragment extends Fragment {
-    private static Connection                CONN;
-    private        MyApplication             mApplication;
-    private        List<MedicinePlan>        mMedicinePlans;
+
     //将数据封装成数据源
     private        List<Map<String, Object>> mMedicine_list       = new ArrayList<Map<String,
             Object>>();
@@ -40,6 +38,12 @@ public class PatientOneFragment extends Fragment {
     @Override
     public void onResume () {
         super.onResume();
+        mMedicine_list       = new ArrayList<Map<String, Object>>();
+        mMedicine_Titles     = new ArrayList<>();
+        mMedicine_Contents   = new ArrayList<>();
+        mMedicine_attentions = new ArrayList<>();
+        mMedicine_needtimes  = new ArrayList<>();
+        SetMessage();
     }
 
     @Override
@@ -51,7 +55,11 @@ public class PatientOneFragment extends Fragment {
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SetMessage();
+    }
 
+    //得到计划内容
+    public void SetMessage(){
         mMedicine_Titles = ((PatientNursingPlanFragment) (PatientOneFragment.this
                 .getParentFragment())).getmMedicine_Titles();
         mMedicine_Contents = ((PatientNursingPlanFragment) (PatientOneFragment.this
@@ -99,7 +107,9 @@ public class PatientOneFragment extends Fragment {
         }
         ListView listview = getActivity().findViewById(R.id.listViewmedicine);
         listview.setAdapter(new MyAdapter());
+
     }
+
 
     //当前card adapter
     private class MyAdapter extends BaseAdapter {

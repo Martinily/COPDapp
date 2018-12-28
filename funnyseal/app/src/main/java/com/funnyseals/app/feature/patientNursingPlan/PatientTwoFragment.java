@@ -26,14 +26,22 @@ import java.util.Map;
  */
 public class PatientTwoFragment extends Fragment {
     private View                 mView;
-    private MyApplication        mApplication;
-    private List<InstrumentPlan> mInstrumentPlans;
     private List<String>         mInstrument_Titles     = new ArrayList<>();
     private List<String>         mInstrument_Contents   = new ArrayList<>();
     private List<String>         mInstrument_attentions = new ArrayList<>();
-
     //将数据封装成数据源
     private List<Map<String, Object>> mInstrument_list = new ArrayList<>();
+
+    @Override
+    public void onResume () {
+        super.onResume();
+        //将数据封装成数据源
+        mInstrument_list = new ArrayList<>();
+        mInstrument_Titles     = new ArrayList<>();
+        mInstrument_Contents   = new ArrayList<>();
+        mInstrument_attentions = new ArrayList<>();
+        SetMessage();
+    }
 
     @Override
     public View onCreateView (LayoutInflater inflater,
@@ -51,14 +59,13 @@ public class PatientTwoFragment extends Fragment {
     }
 
     @Override
-    public void onResume () {
-        super.onResume();
-    }
-
-    @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SetMessage();
+    }
 
+    //得到计划内容
+    public void SetMessage(){
         mInstrument_Titles = ((PatientNursingPlanFragment) (PatientTwoFragment.this
                 .getParentFragment())).getmInstrument_Titles();
         mInstrument_Contents = ((PatientNursingPlanFragment) (PatientTwoFragment.this
@@ -89,6 +96,7 @@ public class PatientTwoFragment extends Fragment {
         }
         ListView listview = getActivity().findViewById(R.id.listViewinstrument);
         listview.setAdapter(new MyAdapter());
+
     }
 
     //当前card adapter
