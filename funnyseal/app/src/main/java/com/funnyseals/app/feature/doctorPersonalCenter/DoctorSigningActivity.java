@@ -2,10 +2,8 @@ package com.funnyseals.app.feature.doctorPersonalCenter;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +12,7 @@ import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONException;
@@ -33,22 +32,24 @@ public class DoctorSigningActivity extends AppCompatActivity {
     private EditText    et_doctor_signing_phone;
     private ImageButton ib_doctor_signing_return;
     private Button      bt_doctor_signing_complete, bt_doctor_signing_delete;
-    private String        str1 = "";
+    private String        str1   = "";
     private MyApplication myApplication;
-    private int     type=0;
-    private boolean     isType=true;
+    private int           type   = 0;
+    private boolean       isType = true;
+    private DoctorBottomActivity bottomActivity;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_signing);
         myApplication = (MyApplication) getApplication();
+        bottomActivity = (DoctorBottomActivity) ((MyApplication)getApplication()).getBottom();
         init();
 
     }
 
     /**
-    初始化控件
+     * 初始化控件
      */
     public void init () {
         et_doctor_signing_phone = findViewById(R.id.et_doctor_signing_phone);
@@ -63,9 +64,9 @@ public class DoctorSigningActivity extends AppCompatActivity {
     }
 
     /**
-    号码判定
-    不能为空
-    11位
+     * 号码判定
+     * 不能为空
+     * 11位
      */
     @SuppressLint("ShowToast")
     public void correctPhone () {
@@ -77,15 +78,15 @@ public class DoctorSigningActivity extends AppCompatActivity {
 
         } else {
             Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast.LENGTH_SHORT);
-            isType=true;
+            isType = true;
         }
     }
 
     /**
-     *监听
-     *连接服务器，完成签约，跳转个人中心
-     *跳转个人中心
-     *连接服务器，删除签约人，跳转个人中心
+     * 监听
+     * 连接服务器，完成签约，跳转个人中心
+     * 跳转个人中心
+     * 连接服务器，删除签约人，跳转个人中心
      */
     @SuppressWarnings("deprecation")
     private class addListeners implements View.OnClickListener {
@@ -93,7 +94,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
         public void onClick (View v) {
             switch (v.getId()) {
                 case R.id.bt_doctor_signing_complete:
-                 //   correctPhone();
+                    //   correctPhone();
                     if (isType) {
                         new Thread(() -> {
                             String send = "";
@@ -104,7 +105,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                         ().trim());
                                 jsonObject.put("docID", myApplication.getAccount());
                                 jsonObject.put("request_type", "10");
-                                jsonObject.put("sign_type","0");
+                                jsonObject.put("sign_type", "0");
                                 send = jsonObject.toString();
                                 socket = SocketUtil.getSendSocket();
                                 DataOutputStream out = new DataOutputStream(socket
@@ -123,6 +124,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                         Looper.prepare();
                                         Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast
                                                 .LENGTH_LONG).show();
+                                        bottomActivity.getPatient();
                                         Looper.loop();
                                         break;
                                     case "2":
@@ -177,6 +179,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                     Looper.prepare();
                                     Toast.makeText(DoctorSigningActivity.this, "解约成功", Toast
                                             .LENGTH_LONG).show();
+                                    bottomActivity.getPatient();
                                     Looper.loop();
                                     break;
                                 case "2":

@@ -39,11 +39,11 @@ public class DoctorBottomActivity extends AppCompatActivity {
     private DoctorBottomTabAdapter mFragmentTabAdapter;
     private MyApplication          myApplication;
 
-    private List<String>      mMedicineNames      = new ArrayList<>();
-    private List<String>      mMedicineAttentions = new ArrayList<>();
-    private List<String>      mInstrumentNames      = new ArrayList<>();
-    private List<String>      mInstrumentAttentions = new ArrayList<>();
-    private Thread thread = new Thread(() -> {
+    private List<String> mMedicineNames        = new ArrayList<>();
+    private List<String> mMedicineAttentions   = new ArrayList<>();
+    private List<String> mInstrumentNames      = new ArrayList<>();
+    private List<String> mInstrumentAttentions = new ArrayList<>();
+    private Thread       thread                = new Thread(() -> {
         String send;
         Socket socket;
         try {
@@ -82,8 +82,9 @@ public class DoctorBottomActivity extends AppCompatActivity {
         } catch (JSONException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
+        Thread.interrupted();
     });
-    private Thread thread2=new Thread(() -> {
+    private Thread       thread2               = new Thread(() -> {
         Socket socket;
         JSONObject jsonObject = new JSONObject();
         try {
@@ -122,7 +123,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
         }
         Thread.interrupted();
     });
-    private Thread thread3=new Thread(() -> {
+    private Thread       thread3               = new Thread(() -> {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -194,14 +195,65 @@ public class DoctorBottomActivity extends AppCompatActivity {
         thread2.start();
         thread3.start();
 
-        while (thread3.isAlive()||thread2.isAlive()||thread.isAlive()) {
+        while (thread3.isAlive() || thread2.isAlive() || thread.isAlive()) {
 
         }
     }
-    public List<String> getmMedicineNames() { return mMedicineNames; }
-    public List<String> getmMedicineAttentions() { return mMedicineAttentions; }
-    public List<String> getmInstrumentNames() { return mInstrumentNames; }
-    public List<String> getmInstrumentAttentions() { return mInstrumentAttentions; }
+
+    public void getPatient () {
+        Thread thread = new Thread(() -> {
+            String send;
+            Socket socket;
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("request_type", "12");
+                jsonObject.put("docID", myApplication.getAccount());
+                send = jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(send);
+                out.close();
+
+                Thread.sleep(1000);
+                socket = SocketUtil.getGetArraySocket();
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                String message = in.readUTF();
+                if (message.contains("empty") && message.length() < 10) {
+                    mAllMyPatient = null;
+                } else {
+                    mAllMyPatient = new ArrayList<>();
+                    JSONArray allMyPatient = new JSONArray(message);
+                    int i;
+                    for (i = 0; i < allMyPatient.length(); i++) {
+                        JSONObject patient = allMyPatient.getJSONObject(i);
+                        mAllMyPatient.add(new User(patient.getString("pID"),
+                                patient.getString("pName"),
+                                patient.getString("pSex"),
+                                Integer.valueOf(patient.getString("pAge")),
+                                patient.getString("pTime"),
+                                patient.getString("pAddress")));
+                    }
+                }
+                socket.shutdownOutput();
+                socket.shutdownInput();
+                socket.close();
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        while (thread.isAlive()){
+
+        }
+    }
+
+    public List<String> getmMedicineNames () { return mMedicineNames; }
+
+    public List<String> getmMedicineAttentions () { return mMedicineAttentions; }
+
+    public List<String> getmInstrumentNames () { return mInstrumentNames; }
+
+    public List<String> getmInstrumentAttentions () { return mInstrumentAttentions; }
 
     public List<User> getAllMyPatient () {
         return mAllMyPatient;

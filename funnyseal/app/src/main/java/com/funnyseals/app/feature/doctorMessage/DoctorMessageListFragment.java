@@ -50,9 +50,6 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
             savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_doctor_message_list, container, false);
-        mAllMyPatient = ((DoctorBottomActivity) Objects.requireNonNull(getActivity()))
-                .getAllMyPatient();
-
         mMsgListener = this;
         initUIComponents();
 
@@ -62,6 +59,8 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
     @Override
     public void onResume () {
         super.onResume();
+        mAllMyPatient = ((DoctorBottomActivity) Objects.requireNonNull(getActivity()))
+                .getAllMyPatient();
         loadConversations();
         EMClient.getInstance().chatManager().addMessageListener(mMsgListener);
     }

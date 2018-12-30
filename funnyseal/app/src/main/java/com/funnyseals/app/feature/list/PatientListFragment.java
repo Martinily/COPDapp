@@ -29,29 +29,7 @@ public class PatientListFragment extends Fragment {
                               Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_patient_list, container, false);
 
-        init();
-
-        return mView;
-    }
-
-    @Override
-    public void onResume () {
-        super.onResume();
-    }
-
-
-    private void init () {
-        mUsers = ((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getAllMyPatient();
         mPatientlist = mView.findViewById(R.id.patient_list);
-        mPatientlist.setAdapter(new PatientListItemAdapter(getActivity(), mUsers));
-        addListeners();
-    }
-
-
-    /*
-    列表点击事件
-     */
-    private void addListeners () {
         mPatientlist.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getContext(), UserInfoActivity.class);
             for (User p : mUsers) {
@@ -62,6 +40,16 @@ public class PatientListFragment extends Fragment {
             }
             startActivity(intent);
         });
+
+        return mView;
     }
+
+    @Override
+    public void onResume () {
+        super.onResume();
+        mUsers = ((DoctorBottomActivity) Objects.requireNonNull(getActivity())).getAllMyPatient();
+        mPatientlist.setAdapter(new PatientListItemAdapter(getActivity(), mUsers));
+    }
+
 
 }
