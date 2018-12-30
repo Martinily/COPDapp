@@ -81,8 +81,6 @@ public class UserInfoActivity extends AppCompatActivity {
                 String get = dataInputStream.readUTF();
                 if (!get.equals("empty")){
                     jsonObject = new JSONObject(get);
-                    System.err.println(jsonObject.getString("HistoryCondition"));
-                    System.err.println(jsonObject.getString("HistoryAdvice"));
                     mHistory=jsonObject.getString("HistoryCondition");
                     mOrder=jsonObject.getString("HistoryAdvice");
                 }
