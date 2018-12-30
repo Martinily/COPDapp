@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.funnyseals.app.R;
@@ -35,6 +37,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     private AddEquipmentAdapter addEquipmentAdapter;
     private String              m_name, m_state;
 
+
     /**
      * 通过适配器完成动态加载
      */
@@ -42,10 +45,8 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_my_equipment);
-
         initUIComponents();
         myApplication = (MyApplication) getApplication();
-
         addEquipmentAdapter = new AddEquipmentAdapter(PatientMyEquipmentActivity.this, R.layout
                 .add_equipment, addEquipmentsList);
         listView = findViewById(R.id.patient_lv_list);
@@ -60,9 +61,22 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     void initUIComponents () {
         bt_patient_equipment_return = findViewById(R.id.bt_patient_equipment_return);
         bt_patient_equipment_add = findViewById(R.id.bt_patient_equipment_add);
+
         bt_patient_equipment_add.setOnClickListener(new addListeners());
         bt_patient_equipment_return.setOnClickListener(new addListeners());
 
+
+
+
+
+    }
+    /**
+     * 添加设备界面返回的时候，更新界面
+     */
+    @Override
+    public void onResume () {
+        super.onResume();
+        addEquipmentAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -82,6 +96,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 dataOutputStream.writeUTF(send);
                 dataOutputStream.close();
 
+                Thread.sleep(1000);
                 socket = SocketUtil.setPort(2030);
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String get = dataInputStream.readUTF();
@@ -96,7 +111,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                     addEquipmentAdapter.notifyDataSetChanged();
                     socket.close();
                 }
-            } catch (IOException | JSONException e) {
+            } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
         });

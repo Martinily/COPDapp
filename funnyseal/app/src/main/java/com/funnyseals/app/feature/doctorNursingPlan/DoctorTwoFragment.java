@@ -153,7 +153,6 @@ public class DoctorTwoFragment extends Fragment {
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String message = dataInputStream.readUTF();
                 socket.close();
-                System.err.println(message);
                 if (message.equals("empty")) {
                     return;
                 }

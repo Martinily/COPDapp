@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
@@ -176,7 +177,7 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                     et2 = ed_patient_modify_myage.getText().toString().trim();
                     et3 = ed_patient_modify_mysex.getText().toString().trim();
                     et4 = ed_patient_modify_location.getText().toString().trim();
-                    Thread thread = new Thread(() -> {
+                    @SuppressLint("ShowToast") Thread thread = new Thread(() -> {
                         String send = "";
                         Socket socket;
                         try {
@@ -206,10 +207,13 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                                     myUser.setSex(et3);
                                     myUser.setAge(Integer.parseInt(et2));
                                     myUser.setAddress(et4);
+                                    finish();
                                     Looper.prepare();
                                     Toast.makeText(PatientMyInfoModifyActivity.this, "修改成功", Toast
                                             .LENGTH_LONG).show();
                                     Looper.loop();
+                                    PatientMyInfoModifyActivity.this.finish();
+
                                     break;
                                 case "失败":
                                     Looper.prepare();
@@ -225,10 +229,6 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                         }
                     });
                     thread.start();
-                    while (thread.isAlive()) {
-
-                    }
-                    finish();
                     break;
                 case R.id.ib_patient_modify_return:
                     Sure();

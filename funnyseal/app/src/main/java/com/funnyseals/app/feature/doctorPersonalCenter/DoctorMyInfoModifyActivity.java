@@ -171,12 +171,14 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                 .LENGTH_SHORT).show());
     }
 
+
     /**
      * 按钮的监听事件
      * 返回按钮，返回个人中心
      * 连接服务器，更新界面信息，返回个人中心
      * 跳转修改密码界面
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private class addListeners implements View.OnClickListener {
 
         @Override
@@ -199,15 +201,6 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                         Socket socket;
                         try {
                             JSONObject jsonObject = new JSONObject();
-
-                            jsonObject.put("dID", myApplication.getAccount());
-                            jsonObject.put("dName", et1);
-                            jsonObject.put("dAge", et2);
-                            jsonObject.put("dCompany", et3);
-                            jsonObject.put("dPosition", et4);
-                            jsonObject.put("dSex", et5);
-                            jsonObject.put("dAddress", et6);
-
                             jsonObject.put("docID", myApplication.getAccount());
                             jsonObject.put("docName", et1);
                             jsonObject.put("docAge", et2);
@@ -215,8 +208,6 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             jsonObject.put("docTitle", et4);
                             jsonObject.put("docSex", et5);
                             jsonObject.put("docAddress", et6);
-                            jsonObject.put("docAccount",et6);
-
                             jsonObject.put("request_type", "7");
                             jsonObject.put("user_type", "d");
                             send = jsonObject.toString();
@@ -240,29 +231,27 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                                     myUser.setPosition(et4);
                                     myUser.setAge(Integer.parseInt(et2));
                                     myUser.setAddress(et6);
+                                    finish();
                                     Looper.prepare();
                                     Toast.makeText(DoctorMyInfoModifyActivity.this, "修改成功", Toast
                                             .LENGTH_LONG).show();
                                     Looper.loop();
                                     break;
                                 case "失败":
-                                   showToast("数据更新失败");
+                                    Looper.prepare();
+                                    Toast.makeText(DoctorMyInfoModifyActivity.this, "修改失败", Toast
+                                            .LENGTH_LONG).show();
+                                    Looper.loop();
                                     break;
 
                             }
                             socket.close();
                             Thread.interrupted();
-                        } catch (IOException | JSONException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
+                        } catch (IOException | JSONException | InterruptedException e) {
                             e.printStackTrace();
                         }
                     });
                     thread.start();
-                    while (thread.isAlive()) {
-
-                    }
-                    finish();
                     break;
                 case R.id.ib_doctor_modify_changepassword:
                     intent1 = new Intent(DoctorMyInfoModifyActivity.this, DoctorPasswordActivity

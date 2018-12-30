@@ -90,7 +90,43 @@ public class PatientHistoryActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         mPatientID = bundle.getString("PatientID");
 
+        Thread thread = new Thread(() -> {
+            Socket socket;
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("ID", mPatientID);
+                jsonObject.put("request_type", "4");
+                jsonObject.put("query_state", "all");
+                jsonObject.put("user_type", "p");
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(jsonObject.toString());
+                out.close();
 
+                Thread.sleep(1000);
+
+                socket = SocketUtil.getGetSocket();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String message = dataInputStream.readUTF();
+                socket.close();
+
+                if (message.equals("empty")) {
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(message);
+                int i;
+                for (i = 0; i < jsonArray.length(); i++) {
+                    mSicker_historydates.add(jsonArray.getJSONObject(i).getString("planTime"));
+                    mSicker_judgeuses.add(jsonArray.getJSONObject(i).getString("planAcceptS"));
+                    mSicker_planIDs.add(jsonArray.getJSONObject(i).getString("planID"));
+                }
+                socket.close();
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
         thread.start();
         while (thread.isAlive()) {
 
@@ -119,12 +155,15 @@ public class PatientHistoryActivity extends AppCompatActivity {
         listview.setAdapter(new MyAdapter());
 
         //返回按钮事件监听
-        Button quitsickerhistorydate = findViewById(R.id.quitsickerhistorydate);
-        quitsickerhistorydate.setOnClickListener(v -> {
-            Intent intent2 = new Intent(PatientHistoryActivity.this, PatientBottomActivity
-                    .class);
-            startActivity(intent2);
-            finish();
+        Button quitsickerhistorydate = (Button) findViewById(R.id.quitsickerhistorydate);
+        quitsickerhistorydate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+               // Intent intent2 = new Intent(PatientHistoryActivity.this, PatientBottomActivity
+                //        .class);
+                //startActivity(intent2);
+                finish();
+            }
         });
     }
 

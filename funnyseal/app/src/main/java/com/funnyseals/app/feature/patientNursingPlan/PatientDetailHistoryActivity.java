@@ -151,6 +151,60 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         mPatientId = bundle.getString("patientid");
         mPlanId = bundle.getString("planid");
 
+        Thread thread = new Thread(() -> {
+            Socket socket;
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("planID", mPlanId);
+                jsonObject.put("request_type", "5");
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(jsonObject.toString());
+                out.close();
+
+                Thread.sleep(1000);
+
+                socket = SocketUtil.getGetSocket();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String message = dataInputStream.readUTF();
+                socket.close();
+
+                if (message.equals("empty")) {
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(message);
+                int i;
+
+                for (i = 0; i < jsonArray.length(); i++) {
+                    if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
+                        mHistorysports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
+                        mHistorysports_nums.add(jsonArray.getJSONObject(i).getString("sTime"));
+                        mHistorysports_attentions.add(jsonArray.getJSONObject(i).getString
+                                ("sAttention"));
+                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
+                        mHistorymedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
+                        mHistorymedicine_nums.add(jsonArray.getJSONObject(i).getString("mDose"));
+                        mHistorymedicine_attentions.add(jsonArray.getJSONObject(i).getString
+                                ("mAttention"));
+                        mHistorymedicine_times.add(jsonArray.getJSONObject(i).getString("mTime"));
+
+                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
+
+                        mHistoryinstrument_Titles.add(jsonArray.getJSONObject(i).getString
+                                ("appName"));
+                        mHistoryinstrument_nums.add(jsonArray.getJSONObject(i).getString
+                                ("appTime"));
+                        mHistoryinstrument_attentions.add(jsonArray.getJSONObject(i).getString
+                                ("appAttention"));
+                    }
+                }
+                socket.close();
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
         thread.start();
         while (thread.isAlive()) {
 
@@ -245,24 +299,61 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
             }
         });
 
-        Button usehistory = findViewById(R.id.usehistory);
-        usehistory.setOnClickListener(v -> {
-            if(BtnClickLimitUtil.isFastClick())
-            {
-                new AlertDialog.Builder(PatientDetailHistoryActivity.this).setTitle("我的提示")
-                        .setMessage("确定切换当前护理计划？")
-                        .setPositiveButton("确定", (dialog, which) -> {
-                            //发送数据，使用该编号的护理计划
-                            thread2.start();
-                            while (thread2.isAlive()) {
+        Button usehistory = (Button) findViewById(R.id.usehistory);
+        usehistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                if(BtnClickLimitUtil.isFastClick())
+                {
+                    new AlertDialog.Builder(PatientDetailHistoryActivity.this).setTitle("我的提示")
+                            .setMessage("确定切换当前护理计划？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick (DialogInterface dialog, int which) {
+                                    //发送数据，使用该编号的护理计划
+                                    Thread thread=new Thread(() -> {
+                                        Socket socket;
+                                        JSONObject jsonObject = new JSONObject();
+                                        MyApplication application = (MyApplication)
+                                                PatientDetailHistoryActivity.this.getApplication();
+                                        try {
+                                            jsonObject.put("request_type", "14");
+                                            jsonObject.put("update_type", "useState");
+                                            jsonObject.put("planID", mPlanId);
+                                            jsonObject.put("planUseS", "1");
+                                            //jsonObject.put("docID",application.getAccount());
+                                            jsonObject.put("pID", mPatientId);  //mPatientId
+                                            socket = SocketUtil.getSendSocket();
+                                            DataOutputStream out = new DataOutputStream(socket
+                                                    .getOutputStream());
+                                            out.writeUTF(jsonObject.toString());
+                                            out.close();
 
-                            }
-                            if (mJudgesubmmit.equals("true")) {
-                                Toast.makeText(PatientDetailHistoryActivity.this, "切换成功!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(PatientDetailHistoryActivity.this, "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
-                            }
-                        }).show();
+                                            Thread.sleep(1000);
+
+                                            socket = SocketUtil.getGetSocket();
+                                            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                                            String message = dataInputStream.readUTF();
+                                            JSONObject jsonObject3 = new JSONObject(message);
+                                            mJudgesubmmit=jsonObject3.getString("update_result");
+                                            socket.close();
+                                        } catch (JSONException | IOException | InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Thread.interrupted();
+                                    });
+                                    thread.start();
+                                    while (thread.isAlive()) {
+
+                                    }
+                                    if (mJudgesubmmit.equals("true")) {
+                                        Toast.makeText(PatientDetailHistoryActivity.this, "切换成功!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(PatientDetailHistoryActivity.this, "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).show();
+                }
             }
         });
     }

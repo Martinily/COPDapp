@@ -83,7 +83,6 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                 String message = dataInputStream.readUTF();
                 socket.close();
 
-                System.err.println(message);
                 if (message.equals("empty")) {
                     return;
                 }
@@ -94,7 +93,6 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                     mDoctor_historydates.add(jsonArray.getJSONObject(i).getString("planTime"));
                     mDoctor_historyUses.add(jsonArray.getJSONObject(i).getString("planAcceptS"));
                     mDoctor_historyIds.add(jsonArray.getJSONObject(i).getString("planID"));
-                    System.err.println(mDoctor_historydates);
                 }
                 socket.close();
             } catch (JSONException | IOException | InterruptedException e) {
@@ -115,12 +113,10 @@ public class DoctorHistoryActivity extends AppCompatActivity {
         String[] mDoctor_historyUse = (String[]) mDoctor_historyUses.toArray(new String[size2]);
         String[] mDoctor_historyId = (String[]) mDoctor_historyIds.toArray(new String[size3]);
 
-        System.err.println(mDoctor_historydates);
         //将数据封装成数据源
         for (int i = 0; i < doctor_historydate.length; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("doctorhistorydate", doctor_historydate[i]);
-            System.err.println(doctor_historydate[i]);
             if (mDoctor_historyUse[i].equals("1")) {
                 map.put("doctorhistoryuse", R.drawable.vector_drawable_used);
             } else

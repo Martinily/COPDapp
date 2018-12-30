@@ -74,7 +74,6 @@ public class PickPatientActivity extends AppCompatActivity {
                 String message = dataInputStream.readUTF();
                 socket.close();
 
-                System.err.println(message);
                 if (message.equals("empty")) {
                     return;
                 }

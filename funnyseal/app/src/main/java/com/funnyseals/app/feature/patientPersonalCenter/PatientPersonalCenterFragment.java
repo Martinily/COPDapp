@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,14 +37,6 @@ public class PatientPersonalCenterFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_patient_personal_center, container, false);
         myApplication = (MyApplication) getApplication();
         myUser = myApplication.getUser();
-        initUIComponents();
-        return mView;
-    }
-
-    /**
-     * 初始化控件
-     */
-    private void initUIComponents () {
         tv_patient_username=mView.findViewById(R.id.tv_patient_username);
         tv_patient_username.setText(myUser.getName());
         getIb_patient_perinfo = mView.findViewById(R.id.ib_patient_perinfo);
@@ -54,6 +47,12 @@ public class PatientPersonalCenterFragment extends Fragment {
         getIb_patient_doctor.setOnClickListener(new addListeners());
         getIb_patient_equipment = mView.findViewById(R.id.ib_patient_equipment);
         getIb_patient_equipment.setOnClickListener(new addListeners());
+        return mView;
+    }
+    public void onResume () {
+        super.onResume();
+        myUser=myApplication.getUser();
+        tv_patient_username.setText(myUser.getName());
     }
 
     /**
@@ -64,6 +63,7 @@ public class PatientPersonalCenterFragment extends Fragment {
      * 设置图片
      */
     private class addListeners implements View.OnClickListener {
+        @SuppressLint("ShowToast")
         @Override
         public void onClick (View v) {
             switch (v.getId()) {
@@ -71,7 +71,7 @@ public class PatientPersonalCenterFragment extends Fragment {
                     startActivity(new Intent(getActivity(), PatientMyInfoModifyActivity.class));
                     break;
                 case R.id.ib_patient_doctor:
-                    if (myUser.getMyDoctor().equals(6))
+                    if (myUser.getMyDoctor().equals("6"))
                     {
                         Toast.makeText(getActivity(),"当前未绑定医生",Toast.LENGTH_LONG);
                     }

@@ -36,6 +36,11 @@ public class PatientThreeFragment extends Fragment {
     @Override
     public void onResume () {
         super.onResume();
+        mSports_list       = new ArrayList<>();
+        mSports_Titles     = new ArrayList<>();//名称
+        mSports_Contents   = new ArrayList<>();  //时长
+        mSports_attentions = new ArrayList<>();//注意事项
+        SetMessage();
     }
 
     @Override
@@ -48,7 +53,11 @@ public class PatientThreeFragment extends Fragment {
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SetMessage();
+    }
 
+    //得到计划内容
+    public void SetMessage(){
         mSports_Titles = ((PatientNursingPlanFragment) (PatientThreeFragment.this
                 .getParentFragment())).getmSports_Titles();
         mSports_Contents = ((PatientNursingPlanFragment) (PatientThreeFragment.this

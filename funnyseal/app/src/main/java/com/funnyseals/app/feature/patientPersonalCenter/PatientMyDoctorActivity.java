@@ -2,6 +2,7 @@ package com.funnyseals.app.feature.patientPersonalCenter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import java.net.Socket;
 /**
  * 我的医生界面
  */
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class PatientMyDoctorActivity extends AppCompatActivity {
 
     private TextView tv_patient_doctor_name, tv_patient_doctor_hospital, tv_patient_doctor_post,tv_patient_doctor_age,tv_patient_doctor_sex;
@@ -34,7 +36,6 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
     private String        myDoctor = "";
     private User          myUser;
     private String        name, hosptial, post,age,sex;
-
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,14 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         bt_patient_mydoctor_chat = findViewById(R.id.bt_patient_mydoctor_chat);
         bt_patient_mydoctor_chat.setOnClickListener(new addListeners());
         myDoctor();
+
+    }
+    void initText(){
+        tv_patient_doctor_name.setText(name);
+        tv_patient_doctor_post.setText(post);
+        tv_patient_doctor_hospital.setText(hosptial);
+        tv_patient_doctor_age.setText(age);
+        tv_patient_doctor_sex.setText(sex);
     }
 
     /**
@@ -78,7 +87,7 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 out.writeUTF(send);
                 out.close();
-
+                Thread.sleep(1000);
                 socket = SocketUtil.setPort(2023);
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String message = dataInputStream.readUTF();
@@ -90,23 +99,18 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                 post = jsonObject.get("docTitle").toString();
                 age=jsonObject.get("docAge").toString();
                 sex=jsonObject.getString("docSex");
-
-
+                initText();
                 socket.close();
                 Thread.interrupted();
-            } catch (IOException | JSONException e) {
+            } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
         });
         thread.start();
-        while (thread.isAlive()) {
+        while (thread.isAlive()){
 
         }
-        tv_patient_doctor_name.setText(name);
-        tv_patient_doctor_post.setText(post);
-        tv_patient_doctor_hospital.setText(hosptial);
-        tv_patient_doctor_age.setText(age);
-        tv_patient_doctor_sex.setText(sex);
+
 
     }
 

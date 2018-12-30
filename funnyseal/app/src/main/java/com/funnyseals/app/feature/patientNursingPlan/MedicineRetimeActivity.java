@@ -48,7 +48,6 @@ public class MedicineRetimeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         final String aa = bundle.getString("medicinetitle");
-        System.err.println(aa);
         mNames = aa;
         mAlarmManager = (AlarmManager) MedicineRetimeActivity.this.getSystemService(Context
                 .ALARM_SERVICE);
