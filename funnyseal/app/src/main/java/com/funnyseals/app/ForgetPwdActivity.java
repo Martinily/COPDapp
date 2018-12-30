@@ -1,7 +1,6 @@
 package com.funnyseals.app;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -137,8 +136,9 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
         )) {
             showToast("两次输入的密码不同");
         } else {
-            SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(),
-                    mEtIdentifyingCode.getText().toString());
+            /*SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(),
+                    mEtIdentifyingCode.getText().toString());*/
+            linkToServer();
         }
     }
 
@@ -175,7 +175,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
                 switch (jsonObject.getString("password_result")) {
                     case "true":
                         showToast("密码修改成功！");
-                        startActivity(new Intent(ForgetPwdActivity.this, LoginActivity.class));
+                        //startActivity(new Intent(ForgetPwdActivity.this, LoginActivity.class));
                         finish();
                         break;
                     case "false":

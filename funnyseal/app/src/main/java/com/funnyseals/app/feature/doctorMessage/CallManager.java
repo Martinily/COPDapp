@@ -14,6 +14,7 @@ import android.media.SoundPool;
 import android.support.v4.app.NotificationCompat;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
@@ -23,6 +24,7 @@ import com.vmloft.develop.library.tools.utils.VMLog;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,13 +38,15 @@ import java.util.TimerTask;
  */
 public class CallManager {
     // 单例类实例
-    private static CallManager         instance;
+    private static CallManager instance;
+
     // 上下文菜单
-    private        Context             context;
-    private        BluetoothHeadset    bluetoothHeadset;
+    private Context          context;
+    private BluetoothHeadset bluetoothHeadset;
+
     // 通知栏提醒管理类
-    private        NotificationManager notificationManager;
-    private        int                 callNotificationId = 0526;
+    private NotificationManager notificationManager;
+    private int                 callNotificationId = 0526;
 
     // 音频管理器
     private AudioManager audioManager;
@@ -192,6 +196,8 @@ public class CallManager {
                 content = "通话已取消！";
                 break;
         }
+
+
         body = new EMTextMessageBody(content);
         message.addBody(body);
         message.setStatus(EMMessage.Status.SUCCESS);
@@ -202,7 +208,11 @@ public class CallManager {
         }
         message.setUnread(false);
         // 调用sdk的保存消息方法
-        EMClient.getInstance().chatManager().saveMessage(message);
+        if(BtnClickLimitUtil.isFastClick()){
+            EMClient.getInstance().chatManager().saveMessage(message);
+            System.err.println("------------------------");
+            EMClient.getInstance().chatManager().importMessages(Collections.singletonList(message));
+        }
 
         try {
             Thread.sleep(1000);

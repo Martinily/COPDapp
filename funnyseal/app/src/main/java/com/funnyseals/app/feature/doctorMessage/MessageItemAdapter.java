@@ -96,9 +96,12 @@ public class MessageItemAdapter extends BaseAdapter {
             viewHolder.mName.setText(mMyDoctor.getName().isEmpty() ? account : mMyDoctor.getName());
         }
 
-
-        viewHolder.mContent.setText(((EMTextMessageBody) conversation.getLastMessage().getBody())
-                .getMessage());
+        if(conversation.getAllMsgCount()!=0){
+            viewHolder.mContent.setText(((EMTextMessageBody) conversation.getLastMessage().getBody())
+                    .getMessage());
+            viewHolder.mTime.setText(DateUtils.getTimestampString(new Date(conversation
+                    .getLastMessage().getMsgTime())));
+        }
 
         int unread = conversation.getUnreadMsgCount();
         if (unread != 0) {
@@ -106,9 +109,6 @@ public class MessageItemAdapter extends BaseAdapter {
             viewHolder.mMessageNum.showTextBadge(unread + "");
             viewHolder.mMessageNum.setOnClickListener(v -> conversation.markAllMessagesAsRead());
         }
-
-        viewHolder.mTime.setText(DateUtils.getTimestampString(new Date(conversation
-                .getLastMessage().getMsgTime())));
 
         return convertView;
     }

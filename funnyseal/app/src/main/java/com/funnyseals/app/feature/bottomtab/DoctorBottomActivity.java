@@ -43,7 +43,8 @@ public class DoctorBottomActivity extends AppCompatActivity {
     private List<String> mMedicineAttentions   = new ArrayList<>();
     private List<String> mInstrumentNames      = new ArrayList<>();
     private List<String> mInstrumentAttentions = new ArrayList<>();
-    private Thread       thread                = new Thread(() -> {
+
+    private Thread thread  = new Thread(() -> {
         String send;
         Socket socket;
         try {
@@ -84,7 +85,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
         }
         Thread.interrupted();
     });
-    private Thread       thread2               = new Thread(() -> {
+    private Thread thread2 = new Thread(() -> {
         Socket socket;
         JSONObject jsonObject = new JSONObject();
         try {
@@ -100,7 +101,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
             socket = SocketUtil.getArraySendSocket();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             String message = dataInputStream.readUTF();
-            System.err.println(message);
             if (message.equals("empty")) {
                 return;
             }
@@ -122,7 +122,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
         }
         Thread.interrupted();
     });
-    private Thread       thread3               = new Thread(() -> {
+    private Thread thread3 = new Thread(() -> {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -143,7 +143,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
             socket = SocketUtil.getArraySendSocket2();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             String message = dataInputStream.readUTF();
-            System.err.println(message);
             if (message.equals("empty")) {
                 return;
             }
@@ -240,7 +239,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
             }
         });
         thread.start();
-        while (thread.isAlive()){
+        while (thread.isAlive()) {
 
         }
     }
@@ -265,8 +264,8 @@ public class DoctorBottomActivity extends AppCompatActivity {
     }
 
     private void initBottomTabs () {
-        mIndexTab = findViewById(R.id.doctor_personalCenter_tab);
-        mPreviousTabId = R.id.doctor_personalCenter_tab;
+        mIndexTab = findViewById(R.id.doctor_patientList_tab);
+        mPreviousTabId = R.id.doctor_patientList_tab;
 
         RadioGroup bottomTabs = findViewById(R.id.doctor_bottom_tabs);
 
