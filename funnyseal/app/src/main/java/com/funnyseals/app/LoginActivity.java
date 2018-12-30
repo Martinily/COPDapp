@@ -195,7 +195,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 out.writeUTF(send);
                 out.close();
 
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 socket = SocketUtil.getGetSocket();
 
                 DataInputStream datainputstream = new DataInputStream(socket.getInputStream());

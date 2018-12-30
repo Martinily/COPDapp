@@ -126,7 +126,7 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void destorySendSMSHandler () {
-        super.onDestroy();
+        //super.onDestroy();
         SMSSDK.unregisterEventHandler(sendSMSHandler);
     }
 
@@ -158,8 +158,8 @@ public class ForgetPwdActivity extends AppCompatActivity implements View.OnClick
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("request_type", "8");
                 jsonObject.put("modify_type", "forget");
-                jsonObject.put("user_name", mEtAccount.getText().toString());
-                jsonObject.put("user_pw", mEtPassword.getText().toString());
+                jsonObject.put("ID", mEtAccount.getText().toString());
+                jsonObject.put("Password", mEtPassword.getText().toString());
                 send = jsonObject.toString();
                 socket = SocketUtil.getSendSocket();
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());

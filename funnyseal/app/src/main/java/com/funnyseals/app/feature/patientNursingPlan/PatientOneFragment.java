@@ -30,8 +30,7 @@ public class PatientOneFragment extends Fragment {
     private        MyApplication             mApplication;
     private        List<MedicinePlan>        mMedicinePlans;
     //将数据封装成数据源
-    private        List<Map<String, Object>> mMedicine_list       = new ArrayList<Map<String,
-            Object>>();
+    private        List<Map<String, Object>> mMedicine_list       = new ArrayList<>();
     private        List<String>              mMedicine_Titles     = new ArrayList<>();
     private        List<String>              mMedicine_Contents   = new ArrayList<>();
     private        List<String>              mMedicine_attentions = new ArrayList<>();
@@ -66,13 +65,13 @@ public class PatientOneFragment extends Fragment {
         int size3 = mMedicine_attentions.size();
         int size4 = mMedicine_needtimes.size();
 
-        String[] medicine_Title = (String[]) mMedicine_Titles.toArray(new String[size]);
-        String[] medicine_Content = (String[]) mMedicine_Contents.toArray(new String[size2]);
-        String[] medicine_attention = (String[]) mMedicine_attentions.toArray(new String[size3]);
-        String[] medicine_needtime = (String[]) mMedicine_needtimes.toArray(new String[size4]);
+        String[] medicine_Title = mMedicine_Titles.toArray(new String[size]);
+        String[] medicine_Content = mMedicine_Contents.toArray(new String[size2]);
+        String[] medicine_attention = mMedicine_attentions.toArray(new String[size3]);
+        String[] medicine_needtime = mMedicine_needtimes.toArray(new String[size4]);
 
         for (int i = 0; i < medicine_Title.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("medicinetitle", medicine_Title[i]);
             map.put("medicineimg", R.drawable.vector_drawable_pillow);
             map.put("medicinecontent", medicine_Content[i]);
@@ -149,7 +148,6 @@ public class PatientOneFragment extends Fragment {
                     ("medicineattention").toString());
             mHolder.mCardmedicine_time.setText(mMedicine_list.get(position).get
                     ("realMedicineTime").toString());
-            System.err.println(mMedicine_list.get(position).get("realMedicineTime").toString());
 
             Button moretime = view.findViewById(R.id.moremedicinetime);
             moretime.setOnClickListener(v -> {

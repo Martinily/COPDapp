@@ -32,6 +32,40 @@ public class PatientBottomActivity extends AppCompatActivity {
     private PatientBottomTabAdapter mFragmentTabAdapter;
     private User                    mMyDoctor;
     private MyApplication           myApplication;
+    private Thread thread = new Thread(() -> {
+        String send;
+        Socket socket;
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("request_type", "6");
+            jsonObject.put("ID", myApplication.getUser().getMyDoctor());
+            jsonObject.put("user_type", "d");
+            send = jsonObject.toString();
+            socket = SocketUtil.getSendSocket();
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            out.writeUTF(send);
+            out.close();
+
+            Thread.sleep(500);
+            socket = SocketUtil.getInfo();
+            DataInputStream in = new DataInputStream(socket.getInputStream());
+            String message = in.readUTF();
+            JSONObject myDoctor = new JSONObject(message);
+            mMyDoctor = new User(myDoctor.getString("docID"),
+                    myDoctor.getString("docName"),
+                    myDoctor.getString("docSex"),
+                    Integer.valueOf(myDoctor.getString("docAge")),
+                    myDoctor.getString("docTime"),
+                    myDoctor.getString("docAddress"),
+                    myDoctor.getString("docCompany"),
+                    myDoctor.getString("docTitle"));
+            socket.close();
+
+        } catch (JSONException | IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        Thread.interrupted();
+    });
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -53,40 +87,6 @@ public class PatientBottomActivity extends AppCompatActivity {
     }
 
     public void initData () {
-        Thread thread = new Thread(() -> {
-            String send;
-            Socket socket;
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("request_type", "6");
-                jsonObject.put("ID", myApplication.getUser().getMyDoctor());
-                jsonObject.put("user_type", "d");
-                send = jsonObject.toString();
-                socket = SocketUtil.getSendSocket();
-                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                out.writeUTF(send);
-                out.close();
-
-                Thread.sleep(500);
-                socket = SocketUtil.getInfo();
-                DataInputStream in = new DataInputStream(socket.getInputStream());
-                String message = in.readUTF();
-                JSONObject myDoctor = new JSONObject(message);
-                mMyDoctor = new User(myDoctor.getString("docID"),
-                        myDoctor.getString("docName"),
-                        myDoctor.getString("docSex"),
-                        Integer.valueOf(myDoctor.getString("docAge")),
-                        myDoctor.getString("docTime"),
-                        myDoctor.getString("docAddress"),
-                        myDoctor.getString("docCompany"),
-                        myDoctor.getString("docTitle"));
-                socket.close();
-
-            } catch (JSONException | IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-            Thread.interrupted();
-        });
         thread.start();
         while (thread.isAlive()) {
 

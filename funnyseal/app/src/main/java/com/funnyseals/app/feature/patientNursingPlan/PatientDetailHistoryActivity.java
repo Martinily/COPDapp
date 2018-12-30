@@ -1,7 +1,6 @@
 package com.funnyseals.app.feature.patientNursingPlan;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +49,93 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
     private List<String> mHistorysports_Titles         = new ArrayList<>();
     private List<String> mHistorysports_nums           = new ArrayList<>();
     private List<String> mHistorysports_attentions     = new ArrayList<>();
+    private Thread thread = new Thread(() -> {
+        Socket socket;
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("planID", mPlanId);
+            jsonObject.put("request_type", "5");
+            socket = SocketUtil.getSendSocket();
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            out.writeUTF(jsonObject.toString());
+            out.close();
+
+            Thread.sleep(500);
+
+            socket = SocketUtil.getGetSocket();
+            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+            String message = dataInputStream.readUTF();
+            socket.close();
+
+            if (message.equals("empty")) {
+                return;
+            }
+
+            JSONArray jsonArray = new JSONArray(message);
+            int i;
+
+            for (i = 0; i < jsonArray.length(); i++) {
+                if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
+                    mHistorysports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
+                    mHistorysports_nums.add(jsonArray.getJSONObject(i).getString("sTime"));
+                    mHistorysports_attentions.add(jsonArray.getJSONObject(i).getString
+                            ("sAttention"));
+                } else if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
+                    mHistorymedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
+                    mHistorymedicine_nums.add(jsonArray.getJSONObject(i).getString("mDose"));
+                    mHistorymedicine_attentions.add(jsonArray.getJSONObject(i).getString
+                            ("mAttention"));
+                    mHistorymedicine_times.add(jsonArray.getJSONObject(i).getString("mTime"));
+                } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
+                    mHistoryinstrument_Titles.add(jsonArray.getJSONObject(i).getString
+                            ("appName"));
+                    mHistoryinstrument_nums.add(jsonArray.getJSONObject(i).getString
+                            ("appTime"));
+                    mHistoryinstrument_attentions.add(jsonArray.getJSONObject(i).getString
+                            ("appAttention"));
+                }
+            }
+            socket.shutdownOutput();
+            socket.shutdownInput();
+            socket.close();
+        } catch (JSONException | IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        Thread.interrupted();
+    });
+    private Thread thread2=new Thread(() -> {
+        Socket socket;
+        JSONObject jsonObject = new JSONObject();
+        MyApplication application = (MyApplication)
+                PatientDetailHistoryActivity.this.getApplication();
+        try {
+            jsonObject.put("request_type", "14");
+            jsonObject.put("update_type", "useState");
+            jsonObject.put("planID", mPlanId);
+            jsonObject.put("planUseS", "1");
+            //jsonObject.put("docID",application.getAccount());
+            jsonObject.put("pID", mPatientId);  //mPatientId
+            socket = SocketUtil.getSendSocket();
+            DataOutputStream out = new DataOutputStream(socket
+                    .getOutputStream());
+            out.writeUTF(jsonObject.toString());
+            out.close();
+
+            Thread.sleep(500);
+
+            socket = SocketUtil.getGetSocket();
+            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+            String message = dataInputStream.readUTF();
+            JSONObject jsonObject3 = new JSONObject(message);
+            mJudgesubmmit=jsonObject3.getString("update_result");
+            socket.shutdownInput();
+            socket.shutdownOutput();
+            socket.close();
+        } catch (JSONException | IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        Thread.interrupted();
+    });
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -65,72 +151,6 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         mPatientId = bundle.getString("patientid");
         mPlanId = bundle.getString("planid");
 
-        Thread thread = new Thread(() -> {
-            Socket socket;
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("planID", mPlanId);
-                jsonObject.put("request_type", "5");
-                socket = SocketUtil.getSendSocket();
-                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                out.writeUTF(jsonObject.toString());
-                out.close();
-
-                Thread.sleep(1000);
-
-                socket = SocketUtil.getGetSocket();
-                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                String message = dataInputStream.readUTF();
-                socket.close();
-
-                System.err.println(message);
-                if (message.equals("empty")) {
-                    return;
-                }
-
-                JSONArray jsonArray = new JSONArray(message);
-                int i;
-
-                for (i = 0; i < jsonArray.length(); i++) {
-                    if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
-                        System.err.println("111");
-                        mHistorysports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
-                        mHistorysports_nums.add(jsonArray.getJSONObject(i).getString("sTime"));
-                        mHistorysports_attentions.add(jsonArray.getJSONObject(i).getString
-                                ("sAttention"));
-                        System.err.println(mHistorysports_Titles);
-                        System.err.println(mHistorysports_nums);
-                        System.err.println(mHistorysports_attentions);
-                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
-                        System.err.println("222");
-                        mHistorymedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
-                        mHistorymedicine_nums.add(jsonArray.getJSONObject(i).getString("mDose"));
-                        mHistorymedicine_attentions.add(jsonArray.getJSONObject(i).getString
-                                ("mAttention"));
-                        mHistorymedicine_times.add(jsonArray.getJSONObject(i).getString("mTime"));
-                        System.err.println(mHistorymedicine_Titles);
-                        System.err.println(mHistorymedicine_nums);
-                        System.err.println(mHistorymedicine_attentions);
-                        System.err.println(mHistorymedicine_times);
-                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
-                        System.err.println("333");
-                        mHistoryinstrument_Titles.add(jsonArray.getJSONObject(i).getString
-                                ("appName"));
-                        mHistoryinstrument_nums.add(jsonArray.getJSONObject(i).getString
-                                ("appTime"));
-                        mHistoryinstrument_attentions.add(jsonArray.getJSONObject(i).getString
-                                ("appAttention"));
-                        System.err.println(mHistoryinstrument_Titles);
-                        System.err.println(mHistoryinstrument_nums);
-                        System.err.println(mHistoryinstrument_attentions);
-                    }
-                }
-                socket.close();
-            } catch (JSONException | IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-            Thread.interrupted();
-        });
         thread.start();
         while (thread.isAlive()) {
 
@@ -140,34 +160,34 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         int size2 = mHistoryinstrument_Titles.size();
         int size3 = mHistorysports_Titles.size();
 
-        String[] historymedicine_Title = (String[]) mHistorymedicine_Titles.toArray(new
+        String[] historymedicine_Title = mHistorymedicine_Titles.toArray(new
                 String[size]);//药物名称
-        String[] historymedicine_num = (String[]) mHistorymedicine_nums.toArray(new String[size])
+        String[] historymedicine_num = mHistorymedicine_nums.toArray(new String[size])
                 ;//药物数量
-        String[] historymedicine_attention = (String[]) mHistorymedicine_attentions.toArray(new
+        String[] historymedicine_attention = mHistorymedicine_attentions.toArray(new
                 String[size]);//药物注意事项
-        String[] historymedicine_time = (String[]) mHistorymedicine_times.toArray(new
+        String[] historymedicine_time = mHistorymedicine_times.toArray(new
                 String[size]);//药物时间
 
-        String[] historyinstrument_Title = (String[]) mHistoryinstrument_Titles.toArray(new
+        String[] historyinstrument_Title = mHistoryinstrument_Titles.toArray(new
                 String[size2]);//器械名称
-        String[] historyinstrument_num = (String[]) mHistoryinstrument_nums.toArray(new
+        String[] historyinstrument_num = mHistoryinstrument_nums.toArray(new
                 String[size2]);//器械时长
-        String[] historyinstrument_attention = (String[]) mHistoryinstrument_attentions.toArray
+        String[] historyinstrument_attention = mHistoryinstrument_attentions.toArray
                 (new String[size2]);//器械注意事项
 
-        String[] historysports_Title = (String[]) mHistorysports_Titles.toArray(new
+        String[] historysports_Title = mHistorysports_Titles.toArray(new
                 String[size3]);//运动名称
-        String[] historysports_num = (String[]) mHistorysports_nums.toArray(new String[size3]);
+        String[] historysports_num = mHistorysports_nums.toArray(new String[size3]);
         //运动时长
-        String[] historysports_attention = (String[]) mHistorysports_attentions.toArray(new
+        String[] historysports_attention = mHistorysports_attentions.toArray(new
                 String[size3]);//运动注意事项
 
         String time;
         //分类存放
         for (int i = 0; i < historymedicine_Title.length; i++) {
             time = "";
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("historytitle", historymedicine_Title[i]);
             map.put("historyimg", R.drawable.vector_drawable_pillow);
             map.put("historynum", "剂量：");
@@ -194,7 +214,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < historyinstrument_Title.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("historytitle", historyinstrument_Title[i]);
             map.put("historyimg", R.drawable.vector_drawable_instrument);
             map.put("historynum", "建议时长：");
@@ -204,7 +224,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
             medicine_list.add(map);
         }
         for (int i = 0; i < historysports_Title.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("historytitle", historysports_Title[i]);
             map.put("historyimg", R.drawable.vector_drawable_sports);
             map.put("historynum", "建议时长：");
@@ -213,11 +233,11 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
             map.put("historytime", "-");
             medicine_list.add(map);
         }
-        ListView listview = (ListView) findViewById(R.id.listViewsikerhistory);
+        ListView listview = findViewById(R.id.listViewsikerhistory);
         listview.setAdapter(new MyAdapter());
 
         //退出按钮的监听
-        Button quitsickerhistory = (Button) findViewById(R.id.quitsickerhistory);
+        Button quitsickerhistory = findViewById(R.id.quitsickerhistory);
         quitsickerhistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
@@ -225,62 +245,24 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
             }
         });
 
-        Button usehistory = (Button) findViewById(R.id.usehistory);
-        usehistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                if(BtnClickLimitUtil.isFastClick())
-                {
-                    new AlertDialog.Builder(PatientDetailHistoryActivity.this).setTitle("我的提示")
-                            .setMessage("确定切换当前护理计划？")
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick (DialogInterface dialog, int which) {
-                                    //发送数据，使用该编号的护理计划
-                                    Thread thread=new Thread(() -> {
-                                        Socket socket;
-                                        JSONObject jsonObject = new JSONObject();
-                                        MyApplication application = (MyApplication)
-                                                PatientDetailHistoryActivity.this.getApplication();
-                                        try {
-                                            jsonObject.put("request_type", "14");
-                                            jsonObject.put("update_type", "useState");
-                                            jsonObject.put("planID", mPlanId);
-                                            jsonObject.put("planUseS", "1");
-                                            //jsonObject.put("docID",application.getAccount());
-                                            jsonObject.put("pID", mPatientId);  //mPatientId
-                                            socket = SocketUtil.getSendSocket();
-                                            DataOutputStream out = new DataOutputStream(socket
-                                                    .getOutputStream());
-                                            out.writeUTF(jsonObject.toString());
-                                            out.close();
+        Button usehistory = findViewById(R.id.usehistory);
+        usehistory.setOnClickListener(v -> {
+            if(BtnClickLimitUtil.isFastClick())
+            {
+                new AlertDialog.Builder(PatientDetailHistoryActivity.this).setTitle("我的提示")
+                        .setMessage("确定切换当前护理计划？")
+                        .setPositiveButton("确定", (dialog, which) -> {
+                            //发送数据，使用该编号的护理计划
+                            thread2.start();
+                            while (thread2.isAlive()) {
 
-                                            Thread.sleep(1000);
-
-                                            socket = SocketUtil.getGetSocket();
-                                            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                                            String message = dataInputStream.readUTF();
-                                            JSONObject jsonObject3 = new JSONObject(message);
-                                            mJudgesubmmit=jsonObject3.getString("update_result");
-                                            System.err.println(mJudgesubmmit);
-                                            socket.close();
-                                        } catch (JSONException | IOException | InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        Thread.interrupted();
-                                    });
-                                    thread.start();
-                                    while (thread.isAlive()) {
-
-                                    }
-                                    if (mJudgesubmmit.equals("true")) {
-                                        Toast.makeText(PatientDetailHistoryActivity.this, "切换成功!", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(PatientDetailHistoryActivity.this, "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }).show();
-                }
+                            }
+                            if (mJudgesubmmit.equals("true")) {
+                                Toast.makeText(PatientDetailHistoryActivity.this, "切换成功!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(PatientDetailHistoryActivity.this, "当前网络不稳定，换个姿势试试~", Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
             }
         });
     }
@@ -311,12 +293,12 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
                 view = LayoutInflater.from(PatientDetailHistoryActivity.this).inflate(R.layout
                         .historydetail_item, null);
                 mHolder = new ViewHolder();
-                mHolder.cardhistory_title = (TextView) view.findViewById(R.id.hismedicine);
-                mHolder.cardhistory_image = (ImageView) view.findViewById(R.id.hismedicineImg);
-                mHolder.cardhistory_num = (TextView) view.findViewById(R.id.histype);
-                mHolder.cardhistory_numdetail = (TextView) view.findViewById(R.id.hisnum);
-                mHolder.cardhistory_attention = (TextView) view.findViewById(R.id.hisattention);
-                mHolder.cardhistory_time = (TextView) view.findViewById(R.id.histime);
+                mHolder.cardhistory_title = view.findViewById(R.id.hismedicine);
+                mHolder.cardhistory_image = view.findViewById(R.id.hismedicineImg);
+                mHolder.cardhistory_num = view.findViewById(R.id.histype);
+                mHolder.cardhistory_numdetail = view.findViewById(R.id.hisnum);
+                mHolder.cardhistory_attention = view.findViewById(R.id.hisattention);
+                mHolder.cardhistory_time = view.findViewById(R.id.histime);
                 view.setTag(mHolder);  //将ViewHolder存储在View中
             } else {
                 view = convertView;
