@@ -3,6 +3,7 @@ package com.funnyseals.app.feature.health;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HealthCenterFragment extends Fragment {
 
@@ -32,7 +34,6 @@ public class HealthCenterFragment extends Fragment {
     public static List<String>  data2    = new ArrayList<>();
     public static List<String>  data3    = new ArrayList<>();
     public static List<String>  datatime = new ArrayList<>();
-    private       MyApplication myApplication;
     private       int           indexoffev1;
     private       int           indexoffvc;
     private       int           indexofvc;
@@ -41,11 +42,6 @@ public class HealthCenterFragment extends Fragment {
 
     public HealthCenterFragment () {
         // Required empty public constructor
-    }
-
-    public static HealthCenterFragment newInstance (String param1, String param2) {
-        HealthCenterFragment fragment = new HealthCenterFragment();
-        return fragment;
     }
 
     @Override
@@ -60,7 +56,7 @@ public class HealthCenterFragment extends Fragment {
         TextView textView2 = publicview.findViewById(R.id.data2);
         TextView textView2c = publicview.findViewById(R.id.data_caculate);
         TextView textView3 = publicview.findViewById(R.id.data3);
-        myApplication = (MyApplication) getActivity().getApplication();
+        MyApplication myApplication = (MyApplication) Objects.requireNonNull(getActivity()).getApplication();
         //获取数据
         final String m_id = myApplication.getAccount();
         Thread thread = new Thread(() -> {
@@ -115,8 +111,9 @@ public class HealthCenterFragment extends Fragment {
                         } else
                             SimpleChartView.data2.add(0);
                     }
-                } else
-                    Toast.makeText(getActivity(), "暂无用户数据", Toast.LENGTH_LONG).show();
+                } else{
+                    showToast("暂无用户数据");
+                }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
@@ -135,35 +132,32 @@ public class HealthCenterFragment extends Fragment {
                     (data2.get(indexoffvc));
             if (percent < 70)
                 textView2c.setTextColor(Color.parseColor("#FF0000"));
-            String string = String.valueOf(percent) + "%";
-            textView2c.setText(string);
+                String string = String.valueOf(percent) + "%";
+                textView2c.setText(string);
         }
         super.onResume();
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+    public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_health_center, container, false);
         publicview = view;
         Button button1 = view.findViewById(R.id.gotocentre2);
         Button button2 = view.findViewById(R.id.gotocentre3);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Intent intent = new Intent(getActivity(), HealthCenterUpdateActivity.class);
-                startActivity(intent);
-            }
+        button1.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), HealthCenterUpdateActivity.class);
+            startActivity(intent);
         });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Intent intent = new Intent(getActivity(), HealthCenterHistoryActivity.class);
-                startActivity(intent);
-            }
+        button2.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), HealthCenterHistoryActivity.class);
+            startActivity(intent);
         });
         return view;
     }
 
+    public void showToast (final String msg) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(() -> Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show());
+    }
 
 }

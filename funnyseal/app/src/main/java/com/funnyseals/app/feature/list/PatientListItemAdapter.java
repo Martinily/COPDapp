@@ -32,7 +32,8 @@ public class PatientListItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount () {
-        return mUsers.size();
+        if (mUsers != null) return mUsers.size();
+        else return 0;
     }
 
     @Override
@@ -42,7 +43,8 @@ public class PatientListItemAdapter extends BaseAdapter {
 
     @Override
     public long getItemId (int position) {
-        return position;
+        if (mUsers != null) return position;
+        else return 0;
     }
 
     /*
