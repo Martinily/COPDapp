@@ -100,7 +100,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
             socket = SocketUtil.getArraySendSocket();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             String message = dataInputStream.readUTF();
-            socket.close();
             System.err.println(message);
             if (message.equals("empty")) {
                 return;
@@ -144,7 +143,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
             socket = SocketUtil.getArraySendSocket2();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             String message = dataInputStream.readUTF();
-            socket.close();
             System.err.println(message);
             if (message.equals("empty")) {
                 return;

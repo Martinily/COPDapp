@@ -114,6 +114,10 @@ public class HealthCenterFragment extends Fragment {
                 } else{
                     showToast("暂无用户数据");
                 }
+                dataInputStream.close();
+                socket.shutdownInput();
+                socket.shutdownOutput();
+                socket.close();
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
