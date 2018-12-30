@@ -23,6 +23,7 @@ import com.vmloft.develop.library.tools.utils.VMLog;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -203,6 +204,7 @@ public class CallManager {
         message.setUnread(false);
         // 调用sdk的保存消息方法
         EMClient.getInstance().chatManager().saveMessage(message);
+        EMClient.getInstance().chatManager().importMessages(Collections.singletonList(message));
 
         try {
             Thread.sleep(1000);
