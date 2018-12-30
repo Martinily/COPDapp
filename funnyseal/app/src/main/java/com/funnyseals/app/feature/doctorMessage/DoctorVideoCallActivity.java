@@ -81,17 +81,22 @@ public class DoctorVideoCallActivity extends CallActivity {
     FloatingActionButton answerCallFab;
 
     // SurfaceView 控件状态，-1 表示通话未接通，0 表示本小远大，1 表示远小本大
-    private int     surfaceState = -1;
-    private boolean isMonitor    = false;
-    private int     littleWidth;
-    private int     littleHeight;
-    private int     rightMargin;
-    private int     topMargin;
-    private String    mMyPatientAccount;
-    private String  mMedicalHistory;
-    private String  mMdeicalOrder;
-    private String  mMedicalHistoryChange;
-    private String  mMdeicalOrderChange;
+    private int surfaceState = -1;
+    private int littleWidth;
+    private int littleHeight;
+    private int rightMargin;
+    private int topMargin;
+
+    //判断是否接通电话
+    private boolean isCalled  = false;
+    private boolean isMonitor = false;
+
+    private String mMyPatientAccount;
+    private String mMedicalHistory;
+    private String mMdeicalOrder;
+    private String mMedicalHistoryChange;
+    private String mMdeicalOrderChange;
+    private String result;
 
     // 视频通话帮助类
     private EMVideoCallHelper videoCallHelper;
@@ -115,15 +120,15 @@ public class DoctorVideoCallActivity extends CallActivity {
         setContentView(R.layout.activity_doctor_video_call);
 
         Intent intent = this.getIntent();
-        mMyPatientAccount =intent.getStringExtra("myPatientAccount");
+        mMyPatientAccount = intent.getStringExtra("myPatientAccount");
 
         ButterKnife.bind(this);
         initData();
         initView();
     }
 
-    private void initData(){
-        Thread thread=new Thread(() -> {
+    private void initData () {
+        Thread thread = new Thread(() -> {
             String send;
             Socket socket;
             try {
@@ -142,9 +147,8 @@ public class DoctorVideoCallActivity extends CallActivity {
                 DataInputStream in = new DataInputStream(socket.getInputStream());
                 String message = in.readUTF();
                 JSONObject medicalInfo = new JSONObject(message);
-                mMedicalHistory=medicalInfo.getString("HistoryCondition");
-                mMdeicalOrder=medicalInfo.getString("HistoryAdvice");
-                System.err.println(mMedicalHistory);
+                mMedicalHistory = medicalInfo.getString("HistoryCondition");
+                mMdeicalOrder = medicalInfo.getString("HistoryAdvice");
 
                 socket.shutdownInput();
                 socket.shutdownOutput();
@@ -156,7 +160,7 @@ public class DoctorVideoCallActivity extends CallActivity {
             Thread.interrupted();
         });
         thread.start();
-        while (thread.isAlive()){
+        while (thread.isAlive()) {
 
         }
     }
@@ -217,30 +221,36 @@ public class DoctorVideoCallActivity extends CallActivity {
         if (CallManager.getInstance().isExternalInputData()) {
             new PreviewManager(surfaceView);
         }
+
+        medicalHistory.setVisibility(View.GONE);
+        medicalOrder.setVisibility(View.GONE);
+        callInfoBtn.setActivated(isMonitor);
     }
 
     @SuppressLint("InflateParams")
     private void showAlertDialogHistory () {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        mView = View.inflate(DoctorVideoCallActivity.this,R.layout.view_dialog_medical_history, null);
+        mView = View.inflate(DoctorVideoCallActivity.this, R.layout.view_dialog_medical_history,
+                null);
         alertDialogTitle = mView.findViewById(R.id.dialog_title);
         alertDialogDetail = mView.findViewById(R.id.dialog_detail);
         alertDialogCancel = mView.findViewById(R.id.btn_dialog_cancel);
         alertDialogOk = mView.findViewById(R.id.btn_dialog_ok);
         builder.setView(mView);
         builder.setCancelable(false);
-        alertDialog=builder.create();
+        alertDialog = builder.create();
 
         alertDialogTitle.setText("修改病情：");
         alertDialogDetail.setText(mMedicalHistory);
 
         alertDialogCancel.setOnClickListener(v -> {
             alertDialog.dismiss();
+            mMedicalHistoryChange = mMedicalHistory;
             showAlertDialogOrder();
         });
         alertDialogOk.setOnClickListener(v -> {
-            mMedicalHistoryChange=alertDialogDetail.getText().toString();
+            mMedicalHistoryChange = alertDialogDetail.getText().toString();
             alertDialog.dismiss();
             showAlertDialogOrder();
         });
@@ -250,68 +260,79 @@ public class DoctorVideoCallActivity extends CallActivity {
 
     private void showAlertDialogOrder () {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        mView = View.inflate(DoctorVideoCallActivity.this,R.layout.view_dialog_medical_history, null);
+        mView = View.inflate(DoctorVideoCallActivity.this, R.layout.view_dialog_medical_history,
+                null);
         alertDialogTitle = mView.findViewById(R.id.dialog_title);
         alertDialogDetail = mView.findViewById(R.id.dialog_detail);
         alertDialogCancel = mView.findViewById(R.id.btn_dialog_cancel);
         alertDialogOk = mView.findViewById(R.id.btn_dialog_ok);
         builder.setView(mView);
         builder.setCancelable(false);
-        alertDialog=builder.create();
+
+        alertDialog = builder.create();
 
         alertDialogTitle.setText("修改医嘱：");
         alertDialogDetail.setText(mMdeicalOrder);
 
         alertDialogCancel.setOnClickListener(v -> {
             alertDialog.dismiss();
+            mMdeicalOrderChange = mMdeicalOrder;
+            modifyMedicalContent();
             onFinish();
         });
         alertDialogOk.setOnClickListener(v -> {
-            mMdeicalOrderChange=alertDialogDetail.getText().toString();
+            mMdeicalOrderChange = alertDialogDetail.getText().toString();
             alertDialog.dismiss();
-            Thread thread=new Thread(() -> {
-                String send;
-                Socket socket;
-                try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("request_type", "15");
-                    jsonObject.put("history_type", "add");
-                    jsonObject.put("HistoryCondition", mMedicalHistoryChange);
-                    jsonObject.put("HistoryAdvice", mMdeicalOrderChange);
-                    jsonObject.put("pID", mMyPatientAccount);
-                    send = jsonObject.toString();
-                    socket = SocketUtil.getSendSocket();
-                    DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                    out.writeUTF(send);
-                    out.close();
-
-                    Thread.sleep(1000);
-                    socket = SocketUtil.getModifyResult();
-                    DataInputStream in = new DataInputStream(socket.getInputStream());
-                    String message = in.readUTF();
-                    JSONObject medicalInfo = new JSONObject(message);
-                    String result=medicalInfo.getString("history_result");
-                    runOnUiThread(() -> Toast.makeText(DoctorVideoCallActivity.this, result, Toast.LENGTH_SHORT).show());
-                    /*if(result.equals("false")){
-                        endCall();
-                    }*/
-
-                    socket.shutdownInput();
-                    socket.shutdownOutput();
-                    socket.close();
-
-                } catch (JSONException | IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Thread.interrupted();
-            });
-            thread.start();
-            while (thread.isAlive()){
-
-            }
+            modifyMedicalContent();
             onFinish();
         });
         alertDialog.show();
+    }
+
+    public void modifyMedicalContent () {
+        Thread thread = new Thread(() -> {
+            String send;
+            Socket socket;
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("request_type", "15");
+                jsonObject.put("history_type", "add");
+                jsonObject.put("HistoryCondition", mMedicalHistoryChange);
+                jsonObject.put("HistoryAdvice", mMdeicalOrderChange);
+                jsonObject.put("pID", mMyPatientAccount);
+                send = jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(send);
+                out.close();
+
+                Thread.sleep(1000);
+                socket = SocketUtil.getModifyResult();
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                String message = in.readUTF();
+                JSONObject medicalInfo = new JSONObject(message);
+                result = medicalInfo.getString("history_result");
+                if(result.equals("true")){
+                    result="修改成功";
+                }else{
+                    result="修改失败";
+                }
+                runOnUiThread(() -> Toast.makeText(DoctorVideoCallActivity.this, result,
+                        Toast.LENGTH_SHORT).show());
+
+                socket.shutdownInput();
+                socket.shutdownOutput();
+                socket.close();
+
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
+        thread.start();
+        while (thread.isAlive()) {
+
+        }
     }
 
 
@@ -370,7 +391,6 @@ public class DoctorVideoCallActivity extends CallActivity {
 
     protected void endCall () {
         CallManager.getInstance().endCall();
-        showAlertDialogHistory();
     }
 
     /**
@@ -549,6 +569,7 @@ public class DoctorVideoCallActivity extends CallActivity {
     private void onCallSurface () {
         // 更新通话界面控件状态
         surfaceState = 0;
+        isCalled = true;
 
         localParams = new RelativeLayout.LayoutParams(littleWidth, littleHeight);
         localParams.width = littleWidth;
@@ -613,7 +634,11 @@ public class DoctorVideoCallActivity extends CallActivity {
                 break;
             case DISCONNECTED: // 通话已中断
                 VMLog.i("通话已结束" + callError);
-                //onFinish();
+                if (!isCalled) {
+                    onFinish();
+                } else {
+                    showAlertDialogHistory();
+                }
                 break;
             case NETWORK_DISCONNECTED:
                 Toast.makeText(activity, "对方网络断开", Toast.LENGTH_SHORT).show();

@@ -49,6 +49,7 @@ public class CallReceiver extends BroadcastReceiver {
             CallManager.getInstance().setCallType(CallManager.CallType.VIDEO);
             if(USER_TYPE.equals("d")){
                 callIntent.setClass(context, DoctorVideoCallActivity.class);
+                callIntent.putExtra("myPatientAccount", callFrom);
             }else{
                 callIntent.setClass(context, PatientVideoCallActivity.class);
             }

@@ -101,8 +101,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
             socket = SocketUtil.getArraySendSocket();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             String message = dataInputStream.readUTF();
-            socket.close();
-            System.err.println(message);
             if (message.equals("empty")) {
                 return;
             }
@@ -145,8 +143,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
             socket = SocketUtil.getArraySendSocket2();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             String message = dataInputStream.readUTF();
-            socket.close();
-            System.err.println(message);
             if (message.equals("empty")) {
                 return;
             }
@@ -268,8 +264,8 @@ public class DoctorBottomActivity extends AppCompatActivity {
     }
 
     private void initBottomTabs () {
-        mIndexTab = findViewById(R.id.doctor_personalCenter_tab);
-        mPreviousTabId = R.id.doctor_personalCenter_tab;
+        mIndexTab = findViewById(R.id.doctor_patientList_tab);
+        mPreviousTabId = R.id.doctor_patientList_tab;
 
         RadioGroup bottomTabs = findViewById(R.id.doctor_bottom_tabs);
 
