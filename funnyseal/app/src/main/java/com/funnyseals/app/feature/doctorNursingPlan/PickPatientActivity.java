@@ -98,11 +98,11 @@ public class PickPatientActivity extends AppCompatActivity {
 
         int size = mPatients.size();
         int size2 = mPatientsIds.size();
-        String[] mPatient = (String[]) mPatients.toArray(new String[size]);
-        String[] mPatientsId = (String[]) mPatientsIds.toArray(new String[size2]);
+        String[] mPatient = mPatients.toArray(new String[size]);
+        String[] mPatientsId = mPatientsIds.toArray(new String[size2]);
 
         //加载mPatientlistView
-        mPatientlistView = (ListView) findViewById(R.id.pickpatientlistView);
+        mPatientlistView = findViewById(R.id.pickpatientlistView);
         mListViewAdapter = new MyListViewAdapter(PickPatientActivity.this, mPatientBeanList);
         mPatientlistView.setAdapter(mListViewAdapter);
 
@@ -136,7 +136,7 @@ public class PickPatientActivity extends AppCompatActivity {
         }
 
         //退出的点击事件
-        final Button medicinesaveall = (Button) findViewById(R.id.quitpickpitient);
+        final Button medicinesaveall = findViewById(R.id.quitpickpitient);
         medicinesaveall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
@@ -201,7 +201,7 @@ public class PickPatientActivity extends AppCompatActivity {
             }
 
             //更新数据
-            final TextView nameTextView = (TextView) view.findViewById(R.id.patientName);
+            final TextView nameTextView = view.findViewById(R.id.patientName);
             nameTextView.setText(bean.getName());
 
             final int removePosition = position;

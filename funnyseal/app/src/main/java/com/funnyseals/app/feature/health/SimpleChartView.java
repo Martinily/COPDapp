@@ -25,7 +25,6 @@ public class SimpleChartView extends View {
             }, 1000);//一秒刷新一次
         }
 
-        ;
     };
 
     public SimpleChartView (Context context, AttributeSet attrs) {

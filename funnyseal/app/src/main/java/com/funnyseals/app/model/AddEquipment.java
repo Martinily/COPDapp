@@ -13,6 +13,13 @@ public class AddEquipment {
     }
 
     public String getEquipment_state () {
+        if (equipment_state.equals("0"))
+        {
+            equipment_state="未使用";
+        }
+        if (equipment_state.equals("1")){
+            equipment_state="使用";
+        }
         return equipment_state;
     }
 }

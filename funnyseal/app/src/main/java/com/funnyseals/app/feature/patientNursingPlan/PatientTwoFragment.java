@@ -77,9 +77,9 @@ public class PatientTwoFragment extends Fragment {
         int size2 = mInstrument_Contents.size();
         int size3 = mInstrument_attentions.size();
 
-        String[] instrument_Title = (String[]) mInstrument_Titles.toArray(new String[size]);
-        String[] instrument_Content = (String[]) mInstrument_Contents.toArray(new String[size2]);
-        String[] instrument_attention = (String[]) mInstrument_attentions.toArray(new
+        String[] instrument_Title = mInstrument_Titles.toArray(new String[size]);
+        String[] instrument_Content = mInstrument_Contents.toArray(new String[size2]);
+        String[] instrument_attention = mInstrument_attentions.toArray(new
                 String[size3]);
 
         //将数据封装成数据源

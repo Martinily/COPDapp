@@ -27,12 +27,15 @@ import java.net.Socket;
 
 public class PatientBottomActivity extends AppCompatActivity {
 
-    private RadioButton             mIndexTab;
-    private int                     mPreviousTabId;
+    private int  mPreviousTabId;
+    private User mMyDoctor;
+
+    private RadioButton mIndexTab;
+
     private PatientBottomTabAdapter mFragmentTabAdapter;
-    private User                    mMyDoctor;
     private MyApplication           myApplication;
-    private Thread thread = new Thread(() -> {
+
+    private Thread getMyInfo = new Thread(() -> {
         String send;
         Socket socket;
         try {
@@ -59,12 +62,14 @@ public class PatientBottomActivity extends AppCompatActivity {
                     myDoctor.getString("docAddress"),
                     myDoctor.getString("docCompany"),
                     myDoctor.getString("docTitle"));
+
+            socket.shutdownOutput();
+            socket.shutdownInput();
             socket.close();
 
         } catch (JSONException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        Thread.interrupted();
     });
 
     @Override
@@ -72,7 +77,8 @@ public class PatientBottomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_bottom);
         myApplication = (MyApplication) getApplication();
-        initData();
+        getMyInfo.start();
+
         //初始化导航栏
         initBottomTabs();
     }
@@ -83,13 +89,6 @@ public class PatientBottomActivity extends AppCompatActivity {
             super.onBackPressed();
         } else {
             mIndexTab.setChecked(true);
-        }
-    }
-
-    public void initData () {
-        thread.start();
-        while (thread.isAlive()) {
-
         }
     }
 
@@ -116,6 +115,9 @@ public class PatientBottomActivity extends AppCompatActivity {
         fragmentMap.put(R.id.patient_health_tab, new HealthCenterFragment());
         fragmentMap.put(R.id.patient_personalcenter_tab, new PatientPersonalCenterFragment());
 
+        while (getMyInfo.isAlive()) {
+
+        }
         mFragmentTabAdapter = new BottomTabBar(this, fragmentMap, R.id.fl_patient_content,
                 bottomTabs);
     }

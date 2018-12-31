@@ -70,7 +70,7 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
         mSports_Contents.clear();
         mSports_attentions.clear();
 
-        GetMessage();;
+        GetMessage();
     }
 
     @Override

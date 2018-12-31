@@ -37,11 +37,11 @@ public class InstrumentDetailActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         final String position = bundle.getString("position");
-        mDialoginstrumentname = (TextView) findViewById(R.id.instrumentname);
+        mDialoginstrumentname = findViewById(R.id.instrumentname);
         mDialoginstrumentname.setText(bundle.getString("instrumentname"));
-        mDialoginstrumentnum = (EditText) findViewById(R.id.instrumentnum);
+        mDialoginstrumentnum = findViewById(R.id.instrumentnum);
         mDialoginstrumentnum.setText(bundle.getString("instrumentcontent"));
-        mDialoginstrument_editor_detail = (EditText) findViewById(R.id.instrument_editor_detail);
+        mDialoginstrument_editor_detail = findViewById(R.id.instrument_editor_detail);
         mDialoginstrument_editor_detail.setText(bundle.getString("instrumentattention"));
 
         final EditText instrumentnum = findViewById(R.id.instrumentnum);

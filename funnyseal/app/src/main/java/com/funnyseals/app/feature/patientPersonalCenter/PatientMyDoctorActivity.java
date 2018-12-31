@@ -62,6 +62,9 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
         myDoctor();
 
     }
+    /**
+     更新界面UI信息
+     */
     void initText(){
         tv_patient_doctor_name.setText(name);
         tv_patient_doctor_post.setText(post);

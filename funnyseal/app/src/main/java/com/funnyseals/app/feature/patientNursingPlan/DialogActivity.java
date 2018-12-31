@@ -55,8 +55,8 @@ public class DialogActivity extends Activity {
             barmanager.notify(differid, notice);
         }
 
-        tv = (TextView) findViewById(R.id.dialog_tv);
-        bt = (Button) findViewById(R.id.dialog_bt);
+        tv = findViewById(R.id.dialog_tv);
+        bt = findViewById(R.id.dialog_bt);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
     }
