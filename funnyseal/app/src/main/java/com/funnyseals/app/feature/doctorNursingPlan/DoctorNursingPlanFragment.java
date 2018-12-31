@@ -143,7 +143,7 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                 {
                     if (mPlannum > 0) {
                         if (mWhere.equals("1")) {
-                            new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要发送吗？")
+                            new AlertDialog.Builder(getActivity()).setTitle("提示").setMessage("确定完成并发送吗？")
                                     .setPositiveButton("确定", (dialog,which) ->{
                                             mPatientId = mMyFriend;
                                             mWhere="0";
