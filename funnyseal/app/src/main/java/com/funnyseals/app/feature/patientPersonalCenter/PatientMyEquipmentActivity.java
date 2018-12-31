@@ -1,13 +1,21 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
@@ -35,7 +43,9 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     private List<AddEquipment>  addEquipmentsList = new ArrayList<>();
     private ListView            listView          = null;
     private AddEquipmentAdapter addEquipmentAdapter;
-    private String              m_name, m_state;
+    private String              eName;
+    private AddEquipment novels;
+    private int myPosition;
 
 
     /**
@@ -53,6 +63,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         listView.setAdapter(addEquipmentAdapter);
         addEquipmentAdapter.notifyDataSetChanged();
         myAddEquipment();
+        this.registerForContextMenu(listView);
     }
 
     /**
@@ -65,10 +76,6 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         bt_patient_equipment_add.setOnClickListener(new addListeners());
         bt_patient_equipment_return.setOnClickListener(new addListeners());
 
-
-
-
-
     }
     /**
      * 添加设备界面返回的时候，更新界面
@@ -79,6 +86,40 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         addEquipmentAdapter.notifyDataSetChanged();
     }
 
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("请选择您的操作");
+        menu.setHeaderIcon(android.R.drawable.ic_menu_info_details);
+            /*
+           参数1:组id
+           参数2:项id
+           参数3:顺序
+           参数4:菜单项的内容
+        */
+        menu.add(0, 0, Menu.NONE, "删除该项");
+        menu.add(0, 1, Menu.NONE, "取消");
+    }
+
+
+    public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        myPosition=menuInfo.position;
+
+        switch (item.getItemId()){
+            case 0:
+                addEquipmentAdapter.remove(addEquipmentAdapter.getItem(myPosition));
+                View view = listView.getChildAt(myPosition);
+                TextView t = view.findViewById(R.id.add_equipment_name);
+                eName = t.getText().toString();
+                deleteEquipment();
+                Log.d("1", "onContextItemSelected: 删除该项sobj:111111="+addEquipmentAdapter.getItem(myPosition)+"11111");
+                Log.d("2","ddddddd"+eName+"ddddd");
+
+                return true;
+            case 1:
+                return false;
+        }
+        return super.onContextItemSelected(item);
+    }
     /**
      * 连接服务器，动态加载我的设备
      */
@@ -103,7 +144,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 if (!get.equals("empty")) {
                     JSONArray jsonArray = new JSONArray(get);
                     for (int i = jsonArray.length() - 1; i >= 0; i--) {
-                        AddEquipment novels = findAddEquipment.sectionData(jsonArray
+                        novels = findAddEquipment.sectionData(jsonArray
                                 .getJSONObject(i));
                         addEquipmentsList.add(novels);
                     }
@@ -120,7 +161,49 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         }
 
     }
+    /**
+     * 删除
+     */
+    public void deleteEquipment(){
+        @SuppressLint("ShowToast") Thread thread = new Thread(() -> {
+            Socket socket;
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("request_type", "9");
+                jsonObject.put("device_type", "delete");
+                jsonObject.put("pID", myApplication.getAccount());
+                jsonObject.put("eName",eName);
+                String send = jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                dataOutputStream.writeUTF(send);
+                dataOutputStream.close();
 
+                Thread.sleep(1000);
+                socket = SocketUtil.setPort(2030);
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String delete = dataInputStream.readUTF();
+                switch (delete) {
+                    case "false":
+                        Looper.prepare();
+                        Toast.makeText(PatientMyEquipmentActivity.this,"删除失败，网络连接失败",Toast.LENGTH_SHORT);
+                        Looper.loop();
+                        break;
+                    case "true":
+                        Looper.prepare();
+                        Toast.makeText(PatientMyEquipmentActivity.this,"删除成功",Toast.LENGTH_SHORT);
+                        Looper.loop();
+                        addEquipmentAdapter.notifyDataSetChanged();
+                        break;
+                }
+                socket.close();
+            } catch (IOException | JSONException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        while (thread.isAlive()) {
+        }}
     /**
      * 监听事件
      * 返回，返回个人中心
