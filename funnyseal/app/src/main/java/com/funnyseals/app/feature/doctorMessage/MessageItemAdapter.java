@@ -93,7 +93,7 @@ public class MessageItemAdapter extends BaseAdapter {
                 }
             }
         } else if (mUserType.equals("patient")) {
-            viewHolder.mName.setText(mMyDoctor.getName().isEmpty() ? account : mMyDoctor.getName());
+            viewHolder.mName.setText(mMyDoctor.getName().equals("默认") ? account : mMyDoctor.getName());
         }
 
         if(conversation.getAllMsgCount()!=0){

@@ -57,7 +57,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
             out.writeUTF(send);
             out.close();
 
-            Thread.sleep(1000);
+            Thread.sleep(500);
             socket = SocketUtil.getGetArraySocket();
             DataInputStream in = new DataInputStream(socket.getInputStream());
             String message = in.readUTF();
@@ -83,7 +83,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
         } catch (JSONException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        Thread.interrupted();
     });
     private Thread thread2 = new Thread(() -> {
         Socket socket;
@@ -96,7 +95,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
             out.writeUTF(jsonObject.toString());
             out.close();
 
-            Thread.sleep(4000);
+            Thread.sleep(500);
 
             socket = SocketUtil.getArraySendSocket();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
@@ -120,7 +119,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
         } catch (JSONException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        Thread.interrupted();
     });
     private Thread thread3 = new Thread(() -> {
         try {
@@ -138,7 +136,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
             out.writeUTF(jsonObject.toString());
             out.close();
 
-            Thread.sleep(1000);
+            Thread.sleep(500);
 
             socket = SocketUtil.getArraySendSocket2();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
@@ -161,7 +159,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
         } catch (JSONException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        Thread.interrupted();
     });
 
 
@@ -191,10 +188,6 @@ public class DoctorBottomActivity extends AppCompatActivity {
         thread.start();
         thread2.start();
         thread3.start();
-
-        while (thread3.isAlive() || thread2.isAlive() || thread.isAlive()) {
-
-        }
     }
 
     public void getPatient () {
@@ -211,7 +204,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
                 out.writeUTF(send);
                 out.close();
 
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 socket = SocketUtil.getGetArraySocket();
                 DataInputStream in = new DataInputStream(socket.getInputStream());
                 String message = in.readUTF();
@@ -275,6 +268,11 @@ public class DoctorBottomActivity extends AppCompatActivity {
         fragmentMap.put(R.id.doctor_message_tab, new DoctorMessageListFragment());
         fragmentMap.put(R.id.doctor_nursingPlan_tab, new DoctorNursingPlanFragment());
         fragmentMap.put(R.id.doctor_personalCenter_tab, new DoctorPersonalCenterFragment());
+
+
+        while (thread3.isAlive() || thread2.isAlive() || thread.isAlive()) {
+
+        }
 
         mFragmentTabAdapter = new BottomTabBar(this, fragmentMap, R.id.fl_doctor_content,
                 bottomTabs);

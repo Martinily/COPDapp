@@ -127,7 +127,7 @@
                     android:layout_marginRight="@dimen/vm_dimen_16"
                     android:background="@drawable/click_circle_transparent"
                     android:contentDescription="切换"
-                    android:src="@drawable/vector_drawable_camera_change" />
+                    android:src="@drawable/ic_switch_camera_black_24dp" />
             </LinearLayout>
 
             <LinearLayout
