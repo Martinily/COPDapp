@@ -42,7 +42,6 @@ public class AddEquipmentAdapter extends ArrayAdapter {
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         TextView EquipmentName = view.findViewById(R.id.add_equipment_name);
         TextView EquipmentState = view.findViewById(R.id.add_equipment_state);
-        final ImageButton EquipmentDelete=view.findViewById(R.id.add_equipment_delete);
         EquipmentState.setText(addEquipment.getEquipment_state());
         EquipmentName.setText(addEquipment.getEquipment_name());
         return view;
