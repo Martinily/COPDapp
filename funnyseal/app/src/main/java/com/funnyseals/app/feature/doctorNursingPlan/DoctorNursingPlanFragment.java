@@ -98,8 +98,13 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
         super.onResume();
 
         mMyFriend=((DoctorBottomActivity)Objects.requireNonNull(getActivity())).getMyFriend();
-        ((DoctorBottomActivity)getActivity()).setMyFriend("0");
-        mWhere="1";
+
+        if(mMyFriend.equals("0"))
+        {
+            mWhere="0";
+        }else{
+            mWhere="1";
+        }
     }
 
     //点击事件的集合
@@ -139,14 +144,16 @@ public class DoctorNursingPlanFragment extends Fragment implements View.OnClickL
                     if (mPlannum > 0) {
                         if (mWhere.equals("1")) {
                             new AlertDialog.Builder(getActivity()).setTitle("我的提示").setMessage("确定要发送吗？")
-                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick (DialogInterface dialog, int which) {
+                                    .setPositiveButton("确定", (dialog,which) ->{
                                             mPatientId = mMyFriend;
                                             mWhere="0";
+                                            ((DoctorBottomActivity)getActivity()).setMyFriend("0");
                                             SendPlan();
-                                        }
-                                    }).show();
+                                    }).setNegativeButton("取消",(dialog,which) ->{
+                                            ((DoctorBottomActivity)getActivity()).setMyFriend("0");
+                                            mWhere="0";
+                                    }
+                            ).show();
                         } else {
                             Intent intent2 = new Intent(getActivity(), PickPatientActivity.class);
                             //传输医生编号

@@ -70,61 +70,7 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
         mSports_Contents.clear();
         mSports_attentions.clear();
 
-        Thread thread = new Thread(() -> {
-            Socket socket;
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("ID", mPatientID);
-                jsonObject.put("request_type", "4");
-                jsonObject.put("user_type", "p");
-                jsonObject.put("query_state", "now");
-                socket = SocketUtil.getSendSocket();
-                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                out.writeUTF(jsonObject.toString());
-                out.close();
-
-                Thread.sleep(1000);
-
-                socket = SocketUtil.getGetSocket();
-                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                String message = dataInputStream.readUTF();
-                socket.close();
-                if (message.equals("empty")) {
-                    return;
-                }
-
-                JSONArray jsonArray = new JSONArray(message);
-                int i;
-
-                for (i = 0; i < jsonArray.length(); i++) {
-                    if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
-                        mMedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
-                        mMedicine_Contents.add(jsonArray.getJSONObject(i).getString("mDose"));
-                        mMedicine_attentions.add(jsonArray.getJSONObject(i).getString
-                                ("mAttention"));
-                        mMedicine_needtimes.add(jsonArray.getJSONObject(i).getString("mTime"));
-                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
-                        mInstrument_Titles.add(jsonArray.getJSONObject(i).getString("appName"));
-                        mInstrument_Contents.add(jsonArray.getJSONObject(i).getString("appTime"));
-                        mInstrument_attentions.add(jsonArray.getJSONObject(i).getString
-                                ("appAttention"));
-                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
-                        mSports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
-                        mSports_Contents.add(jsonArray.getJSONObject(i).getString("sTime"));
-                        mSports_attentions.add(jsonArray.getJSONObject(i).getString("sAttention"));
-                    }
-                }
-                socket.close();
-            } catch (JSONException | IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-            Thread.interrupted();
-        });
-        thread.start();
-        while (thread.isAlive()) {
-
-        }
-        //System.err.println(mMedicine_Titles.size());
+        GetMessage();;
     }
 
     @Override
@@ -140,60 +86,7 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
         initView();
         myApplication = (MyApplication) getActivity().getApplication();
         mPatientID=myApplication.getAccount();
-        Thread thread = new Thread(() -> {
-            Socket socket;
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("ID", mPatientID);
-                jsonObject.put("request_type", "4");
-                jsonObject.put("user_type", "p");
-                jsonObject.put("query_state", "now");
-                socket = SocketUtil.getSendSocket();
-                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                out.writeUTF(jsonObject.toString());
-                out.close();
-
-                Thread.sleep(1000);
-
-                socket = SocketUtil.getGetSocket();
-                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                String message = dataInputStream.readUTF();
-                socket.close();
-                if (message.equals("empty")) {
-                    return;
-                }
-
-                JSONArray jsonArray = new JSONArray(message);
-                int i;
-
-                for (i = 0; i < jsonArray.length(); i++) {
-                    if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
-                        mMedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
-                        mMedicine_Contents.add(jsonArray.getJSONObject(i).getString("mDose"));
-                        mMedicine_attentions.add(jsonArray.getJSONObject(i).getString
-                                ("mAttention"));
-                        mMedicine_needtimes.add(jsonArray.getJSONObject(i).getString("mTime"));
-                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
-                        mInstrument_Titles.add(jsonArray.getJSONObject(i).getString("appName"));
-                        mInstrument_Contents.add(jsonArray.getJSONObject(i).getString("appTime"));
-                        mInstrument_attentions.add(jsonArray.getJSONObject(i).getString
-                                ("appAttention"));
-                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
-                        mSports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
-                        mSports_Contents.add(jsonArray.getJSONObject(i).getString("sTime"));
-                        mSports_attentions.add(jsonArray.getJSONObject(i).getString("sAttention"));
-                    }
-                }
-                socket.close();
-            } catch (JSONException | IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-            Thread.interrupted();
-        });
-        thread.start();
-        while (thread.isAlive()) {
-
-        }
+        GetMessage();
 
         // 设置菜单栏的点击事件
         mTv_patient_one.setOnClickListener(this);
@@ -211,6 +104,63 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
         mVp_patient_myViewPager.setAdapter(mAdapter);
         mVp_patient_myViewPager.setCurrentItem(0);  //初始化显示第一个页面
         mTv_patient_one.setBackgroundColor(Color.LTGRAY);//被选中就为灰色
+    }
+
+    public void GetMessage(){
+        Thread thread = new Thread(() -> {
+            Socket socket;
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("ID", mPatientID);
+                jsonObject.put("request_type", "4");
+                jsonObject.put("user_type", "p");
+                jsonObject.put("query_state", "now");
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(jsonObject.toString());
+                out.close();
+
+                Thread.sleep(1000);
+
+                socket = SocketUtil.getGetSocket();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String message = dataInputStream.readUTF();
+                socket.close();
+                if (message.equals("empty")) {
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(message);
+                int i;
+
+                for (i = 0; i < jsonArray.length(); i++) {
+                    if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
+                        mMedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
+                        mMedicine_Contents.add(jsonArray.getJSONObject(i).getString("mDose"));
+                        mMedicine_attentions.add(jsonArray.getJSONObject(i).getString
+                                ("mAttention"));
+                        mMedicine_needtimes.add(jsonArray.getJSONObject(i).getString("mTime"));
+                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
+                        mInstrument_Titles.add(jsonArray.getJSONObject(i).getString("appName"));
+                        mInstrument_Contents.add(jsonArray.getJSONObject(i).getString("appTime"));
+                        mInstrument_attentions.add(jsonArray.getJSONObject(i).getString
+                                ("appAttention"));
+                    } else if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
+                        mSports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
+                        mSports_Contents.add(jsonArray.getJSONObject(i).getString("sTime"));
+                        mSports_attentions.add(jsonArray.getJSONObject(i).getString("sAttention"));
+                    }
+                }
+                socket.close();
+            } catch (JSONException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
+        thread.start();
+        while (thread.isAlive()) {
+
+        }
     }
 
     @Override
