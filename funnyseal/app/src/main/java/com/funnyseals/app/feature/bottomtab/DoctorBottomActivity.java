@@ -138,7 +138,7 @@ public class DoctorBottomActivity extends AppCompatActivity {
             out.writeUTF(jsonObject.toString());
             out.close();
 
-            Thread.sleep(4000);
+            Thread.sleep(1000);
 
             socket = SocketUtil.getArraySendSocket2();
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());

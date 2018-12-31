@@ -85,6 +85,9 @@ public class HealthCenterUpdateActivity extends AppCompatActivity {
                                         .LENGTH_LONG).show();
                             Looper.loop();
                             dataInputStream.close();
+                            socket.shutdownInput();
+                            socket.shutdownOutput();
+                            socket.close();
                         } catch (IOException | JSONException e) {
                             e.printStackTrace();
                         }

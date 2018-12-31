@@ -1,19 +1,23 @@
 package com.funnyseals.app.feature.list;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.doctorMessage.DoctorChatActivity;
 import com.funnyseals.app.model.User;
+import com.funnyseals.app.util.SocketUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 /*
 展示患者详细信息
@@ -31,6 +35,9 @@ public class UserInfoActivity extends AppCompatActivity {
 
     private User mMyPatient;
 
+    private String mHistory;
+    private String mOrder;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,7 @@ public class UserInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mMyPatient = (User) intent.getSerializableExtra("user");
         initView();
+        getserverdata();
         initData();
         addListener();
     }
@@ -54,14 +62,49 @@ public class UserInfoActivity extends AppCompatActivity {
         mTvOrder = findViewById(R.id.patientmedicalorder);
     }
 
+    private void getserverdata(){
+        Thread thread=new Thread(()->{
+            Socket socket;
+            String mAccount=mMyPatient.getAccount();
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("request_type","15");
+                jsonObject.put("history_type","getnow");
+                jsonObject.put("pID",mAccount);
+                String send = jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                dataOutputStream.writeUTF(send);
+
+                socket = SocketUtil.getGetSocket();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                String get = dataInputStream.readUTF();
+                if (!get.equals("empty")){
+                    jsonObject = new JSONObject(get);
+                    mHistory=jsonObject.getString("HistoryCondition");
+                    mOrder=jsonObject.getString("HistoryAdvice");
+                }
+
+                socket.shutdownOutput();
+                socket.shutdownInput();
+                socket.close();
+            }catch (JSONException|IOException e){
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        while (thread.isAlive()){
+        }
+    }
+
     private void initData () {
         mTvName.setText(mMyPatient.getName());
         mTvSex.setText(mMyPatient.getSex());
         mTvAge.setText(String.valueOf(mMyPatient.getAge()));
         mTvAccount.setText(mMyPatient.getAccount());
         mTvAddress.setText(mMyPatient.getAddress());
-        mTvHistory.setText(mMyPatient.getMedicalHistory());
-        mTvOrder.setText(mMyPatient.getMedicalOrder());
+        mTvHistory.setText(mHistory);
+        mTvOrder.setText(mOrder);
     }
 
     private void addListener () {
