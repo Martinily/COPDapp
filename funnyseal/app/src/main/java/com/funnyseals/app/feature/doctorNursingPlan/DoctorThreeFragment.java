@@ -231,13 +231,13 @@ public class DoctorThreeFragment extends Fragment {
             }
 
             //更新数据
-            final TextView nameTextView = (TextView) view.findViewById(R.id.showName);
+            final TextView nameTextView = view.findViewById(R.id.showName);
             nameTextView.setText(bean.getName());
 
             final int removePosition = position;
 
             //删除按钮点击事件
-            final Button deleteButton = (Button) view.findViewById(R.id.showDeleteButton);
+            final Button deleteButton = view.findViewById(R.id.showDeleteButton);
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v) {

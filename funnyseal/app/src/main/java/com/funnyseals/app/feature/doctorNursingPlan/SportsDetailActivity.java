@@ -37,11 +37,11 @@ public class SportsDetailActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         final String position = bundle.getString("position");
-        dialogsportsname = (TextView) findViewById(R.id.sportsname);
+        dialogsportsname = findViewById(R.id.sportsname);
         dialogsportsname.setText(bundle.getString("sportsname"));
-        dialogsportsnum = (EditText) findViewById(R.id.sportsnum);
+        dialogsportsnum = findViewById(R.id.sportsnum);
         dialogsportsnum.setText(bundle.getString("sportscontent"));
-        dialogsports_editor_detail = (EditText) findViewById(R.id.sports_editor_detail);
+        dialogsports_editor_detail = findViewById(R.id.sports_editor_detail);
         dialogsports_editor_detail.setText(bundle.getString("sportsattention"));
 
         final EditText sportsnum = findViewById(R.id.sportsnum);

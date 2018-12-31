@@ -44,11 +44,11 @@ public class MedicineDetailActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         final String position = bundle.getString("position");
-        mDialogmedicinename = (TextView) findViewById(R.id.medicinename);
+        mDialogmedicinename = findViewById(R.id.medicinename);
         mDialogmedicinename.setText(bundle.getString("medicinename"));
-        mDialogmedicinenum = (EditText) findViewById(R.id.medicinenum);
+        mDialogmedicinenum = findViewById(R.id.medicinenum);
         mDialogmedicinenum.setText(bundle.getString("medicinecontent"));
-        mDialogmedicine_editor_detail = (EditText) findViewById(R.id.medicine_editor_detail);
+        mDialogmedicine_editor_detail = findViewById(R.id.medicine_editor_detail);
         mDialogmedicine_editor_detail.setText(bundle.getString("medicineattention"));
         final String medicinetime = bundle.getString("medicinetime");
 
