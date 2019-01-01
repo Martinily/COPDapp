@@ -43,9 +43,9 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
 
     private EditText ed_patient_modify_myname, ed_patient_modify_myage;
     private TextView tv_patient_info_account, tv_patient_modify_mysettlingtime,  ed_patient_modify_location, ed_patient_modify_mysex;
-    private Button bt_patient_modify_complete;
+    private Button bt_patient_modify_complete,ib_patient_modify_return;
     private String et1, et2, et3, et4;
-    private ImageButton ib_patient_modify_return, ib_patient_modify_password,
+    private ImageButton  ib_patient_modify_password,
             ib_patient_modify_advice;
     private User          myUser;
     private MyApplication myApplication;

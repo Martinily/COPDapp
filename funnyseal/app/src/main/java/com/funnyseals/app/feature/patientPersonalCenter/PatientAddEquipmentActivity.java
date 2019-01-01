@@ -35,8 +35,7 @@ import java.net.Socket;
 public class PatientAddEquipmentActivity extends AppCompatActivity {
 
     private Spinner sp_patient_add_name, sp_patient_add_state;
-    private Button        bt_patient_add_complete;
-    private ImageButton   ib_patient_add_return;
+    private Button        bt_patient_add_complete, ib_patient_add_return;
     private MyApplication myApplication;
     private String        item_name, item_state;
     /**

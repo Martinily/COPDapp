@@ -26,12 +26,10 @@ import java.net.Socket;
 /**
  * 我的医生界面
  */
-@SuppressWarnings("ResultOfMethodCallIgnored")
 public class PatientMyDoctorActivity extends AppCompatActivity {
 
     private TextView tv_patient_doctor_name, tv_patient_doctor_hospital, tv_patient_doctor_post,tv_patient_doctor_age,tv_patient_doctor_sex;
-    private ImageButton   ib_patient_doctor_return;
-    private Button        bt_patient_mydoctor_chat;
+    private Button        bt_patient_mydoctor_chat,ib_patient_doctor_return;
     private MyApplication myApplication;
     private String        myDoctor = "";
     private User          myUser;

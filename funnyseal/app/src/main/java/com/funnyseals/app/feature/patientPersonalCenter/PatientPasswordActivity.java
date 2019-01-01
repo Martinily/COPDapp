@@ -30,8 +30,7 @@ import java.net.Socket;
  * 修改密码界面
  */
 public class PatientPasswordActivity extends AppCompatActivity {
-    private Button      bt_patient_change_complete;
-    private ImageButton ib_patient_change_return;
+    private Button      bt_patient_change_complete,ib_patient_change_return;
     private EditText    et_patient_change_oldpassword, et_patient_change_newpassword,
             et_patient_change_againpassword;
     private MyApplication myApplication;

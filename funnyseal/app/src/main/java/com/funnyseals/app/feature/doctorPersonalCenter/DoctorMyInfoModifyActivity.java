@@ -38,8 +38,8 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
     private String et1 = "", et2 = "", et3 = "", et4 = "", et5 = "", et6 = "";
     private EditText et_doctor_modify_myname, et_doctor_modify_myage,
            et_doctor_modify_myhospital, et_doctor_modify_mypost;
-    private Button      bt_doctor_modify_complete;
-    private ImageButton ib_doctor_modify_return, ib_doctor_modify_changepassword;
+    private Button      bt_doctor_modify_complete,ib_doctor_modify_return;
+    private ImageButton  ib_doctor_modify_changepassword;
     private Intent        intent1;
     private User          myUser;
     private MyApplication myApplication;

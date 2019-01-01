@@ -30,8 +30,7 @@ import java.net.Socket;
 public class DoctorSigningActivity extends AppCompatActivity {
 
     private EditText    et_doctor_signing_phone;
-    private ImageButton ib_doctor_signing_return;
-    private Button      bt_doctor_signing_complete, bt_doctor_signing_delete;
+    private Button      bt_doctor_signing_complete,ib_doctor_signing_return, bt_doctor_signing_delete;
     private String        str1   = "";
     private MyApplication myApplication;
     private int           type   = 0;

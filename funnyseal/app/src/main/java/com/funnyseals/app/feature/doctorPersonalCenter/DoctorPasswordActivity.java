@@ -31,8 +31,7 @@ import java.net.Socket;
 public class DoctorPasswordActivity extends AppCompatActivity {
     private EditText et_doctor_change_oldpassword, et_doctor_change_newpassword,
             et_doctor_change_againpassword;
-    private Button        bt_doctor_change_complete;
-    private ImageButton   ib_doctor_change_return;
+    private Button        bt_doctor_change_complete,ib_doctor_change_return;
     private MyApplication myApplication;
     private String        result="";
 
@@ -178,7 +177,6 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                 result=jsonObject1.getString("password_result");
 
                 socket.close();
-
             } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -186,7 +184,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
         });
         thread.start();
         while (thread.isAlive()){
-            
+
         }
         switch (result) {
             case "0":
