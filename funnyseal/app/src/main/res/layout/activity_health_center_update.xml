@@ -63,7 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/healthcenter_project1"
-            android:textColor="@color/teal"
             android:textSize="20sp" />
 
         <EditText
@@ -80,7 +79,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/healthcenter_unit"
-            android:textColor="@color/teal"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -110,7 +108,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/healthcenter_project2"
-            android:textColor="@color/teal"
             android:textSize="20sp" />
 
         <EditText
@@ -127,7 +124,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/healthcenter_unit"
-            android:textColor="@color/teal"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -156,7 +152,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/healthcenter_project3"
-            android:textColor="@color/teal"
             android:textSize="20sp" />
 
         <EditText
@@ -173,7 +168,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/healthcenter_unit"
-            android:textColor="@color/teal"
             android:textSize="20sp" />
 
     </LinearLayout>

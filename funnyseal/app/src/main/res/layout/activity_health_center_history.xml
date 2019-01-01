@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textSize="25sp"
-                android:textColor="#0000FF"/>
+                android:textColor="@color/teal"/>
 
             <TextView
                 android:id="@+id/unit1"
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textSize="25sp"
-                android:textColor="#0000FF"/>
+                android:textColor="@color/teal"/>
 
             <TextView
                 android:id="@+id/unit2"
@@ -168,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:textSize="25sp"
-                android:textColor="#0000FF"/>
+                android:textColor="@color/teal"/>
 
             <TextView
                 android:id="@+id/unit3"
