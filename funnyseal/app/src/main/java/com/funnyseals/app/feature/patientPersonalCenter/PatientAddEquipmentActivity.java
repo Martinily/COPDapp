@@ -72,6 +72,8 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         builder.setMessage("修改未保存，确定退出？");
         builder.setPositiveButton("确定", (dialog, which) -> {
             dialog.dismiss();
+            Intent intent = getIntent();
+            setResult(11,intent);
             finish();
         });
         builder.setNegativeButton("取消", (dialog, which) -> {
@@ -201,8 +203,6 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     Intent intent = getIntent();
                     intent.putExtra("name",item_name);
                     intent.putExtra("state",item_state);
-                    Log.d("数据","+++++++++++++++++++++++++"+item_state+"++++++++++++++++++++++++++");
-                    Log.d("数据","+++++++++++++++++++++++++"+item_name+"++++++++++++++++++++++++");
                     setResult(12,intent);
                     finish();
                     break;

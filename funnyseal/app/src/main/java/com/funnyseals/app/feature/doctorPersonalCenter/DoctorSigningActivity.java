@@ -135,7 +135,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                         break;
                                     case "1":
                                         Looper.prepare();
-                                        Toast.makeText(DoctorSigningActivity.this, "签约失败", Toast
+                                        Toast.makeText(DoctorSigningActivity.this, "当前网络不稳定，请换个姿势试试~", Toast
                                                 .LENGTH_LONG).show();
                                         Looper.loop();
                                         break;
@@ -190,7 +190,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                     break;
                                 case "1":
                                     Looper.prepare();
-                                    Toast.makeText(DoctorSigningActivity.this, "解约失败", Toast
+                                    Toast.makeText(DoctorSigningActivity.this, "当前网络不稳定，请换个姿势试试~", Toast
                                             .LENGTH_LONG).show();
                                     Looper.loop();
                                     break;

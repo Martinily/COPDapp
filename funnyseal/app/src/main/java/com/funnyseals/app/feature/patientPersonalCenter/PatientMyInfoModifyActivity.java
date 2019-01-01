@@ -44,6 +44,7 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
     private User          myUser;
     private MyApplication myApplication;
     private CityPicker cityPicker;
+    private String     result;
 
     /**
      * 调用本地
@@ -195,40 +196,37 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                             out.writeUTF(send);
                             out.close();
 
+                            Thread.sleep(1000);
                             socket = SocketUtil.setPort(2019);
                             DataInputStream dataInputStream = new DataInputStream(socket
                                     .getInputStream());
                             String message = dataInputStream.readUTF();
 
-                            jsonObject = new JSONObject(message);
-                            switch (jsonObject.getString("update_result")) {
-                                case "成功":
-                                    myUser.setName(et1);
-                                    myUser.setSex(et3);
-                                    myUser.setAge(Integer.parseInt(et2));
-                                    myUser.setAddress(et4);
-                                    finish();
-                                    Looper.prepare();
-                                    Toast.makeText(PatientMyInfoModifyActivity.this, "修改成功", Toast
-                                            .LENGTH_LONG).show();
-                                    Looper.loop();
-                                    PatientMyInfoModifyActivity.this.finish();
-
-                                    break;
-                                case "失败":
-                                    Looper.prepare();
-                                    Toast.makeText(PatientMyInfoModifyActivity.this,"数据更新失败",Toast.LENGTH_LONG);
-                                    Looper.loop();
-                                    break;
-
-                            }
+                            JSONObject jsonObject1 = new JSONObject(message);
+                            result=jsonObject1.getString("update_result");
                             socket.close();
                             Thread.interrupted();
-                        } catch (IOException | JSONException e) {
+                        } catch (IOException | JSONException | InterruptedException e) {
                             e.printStackTrace();
                         }
                     });
                     thread.start();
+                    switch (result) {
+                        case "成功":
+                            myUser.setName(et1);
+                            myUser.setSex(et3);
+                            myUser.setAge(Integer.parseInt(et2));
+                            myUser.setAddress(et4);
+                            Toast.makeText(PatientMyInfoModifyActivity.this, "个人信息修改成功", Toast
+                                    .LENGTH_LONG).show();
+
+                            finish();
+                            break;
+                        case "失败":
+                            Toast.makeText(PatientMyInfoModifyActivity.this,"网络不稳定，请稍后再试~",Toast.LENGTH_LONG);
+                            break;
+
+                    }
                     break;
                 case R.id.ib_patient_modify_return:
                     Sure();

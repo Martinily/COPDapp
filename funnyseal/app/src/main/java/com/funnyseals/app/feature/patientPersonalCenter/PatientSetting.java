@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.funnyseals.app.LoginActivity;
 import com.funnyseals.app.R;
@@ -17,7 +17,7 @@ import com.funnyseals.app.R;
  */
 public class PatientSetting extends AppCompatActivity {
 
-    private TextView    tv_patient_setting_finish;
+    private Button bt_patient_setting_finish;
     private ImageButton ib_patient_setting_return;
 
     protected void onCreate (Bundle savedInstanceState) {
@@ -30,9 +30,9 @@ public class PatientSetting extends AppCompatActivity {
      * 初始化控件
      */
     public void init () {
-        tv_patient_setting_finish = findViewById(R.id.tv_patient_setting_finish);
+        bt_patient_setting_finish = findViewById(R.id.bt_patient_setting_finish);
         ib_patient_setting_return = findViewById(R.id.ib_patient_setting_return);
-        tv_patient_setting_finish.setOnClickListener(new addListeners());
+        bt_patient_setting_finish.setOnClickListener(new addListeners());
         ib_patient_setting_return.setOnClickListener(new addListeners());
     }
     public void Sure () {
@@ -59,7 +59,7 @@ public class PatientSetting extends AppCompatActivity {
                 case R.id.ib_patient_setting_return:
                     finish();
                     break;
-                case R.id.tv_patient_setting_finish:
+                case R.id.bt_patient_setting_finish:
                     Sure();
                     break;
                 default:

@@ -29,7 +29,7 @@
         android:layout_height="91dp"
         android:layout_marginTop="23dp"
         android:background="@null"
-        android:src="@drawable/ic_patient"
+        android:src="@drawable/ic_person_black_24dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_patient_title" />

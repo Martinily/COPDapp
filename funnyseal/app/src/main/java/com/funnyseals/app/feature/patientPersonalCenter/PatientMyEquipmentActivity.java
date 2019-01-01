@@ -87,19 +87,22 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         Log.d("更新数据","更新数据就是这个");
 
-            String name= data.getStringExtra("name");
-            String state=data.getStringExtra("state");
-            Log.d("更新数据","更新数据"+name+"就是这个");
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("eName",name);
-                jsonObject.put("eState",state);
-                novels=findAddEquipment.sectionData(jsonObject);
-                addEquipmentAdapter.add(novels);
+            if (requestCode==10&&requestCode==12){
+                String name= data.getStringExtra("name");
+                String state=data.getStringExtra("state");
+                Log.d("更新数据","更新数据"+name+"就是这个");
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("eName",name);
+                    jsonObject.put("eState",state);
+                    novels=findAddEquipment.sectionData(jsonObject);
+                    addEquipmentAdapter.add(novels);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
