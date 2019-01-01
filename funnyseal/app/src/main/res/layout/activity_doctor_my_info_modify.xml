@@ -40,29 +40,16 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/tv_doctor_modify_portrait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="头像"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_doctor_modify_title" />
-
-    <TextView
         android:id="@+id/tv_doctor_modify_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="36dp"
         android:text="姓名"
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_doctor_modify_portrait" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_doctor_modify_title" />
 
     <TextView
         android:id="@+id/tv_doctor_modify_sex"
@@ -134,8 +121,8 @@
         android:id="@+id/et_doctor_modify_myname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="36dp"
         android:layout_marginRight="168dp"
         android:background="@null"
         android:hint="乔"
@@ -145,7 +132,7 @@
         app:layout_constraintStart_toEndOf="@+id/tv_doctor_modify_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_doctor_modify_title" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_doctor_modify_mysex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

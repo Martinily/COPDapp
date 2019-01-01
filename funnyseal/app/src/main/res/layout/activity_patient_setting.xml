@@ -24,13 +24,17 @@
         app:layout_constraintStart_toEndOf="@+id/ib_patient_setting_return"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_patient_setting_finish"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/bt_patient_setting_finish"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/smssdk_lv_item_selector"
+        android:stateListAnimator="@drawable/edittext_focused"
         android:text="退出登陆"
+        android:textAlignment="viewStart"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/teal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -27,6 +27,8 @@ public class AddEquipmentAdapter extends ArrayAdapter {
             objects) {
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
+        this.myEquipment=objects;
+
     }
     /**
      * 获取当前项的AddEquipment实例
@@ -38,15 +40,31 @@ public class AddEquipmentAdapter extends ArrayAdapter {
     @Override
     public View getView (int position, View convertView, ViewGroup parent) {
         AddEquipment addEquipment = (AddEquipment) getItem(position);
-        @SuppressLint("ViewHolder")
-        View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-        TextView EquipmentName = view.findViewById(R.id.add_equipment_name);
-        TextView EquipmentState = view.findViewById(R.id.add_equipment_state);
-        EquipmentState.setText(addEquipment.getEquipment_state());
-        EquipmentName.setText(addEquipment.getEquipment_name());
+        View view;
+        ViewHolder viewHolder;
+        if (convertView==null){
+            view=LayoutInflater.from(getContext()).inflate(resourceId, null);
+            viewHolder = new ViewHolder();
+            viewHolder.EquipmentName=view.findViewById(R.id.add_equipment_name);
+            viewHolder.EquipmentState=view.findViewById(R.id.add_equipment_state);
+            view.setTag(viewHolder);
+        }
+        else {
+            view=convertView;
+            viewHolder=(ViewHolder)convertView.getTag();
+        }
+        viewHolder.EquipmentName.setText(addEquipment.getEquipment_name());
+        viewHolder.EquipmentState.setText(addEquipment.getEquipment_state());
         return view;
+       // View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
+     //   TextView EquipmentName = view.findViewById(R.id.add_equipment_name);
+    //    TextView EquipmentState = view.findViewById(R.id.add_equipment_state);
+    //    EquipmentState.setText(addEquipment.getEquipment_state());
+      //  EquipmentName.setText(addEquipment.getEquipment_name());
+     //   return view;
     }
-
-
-
+    class ViewHolder{
+        TextView EquipmentName;
+        TextView EquipmentState;
+    }
 }

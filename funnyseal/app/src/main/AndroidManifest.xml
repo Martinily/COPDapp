@@ -76,7 +76,6 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
@@ -97,7 +96,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".SignupActivity" />
         <activity android:name=".ForgetPwdActivity" />
         <activity android:name=".feature.bottomtab.DoctorBottomActivity" />
@@ -163,6 +161,7 @@
             android:name=".feature.patientPersonalCenter.PatientSetting"
             android:label="@string/title_activity_patient_setting"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
     </application>
 
 </manifest>

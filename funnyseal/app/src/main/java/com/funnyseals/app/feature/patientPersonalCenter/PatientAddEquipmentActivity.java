@@ -1,11 +1,13 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -70,6 +72,8 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         builder.setMessage("修改未保存，确定退出？");
         builder.setPositiveButton("确定", (dialog, which) -> {
             dialog.dismiss();
+            Intent intent = getIntent();
+            setResult(11,intent);
             finish();
         });
         builder.setNegativeButton("取消", (dialog, which) -> {
@@ -142,7 +146,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
-            finish();
+
     }
 
     /**
@@ -182,7 +186,6 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
 
         }
     }
-
     /**
      * 监听事件
      * 返回 我的设备
@@ -197,6 +200,10 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     break;
                 case R.id.bt_patient_add_complete:
                     addEquipment();
+                    Intent intent = getIntent();
+                    intent.putExtra("name",item_name);
+                    intent.putExtra("state",item_state);
+                    setResult(12,intent);
                     finish();
                     break;
                 default:
@@ -204,4 +211,5 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
             }
         }
     }
+
 }
