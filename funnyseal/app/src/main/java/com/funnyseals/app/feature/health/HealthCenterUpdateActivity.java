@@ -1,6 +1,7 @@
 package com.funnyseals.app.feature.health;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +51,8 @@ public class HealthCenterUpdateActivity extends AppCompatActivity {
                 Toast.makeText(HealthCenterUpdateActivity.this, "请输入至少一项数据", Toast
                         .LENGTH_LONG).show();
             else if (Integer.parseInt(m_data1)>Integer.parseInt(m_data2) | Integer.parseInt(m_data1)<Integer.parseInt(m_data2)/2 |
+                    Integer.parseInt(m_data1)<1000 | Integer.parseInt(m_data1)>5000 |
+                    Integer.parseInt(m_data2)<1000 | Integer.parseInt(m_data2)>5000 |
                     Integer.parseInt(m_data3)<1000 | Integer.parseInt(m_data3)>5000)
                 Toast.makeText(HealthCenterUpdateActivity.this, "请输入合理的数据", Toast
                         .LENGTH_LONG).show();
@@ -91,11 +94,20 @@ public class HealthCenterUpdateActivity extends AppCompatActivity {
                 thread.start();
             }
         });
-        button2.setOnClickListener(v -> finish());
+        button2.setOnClickListener(v -> showDialog());
     }
 
-    public void showToast (final String msg) {
+    private void showToast (final String msg) {
         runOnUiThread(() -> Toast.makeText(HealthCenterUpdateActivity.this, msg, Toast.LENGTH_SHORT).show());
+    }
+
+    private void showDialog(){
+        final AlertDialog.Builder mDialog= new AlertDialog.Builder(HealthCenterUpdateActivity.this);
+        mDialog.setTitle("提示");
+        mDialog.setMessage("确定取消更新数据吗？");
+        mDialog.setPositiveButton("确定", (dialog, which) -> finish());
+        mDialog.setNegativeButton("返回", (dialog, which) -> dialog.dismiss());
+        mDialog.show();
     }
 
 }
