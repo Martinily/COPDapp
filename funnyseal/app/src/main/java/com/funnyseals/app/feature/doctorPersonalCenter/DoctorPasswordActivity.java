@@ -150,7 +150,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
      * 连接服务器
      */
     public void changePassword(){
-        new Thread(() -> {
+        Thread thread = new Thread(() ->{
             String send = "";
             Socket socket;
             try {
@@ -178,11 +178,16 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                 result=jsonObject1.getString("password_result");
 
                 socket.close();
-                Thread.interrupted();
+
             } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
-        }).start();
+            Thread.interrupted();
+        });
+        thread.start();
+        while (thread.isAlive()){
+            
+        }
         switch (result) {
             case "0":
                 Toast.makeText(DoctorPasswordActivity.this, "修改密码成功",

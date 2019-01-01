@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,12 +76,13 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
         et_doctor_modify_myhospital.setText(myUser.getCompany());
         et_doctor_modify_myname.setText(myUser.getName());
         et_doctor_modify_mysex.setText(myUser.getSex());
-        et_doctor_modify_mysex.setOnClickListener(new addListeners());
+
         et_doctor_modify_mylocation.setText(myUser.getAddress());
         et_doctor_modify_mypost.setText(myUser.getPosition());
         tv_doctor_modify_myaccount.setText(myUser.getAccount());
         tv_doctor_modify_mytime.setText(myUser.getRegisterTime());
 
+        et_doctor_modify_mysex.setOnClickListener(new addListeners());
         et_doctor_modify_mylocation.setOnClickListener(new addListeners());
         ib_doctor_modify_return = findViewById(R.id.ib_doctor_modify_return);
         ib_doctor_modify_return.setOnClickListener(new addListeners());
@@ -235,22 +237,26 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             out.writeUTF(send);
                             out.close();
 
-                            Thread.sleep(1000);
+                            Thread.sleep(2000);
                             socket = SocketUtil.setPort(2019);
                             DataInputStream dataInputStream = new DataInputStream(socket
                                     .getInputStream());
                             String message = dataInputStream.readUTF();
 
-                            JSONObject jsonObject1 = new JSONObject(message);
-                            result=jsonObject1.getString("update_result");
+                             jsonObject = new JSONObject(message);
+                             result=jsonObject.getString("update_result");
 
                             socket.close();
-                            Thread.interrupted();
+
                         } catch (IOException | JSONException | InterruptedException e) {
                             e.printStackTrace();
                         }
+                        Thread.interrupted();
                     });
                     thread.start();
+                    while (thread.isAlive()){
+
+                    }
                     switch (result) {
                         case "成功":
                             myUser.setName(et1);
@@ -259,19 +265,14 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             myUser.setPosition(et4);
                             myUser.setAge(Integer.parseInt(et2));
                             myUser.setAddress(et6);
-
-
                             Toast.makeText(DoctorMyInfoModifyActivity.this, "修改成功", Toast
                                     .LENGTH_LONG).show();
                             finish();
                             break;
                         case "失败":
-                            Looper.prepare();
                             Toast.makeText(DoctorMyInfoModifyActivity.this, "修改失败", Toast
                                     .LENGTH_LONG).show();
-                            Looper.loop();
                             break;
-
                     }
                     break;
                 case R.id.ib_doctor_modify_changepassword:
