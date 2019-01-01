@@ -230,12 +230,16 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                             JSONObject jsonObject1 = new JSONObject(message);
                             result=jsonObject1.getString("update_result");
                             socket.close();
-                            Thread.interrupted();
+
                         } catch (IOException | JSONException | InterruptedException e) {
                             e.printStackTrace();
                         }
+                        Thread.interrupted();
                     });
                     thread.start();
+                    while (thread.isAlive()){
+
+                    }
                     switch (result) {
                         case "成功":
                             myUser.setName(et1);
