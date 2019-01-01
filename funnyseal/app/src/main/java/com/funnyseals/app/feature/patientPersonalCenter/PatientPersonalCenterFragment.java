@@ -78,7 +78,6 @@ public class PatientPersonalCenterFragment extends Fragment {
                     else {
                         startActivity(new Intent(getActivity(), PatientMyDoctorActivity.class));
                     }
-
                     break;
                 case R.id.ib_patient_setting:
                         startActivity(new Intent(getActivity(), PatientSetting.class));

@@ -1,17 +1,21 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.funnyseals.app.LoginActivity;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.doctorPersonalCenter.DoctorPasswordActivity;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONException;
@@ -31,6 +35,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
     private EditText    et_patient_change_oldpassword, et_patient_change_newpassword,
             et_patient_change_againpassword;
     private MyApplication myApplication;
+    private String      result="";
     private boolean       type = false;
 
     /**
@@ -62,23 +67,23 @@ public class PatientPasswordActivity extends AppCompatActivity {
      * 长度为6-20
      * 两次密码一致
      */
-    public boolean myCorrectPas () {
+    public void myCorrectPas () {
 
         if (getOldpassword().isEmpty() || getNewpassword().isEmpty() || getAgainpassword()
                 .isEmpty()) {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
-            return false;
+
         } else if (!isLetterOrDigit(getNewpassword())) {
             Toast.makeText(this, "密码不能包含特殊字符", Toast.LENGTH_SHORT).show();
-            return false;
+
         } else if (getNewpassword().length() < 6 || getNewpassword().length() > 16) {
             Toast.makeText(this, "密码长度应为6-20位", Toast.LENGTH_SHORT).show();
-            return false;
+
         } else if (!isSame(getNewpassword(), getAgainpassword())) {
             Toast.makeText(this, "两次密码不一致，请重新输入", Toast.LENGTH_LONG).show();
-            return false;
+
         } else {
-            return true;
+            changePassword();
         }
     }
 
@@ -98,6 +103,71 @@ public class PatientPasswordActivity extends AppCompatActivity {
         ib_patient_change_return.setOnClickListener(new addListener());
     }
 
+    /**
+     *连接服务器
+     */
+    public void changePassword(){
+        Thread thread  = new Thread(() -> {
+            String send = "";
+            Socket socket;
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("request_type", "8");
+                jsonObject.put("modify_type", "update");
+                jsonObject.put("ID", myApplication.getAccount());
+                jsonObject.put("oldPassword", getOldpassword());
+                jsonObject.put("newPassword", getNewpassword());
+                send = jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket
+                        .getOutputStream());
+                out.writeUTF(send);
+                out.close();
+
+                Thread.sleep(2000);
+
+                socket = SocketUtil.setPort(2032);
+                DataInputStream dataInputStream = new DataInputStream(socket
+                        .getInputStream());
+                String message = dataInputStream.readUTF();
+
+                JSONObject jsonObject1 = new JSONObject(message);
+
+
+                result=jsonObject1.getString("password_result");
+                socket.close();
+            } catch (IOException | JSONException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            Thread.interrupted();
+        });
+        thread.start();
+        while (thread.isAlive()){
+
+        }
+        switch (result) {
+            case "0":
+                Toast.makeText(PatientPasswordActivity.this, "修改密码成功",
+                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(PatientPasswordActivity.this, LoginActivity
+                        .class);
+                startActivity(intent);
+                break;
+            case "1":
+                Toast.makeText(PatientPasswordActivity.this, "用户名错误",
+                        Toast.LENGTH_LONG).show();
+                break;
+            case "2":
+                Toast.makeText(PatientPasswordActivity.this, "密码错误", Toast
+                        .LENGTH_LONG).show();
+
+                break;
+            case "3":
+                Toast.makeText(PatientPasswordActivity.this, "当前网络不稳定，换个姿势试试~", Toast
+                        .LENGTH_LONG).show();
+                break;
+        }
+    }
     public boolean isSame (String str1, String str2) {
         boolean isSame = false;
         if (str1.equals(str2)) {
@@ -160,63 +230,8 @@ public class PatientPasswordActivity extends AppCompatActivity {
         public void onClick (View v) {
             switch (v.getId()) {
                 case R.id.bt_patient_change_complete:
-                    if (myCorrectPas()) {
-                        new Thread(() -> {
-                            String send = "";
-                            Socket socket;
-                            try {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("request_type", "8");
-                                jsonObject.put("modify_type", "update");
-                                jsonObject.put("ID", myApplication.getAccount());
-                                jsonObject.put("oldPassword", getOldpassword());
-                                jsonObject.put("newPassword", getNewpassword());
-                                send = jsonObject.toString();
-                                socket = SocketUtil.getSendSocket();
-                                DataOutputStream out = new DataOutputStream(socket
-                                        .getOutputStream());
-                                out.writeUTF(send);
-                                out.close();
-
-                                socket = SocketUtil.getGetSocket();
-                                DataInputStream dataInputStream = new DataInputStream(socket
-                                        .getInputStream());
-                                String message = dataInputStream.readUTF();
-
-                                jsonObject = new JSONObject(message);
-                                switch (jsonObject.getString("password_result")) {
-                                    case "0":
-                                        type = true;
-                                        Looper.prepare();
-                                        Toast.makeText(PatientPasswordActivity.this,"数据更新失败",Toast.LENGTH_LONG);
-                                        Looper.loop();
-                                        break;
-                                    case "1":
-                                        Looper.prepare();
-                                        Toast.makeText(PatientPasswordActivity.this,"用户名错误",Toast.LENGTH_LONG);
-                                        Looper.loop();
-                                        break;
-                                    case "2":
-                                        Looper.prepare();
-                                        Toast.makeText(PatientPasswordActivity.this,"密码错误",Toast.LENGTH_LONG);
-                                        Looper.loop();
-                                        break;
-                                    case "3":
-                                        Looper.prepare();
-                                        Toast.makeText(PatientPasswordActivity.this,"确认连接网络",Toast.LENGTH_LONG);
-                                        Looper.loop();
-                                        break;
-                                }
-                                socket.close();
-                            } catch (IOException | JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }).start();
-                        if (type) {
-                            finish();
-                        }
-                    }
-                    break;
+                    myCorrectPas();
+                        break;
                 case R.id.ib_patient_change_return:
                     Sure();
                     break;

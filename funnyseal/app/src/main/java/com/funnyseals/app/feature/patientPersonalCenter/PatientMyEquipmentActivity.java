@@ -2,6 +2,7 @@ package com.funnyseals.app.feature.patientPersonalCenter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -61,9 +62,9 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 .add_equipment, addEquipmentsList);
         listView = findViewById(R.id.patient_lv_list);
         listView.setAdapter(addEquipmentAdapter);
-        addEquipmentAdapter.notifyDataSetChanged();
         myAddEquipment();
         this.registerForContextMenu(listView);
+
     }
 
     /**
@@ -80,10 +81,25 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     /**
      * 添加设备界面返回的时候，更新界面
      */
+
     @Override
-    public void onResume () {
-        super.onResume();
-        addEquipmentAdapter.notifyDataSetChanged();
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        Log.d("更新数据","更新数据就是这个");
+
+            String name= data.getStringExtra("name");
+            String state=data.getStringExtra("state");
+            Log.d("更新数据","更新数据"+name+"就是这个");
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("eName",name);
+                jsonObject.put("eState",state);
+                novels=findAddEquipment.sectionData(jsonObject);
+                addEquipmentAdapter.add(novels);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -111,9 +127,6 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 TextView t = view.findViewById(R.id.add_equipment_name);
                 eName = t.getText().toString();
                 deleteEquipment();
-                Log.d("1", "onContextItemSelected: 删除该项sobj:111111="+addEquipmentAdapter.getItem(myPosition)+"11111");
-                Log.d("2","ddddddd"+eName+"ddddd");
-
                 return true;
             case 1:
                 return false;
@@ -218,7 +231,9 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.bt_patient_equipment_add:
-                    startActivity(new Intent(PatientMyEquipmentActivity.this, PatientAddEquipmentActivity.class));
+                    Intent intent = new Intent(PatientMyEquipmentActivity.this,PatientAddEquipmentActivity.class);
+                    startActivityForResult(intent,10);
+                  //  startActivity(new Intent(PatientMyEquipmentActivity.this, PatientAddEquipmentActivity.class));
                     break;
                 default:
                     break;

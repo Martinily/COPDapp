@@ -1,11 +1,13 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -142,7 +144,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
-            finish();
+
     }
 
     /**
@@ -182,7 +184,6 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
 
         }
     }
-
     /**
      * 监听事件
      * 返回 我的设备
@@ -197,6 +198,12 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     break;
                 case R.id.bt_patient_add_complete:
                     addEquipment();
+                    Intent intent = getIntent();
+                    intent.putExtra("name",item_name);
+                    intent.putExtra("state",item_state);
+                    Log.d("数据","+++++++++++++++++++++++++"+item_state+"++++++++++++++++++++++++++");
+                    Log.d("数据","+++++++++++++++++++++++++"+item_name+"++++++++++++++++++++++++");
+                    setResult(12,intent);
                     finish();
                     break;
                 default:
@@ -204,4 +211,5 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
             }
         }
     }
+
 }
