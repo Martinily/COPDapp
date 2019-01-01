@@ -1,5 +1,6 @@
 package com.funnyseals.app.feature.doctorPersonalCenter;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,15 +35,16 @@ import java.net.Socket;
 public class DoctorMyInfoModifyActivity extends AppCompatActivity {
 
     private String et1 = "", et2 = "", et3 = "", et4 = "", et5 = "", et6 = "";
-    private EditText et_doctor_modify_myname, et_doctor_modify_mysex, et_doctor_modify_myage,
+    private EditText et_doctor_modify_myname, et_doctor_modify_myage,
            et_doctor_modify_myhospital, et_doctor_modify_mypost;
     private Button      bt_doctor_modify_complete;
     private ImageButton ib_doctor_modify_return, ib_doctor_modify_changepassword;
     private Intent        intent1;
     private User          myUser;
     private MyApplication myApplication;
-    private TextView  et_doctor_modify_mylocation,tv_doctor_modify_myaccount,tv_doctor_modify_mytime;
+    private TextView  et_doctor_modify_mylocation,tv_doctor_modify_myaccount,tv_doctor_modify_mytime,et_doctor_modify_mysex;
     private CityPicker cityPicker;
+    private String result="";
 
 
     @Override
@@ -73,6 +75,7 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
         et_doctor_modify_myhospital.setText(myUser.getCompany());
         et_doctor_modify_myname.setText(myUser.getName());
         et_doctor_modify_mysex.setText(myUser.getSex());
+        et_doctor_modify_mysex.setOnClickListener(new addListeners());
         et_doctor_modify_mylocation.setText(myUser.getAddress());
         et_doctor_modify_mypost.setText(myUser.getPosition());
         tv_doctor_modify_myaccount.setText(myUser.getAccount());
@@ -88,7 +91,23 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
 
 
     }
+    /**
+     * 性别选择器
+     */
+    private String[] sexArry = new String[]{ "女", "男"};// 性别选择
+    private void showSexChooseDialog() {
+        AlertDialog.Builder builder3 = new AlertDialog.Builder(this);// 自定义对话框
+        builder3.setSingleChoiceItems(sexArry, 0, new DialogInterface.OnClickListener() {// 2默认的选中
 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {// which是被选中的位置
+                // showToast(which+"");
+                et_doctor_modify_mysex.setText(sexArry[which]);
+                dialog.dismiss();// 随便点击一个item消失对话框，不用点击确认取消
+            }
+        });
+        builder3.show();// 让弹出框显示
+    }
     /**
      * 滚轮文字的大小
      * 滚轮文字的颜色
@@ -222,29 +241,9 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                                     .getInputStream());
                             String message = dataInputStream.readUTF();
 
-                            jsonObject = new JSONObject(message);
-                            switch (jsonObject.getString("update_result")) {
-                                case "成功":
-                                    myUser.setName(et1);
-                                    myUser.setSex(et5);
-                                    myUser.setCompany(et3);
-                                    myUser.setPosition(et4);
-                                    myUser.setAge(Integer.parseInt(et2));
-                                    myUser.setAddress(et6);
-                                    finish();
-                                    Looper.prepare();
-                                    Toast.makeText(DoctorMyInfoModifyActivity.this, "修改成功", Toast
-                                            .LENGTH_LONG).show();
-                                    Looper.loop();
-                                    break;
-                                case "失败":
-                                    Looper.prepare();
-                                    Toast.makeText(DoctorMyInfoModifyActivity.this, "修改失败", Toast
-                                            .LENGTH_LONG).show();
-                                    Looper.loop();
-                                    break;
+                            JSONObject jsonObject1 = new JSONObject(message);
+                            result=jsonObject1.getString("update_result");
 
-                            }
                             socket.close();
                             Thread.interrupted();
                         } catch (IOException | JSONException | InterruptedException e) {
@@ -252,6 +251,28 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                         }
                     });
                     thread.start();
+                    switch (result) {
+                        case "成功":
+                            myUser.setName(et1);
+                            myUser.setSex(et5);
+                            myUser.setCompany(et3);
+                            myUser.setPosition(et4);
+                            myUser.setAge(Integer.parseInt(et2));
+                            myUser.setAddress(et6);
+
+
+                            Toast.makeText(DoctorMyInfoModifyActivity.this, "修改成功", Toast
+                                    .LENGTH_LONG).show();
+                            finish();
+                            break;
+                        case "失败":
+                            Looper.prepare();
+                            Toast.makeText(DoctorMyInfoModifyActivity.this, "修改失败", Toast
+                                    .LENGTH_LONG).show();
+                            Looper.loop();
+                            break;
+
+                    }
                     break;
                 case R.id.ib_doctor_modify_changepassword:
                     intent1 = new Intent(DoctorMyInfoModifyActivity.this, DoctorPasswordActivity
@@ -261,6 +282,9 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                 case R.id.et_doctor_modify_mylocation:
                     initCityPicker();
                     cityPicker.show();
+                    break;
+                case R.id.et_doctor_modify_mysex:
+                    showSexChooseDialog();
                     break;
                 default:
                     break;

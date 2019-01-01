@@ -1,17 +1,22 @@
 package com.funnyseals.app.feature.patientPersonalCenter;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -28,6 +33,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Calendar;
 
 /**
  * 患者端
@@ -35,8 +41,8 @@ import java.net.Socket;
  */
 public class PatientMyInfoModifyActivity extends AppCompatActivity {
 
-    private EditText ed_patient_modify_myname, ed_patient_modify_mysex, ed_patient_modify_myage;
-    private TextView tv_patient_info_account, tv_patient_modify_mysettlingtime,  ed_patient_modify_location;
+    private EditText ed_patient_modify_myname, ed_patient_modify_myage;
+    private TextView tv_patient_info_account, tv_patient_modify_mysettlingtime,  ed_patient_modify_location, ed_patient_modify_mysex;
     private Button bt_patient_modify_complete;
     private String et1, et2, et3, et4;
     private ImageButton ib_patient_modify_return, ib_patient_modify_password,
@@ -44,7 +50,7 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
     private User          myUser;
     private MyApplication myApplication;
     private CityPicker cityPicker;
-    private String     result;
+    private String     result="";
 
     /**
      * 调用本地
@@ -60,6 +66,7 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
 
     }
 
+
     /**
      * 初始化控件
      */
@@ -74,6 +81,7 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
         ed_patient_modify_myname.setText(myUser.getName());
         ed_patient_modify_myage.setText(String.valueOf(myUser.getAge()));
         ed_patient_modify_mysex.setText(myUser.getSex());
+        ed_patient_modify_mysex.setOnClickListener(new addListeners());
         ed_patient_modify_location.setText(myUser.getAddress());
         ed_patient_modify_location.setOnClickListener(new addListeners());
         tv_patient_info_account.setText(myUser.getAccount());
@@ -89,7 +97,23 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
         ib_patient_modify_advice.setOnClickListener(new addListeners());
 
     }
+    /**
+     * 性别选择器
+     */
+    private String[] sexArry = new String[]{ "女", "男"};// 性别选择
+    private void showSexChooseDialog() {
+        AlertDialog.Builder builder3 = new AlertDialog.Builder(this);// 自定义对话框
+        builder3.setSingleChoiceItems(sexArry, 0, new DialogInterface.OnClickListener() {// 2默认的选中
 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {// which是被选中的位置
+                // showToast(which+"");
+                ed_patient_modify_mysex.setText(sexArry[which]);
+                dialog.dismiss();// 随便点击一个item消失对话框，不用点击确认取消
+            }
+        });
+        builder3.show();// 让弹出框显示
+    }
     /**
      * 滚轮文字的大小
      * 滚轮文字的颜色
@@ -197,6 +221,7 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                             out.close();
 
                             Thread.sleep(1000);
+
                             socket = SocketUtil.setPort(2019);
                             DataInputStream dataInputStream = new DataInputStream(socket
                                     .getInputStream());
@@ -219,7 +244,6 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                             myUser.setAddress(et4);
                             Toast.makeText(PatientMyInfoModifyActivity.this, "个人信息修改成功", Toast
                                     .LENGTH_LONG).show();
-
                             finish();
                             break;
                         case "失败":
@@ -243,6 +267,9 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                 case R.id.ed_patient_modify_location:
                     initCityPicker();
                     cityPicker.show();
+                    break;
+                case R.id.ed_patient_modify_mysex:
+                    showSexChooseDialog();
                     break;
                 default:
                     break;
