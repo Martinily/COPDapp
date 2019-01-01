@@ -199,9 +199,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             showToast("请输入6-20位由大小写字母和数字组成的密码！");
         } else if (!mEtPassword.getText().toString().equals(mEtPasswordAgain.getText().toString())) {
             showToast("两次输入的密码不同！");
-        } else if (mEtIdentifyingCode.getText().toString().isEmpty()){
+        } else if (mEtIdentifyingCode.getText().toString().isEmpty()) {
             showToast("请输入验证码！");
-        } else{
+        } else {
             SMSSDK.submitVerificationCode("86", mEtAccount.getText().toString(),
                     mEtIdentifyingCode.getText().toString());
         }
