@@ -175,7 +175,7 @@ public class DoctorTwoFragment extends Fragment {
     //展示下拉列表
     private void ShowListPopulWindow () {
         int size = mInstrumentNames.size();
-        String[] instrumentss = (String[]) mInstrumentNames.toArray(new String[size]);
+        String[] instrumentss = mInstrumentNames.toArray(new String[size]);
         final ListPopupWindow listPopupWindow;
         listPopupWindow = new ListPopupWindow(getActivity());
         listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout
@@ -219,9 +219,9 @@ public class DoctorTwoFragment extends Fragment {
             return;
         }
         int size = mInstrumentNames.size();
-        String[] instrumentss = (String[]) mInstrumentNames.toArray(new String[size]);
+        String[] instrumentss = mInstrumentNames.toArray(new String[size]);
         int size2 = mInstrumentAttentions.size();
-        String[] instrumentattention = (String[]) mInstrumentAttentions.toArray(new String[size2]);
+        String[] instrumentattention = mInstrumentAttentions.toArray(new String[size2]);
         String attention = "";
         for (int j = 0; j < size; j++) {
             if (nameEditText.getText().toString().equals(instrumentss[j])) {
@@ -298,13 +298,13 @@ public class DoctorTwoFragment extends Fragment {
             }
 
             //更新数据
-            final TextView nameTextView = (TextView) view.findViewById(R.id.showName);
+            final TextView nameTextView = view.findViewById(R.id.showName);
             nameTextView.setText(bean.getName());
 
             final int removePosition = position;
 
             //删除按钮点击事件
-            final Button deleteButton = (Button) view.findViewById(R.id.showDeleteButton);
+            final Button deleteButton = view.findViewById(R.id.showDeleteButton);
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v) {

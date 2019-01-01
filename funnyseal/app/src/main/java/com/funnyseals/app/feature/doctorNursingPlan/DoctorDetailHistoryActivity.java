@@ -70,7 +70,7 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
         mPlanId = bundle.getString("planid");
 
         //发送护理计划，跳转到患者列表
-        mPickPatient = (Button) findViewById(R.id.sendhistory);
+        mPickPatient = findViewById(R.id.sendhistory);
         mPickPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
@@ -149,27 +149,27 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
         int size2 = mHistoryinstrument_Titles.size();
         int size3 = mHistorysports_Titles.size();
 
-        String[] historymedicine_Title = (String[]) mHistorymedicine_Titles.toArray(new
+        String[] historymedicine_Title = mHistorymedicine_Titles.toArray(new
                 String[size]);//药物名称
-        String[] historymedicine_num = (String[]) mHistorymedicine_nums.toArray(new String[size])
+        String[] historymedicine_num = mHistorymedicine_nums.toArray(new String[size])
                 ;//药物数量
-        String[] historymedicine_attention = (String[]) mHistorymedicine_attentions.toArray(new
+        String[] historymedicine_attention = mHistorymedicine_attentions.toArray(new
                 String[size]);//药物注意事项
-        String[] historymedicine_time = (String[]) mHistorymedicine_times.toArray(new
+        String[] historymedicine_time = mHistorymedicine_times.toArray(new
                 String[size]);//药物时间
 
-        String[] historyinstrument_Title = (String[]) mHistoryinstrument_Titles.toArray(new
+        String[] historyinstrument_Title = mHistoryinstrument_Titles.toArray(new
                 String[size2]);//器械名称
-        String[] historyinstrument_num = (String[]) mHistoryinstrument_nums.toArray(new
+        String[] historyinstrument_num = mHistoryinstrument_nums.toArray(new
                 String[size2]);//器械时长
-        String[] historyinstrument_attention = (String[]) mHistoryinstrument_attentions.toArray
+        String[] historyinstrument_attention = mHistoryinstrument_attentions.toArray
                 (new String[size2]);//器械注意事项
 
-        String[] historysports_Title = (String[]) mHistorysports_Titles.toArray(new
+        String[] historysports_Title = mHistorysports_Titles.toArray(new
                 String[size3]);//运动名称
-        String[] historysports_num = (String[]) mHistorysports_nums.toArray(new String[size3]);
+        String[] historysports_num = mHistorysports_nums.toArray(new String[size3]);
         //运动时长
-        String[] historysports_attention = (String[]) mHistorysports_attentions.toArray(new
+        String[] historysports_attention = mHistorysports_attentions.toArray(new
                 String[size3]);//运动注意事项
 
         //分类（药物，器械，运动）存放
@@ -222,11 +222,11 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
             map.put("historytime", "-");
             medicine_list.add(map);
         }
-        ListView listview = (ListView) findViewById(R.id.listViewdoctorhistory);
+        ListView listview = findViewById(R.id.listViewdoctorhistory);
         listview.setAdapter(new MyAdapter());
 
         //退出按钮事件监听
-        Button quitdoctorhistory = (Button) findViewById(R.id.quitdochistory);
+        Button quitdoctorhistory = findViewById(R.id.quitdochistory);
         quitdoctorhistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
@@ -312,12 +312,12 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
                 view = LayoutInflater.from(DoctorDetailHistoryActivity.this).inflate(R.layout
                         .historydetail_item, null);
                 mHolder = new ViewHolder();
-                mHolder.cardhistory_title = (TextView) view.findViewById(R.id.hismedicine);
-                mHolder.cardhistory_image = (ImageView) view.findViewById(R.id.hismedicineImg);
-                mHolder.cardhistory_num = (TextView) view.findViewById(R.id.histype);
-                mHolder.cardhistory_numdetail = (TextView) view.findViewById(R.id.hisnum);
-                mHolder.cardhistory_attention = (TextView) view.findViewById(R.id.hisattention);
-                mHolder.cardhistory_time = (TextView) view.findViewById(R.id.histime);
+                mHolder.cardhistory_title = view.findViewById(R.id.hismedicine);
+                mHolder.cardhistory_image = view.findViewById(R.id.hismedicineImg);
+                mHolder.cardhistory_num = view.findViewById(R.id.histype);
+                mHolder.cardhistory_numdetail = view.findViewById(R.id.hisnum);
+                mHolder.cardhistory_attention = view.findViewById(R.id.hisattention);
+                mHolder.cardhistory_time = view.findViewById(R.id.histime);
                 view.setTag(mHolder);  //将ViewHolder存储在View中
             } else {
                 view = convertView;

@@ -69,9 +69,9 @@ public class PatientThreeFragment extends Fragment {
         int size2 = mSports_Contents.size();
         int size3 = mSports_attentions.size();
 
-        String[] sports_Title = (String[]) mSports_Titles.toArray(new String[size]);
-        String[] sports_Content = (String[]) mSports_Contents.toArray(new String[size2]);
-        String[] sports_attention = (String[]) mSports_attentions.toArray(new String[size3]);
+        String[] sports_Title = mSports_Titles.toArray(new String[size]);
+        String[] sports_Content = mSports_Contents.toArray(new String[size2]);
+        String[] sports_attention = mSports_attentions.toArray(new String[size3]);
 
 
         for (int i = 0; i < sports_Title.length; i++) {

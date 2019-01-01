@@ -135,9 +135,9 @@ public class PatientHistoryActivity extends AppCompatActivity {
         int size = mSicker_historydates.size();
         int size2 = mSicker_judgeuses.size();
         int size3 = mSicker_planIDs.size();
-        String[] sicker_historydate = (String[]) mSicker_historydates.toArray(new String[size]);//日期
-        String[] sicker_judgeuse = (String[]) mSicker_judgeuses.toArray(new String[size2]);//是否接收
-        String[] sicker_planID = (String[]) mSicker_planIDs.toArray(new String[size3]);
+        String[] sicker_historydate = mSicker_historydates.toArray(new String[size]);//日期
+        String[] sicker_judgeuse = mSicker_judgeuses.toArray(new String[size2]);//是否接收
+        String[] sicker_planID = mSicker_planIDs.toArray(new String[size3]);
 
 
         //将数据封装成数据源
@@ -155,7 +155,7 @@ public class PatientHistoryActivity extends AppCompatActivity {
         listview.setAdapter(new MyAdapter());
 
         //返回按钮事件监听
-        Button quitsickerhistorydate = (Button) findViewById(R.id.quitsickerhistorydate);
+        Button quitsickerhistorydate = findViewById(R.id.quitsickerhistorydate);
         quitsickerhistorydate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {

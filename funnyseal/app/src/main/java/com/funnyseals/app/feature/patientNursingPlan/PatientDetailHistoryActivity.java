@@ -300,7 +300,7 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
             }
         });
 
-        Button usehistory = (Button) findViewById(R.id.usehistory);
+        Button usehistory = findViewById(R.id.usehistory);
         usehistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {

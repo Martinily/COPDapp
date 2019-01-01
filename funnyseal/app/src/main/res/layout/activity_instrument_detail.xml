@@ -78,7 +78,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="25dp"
-
             android:text="时长："
             android:textColor="@color/darkgray"
             android:textSize="22dp" />
@@ -88,6 +87,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:autofillHints=""
+            android:maxLength="3"
             android:background="@drawable/txt_radiuborder"
             android:gravity="center"
             android:inputType="number"

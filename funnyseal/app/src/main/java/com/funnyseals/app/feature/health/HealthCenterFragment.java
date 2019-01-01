@@ -70,7 +70,6 @@ public class HealthCenterFragment extends Fragment {
                 socket = SocketUtil.getSendSocket();
                 DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                 dataOutputStream.writeUTF(send);
-                dataOutputStream.close();
 
                 socket = SocketUtil.getGetSocket();
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
@@ -114,7 +113,6 @@ public class HealthCenterFragment extends Fragment {
                 } else{
                     showToast("暂无用户数据");
                 }
-                dataInputStream.close();
                 socket.shutdownInput();
                 socket.shutdownOutput();
                 socket.close();

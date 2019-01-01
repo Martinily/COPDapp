@@ -109,9 +109,9 @@ public class DoctorHistoryActivity extends AppCompatActivity {
         int size = mDoctor_historydates.size();
         int size2 = mDoctor_historyUses.size();
         int size3 = mDoctor_historyIds.size();
-        String[] doctor_historydate = (String[]) mDoctor_historydates.toArray(new String[size]);
-        String[] mDoctor_historyUse = (String[]) mDoctor_historyUses.toArray(new String[size2]);
-        String[] mDoctor_historyId = (String[]) mDoctor_historyIds.toArray(new String[size3]);
+        String[] doctor_historydate = mDoctor_historydates.toArray(new String[size]);
+        String[] mDoctor_historyUse = mDoctor_historyUses.toArray(new String[size2]);
+        String[] mDoctor_historyId = mDoctor_historyIds.toArray(new String[size3]);
 
         //将数据封装成数据源
         for (int i = 0; i < doctor_historydate.length; i++) {
@@ -124,11 +124,11 @@ public class DoctorHistoryActivity extends AppCompatActivity {
             map.put("doctorhistoryid", mDoctor_historyId[i]);
             doctorhistory_list.add(map);
         }
-        ListView listview = (ListView) findViewById(R.id.listViewdoctorhistorydate);
+        ListView listview = findViewById(R.id.listViewdoctorhistorydate);
         listview.setAdapter(new MyAdapter());
 
         //返回按钮事件监听
-        Button quitdoctorhistorydate = (Button) findViewById(R.id.quitdoctorhistorydate);
+        Button quitdoctorhistorydate = findViewById(R.id.quitdoctorhistorydate);
         quitdoctorhistorydate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
@@ -163,8 +163,8 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                 view = LayoutInflater.from(DoctorHistoryActivity.this).inflate(R.layout
                         .historydate_item, null);
                 mHolder = new ViewHolder();
-                mHolder.cardhistory_date = (TextView) view.findViewById(R.id.historytime);
-                mHolder.cardhistory_judgeuse = (ImageView) view.findViewById(R.id.judgeuse);
+                mHolder.cardhistory_date = view.findViewById(R.id.historytime);
+                mHolder.cardhistory_judgeuse = view.findViewById(R.id.judgeuse);
                 view.setTag(mHolder);  //将ViewHolder存储在View中
             } else {
                 view = convertView;
@@ -176,7 +176,7 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                     .get("doctorhistoryuse"));
 
             //详细的某一项历史计划的查看
-            Button moredetailhistory = (Button) view.findViewById(R.id.moredetailhistory);
+            Button moredetailhistory = view.findViewById(R.id.moredetailhistory);
             moredetailhistory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v) {

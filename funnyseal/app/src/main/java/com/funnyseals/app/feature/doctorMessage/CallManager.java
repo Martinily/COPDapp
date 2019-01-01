@@ -210,7 +210,6 @@ public class CallManager {
         // 调用sdk的保存消息方法
         if(BtnClickLimitUtil.isFastClick()){
             EMClient.getInstance().chatManager().saveMessage(message);
-            System.err.println("------------------------");
             EMClient.getInstance().chatManager().importMessages(Collections.singletonList(message));
         }
 
