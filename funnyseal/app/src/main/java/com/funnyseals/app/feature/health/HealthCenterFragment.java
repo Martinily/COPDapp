@@ -34,6 +34,7 @@ public class HealthCenterFragment extends Fragment {
     public static List<String>  data2    = new ArrayList<>();
     public static List<String>  data3    = new ArrayList<>();
     public static List<String>  datatime = new ArrayList<>();
+    private       String        msg;
     private       int           indexoffev1;
     private       int           indexoffvc;
     private       int           indexofvc;
@@ -46,6 +47,7 @@ public class HealthCenterFragment extends Fragment {
 
     @Override
     public void onCreate (Bundle savedInstanceState) {
+        msg = "null";
         super.onCreate(savedInstanceState);
     }
 
@@ -111,7 +113,10 @@ public class HealthCenterFragment extends Fragment {
                             SimpleChartView.data2.add(0);
                     }
                 } else{
-                    showToast("暂无用户数据");
+                    if (msg.equals("null")) {
+                        showToast("暂无用户数据");
+                        msg = "暂无用户数据";
+                    }
                 }
                 socket.shutdownInput();
                 socket.shutdownOutput();
@@ -134,12 +139,21 @@ public class HealthCenterFragment extends Fragment {
                     (data2.get(indexoffvc));
             if (percent < 70){
                 textView2c.setTextColor(Color.parseColor("#FF0000"));
-                showToast("您的数据存在异常，请确认您的身体状况");
+                if (msg.equals("null")){
+                    showToast("您的数据存在异常，请确认您的身体状况");
+                    msg = "您的数据存在异常，请确认您的身体状况";
+                }
             }
                 String string = String.valueOf(percent) + "%";
                 textView2c.setText(string);
         }
         super.onResume();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) showToast(msg);
     }
 
     @Override
