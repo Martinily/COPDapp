@@ -1,6 +1,7 @@
 package com.funnyseals.app.feature.health;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,11 +92,20 @@ public class HealthCenterUpdateActivity extends AppCompatActivity {
                 thread.start();
             }
         });
-        button2.setOnClickListener(v -> finish());
+        button2.setOnClickListener(v -> showDialog());
     }
 
-    public void showToast (final String msg) {
+    private void showToast (final String msg) {
         runOnUiThread(() -> Toast.makeText(HealthCenterUpdateActivity.this, msg, Toast.LENGTH_SHORT).show());
+    }
+
+    private void showDialog(){
+        final AlertDialog.Builder mDialog= new AlertDialog.Builder(HealthCenterUpdateActivity.this);
+        mDialog.setTitle("提示");
+        mDialog.setMessage("确定取消更新数据吗？");
+        mDialog.setPositiveButton("确定", (dialog, which) -> finish());
+        mDialog.setNegativeButton("返回", (dialog, which) -> dialog.dismiss());
+        mDialog.show();
     }
 
 }
