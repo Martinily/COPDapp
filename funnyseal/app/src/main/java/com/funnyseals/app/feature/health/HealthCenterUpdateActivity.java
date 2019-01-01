@@ -51,6 +51,8 @@ public class HealthCenterUpdateActivity extends AppCompatActivity {
                 Toast.makeText(HealthCenterUpdateActivity.this, "请输入至少一项数据", Toast
                         .LENGTH_LONG).show();
             else if (Integer.parseInt(m_data1)>Integer.parseInt(m_data2) | Integer.parseInt(m_data1)<Integer.parseInt(m_data2)/2 |
+                    Integer.parseInt(m_data1)<1000 | Integer.parseInt(m_data1)>5000 |
+                    Integer.parseInt(m_data2)<1000 | Integer.parseInt(m_data2)>5000 |
                     Integer.parseInt(m_data3)<1000 | Integer.parseInt(m_data3)>5000)
                 Toast.makeText(HealthCenterUpdateActivity.this, "请输入合理的数据", Toast
                         .LENGTH_LONG).show();

@@ -45,7 +45,7 @@ public class SimpleChartView extends View {
         paint1.setAntiAlias(true);
         paint1.setStrokeWidth(5);
         Paint paint2 = new Paint();
-        paint2.setColor(Color.parseColor("#00FF00"));
+        paint2.setColor(Color.parseColor("#008080"));
         paint2.setAntiAlias(true);
         paint2.setStrokeWidth(5);
         paint2.setTextSize(40);

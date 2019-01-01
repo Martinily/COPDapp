@@ -132,8 +132,10 @@ public class HealthCenterFragment extends Fragment {
         if (indexoffev1 != index & indexoffvc != index) {
             int percent = Integer.parseInt(data1.get(indexoffev1)) * 100 / Integer.parseInt
                     (data2.get(indexoffvc));
-            if (percent < 70)
+            if (percent < 70){
                 textView2c.setTextColor(Color.parseColor("#FF0000"));
+                showToast("您的数据存在异常，请确认您的身体状况");
+            }
                 String string = String.valueOf(percent) + "%";
                 textView2c.setText(string);
         }
@@ -158,7 +160,7 @@ public class HealthCenterFragment extends Fragment {
         return view;
     }
 
-    public void showToast (final String msg) {
+    private void showToast (final String msg) {
         Objects.requireNonNull(getActivity()).runOnUiThread(() -> Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show());
     }
 

@@ -67,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="@string/healthcenter_project1"
+                android:textColor="@color/teal"
                 android:textSize="20sp" />
 
             <TextView
@@ -81,6 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="@string/healthcenter_unit"
+                android:textColor="@color/teal"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -110,6 +112,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/healthcenter_project2"
+                android:textColor="@color/teal"
                 android:textSize="20sp" />
 
             <TextView
@@ -124,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="@string/healthcenter_unit"
+                android:textColor="@color/teal"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -144,6 +148,7 @@
                 android:layout_marginStart="5dp"
                 android:gravity="center"
                 android:text="@string/healthcenter_projectcaculate"
+                android:textColor="@color/teal"
                 android:textSize="20sp" />
 
             <TextView
@@ -163,6 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/notice"
+            android:textColor="@color/teal"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -193,6 +199,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_height="50dp"
                 android:text="@string/healthcenter_project3"
+                android:textColor="@color/teal"
                 android:textSize="20sp" />
 
             <TextView
@@ -207,6 +214,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="@string/healthcenter_unit"
+                android:textColor="@color/teal"
                 android:textSize="20sp" />
         </LinearLayout>
 
