@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +35,6 @@ public class DoctorPasswordActivity extends AppCompatActivity {
     private Button        bt_doctor_change_complete,ib_doctor_change_return;
     private MyApplication myApplication;
     private String        result="";
-
     /**
      * 判断密码不能有特殊字符，只能是英文或者数字
      * 判断两次密码一致
@@ -46,8 +46,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                 isLetterOrDigit = true;
             }
         String regex = "^[a-zA-Z0-9]{6,20}$";
-        boolean isRight = isLetterOrDigit && str.matches(regex);
-        return isRight;
+        return (isLetterOrDigit && str.matches(regex));
     }
 
     @Override
@@ -66,15 +65,13 @@ public class DoctorPasswordActivity extends AppCompatActivity {
      * 密码为6-20位
      * 两次密码一致
      */
-    public void myCorrectPas (String oldpassword, String newpassword, String againpassword) {
+    public void myCorrectPas () {
 
-        if (oldpassword.equals("") || newpassword.equals("") || againpassword.equals("")) {
+        if (getOldpassword().equals("") || getNewpassword().equals("") || getAgainpassword().equals("")) {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
-        } else if (!isLetterOrDigit(newpassword)) {
-            Toast.makeText(this, "密码不能包含特殊字符", Toast.LENGTH_SHORT).show();
-        } else if (newpassword.length() < 6 || newpassword.length() > 20) {
-            Toast.makeText(this, "密码长度应为6-20位", Toast.LENGTH_SHORT).show();
-        } else if (!isSame(newpassword, againpassword)) {
+        } else if (!isLetterOrDigit(getNewpassword())) {
+            Toast.makeText(this, "密码长度应为6-20位,且不包含特殊字符", Toast.LENGTH_SHORT).show();
+        } else if (!isSame(getNewpassword(), getAgainpassword())) {
             Toast.makeText(this, "两次密码不一致，请重新输入", Toast.LENGTH_LONG).show();
         } else {
             changePassword();
@@ -168,7 +165,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
 
                 Thread.sleep(2000);
 
-                socket = SocketUtil.getGetSocket();
+                socket = SocketUtil.setPort(2032);
                 DataInputStream dataInputStream = new DataInputStream(socket
                         .getInputStream());
                 String message = dataInputStream.readUTF();
@@ -186,6 +183,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
         while (thread.isAlive()){
 
         }
+        Log.d("修改密码","++++++++++++++++++++"+result+"++++++++++++++++++++");
         switch (result) {
             case "0":
                 Toast.makeText(DoctorPasswordActivity.this, "修改密码成功",
@@ -223,7 +221,7 @@ public class DoctorPasswordActivity extends AppCompatActivity {
                     Sure();
                     break;
                 case R.id.bt_doctor_change_complete:
-                    myCorrectPas(getOldpassword(), getNewpassword(), getAgainpassword());
+                    myCorrectPas();
                     break;
                 default:
                     break;

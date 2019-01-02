@@ -230,7 +230,7 @@ public class PatientPasswordActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.bt_patient_change_complete:
                     myCorrectPas();
-                        break;
+                    break;
                 case R.id.ib_patient_change_return:
                     Sure();
                     break;
