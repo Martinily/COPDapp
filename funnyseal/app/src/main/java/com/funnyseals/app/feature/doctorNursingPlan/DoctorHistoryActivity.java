@@ -81,7 +81,6 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                 socket = SocketUtil.getGetSocket();
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String message = dataInputStream.readUTF();
-
                 if (message.equals("empty")) {
                     return;
                 }
@@ -93,12 +92,13 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                     mDoctor_historyUses.add(jsonArray.getJSONObject(i).getString("planAcceptS"));
                     mDoctor_historyIds.add(jsonArray.getJSONObject(i).getString("planID"));
                 }
-
+                dataInputStream.close();
+                socket.shutdownInput();
+                socket.shutdownOutput();
                 socket.close();
             } catch (JSONException | IOException | InterruptedException e) {
                 e.printStackTrace();
             }
-            Thread.interrupted();
         });
         thread.start();
         while (thread.isAlive()) {
