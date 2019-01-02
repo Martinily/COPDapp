@@ -118,6 +118,8 @@ public class DoctorMessageListFragment extends Fragment implements EMMessageList
         //删除消息
         mChatList.setOnMenuItemClickListener((position, menu, index) -> {
             if (index == 0) {
+
+                EMClient.getInstance().chatManager().deleteConversation(mConversationList.get(position).conversationId(), false);
                 mConversationList.remove(position);
                 mAdapter.notifyDataSetChanged();
             }

@@ -81,7 +81,6 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                 socket = SocketUtil.getGetSocket();
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String message = dataInputStream.readUTF();
-                socket.close();
 
                 if (message.equals("empty")) {
                     return;
@@ -94,6 +93,7 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                     mDoctor_historyUses.add(jsonArray.getJSONObject(i).getString("planAcceptS"));
                     mDoctor_historyIds.add(jsonArray.getJSONObject(i).getString("planID"));
                 }
+
                 socket.close();
             } catch (JSONException | IOException | InterruptedException e) {
                 e.printStackTrace();
