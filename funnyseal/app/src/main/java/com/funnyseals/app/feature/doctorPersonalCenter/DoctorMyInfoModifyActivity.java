@@ -270,7 +270,7 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                             finish();
                             break;
                         case "失败":
-                            Toast.makeText(DoctorMyInfoModifyActivity.this, "修改失败", Toast
+                            Toast.makeText(DoctorMyInfoModifyActivity.this, "当前网络不稳定，换个姿势试试~", Toast
                                     .LENGTH_LONG).show();
                             break;
                     }

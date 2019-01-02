@@ -102,10 +102,10 @@ public class PatientMyDoctorActivity extends AppCompatActivity {
                 sex=jsonObject.getString("docSex");
                 initText();
                 socket.close();
-                Thread.interrupted();
             } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
+            Thread.interrupted();
         });
         thread.start();
         while (thread.isAlive()){

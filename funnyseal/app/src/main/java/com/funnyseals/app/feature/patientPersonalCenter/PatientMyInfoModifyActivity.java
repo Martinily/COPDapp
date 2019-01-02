@@ -251,7 +251,7 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                             finish();
                             break;
                         case "失败":
-                            Toast.makeText(PatientMyInfoModifyActivity.this,"网络不稳定，请稍后再试~",Toast.LENGTH_LONG);
+                            Toast.makeText(PatientMyInfoModifyActivity.this,"当前网络不稳定，换个姿势试试~",Toast.LENGTH_LONG);
                             break;
 
                     }

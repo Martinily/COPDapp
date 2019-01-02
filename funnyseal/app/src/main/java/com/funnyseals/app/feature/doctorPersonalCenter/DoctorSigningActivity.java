@@ -36,6 +36,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
     private int           type   = 0;
     private boolean       isType = true;
     private DoctorBottomActivity bottomActivity;
+    private String         result="";
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -95,7 +96,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                 case R.id.bt_doctor_signing_complete:
                     //   correctPhone();
                     if (isType) {
-                        new Thread(() -> {
+                        Thread thread=new Thread(() -> {
                             String send = "";
                             Socket socket;
                             try {
@@ -117,35 +118,39 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                         .getInputStream());
                                 String message = dataInputStream.readUTF();
 
-                                jsonObject = new JSONObject(message);
-                                switch (jsonObject.getString("sign_result")) {
-                                    case "0":
-                                        Looper.prepare();
-                                        Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast
-                                                .LENGTH_LONG).show();
-                                        bottomActivity.getPatient();
-                                        Looper.loop();
-                                        break;
-                                    case "2":
-                                        Looper.prepare();
-                                        Toast.makeText(DoctorSigningActivity.this, "用户不存在", Toast
-                                                .LENGTH_LONG).show();
-                                        Looper.loop();
-                                        break;
-                                    case "1":
-                                        Looper.prepare();
-                                        Toast.makeText(DoctorSigningActivity.this, "当前网络不稳定，请换个姿势试试~", Toast
-                                                .LENGTH_LONG).show();
-                                        Looper.loop();
-                                        break;
-                                }
+                                JSONObject jsonObject1 = new JSONObject(message);
+
+                                result=jsonObject1.getString("sign_result");
+
                                 socket.close();
                             } catch (IOException | JSONException e) {
                                 e.printStackTrace();
                             }
-                        }).start();
+                            Thread.interrupted();
+                        });
+                        thread.start();
+                        while (thread.isAlive()){
+
+                        }
+                        switch (result) {
+                            case "0":
+                                Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast
+                                        .LENGTH_LONG).show();
+                                bottomActivity.getPatient();
+                                finish();
+                                break;
+                            case "2":
+                                Toast.makeText(DoctorSigningActivity.this, "用户不存在", Toast
+                                        .LENGTH_LONG).show();
+                                break;
+                            case "1":
+                                Toast.makeText(DoctorSigningActivity.this, "当前网络不稳定，请换个姿势试试~", Toast
+                                        .LENGTH_LONG).show();
+                                break;
+                        }
+
                     }
-                    finish();
+
                     break;
                 case R.id.ib_doctor_signing_return:
                     finish();
@@ -167,6 +172,7 @@ public class DoctorSigningActivity extends AppCompatActivity {
                             out.writeUTF(send);
                             out.close();
 
+                            Thread.sleep(1000);
                             socket = SocketUtil.setPort(2025);
                             DataInputStream dataInputStream = new DataInputStream(socket
                                     .getInputStream());
@@ -195,10 +201,11 @@ public class DoctorSigningActivity extends AppCompatActivity {
                                     break;
                             }
                             socket.close();
-                        } catch (IOException | JSONException e) {
+                        } catch (IOException | JSONException | InterruptedException e) {
                             e.printStackTrace();
                         }
                     }).start();
+
                     finish();
                     break;
                 default:
