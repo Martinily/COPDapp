@@ -92,7 +92,6 @@ public class DoctorHistoryActivity extends AppCompatActivity {
                     mDoctor_historyUses.add(jsonArray.getJSONObject(i).getString("planAcceptS"));
                     mDoctor_historyIds.add(jsonArray.getJSONObject(i).getString("planID"));
                 }
-                dataInputStream.close();
                 socket.shutdownInput();
                 socket.shutdownOutput();
                 socket.close();
