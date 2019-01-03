@@ -102,7 +102,6 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.d("更新数据","更新的就是这个+"+name+"dd");
             }
 
 
