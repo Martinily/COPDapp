@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.model.MedicinePlan;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -159,12 +160,14 @@ public class PatientOneFragment extends Fragment {
 
             Button moretime = view.findViewById(R.id.moremedicinetime);
             moretime.setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), MedicineRetimeActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putCharSequence("medicinetitle", mMedicine_list.get(position).get
-                        ("medicinetitle").toString());
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(BtnClickLimitUtil.isFastClick()) {
+                    Intent intent = new Intent(getActivity(), MedicineRetimeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putCharSequence("medicinetitle", mMedicine_list.get(position).get
+                            ("medicinetitle").toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             });
             return view;
         }

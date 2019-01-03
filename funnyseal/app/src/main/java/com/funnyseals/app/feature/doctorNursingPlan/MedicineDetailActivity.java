@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 
 /*
 医生端药物的详细制定
@@ -166,45 +167,48 @@ public class MedicineDetailActivity extends AppCompatActivity {
         });
         //药物需要在完成时进行检查并给出输入提示
         mDone_button.setOnClickListener(v -> {
+            if(BtnClickLimitUtil.isFastClick()) {
+                if (((time[0] * 100000 + time[1] * 10000 + time[2] * 1000 + time[3] * 100 + time[4] *
 
-            if (((time[0] * 100000 + time[1] * 10000 + time[2] * 1000 + time[3] * 100 + time[4] *
-                    10 + time[5]) == 0) || TextUtils.isEmpty(medicinenum.getText()) || TextUtils
-                    .isEmpty(medicine_editor_detail.getText())) {
-                new AlertDialog.Builder(MedicineDetailActivity.this).setTitle("我的提示").setMessage
-                        ("仍有内容未填写，确认完成？")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick (DialogInterface dialog, int which) {
-                                Intent intent2 = new Intent();
-                                Bundle bundle2 = new Bundle();
-                                bundle2.putCharSequence("reposition", position);
-                                bundle2.putCharSequence("remedicinenum", mDialogmedicinenum
-                                        .getText().toString() + "/次");
-                                bundle2.putCharSequence("remedicineattention",
-                                        mDialogmedicine_editor_detail.getText().toString());
-                                bundle2.putCharSequence("remedicinetime", String.valueOf(time[0])
-                                        + String.valueOf(time[1]) + String.valueOf(time[2]) +
-                                        String.valueOf(time[3]) + String.valueOf(time[4]) +
-                                        String.valueOf(time[5]));
-                                intent2.putExtras(bundle2);
-                                setResult(1001, intent2);
-                                finish();  //关闭此activity
-                            }
-                        }).show();
-            } else {
-                Intent intent2 = new Intent();
-                Bundle bundle2 = new Bundle();
-                bundle2.putCharSequence("reposition", position);
-                bundle2.putCharSequence("remedicinenum", mDialogmedicinenum.getText().toString()
-                        + "/次");
-                bundle2.putCharSequence("remedicineattention", mDialogmedicine_editor_detail
-                        .getText().toString());
-                bundle2.putCharSequence("remedicinetime", String.valueOf(time[0]) + String
-                        .valueOf(time[1]) + String.valueOf(time[2]) + String.valueOf(time[3]) +
-                        String.valueOf(time[4]) + String.valueOf(time[5]));
-                intent2.putExtras(bundle2);
-                setResult(1001, intent2);
-                finish();  //关闭此activity
+                        10 + time[5]) == 0) || TextUtils.isEmpty(medicinenum.getText()) || TextUtils
+                        .isEmpty(medicine_editor_detail.getText())) {
+                    new AlertDialog.Builder(MedicineDetailActivity.this).setTitle("我的提示").setMessage
+                            ("仍有内容未填写，确认完成？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick (DialogInterface dialog, int which) {
+                                    Intent intent2 = new Intent();
+                                    Bundle bundle2 = new Bundle();
+                                    bundle2.putCharSequence("reposition", position);
+                                    bundle2.putCharSequence("remedicinenum", mDialogmedicinenum
+                                            .getText().toString() + "/次");
+                                    bundle2.putCharSequence("remedicineattention",
+                                            mDialogmedicine_editor_detail.getText().toString());
+                                    bundle2.putCharSequence("remedicinetime", String.valueOf
+                                            (time[0])
+                                            + String.valueOf(time[1]) + String.valueOf(time[2]) +
+                                            String.valueOf(time[3]) + String.valueOf(time[4]) +
+                                            String.valueOf(time[5]));
+                                    intent2.putExtras(bundle2);
+                                    setResult(1001, intent2);
+                                    finish();  //关闭此activity
+                                }
+                            }).show();
+                } else {
+                    Intent intent2 = new Intent();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putCharSequence("reposition", position);
+                    bundle2.putCharSequence("remedicinenum", mDialogmedicinenum.getText().toString()
+                            + "/次");
+                    bundle2.putCharSequence("remedicineattention", mDialogmedicine_editor_detail
+                            .getText().toString());
+                    bundle2.putCharSequence("remedicinetime", String.valueOf(time[0]) + String
+                            .valueOf(time[1]) + String.valueOf(time[2]) + String.valueOf(time[3]) +
+                            String.valueOf(time[4]) + String.valueOf(time[5]));
+                    intent2.putExtras(bundle2);
+                    setResult(1001, intent2);
+                    finish();  //关闭此activity
+                }
             }
         });
     }

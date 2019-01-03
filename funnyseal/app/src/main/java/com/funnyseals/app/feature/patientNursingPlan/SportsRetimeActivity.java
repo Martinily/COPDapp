@@ -174,10 +174,6 @@ public class SportsRetimeActivity extends AppCompatActivity {
                 editor.putString(ad.getId() + "", ad.getTimeLable());
                 editor.commit();
 
-                //SharedPreferences sp=SportsRetimeActivity.this.getSharedPreferences("HAHA",
-                // Context.MODE_PRIVATE);
-                // String content=sp.getString(ad.getId()+"",null);
-
                 //每一个闹钟对应一个请求码，根据请求码移除特定的闹钟,那么把时间当做请求码
                 SaveAlarmList();
             }

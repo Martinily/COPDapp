@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 
 /*
  *医生端制定insturment详细内容
@@ -62,36 +63,38 @@ public class InstrumentDetailActivity extends AppCompatActivity {
         });
         //完成按钮的监听
         mDone_button.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(instrumentnum.getText()) || TextUtils.isEmpty
-                    (instrument_editor_detail.getText())) {
-                new AlertDialog.Builder(InstrumentDetailActivity.this).setTitle("我的提示")
-                        .setMessage("仍有内容未填写，确认完成？")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick (DialogInterface dialog, int which) {
-                                Intent intent2 = new Intent();
-                                Bundle bundle2 = new Bundle();
-                                bundle2.putCharSequence("reposition", position);
-                                bundle2.putCharSequence("reinstrumentnum", mDialoginstrumentnum
-                                        .getText().toString() + "分钟/次");
-                                bundle2.putCharSequence("reinstrumentattention",
-                                        mDialoginstrument_editor_detail.getText().toString());
-                                intent2.putExtras(bundle2);
-                                setResult(1001, intent2);
-                                finish();  //关闭此activity
-                            }
-                        }).show();
-            } else {
-                Intent intent2 = new Intent();
-                Bundle bundle2 = new Bundle();
-                bundle2.putCharSequence("reposition", position);
-                bundle2.putCharSequence("reinstrumentnum", mDialoginstrumentnum.getText()
-                        .toString() + "分钟/次");
-                bundle2.putCharSequence("reinstrumentattention", mDialoginstrument_editor_detail
-                        .getText().toString());
-                intent2.putExtras(bundle2);
-                setResult(1001, intent2);
-                finish();  //关闭此activity
+            if(BtnClickLimitUtil.isFastClick()) {
+                if (TextUtils.isEmpty(instrumentnum.getText()) || TextUtils.isEmpty
+                        (instrument_editor_detail.getText())) {
+                    new AlertDialog.Builder(InstrumentDetailActivity.this).setTitle("我的提示")
+                            .setMessage("仍有内容未填写，确认完成？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick (DialogInterface dialog, int which) {
+                                    Intent intent2 = new Intent();
+                                    Bundle bundle2 = new Bundle();
+                                    bundle2.putCharSequence("reposition", position);
+                                    bundle2.putCharSequence("reinstrumentnum", mDialoginstrumentnum
+                                            .getText().toString() + "分钟/次");
+                                    bundle2.putCharSequence("reinstrumentattention",
+                                            mDialoginstrument_editor_detail.getText().toString());
+                                    intent2.putExtras(bundle2);
+                                    setResult(1001, intent2);
+                                    finish();  //关闭此activity
+                                }
+                            }).show();
+                } else {
+                    Intent intent2 = new Intent();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putCharSequence("reposition", position);
+                    bundle2.putCharSequence("reinstrumentnum", mDialoginstrumentnum.getText()
+                            .toString() + "分钟/次");
+                    bundle2.putCharSequence("reinstrumentattention", mDialoginstrument_editor_detail
+                            .getText().toString());
+                    intent2.putExtras(bundle2);
+                    setResult(1001, intent2);
+                    finish();  //关闭此activity
+                }
             }
         });
     }

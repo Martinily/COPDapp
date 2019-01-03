@@ -218,12 +218,13 @@
     <ImageButton
         android:id="@+id/ib_patient_modify_change_password"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="45dp"
+        android:layout_height="52dp"
         android:layout_marginStart="236dp"
         android:layout_marginBottom="12dp"
         android:background="@null"
         app:layout_constraintBottom_toTopOf="@+id/tv_patient_modify_mysettlingtime"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_patient_modify_password"
         app:srcCompat="@drawable/smssdk_arrow_right" />
 
@@ -240,11 +241,12 @@
 
     <ImageButton
         android:id="@+id/ib_patient_modify_advice"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="45dp"
+        android:layout_height="52dp"
         android:layout_marginStart="176dp"
         android:layout_marginTop="12dp"
         android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_patient_info_advice"
         app:layout_constraintTop_toBottomOf="@+id/ed_patient_modify_location"
         app:srcCompat="@drawable/smssdk_arrow_right" />

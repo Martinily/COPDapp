@@ -26,6 +26,7 @@
             android:layout_height="58dp"
             android:layout_marginLeft="20dp"
             android:backgroundTint="@color/teal"
+            android:maxLength="20"
             android:drawableRight="@drawable/vector_drawable_na"
             android:hint="请输入药品名称"
             android:textSize="22dp" />
