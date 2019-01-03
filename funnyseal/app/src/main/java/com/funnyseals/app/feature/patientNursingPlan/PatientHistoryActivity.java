@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.bottomtab.PatientBottomActivity;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -208,15 +209,16 @@ public class PatientHistoryActivity extends AppCompatActivity {
 
             Button morehistory = view.findViewById(R.id.moredetailhistory);
             morehistory.setOnClickListener(v -> {
-                //
-                Intent intent = new Intent(PatientHistoryActivity.this,
-                        PatientDetailHistoryActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putCharSequence("planid", sickerhistory_list.get(position).get
-                        ("sickerplanid").toString());  //患者护理计划编号
-                bundle.putCharSequence("patientid", mPatientID);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(BtnClickLimitUtil.isFastClick()) {
+                    Intent intent = new Intent(PatientHistoryActivity.this,
+                            PatientDetailHistoryActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putCharSequence("planid", sickerhistory_list.get(position).get
+                            ("sickerplanid").toString());  //患者护理计划编号
+                    bundle.putCharSequence("patientid", mPatientID);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             });
             return view;
         }

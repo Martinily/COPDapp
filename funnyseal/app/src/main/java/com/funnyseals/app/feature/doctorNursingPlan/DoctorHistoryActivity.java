@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.funnyseals.app.R;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -179,15 +180,16 @@ public class DoctorHistoryActivity extends AppCompatActivity {
             moredetailhistory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v) {
-                    //
-                    Intent intent = new Intent(DoctorHistoryActivity.this,
-                            DoctorDetailHistoryActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putCharSequence("planid", doctorhistory_list.get(position).get
-                            ("doctorhistoryid").toString());  //患者护理计划编号
-                    bundle.putCharSequence("doctorid", mDoctorID);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    if(BtnClickLimitUtil.isFastClick()) {
+                        Intent intent = new Intent(DoctorHistoryActivity.this,
+                                DoctorDetailHistoryActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putCharSequence("planid", doctorhistory_list.get(position).get
+                                ("doctorhistoryid").toString());  //患者护理计划编号
+                        bundle.putCharSequence("doctorid", mDoctorID);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
                 }
             });
             return view;
