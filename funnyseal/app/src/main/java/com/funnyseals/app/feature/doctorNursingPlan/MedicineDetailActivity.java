@@ -181,7 +181,7 @@ public class MedicineDetailActivity extends AppCompatActivity {
                                     Bundle bundle2 = new Bundle();
                                     bundle2.putCharSequence("reposition", position);
                                     bundle2.putCharSequence("remedicinenum", mDialogmedicinenum
-                                            .getText().toString() + "/次");
+                                            .getText().toString());
                                     bundle2.putCharSequence("remedicineattention",
                                             mDialogmedicine_editor_detail.getText().toString());
                                     bundle2.putCharSequence("remedicinetime", String.valueOf
