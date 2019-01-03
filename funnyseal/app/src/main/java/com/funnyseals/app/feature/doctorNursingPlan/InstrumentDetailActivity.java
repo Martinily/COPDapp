@@ -88,7 +88,7 @@ public class InstrumentDetailActivity extends AppCompatActivity {
                     Bundle bundle2 = new Bundle();
                     bundle2.putCharSequence("reposition", position);
                     bundle2.putCharSequence("reinstrumentnum", mDialoginstrumentnum.getText()
-                            .toString() + "分钟/次");
+                            .toString() );
                     bundle2.putCharSequence("reinstrumentattention", mDialoginstrument_editor_detail
                             .getText().toString());
                     intent2.putExtras(bundle2);

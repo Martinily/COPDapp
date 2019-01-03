@@ -88,8 +88,7 @@ public class SportsDetailActivity extends AppCompatActivity {
                     Intent intent2 = new Intent();
                     Bundle bundle2 = new Bundle();
                     bundle2.putCharSequence("reposition", position);
-                    bundle2.putCharSequence("resportsnum", dialogsportsnum.getText().toString() +
-                            "分钟/次");
+                    bundle2.putCharSequence("resportsnum", dialogsportsnum.getText().toString() );
                     bundle2.putCharSequence("resportsattention", dialogsports_editor_detail
                             .getText()
                             .toString());
