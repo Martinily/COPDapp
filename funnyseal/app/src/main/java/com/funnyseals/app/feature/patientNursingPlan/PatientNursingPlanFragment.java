@@ -137,18 +137,18 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
                 for (i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.getJSONObject(i).getString("item_type").equals("med")) {
                         mMedicine_Titles.add(jsonArray.getJSONObject(i).getString("mName"));
-                        mMedicine_Contents.add(jsonArray.getJSONObject(i).getString("mDose"));
+                        mMedicine_Contents.add(jsonArray.getJSONObject(i).getString("mDose")+"/次");
                         mMedicine_attentions.add(jsonArray.getJSONObject(i).getString
                                 ("mAttention"));
                         mMedicine_needtimes.add(jsonArray.getJSONObject(i).getString("mTime"));
                     } else if (jsonArray.getJSONObject(i).getString("item_type").equals("app")) {
                         mInstrument_Titles.add(jsonArray.getJSONObject(i).getString("appName"));
-                        mInstrument_Contents.add(jsonArray.getJSONObject(i).getString("appTime"));
+                        mInstrument_Contents.add(jsonArray.getJSONObject(i).getString("appTime")+"分钟/次");
                         mInstrument_attentions.add(jsonArray.getJSONObject(i).getString
                                 ("appAttention"));
                     } else if (jsonArray.getJSONObject(i).getString("item_type").equals("sports")) {
                         mSports_Titles.add(jsonArray.getJSONObject(i).getString("sType"));
-                        mSports_Contents.add(jsonArray.getJSONObject(i).getString("sTime"));
+                        mSports_Contents.add(jsonArray.getJSONObject(i).getString("sTime")+"分钟/次");
                         mSports_attentions.add(jsonArray.getJSONObject(i).getString("sAttention"));
                     }
                 }

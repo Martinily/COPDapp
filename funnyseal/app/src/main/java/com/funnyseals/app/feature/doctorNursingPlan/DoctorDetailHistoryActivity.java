@@ -180,7 +180,7 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
             map.put("historytitle", historymedicine_Title[i]);
             map.put("historyimg", R.drawable.vector_drawable_pillow);
             map.put("historynum", "剂量：");
-            map.put("historynumdetail", historymedicine_num[i]);
+            map.put("historynumdetail", historymedicine_num[i]+"/次");
             map.put("historyattention", historymedicine_attention[i]);
             if (historymedicine_time[i].equals("-")) {
                 time = "-";
@@ -207,7 +207,7 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
             map.put("historytitle", historyinstrument_Title[i]);
             map.put("historyimg", R.drawable.vector_drawable_instrument);
             map.put("historynum", "建议时长：");
-            map.put("historynumdetail", historyinstrument_num[i]);
+            map.put("historynumdetail", historyinstrument_num[i]+"分钟/次");
             map.put("historyattention", historyinstrument_attention[i]);
             map.put("historytime", "-");
             medicine_list.add(map);
@@ -217,7 +217,7 @@ public class DoctorDetailHistoryActivity extends AppCompatActivity {
             map.put("historytitle", historysports_Title[i]);
             map.put("historyimg", R.drawable.vector_drawable_sports);
             map.put("historynum", "建议时长：");
-            map.put("historynumdetail", historysports_num[i]);
+            map.put("historynumdetail", historysports_num[i]+"分钟/次");
             map.put("historyattention", historysports_attention[i]);
             map.put("historytime", "-");
             medicine_list.add(map);
