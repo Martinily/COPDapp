@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.model.InstrumentPlan;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -148,12 +149,14 @@ public class PatientTwoFragment extends Fragment {
 
             Button moretime = view.findViewById(R.id.moreinstrumenttime);
             moretime.setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), InstrumentRetimeActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putCharSequence("instrumenttitle", mInstrument_list.get(position).get
-                        ("instrumenttitle").toString());
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(BtnClickLimitUtil.isFastClick()) {
+                    Intent intent = new Intent(getActivity(), InstrumentRetimeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putCharSequence("instrumenttitle", mInstrument_list.get(position).get
+                            ("instrumenttitle").toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             });
             return view;
         }

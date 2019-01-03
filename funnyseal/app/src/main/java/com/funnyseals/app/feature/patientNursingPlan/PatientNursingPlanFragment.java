@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONArray;
@@ -186,12 +187,13 @@ public class PatientNursingPlanFragment extends Fragment implements View.OnClick
                 mTv_patient_three.setBackgroundColor(Color.LTGRAY);
                 break;
             case R.id.patienthistory: //查看历史计划
-                Intent intent = new Intent(getActivity(), PatientHistoryActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("PatientID", mPatientID);//患者id
-                intent.putExtras(bundle);
-                startActivity(intent);
-                //getActivity().finish();
+                if(BtnClickLimitUtil.isFastClick()) {
+                    Intent intent = new Intent(getActivity(), PatientHistoryActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("PatientID", mPatientID);//患者id
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
                 break;
         }
     }
