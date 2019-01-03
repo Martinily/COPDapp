@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="#53CC66"
+        android:background="@color/teal"
         android:padding="5dp">
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="#53CC66"
+            android:background="@color/teal"
             android:text="取消"
             android:textColor="#ffffff"
             android:textSize="20sp"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="#53CC66"
+            android:background="@color/teal"
             android:text="确定"
             android:textColor="#ffffff"
             android:textSize="20sp"
