@@ -22,9 +22,10 @@
 
         <EditText
             android:id="@+id/edit_instrument"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="58dp"
             android:layout_marginLeft="20dp"
+            android:layout_weight="1"
             android:maxLength="20"
             android:backgroundTint="@color/teal"
             android:drawableRight="@drawable/vector_drawable_na"
