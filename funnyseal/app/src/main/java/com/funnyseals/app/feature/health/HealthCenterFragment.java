@@ -73,6 +73,7 @@ public class HealthCenterFragment extends Fragment {
                 DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                 dataOutputStream.writeUTF(send);
 
+                Thread.sleep(500);
                 socket = SocketUtil.getGetSocket();
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String get = dataInputStream.readUTF();
@@ -121,7 +122,7 @@ public class HealthCenterFragment extends Fragment {
                 socket.shutdownInput();
                 socket.shutdownOutput();
                 socket.close();
-            } catch (IOException | JSONException e) {
+            } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
         });

@@ -76,6 +76,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                 dataOutputStream.writeUTF(send);
 
+                Thread.sleep(500);
                 socket = SocketUtil.getGetSocket();
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String get = dataInputStream.readUTF();
@@ -88,7 +89,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 socket.shutdownOutput();
                 socket.shutdownInput();
                 socket.close();
-            }catch (JSONException|IOException e){
+            }catch (JSONException | IOException | InterruptedException e){
                 e.printStackTrace();
             }
         });

@@ -74,6 +74,7 @@ public class HealthCenterUpdateActivity extends AppCompatActivity {
                         dataOutputStream.writeUTF(m_send);
                         dataOutputStream.close();
 
+                        Thread.sleep(500);
                         socket = SocketUtil.getGetSocket();
                         DataInputStream dataInputStream = new DataInputStream(socket
                                 .getInputStream());
@@ -87,7 +88,7 @@ public class HealthCenterUpdateActivity extends AppCompatActivity {
                         socket.shutdownOutput();
                         socket.close();
                         finish();
-                    } catch (IOException | JSONException e) {
+                    } catch (IOException | JSONException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 });
