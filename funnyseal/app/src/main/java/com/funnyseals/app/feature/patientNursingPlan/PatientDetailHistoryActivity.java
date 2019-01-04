@@ -102,7 +102,6 @@ public class PatientDetailHistoryActivity extends AppCompatActivity {
         } catch (JSONException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        Thread.interrupted();
     });
     private Thread thread2=new Thread(() -> {
         Socket socket;
