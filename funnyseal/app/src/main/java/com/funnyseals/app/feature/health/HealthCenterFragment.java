@@ -140,7 +140,7 @@ public class HealthCenterFragment extends Fragment {
                     (data2.get(indexoffvc));
             if (percent < 70){
                 textView2c.setTextColor(Color.parseColor("#FF0000"));
-                if (msg.equals("null")){
+                    if (msg.equals("null")){
                     showToast("您的数据存在异常，请确认您的身体状况");
                     msg = "您的数据存在异常，请确认您的身体状况";
                 }
@@ -154,7 +154,7 @@ public class HealthCenterFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden) showToast(msg);
+        if (!hidden & !msg.equals("null")) showToast(msg);
     }
 
     @Override
