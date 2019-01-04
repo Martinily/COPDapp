@@ -26,6 +26,7 @@ import java.util.List;
 public class ChatMessageAdapter extends BaseAdapter {
 
     private String mMyfriend;
+    private String mUserType;
 
     private LayoutInflater  mInflater;
     private List<EMMessage> mMessageList;
@@ -36,6 +37,7 @@ public class ChatMessageAdapter extends BaseAdapter {
         this.mMyfriend = friend;
         this.mMessageList = messageList;
         mApplication = (MyApplication) context.getApplicationContext();
+        mUserType=mApplication.getUserType();
     }
 
     @Override
@@ -71,11 +73,20 @@ public class ChatMessageAdapter extends BaseAdapter {
 
         convertView.setTag(viewHolder);
 
-        if (mApplication.getAccount().equals(message.getFrom())) {
-            viewHolder.portrait.setImageResource(R.drawable.vector_drawable_user);
-        } else {
-            viewHolder.portrait.setImageResource(R.drawable.vector_drawable_user);
+        if(mUserType.equals("d")){
+            if (mApplication.getAccount().equals(message.getFrom())) {
+                viewHolder.portrait.setImageResource(R.drawable.ic_doctor_portrait);
+            } else {
+                viewHolder.portrait.setImageResource(R.drawable.ic_patient);
+            }
+        }else{
+            if (mApplication.getAccount().equals(message.getFrom())) {
+                viewHolder.portrait.setImageResource(R.drawable.ic_patient);
+            } else {
+                viewHolder.portrait.setImageResource(R.drawable.ic_doctor_portrait);
+            }
         }
+
 
         viewHolder.text.setText(((EMTextMessageBody) message.getBody()).getMessage());
 

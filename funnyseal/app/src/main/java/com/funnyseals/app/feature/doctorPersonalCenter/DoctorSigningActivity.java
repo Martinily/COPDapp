@@ -1,8 +1,10 @@
 package com.funnyseals.app.feature.doctorPersonalCenter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.feature.bottomtab.DoctorBottomActivity;
+import com.funnyseals.app.feature.patientPersonalCenter.PatientAddEquipmentActivity;
 import com.funnyseals.app.util.SocketUtil;
 
 import org.json.JSONException;
@@ -30,13 +33,12 @@ import java.net.Socket;
 public class DoctorSigningActivity extends AppCompatActivity {
 
     private EditText    et_doctor_signing_phone;
-    private ImageButton ib_doctor_signing_return;
-    private Button      bt_doctor_signing_complete, bt_doctor_signing_delete;
+    private Button      bt_doctor_signing_complete,ib_doctor_signing_return, bt_doctor_signing_delete;
     private String        str1   = "";
     private MyApplication myApplication;
-    private int           type   = 0;
     private boolean       isType = true;
     private DoctorBottomActivity bottomActivity;
+    private String         result="",result_delete="";
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -46,8 +48,160 @@ public class DoctorSigningActivity extends AppCompatActivity {
         bottomActivity = (DoctorBottomActivity) ((MyApplication)getApplication()).getBottom();
         init();
 
+
+    }
+    public void sureSigning () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DoctorSigningActivity.this);
+        builder.setMessage("确定签约？");
+        builder.setPositiveButton("确定", (dialog, which) -> {
+            dialog.dismiss();
+            Signing();
+        });
+        builder.setNegativeButton("取消", (dialog, which) -> {
+            //取消对话框，返回界面
+            dialog.cancel();
+        });
+        //只有点击按钮才行，点击空白无用
+        builder.setCancelable(false);
+        AlertDialog Builder1 = builder.create();
+        Builder1.show();
+
+    }
+    public void sureDelte () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DoctorSigningActivity.this);
+        builder.setMessage("确定解约？");
+        builder.setPositiveButton("确定", (dialog, which) -> {
+            dialog.dismiss();
+            Rescission();
+
+        });
+        builder.setNegativeButton("取消", (dialog, which) -> {
+            //取消对话框，返回界面
+            dialog.cancel();
+        });
+        //只有点击按钮才行，点击空白无用
+        builder.setCancelable(false);
+        AlertDialog Builder1 = builder.create();
+        Builder1.show();
+
     }
 
+    /**
+     * 签约
+     */
+    public void Signing(){
+        if (isType) {
+            Thread thread=new Thread(() -> {
+                String send = "";
+                Socket socket;
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("pID", et_doctor_signing_phone.getText().toString
+                            ().trim());
+                    jsonObject.put("docID", myApplication.getAccount());
+                    jsonObject.put("request_type", "10");
+                    jsonObject.put("sign_type", "0");
+                    send = jsonObject.toString();
+                    socket = SocketUtil.getSendSocket();
+                    DataOutputStream out = new DataOutputStream(socket
+                            .getOutputStream());
+                    out.writeUTF(send);
+                    out.close();
+
+                    socket = SocketUtil.setPort(2024);
+                    DataInputStream dataInputStream = new DataInputStream(socket
+                            .getInputStream());
+                    String message = dataInputStream.readUTF();
+
+                    JSONObject jsonObject1 = new JSONObject(message);
+
+                    result=jsonObject1.getString("sign_result");
+
+                    socket.close();
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+                Thread.interrupted();
+            });
+            thread.start();
+            while (thread.isAlive()){
+
+            }
+            switch (result) {
+                case "0":
+                    Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast
+                            .LENGTH_LONG).show();
+                    finish();
+                    break;
+                case "2":
+                    Toast.makeText(DoctorSigningActivity.this, "用户不存在", Toast
+                            .LENGTH_LONG).show();
+                    break;
+                case "1":
+                    Toast.makeText(DoctorSigningActivity.this, "当前患者已签约", Toast
+                            .LENGTH_LONG).show();
+                    break;
+            }
+
+        }
+    }
+
+    /**
+     * 解约
+     */
+    public void Rescission(){
+        Thread thread = new Thread(() -> {
+            String send = "";
+            Socket socket;
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("pID", et_doctor_signing_phone.getText().toString()
+                        .trim());
+                jsonObject.put("docID", myApplication.getAccount());
+                jsonObject.put("request_type", "10");
+                jsonObject.put("sign_type", "1");
+                send = jsonObject.toString();
+                socket = SocketUtil.getSendSocket();
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                out.writeUTF(send);
+                out.close();
+
+                Thread.sleep(1000);
+
+                socket = SocketUtil.setPort(2025);
+                DataInputStream dataInputStream = new DataInputStream(socket
+                        .getInputStream());
+                String message = dataInputStream.readUTF();
+
+                JSONObject jsonObject1 = new JSONObject(message);
+                result_delete = jsonObject1.getString("sign_result");
+
+                socket.close();
+            } catch (IOException | JSONException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+        while (thread.isAlive()){
+
+        }
+        switch (result_delete) {
+            case "0":
+                Toast.makeText(DoctorSigningActivity.this, "解约成功", Toast
+                        .LENGTH_LONG).show();
+                finish();
+                break;
+            case "2":
+                Toast.makeText(DoctorSigningActivity.this, "没有该患者", Toast
+                        .LENGTH_LONG).show();
+                break;
+            case "1":
+                Toast.makeText(DoctorSigningActivity.this, "当前网络不稳定，请换个姿势试试~", Toast
+                        .LENGTH_LONG).show();
+                break;
+        }
+
+    }
     /**
      * 初始化控件
      */
@@ -94,113 +248,15 @@ public class DoctorSigningActivity extends AppCompatActivity {
         public void onClick (View v) {
             switch (v.getId()) {
                 case R.id.bt_doctor_signing_complete:
-                    //   correctPhone();
-                    if (isType) {
-                        new Thread(() -> {
-                            String send = "";
-                            Socket socket;
-                            try {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("pID", et_doctor_signing_phone.getText().toString
-                                        ().trim());
-                                jsonObject.put("docID", myApplication.getAccount());
-                                jsonObject.put("request_type", "10");
-                                jsonObject.put("sign_type", "0");
-                                send = jsonObject.toString();
-                                socket = SocketUtil.getSendSocket();
-                                DataOutputStream out = new DataOutputStream(socket
-                                        .getOutputStream());
-                                out.writeUTF(send);
-                                out.close();
-
-                                socket = SocketUtil.setPort(2024);
-                                DataInputStream dataInputStream = new DataInputStream(socket
-                                        .getInputStream());
-                                String message = dataInputStream.readUTF();
-
-                                jsonObject = new JSONObject(message);
-                                switch (jsonObject.getString("sign_result")) {
-                                    case "0":
-                                        Looper.prepare();
-                                        Toast.makeText(DoctorSigningActivity.this, "签约成功", Toast
-                                                .LENGTH_LONG).show();
-                                        bottomActivity.getPatient();
-                                        Looper.loop();
-                                        break;
-                                    case "2":
-                                        Looper.prepare();
-                                        Toast.makeText(DoctorSigningActivity.this, "用户不存在", Toast
-                                                .LENGTH_LONG).show();
-                                        Looper.loop();
-                                        break;
-                                    case "1":
-                                        Looper.prepare();
-                                        Toast.makeText(DoctorSigningActivity.this, "当前网络不稳定，请换个姿势试试~", Toast
-                                                .LENGTH_LONG).show();
-                                        Looper.loop();
-                                        break;
-                                }
-                                socket.close();
-                            } catch (IOException | JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }).start();
-                    }
-                    finish();
+                    correctPhone ();
+                    sureSigning();
                     break;
                 case R.id.ib_doctor_signing_return:
                     finish();
                     break;
                 case R.id.bt_doctor_signing_delete:
-                    new Thread(() -> {
-                        String send = "";
-                        Socket socket;
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("pID", et_doctor_signing_phone.getText().toString()
-                                    .trim());
-                            jsonObject.put("docID", myApplication.getAccount());
-                            jsonObject.put("request_type", "10");
-                            jsonObject.put("sign_type", "1");
-                            send = jsonObject.toString();
-                            socket = SocketUtil.getSendSocket();
-                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                            out.writeUTF(send);
-                            out.close();
-
-                            socket = SocketUtil.setPort(2025);
-                            DataInputStream dataInputStream = new DataInputStream(socket
-                                    .getInputStream());
-                            String message = dataInputStream.readUTF();
-
-                            jsonObject = new JSONObject(message);
-                            switch (jsonObject.getString("sign_result")) {
-                                case "0":
-                                    Looper.prepare();
-                                    Toast.makeText(DoctorSigningActivity.this, "解约成功", Toast
-                                            .LENGTH_LONG).show();
-                                    bottomActivity.getPatient();
-                                    Looper.loop();
-                                    break;
-                                case "2":
-                                    Looper.prepare();
-                                    Toast.makeText(DoctorSigningActivity.this, "没有该患者", Toast
-                                            .LENGTH_LONG).show();
-                                    Looper.loop();
-                                    break;
-                                case "1":
-                                    Looper.prepare();
-                                    Toast.makeText(DoctorSigningActivity.this, "当前网络不稳定，请换个姿势试试~", Toast
-                                            .LENGTH_LONG).show();
-                                    Looper.loop();
-                                    break;
-                            }
-                            socket.close();
-                        } catch (IOException | JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }).start();
-                    finish();
+                    correctPhone ();
+                    sureDelte();
                     break;
                 default:
                     break;

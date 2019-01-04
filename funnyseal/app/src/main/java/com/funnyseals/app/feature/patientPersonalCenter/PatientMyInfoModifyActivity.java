@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
+import com.funnyseals.app.feature.doctorPersonalCenter.DoctorMyInfoModifyActivity;
 import com.funnyseals.app.feature.doctorPersonalCenter.DoctorPasswordActivity;
 import com.funnyseals.app.model.User;
 import com.funnyseals.app.util.SocketUtil;
@@ -43,14 +44,15 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
 
     private EditText ed_patient_modify_myname, ed_patient_modify_myage;
     private TextView tv_patient_info_account, tv_patient_modify_mysettlingtime,  ed_patient_modify_location, ed_patient_modify_mysex;
-    private Button bt_patient_modify_complete;
+    private Button bt_patient_modify_complete,ib_patient_modify_return;
     private String et1, et2, et3, et4;
-    private ImageButton ib_patient_modify_return, ib_patient_modify_password,
+    private ImageButton  ib_patient_modify_password,
             ib_patient_modify_advice;
     private User          myUser;
     private MyApplication myApplication;
     private CityPicker cityPicker;
     private String     result="";
+    private boolean     isTape=false;
 
     /**
      * 调用本地
@@ -161,6 +163,18 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
         });
 
     }
+    /**
+     * 姓名/年龄不能为空
+     */
+    public void nameAgeNotNull(){
+        if (et1.equals("") || et2.equals("")){
+            Toast.makeText(PatientMyInfoModifyActivity.this,"姓名或年龄不能为空",Toast.LENGTH_SHORT).show();
+            isTape=false;
+        }
+        else {
+            isTape=true;
+        }
+    }
 
     /**
      * 返回按钮
@@ -202,62 +216,66 @@ public class PatientMyInfoModifyActivity extends AppCompatActivity {
                     et2 = ed_patient_modify_myage.getText().toString().trim();
                     et3 = ed_patient_modify_mysex.getText().toString().trim();
                     et4 = ed_patient_modify_location.getText().toString().trim();
-                    @SuppressLint("ShowToast") Thread thread = new Thread(() -> {
-                        String send = "";
-                        Socket socket;
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("pID", myApplication.getAccount());
-                            jsonObject.put("pName", et1);
-                            jsonObject.put("pAge", et2);
-                            jsonObject.put("pSex", et3);
-                            jsonObject.put("pAddress", et4);
-                            jsonObject.put("request_type", "7");
-                            jsonObject.put("user_type", "p");
-                            send = jsonObject.toString();
-                            socket = SocketUtil.getSendSocket();
-                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                            out.writeUTF(send);
-                            out.close();
+                    nameAgeNotNull();
+                    if (isTape){
+                        @SuppressLint("ShowToast") Thread thread = new Thread(() -> {
+                            String send = "";
+                            Socket socket;
+                            try {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("pID", myApplication.getAccount());
+                                jsonObject.put("pName", et1);
+                                jsonObject.put("pAge", et2);
+                                jsonObject.put("pSex", et3);
+                                jsonObject.put("pAddress", et4);
+                                jsonObject.put("request_type", "7");
+                                jsonObject.put("user_type", "p");
+                                send = jsonObject.toString();
+                                socket = SocketUtil.getSendSocket();
+                                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                                out.writeUTF(send);
+                                out.close();
 
-                            Thread.sleep(1000);
+                                Thread.sleep(1000);
 
-                            socket = SocketUtil.setPort(2019);
-                            DataInputStream dataInputStream = new DataInputStream(socket
-                                    .getInputStream());
-                            String message = dataInputStream.readUTF();
+                                socket = SocketUtil.setPort(2019);
+                                DataInputStream dataInputStream = new DataInputStream(socket
+                                        .getInputStream());
+                                String message = dataInputStream.readUTF();
 
-                            JSONObject jsonObject1 = new JSONObject(message);
-                            result=jsonObject1.getString("update_result");
-                            socket.close();
+                                JSONObject jsonObject1 = new JSONObject(message);
+                                result=jsonObject1.getString("update_result");
+                                socket.close();
 
-                        } catch (IOException | JSONException | InterruptedException e) {
-                            e.printStackTrace();
+                            } catch (IOException | JSONException | InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Thread.interrupted();
+                        });
+                        thread.start();
+                        while (thread.isAlive()){
+
                         }
-                        Thread.interrupted();
-                    });
-                    thread.start();
-                    while (thread.isAlive()){
+                        switch (result) {
+                            case "成功":
+                                myUser.setName(et1);
+                                myUser.setSex(et3);
+                                myUser.setAge(Integer.parseInt(et2));
+                                myUser.setAddress(et4);
+                                Toast.makeText(PatientMyInfoModifyActivity.this, "个人信息修改成功", Toast
+                                        .LENGTH_LONG).show();
+                                finish();
+                                break;
+                            case "失败":
+                                Toast.makeText(PatientMyInfoModifyActivity.this,"当前网络不稳定，换个姿势试试~",Toast.LENGTH_LONG);
+                                break;
 
+                        }
                     }
-                    switch (result) {
-                        case "成功":
-                            myUser.setName(et1);
-                            myUser.setSex(et3);
-                            myUser.setAge(Integer.parseInt(et2));
-                            myUser.setAddress(et4);
-                            Toast.makeText(PatientMyInfoModifyActivity.this, "个人信息修改成功", Toast
-                                    .LENGTH_LONG).show();
-                            finish();
-                            break;
-                        case "失败":
-                            Toast.makeText(PatientMyInfoModifyActivity.this,"网络不稳定，请稍后再试~",Toast.LENGTH_LONG);
-                            break;
 
-                    }
                     break;
                 case R.id.ib_patient_modify_return:
-                    Sure();
+                        Sure();
                     break;
                 case R.id.ib_patient_modify_change_password:
                     Intent intent = new Intent(PatientMyInfoModifyActivity.this,

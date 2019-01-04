@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.funnyseals.app.R;
 import com.funnyseals.app.feature.MyApplication;
 import com.funnyseals.app.model.SportsPlan;
+import com.funnyseals.app.util.BtnClickLimitUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,12 +136,14 @@ public class PatientThreeFragment extends Fragment {
 
             Button moretime = view.findViewById(R.id.moresportstime);
             moretime.setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), SportsRetimeActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putCharSequence("sportstitle", mSports_list.get(position).get
-                        ("sportstitle").toString());
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(BtnClickLimitUtil.isFastClick()) {
+                    Intent intent = new Intent(getActivity(), SportsRetimeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putCharSequence("sportstitle", mSports_list.get(position).get
+                            ("sportstitle").toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             });
             return view;
         }

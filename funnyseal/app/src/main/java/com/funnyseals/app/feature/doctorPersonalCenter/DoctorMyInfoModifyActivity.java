@@ -38,14 +38,15 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
     private String et1 = "", et2 = "", et3 = "", et4 = "", et5 = "", et6 = "";
     private EditText et_doctor_modify_myname, et_doctor_modify_myage,
            et_doctor_modify_myhospital, et_doctor_modify_mypost;
-    private Button      bt_doctor_modify_complete;
-    private ImageButton ib_doctor_modify_return, ib_doctor_modify_changepassword;
+    private Button      bt_doctor_modify_complete,ib_doctor_modify_return;
+    private ImageButton  ib_doctor_modify_changepassword;
     private Intent        intent1;
     private User          myUser;
     private MyApplication myApplication;
     private TextView  et_doctor_modify_mylocation,tv_doctor_modify_myaccount,tv_doctor_modify_mytime,et_doctor_modify_mysex;
     private CityPicker cityPicker;
     private String result="";
+    private boolean     isTape=false;
 
 
     @Override
@@ -185,11 +186,16 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
     }
 
     /**
-     * 弹出提示
+     * 姓名/年龄不能为空
      */
-    public void showToast (final String msg) {
-        runOnUiThread(() -> Toast.makeText(DoctorMyInfoModifyActivity.this, msg, Toast
-                .LENGTH_SHORT).show());
+    public void nameAgeNotNull(){
+        if (et1.equals("") || et2.equals("")){
+            Toast.makeText(DoctorMyInfoModifyActivity.this,"姓名或年龄不能为空",Toast.LENGTH_SHORT).show();
+            isTape=false;
+        }
+        else {
+            isTape=true;
+        }
     }
 
 
@@ -206,7 +212,7 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
         public void onClick (View v) {
             switch (v.getId()) {
                 case R.id.ib_doctor_modify_return:
-                    Sure();
+                        Sure();
                     break;
                 case R.id.bt_doctor_modify_complete:
                     et1 = et_doctor_modify_myname.getText().toString().trim();
@@ -215,64 +221,72 @@ public class DoctorMyInfoModifyActivity extends AppCompatActivity {
                     et4 = et_doctor_modify_mypost.getText().toString().trim();
                     et5 = et_doctor_modify_mysex.getText().toString().trim();
                     et6 = et_doctor_modify_mylocation.getText().toString().trim();
-
-                    //连接服务器操作
-                    Thread thread = new Thread(() -> {
-                        String send = "";
-                        Socket socket;
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("docID", myApplication.getAccount());
-                            jsonObject.put("docName", et1);
-                            jsonObject.put("docAge", et2);
-                            jsonObject.put("docCompany", et3);
-                            jsonObject.put("docTitle", et4);
-                            jsonObject.put("docSex", et5);
-                            jsonObject.put("docAddress", et6);
-                            jsonObject.put("request_type", "7");
-                            jsonObject.put("user_type", "d");
-                            send = jsonObject.toString();
-                            socket = SocketUtil.getSendSocket();
-                            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-                            out.writeUTF(send);
-                            out.close();
-
-                            Thread.sleep(2000);
-                            socket = SocketUtil.setPort(2019);
-                            DataInputStream dataInputStream = new DataInputStream(socket
-                                    .getInputStream());
-                            String message = dataInputStream.readUTF();
-
-                             jsonObject = new JSONObject(message);
-                             result=jsonObject.getString("update_result");
-
-                            socket.close();
-
-                        } catch (IOException | JSONException | InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Thread.interrupted();
-                    });
-                    thread.start();
-                    while (thread.isAlive()){
-
+                    if (et3.equals("")){
+                        et3="无" ;
                     }
-                    switch (result) {
-                        case "成功":
-                            myUser.setName(et1);
-                            myUser.setSex(et5);
-                            myUser.setCompany(et3);
-                            myUser.setPosition(et4);
-                            myUser.setAge(Integer.parseInt(et2));
-                            myUser.setAddress(et6);
-                            Toast.makeText(DoctorMyInfoModifyActivity.this, "修改成功", Toast
-                                    .LENGTH_LONG).show();
-                            finish();
-                            break;
-                        case "失败":
-                            Toast.makeText(DoctorMyInfoModifyActivity.this, "修改失败", Toast
-                                    .LENGTH_LONG).show();
-                            break;
+                    if (et4.equals("")){
+                        et4="无";
+                    }
+                    nameAgeNotNull();
+                    if (isTape){
+                        //连接服务器操作
+                        Thread thread = new Thread(() -> {
+                            String send = "";
+                            Socket socket;
+                            try {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("docID", myApplication.getAccount());
+                                jsonObject.put("docName", et1);
+                                jsonObject.put("docAge", et2);
+                                jsonObject.put("docCompany", et3);
+                                jsonObject.put("docTitle", et4);
+                                jsonObject.put("docSex", et5);
+                                jsonObject.put("docAddress", et6);
+                                jsonObject.put("request_type", "7");
+                                jsonObject.put("user_type", "d");
+                                send = jsonObject.toString();
+                                socket = SocketUtil.getSendSocket();
+                                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                                out.writeUTF(send);
+                                out.close();
+
+                                Thread.sleep(2000);
+                                socket = SocketUtil.setPort(2019);
+                                DataInputStream dataInputStream = new DataInputStream(socket
+                                        .getInputStream());
+                                String message = dataInputStream.readUTF();
+
+                                jsonObject = new JSONObject(message);
+                                result=jsonObject.getString("update_result");
+
+                                socket.close();
+
+                            } catch (IOException | JSONException | InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Thread.interrupted();
+                        });
+                        thread.start();
+                        while (thread.isAlive()){
+
+                        }
+                        switch (result) {
+                            case "成功":
+                                myUser.setName(et1);
+                                myUser.setSex(et5);
+                                myUser.setCompany(et3);
+                                myUser.setPosition(et4);
+                                myUser.setAge(Integer.parseInt(et2));
+                                myUser.setAddress(et6);
+                                Toast.makeText(DoctorMyInfoModifyActivity.this, "修改成功", Toast
+                                        .LENGTH_LONG).show();
+                                finish();
+                                break;
+                            case "失败":
+                                Toast.makeText(DoctorMyInfoModifyActivity.this, "当前网络不稳定，换个姿势试试~", Toast
+                                        .LENGTH_LONG).show();
+                                break;
+                        }
                     }
                     break;
                 case R.id.ib_doctor_modify_changepassword:

@@ -49,7 +49,7 @@ public class SocketUtil {
         return new Socket(IP_ADDR, PORT_GET_ARRAY);
     }
 
-    public static Socket getModifyResult() throws IOException{
+    public static Socket getModifyResult () throws IOException {
         return new Socket(IP_ADDR, PORT_GET_RESULT);
     }
 

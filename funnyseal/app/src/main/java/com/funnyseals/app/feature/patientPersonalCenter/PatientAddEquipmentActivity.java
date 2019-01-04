@@ -35,10 +35,10 @@ import java.net.Socket;
 public class PatientAddEquipmentActivity extends AppCompatActivity {
 
     private Spinner sp_patient_add_name, sp_patient_add_state;
-    private Button        bt_patient_add_complete;
-    private ImageButton   ib_patient_add_return;
+    private Button        bt_patient_add_complete, ib_patient_add_return;
     private MyApplication myApplication;
     private String        item_name, item_state;
+    private String        result="";
     /**
      * 适配器完成下拉控件
      * 两个下拉控件
@@ -73,6 +73,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
         builder.setPositiveButton("确定", (dialog, which) -> {
             dialog.dismiss();
             Intent intent = getIntent();
+            intent.putExtra("x",1);
             setResult(11,intent);
             finish();
         });
@@ -105,7 +106,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
      * 完成添加设备操作
      */
     private void addEquipment () {
-        new Thread(() -> {
+        Thread thread=new Thread(() -> {
             String send = "";
             Socket socket;
             try {
@@ -122,31 +123,40 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                 out.writeUTF(send);
                 out.close();
 
+                Thread.sleep(1000);
+
                 socket = SocketUtil.setPort(2030);
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String message = dataInputStream.readUTF();
 
-                jsonObject = new JSONObject(message);
-                switch (jsonObject.getString("device_result")) {
-                    case "true":
-                        Looper.prepare();
-                        Toast.makeText(PatientAddEquipmentActivity.this, "添加成功", Toast
-                                .LENGTH_LONG).show();
-                        Looper.loop();
-                        break;
-                    case "false":
-                        Looper.prepare();
-                        Toast.makeText(PatientAddEquipmentActivity.this, "添加失败", Toast
-                                .LENGTH_LONG).show();
-                        Looper.loop();
-                        break;
-                }
+                JSONObject jsonObject1 = new JSONObject(message);
+                result=jsonObject1.getString("divece_result");
+
                 socket.close();
-            } catch (IOException | JSONException e) {
+            } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
-        }).start();
+            Thread.interrupted();
+        });
+        thread.start();
+        while (thread.isAlive()){
 
+        }
+        switch (result) {
+            case "true":
+                Toast.makeText(PatientAddEquipmentActivity.this, "添加成功", Toast
+                        .LENGTH_LONG).show();
+                Intent intent = getIntent();
+                intent.putExtra("name",item_name);
+                intent.putExtra("state",item_state);
+                setResult(12,intent);
+                finish();
+                break;
+            case "false":
+                Toast.makeText(PatientAddEquipmentActivity.this, "不能添加重复设备~", Toast
+                        .LENGTH_LONG).show();
+                break;
+        }
     }
 
     /**
@@ -200,11 +210,7 @@ public class PatientAddEquipmentActivity extends AppCompatActivity {
                     break;
                 case R.id.bt_patient_add_complete:
                     addEquipment();
-                    Intent intent = getIntent();
-                    intent.putExtra("name",item_name);
-                    intent.putExtra("state",item_state);
-                    setResult(12,intent);
-                    finish();
+
                     break;
                 default:
                     break;

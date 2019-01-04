@@ -6,42 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".feature.patientPersonalCenter.PatientDoctorAdviceActivity">
 
-    <TextView
-        android:id="@+id/tv_patient_advice_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/patient_advice_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="医嘱"
-        android:textSize="30sp"
+        android:background="@color/teal"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/ib_patient_advice_return"
-        android:layout_width="51dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@null"
-        app:layout_constraintEnd_toStartOf="@+id/tv_patient_advice_title"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vector_drawable_tx" />
+        <Button
+            android:id="@+id/ib_patient_advice_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/teal"
+            android:text="返回"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_patient_advice_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="医嘱"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <Button
+            android:visibility="invisible"
+            android:id="@+id/bt_patient_add_t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/teal"
+            android:text="添加"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_patient_advice_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:text="病历："
         android:textColor="@color/brown"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ib_patient_advice_return" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_advice_title" />
 
     <TextView
         android:id="@+id/tv_patient_advice_myAdvice"
@@ -50,6 +68,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="@color/teal"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_patient_advice_record" />
@@ -72,6 +91,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="@color/teal"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />

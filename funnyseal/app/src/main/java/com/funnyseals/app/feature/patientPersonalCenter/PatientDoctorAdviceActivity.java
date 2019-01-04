@@ -3,6 +3,7 @@ package com.funnyseals.app.feature.patientPersonalCenter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ import com.funnyseals.app.model.User;
 public class PatientDoctorAdviceActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv_patient_advice_myAdvice, tv_patient_advice_myrecord;
-    private ImageButton   ib_patient_advice_return;
+    private Button ib_patient_advice_return;
     private MyApplication myApplication;
     private User          myUser;
 

@@ -5,45 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".feature.patientPersonalCenter.PatientPersonalCenterFragment">
 
-
-    <TextView
-        android:id="@+id/tv_patient_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/fragment_doctor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="个人中心"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@color/teal"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/ib_patient_setting_return"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/teal"
+            android:text="返回"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_patient_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="个人中心"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <Button
+            android:visibility="invisible"
+            android:id="@+id/bt_patient_add_t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/teal"
+            android:text="添加"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_patient_portrait"
         android:layout_width="88dp"
         android:layout_height="91dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="32dp"
         android:background="@null"
         android:src="@drawable/ic_person_black_24dp"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_patient_title" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_doctor" />
 
     <TextView
         android:id="@+id/tv_patient_perinfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="8dp"
         android:text="个人信息"
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_patient_username" />
 
     <TextView
         android:id="@+id/tv_patient_doctor"
@@ -82,9 +111,10 @@
         android:id="@+id/tv_patient_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:text="用户名"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_patient_portrait" />

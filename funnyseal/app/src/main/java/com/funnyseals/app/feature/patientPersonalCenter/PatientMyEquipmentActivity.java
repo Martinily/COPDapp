@@ -46,6 +46,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     private AddEquipmentAdapter addEquipmentAdapter;
     private String              eName;
     private AddEquipment novels;
+    private String              result="";
     private int myPosition;
 
 
@@ -85,12 +86,12 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        Log.d("更新数据","更新数据就是这个");
-
-            if (requestCode==10&&requestCode==12){
+            if (requestCode==10&&resultCode==11){
+                String x=data.getStringExtra("x");
+            }
+            if (requestCode==10&&resultCode==12){
                 String name= data.getStringExtra("name");
                 String state=data.getStringExtra("state");
-                Log.d("更新数据","更新数据"+name+"就是这个");
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("eName",name);
@@ -102,6 +103,8 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
+
 
     }
 
@@ -130,6 +133,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 TextView t = view.findViewById(R.id.add_equipment_name);
                 eName = t.getText().toString();
                 deleteEquipment();
+             //   Toast.makeText(this,"删除成功",Toast.LENGTH_SHORT).show();
                 return true;
             case 1:
                 return false;
@@ -154,6 +158,7 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 dataOutputStream.close();
 
                 Thread.sleep(1000);
+
                 socket = SocketUtil.setPort(2030);
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 String get = dataInputStream.readUTF();
@@ -197,29 +202,30 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
 
                 Thread.sleep(1000);
                 socket = SocketUtil.setPort(2030);
+
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-                String delete = dataInputStream.readUTF();
-                switch (delete) {
-                    case "false":
-                        Looper.prepare();
-                        Toast.makeText(PatientMyEquipmentActivity.this,"删除失败，网络连接失败",Toast.LENGTH_SHORT);
-                        Looper.loop();
-                        break;
-                    case "true":
-                        Looper.prepare();
-                        Toast.makeText(PatientMyEquipmentActivity.this,"删除成功",Toast.LENGTH_SHORT);
-                        Looper.loop();
-                        addEquipmentAdapter.notifyDataSetChanged();
-                        break;
-                }
+                String message = dataInputStream.readUTF();
+                JSONObject jsonObject1 = new JSONObject(message);
+                result=jsonObject1.getString("divece_result");
                 socket.close();
             } catch (IOException | JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
+            Thread.interrupted();
         });
         thread.start();
         while (thread.isAlive()) {
-        }}
+        }
+        switch (result) {
+            case "false":
+                Toast.makeText(this,"当前网络不稳定，换个姿势试试~",Toast.LENGTH_SHORT).show();
+                break;
+            case "true":
+                Toast.makeText(this,"删除成功",Toast.LENGTH_SHORT).show();
+                addEquipmentAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
     /**
      * 监听事件
      * 返回，返回个人中心
@@ -236,7 +242,6 @@ public class PatientMyEquipmentActivity extends AppCompatActivity {
                 case R.id.bt_patient_equipment_add:
                     Intent intent = new Intent(PatientMyEquipmentActivity.this,PatientAddEquipmentActivity.class);
                     startActivityForResult(intent,10);
-                  //  startActivity(new Intent(PatientMyEquipmentActivity.this, PatientAddEquipmentActivity.class));
                     break;
                 default:
                     break;

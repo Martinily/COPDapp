@@ -17,9 +17,7 @@ import com.funnyseals.app.R;
  */
 public class PatientSetting extends AppCompatActivity {
 
-    private Button bt_patient_setting_finish;
-    private ImageButton ib_patient_setting_return;
-
+    private Button bt_patient_setting_finish,ib_patient_setting_return;
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_setting);

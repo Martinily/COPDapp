@@ -243,12 +243,6 @@ public class InstrumentRetimeActivity extends AppCompatActivity {
                 mins = "0" + String.valueOf(date.get(Calendar.MINUTE));
             else
                 mins = String.valueOf(date.get(Calendar.MINUTE));
-            /*timeLable=String.format("%d月%d日 %d:%d",
-                    date.get(Calendar.MONTH)+1,//getMonth的返回值是从0开始的
-                    date.get(Calendar.DAY_OF_MONTH),
-                    date.get(Calendar.HOUR_OF_DAY),
-                    date.get(Calendar.MINUTE));
-             */
             timeLable = name + ":" + hours + ":" + mins;
         }
 

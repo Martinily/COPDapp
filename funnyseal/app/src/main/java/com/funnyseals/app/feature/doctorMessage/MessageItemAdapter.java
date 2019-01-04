@@ -81,11 +81,12 @@ public class MessageItemAdapter extends BaseAdapter {
         viewHolder.mContent = convertView.findViewById(R.id.chat_item_content);
         viewHolder.mMessageNum = convertView.findViewById(R.id.chat_item_message_num);
 
-        viewHolder.mPortrait.setImageResource(R.drawable.vector_drawable_portrait);
+
         EMConversation conversation = getItem(position);
         viewHolder.mAccount = conversation.conversationId();
         String account = viewHolder.mAccount;
         if (mUserType.equals("doctor")) {
+            viewHolder.mPortrait.setImageResource(R.drawable.ic_patient);
             for (User p : mAllMyPatient) {
                 if (p.getAccount().equals(account)) {
                     viewHolder.mName.setText(p.getName().isEmpty() ? account : p.getName());
@@ -93,6 +94,7 @@ public class MessageItemAdapter extends BaseAdapter {
                 }
             }
         } else if (mUserType.equals("patient")) {
+            viewHolder.mPortrait.setImageResource(R.drawable.ic_doctor_portrait);
             viewHolder.mName.setText(mMyDoctor.getName().equals("默认") ? account : mMyDoctor.getName());
         }
 
